@@ -1,27 +1,9 @@
 ID PRODUKTU ; DESKRIPZIOA 
-1;Restaurant Expenses.
-2;Hotel Accommodation.
-3;Virtual Interior Design.
-4;Virtual Home Staging.
-5;Office Chair.
-6;Office Lamp.
-7;Office Design Software.
-8;Desk Combination.
-12;Storage Box.
-13;Large Desk.
-14;Pedal Bin.
-15;Cabinet with Doors.
-16;Conference Chair (CONFIG).
-17;Office Chair Black.
-18;Corner Desk Left Sit.
-19;Drawer Black.
-20;Flipover.
-21;Desk Stand with Screen.
-23;Acoustic Bloc Screens.
-24;Drawer.
-25;Four Person Desk.
-26;Large Meeting Table.
-27;Three-Seat Sofa.
-28;Deposit.
-29;Cable Management Box.
-30;Warranty.
+1;Restaurant Expenses;All.
+2;Hotel Accommodation;Saleable.
+3;Virtual Interior Design;Expenses.
+4;Virtual Home Staging;Internal.
+5;Office Chair;Services.
+6;Office Lamp;Saleable.
+7;Office Design Software;Software.
+8;Desk Combination;Office Furniture.

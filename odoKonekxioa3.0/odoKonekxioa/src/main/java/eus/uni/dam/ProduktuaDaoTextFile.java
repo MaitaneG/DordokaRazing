@@ -44,14 +44,14 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 	 */
 	@PostConstruct
 	public void init() {
-		String sql = "SELECT product_product.id, product_template.name, product_category.name as e FROM product_product INNER JOIN product_template ON product_product.id = product_template.id INNER JOIN product_category on product_template.id = product_category.id order by product_product.id asc";
+		String sql = "SELECT product_product.id, product_template.name, product_category.name as e, list_price FROM product_product INNER JOIN product_template ON product_product.id = product_template.id INNER JOIN product_category on product_template.id = product_category.id order by product_product.id asc";
 	       
 	    try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/prueba2", "Admin", "Admin123");
 	            Statement stmt = conn.createStatement();
 	            ResultSet rs = stmt.executeQuery(sql)) {
 
 	        while (rs.next()) {
-	      	  Produktua p1= new Produktua(rs.getInt("id"),rs.getString("name"),rs.getString("e"));        	  
+	      	  Produktua p1= new Produktua(rs.getInt("id"),rs.getString("name"),rs.getString("e"), rs.getFloat("list_price"));        	  
 	      	produktuak.add(p1);
 	           
 	        }
@@ -120,10 +120,10 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 			    }
 			try {
 			      FileWriter writer = new FileWriter( filename);
-			      writer.write("ID PRODUKTU ; DESKRIPZIOA ; KATEGORIA \n");
+			      writer.write("ID PRODUKTU ; DESKRIPZIOA ; KATEGORIA ; PREZ \n");
 			      
 			      for(Produktua p: produktuak) {
-			    	  writer.write(p.getIdProd() + ";" + p.getDeskripzioa() + ";"+ p.getCategory() +".\n");
+			    	  writer.write(p.getIdProd() + ";" + p.getDeskripzioa() + ";"+ p.getCategory() + ";" + p.getPrize()+"€\n");
 			      }
 			      
 			      writer.close();

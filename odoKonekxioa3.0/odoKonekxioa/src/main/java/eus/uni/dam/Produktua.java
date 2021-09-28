@@ -5,6 +5,7 @@ public class Produktua {
 	private int idProd;
 	private String deskripzioa="";
 	private String category;
+	private float prize;
 	
 	public String getCategory() {
 		return category;
@@ -30,11 +31,18 @@ public class Produktua {
 		this.idProd = idProd;
 		this.deskripzioa = deskripzioa;
 	}
-public Produktua(int idProd, String deskripzioa, String kategoria) {
+public Produktua(int idProd, String deskripzioa, String kategoria, float prize) {
 		this.category = kategoria;
 		this.idProd = idProd;
 		this.deskripzioa = deskripzioa;
+		this.prize = prize;
 	}
+	public float getPrize() {
+	return prize;
+}
+public void setPrize(float prize) {
+	this.prize = prize;
+}
 	@Override
 	public String toString() {
 		return idProd + "garren produktua, Deskripzioa => "+deskripzioa+", Mota: " + category + ".";

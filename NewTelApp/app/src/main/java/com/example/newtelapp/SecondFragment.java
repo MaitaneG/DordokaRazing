@@ -20,6 +20,9 @@ public class SecondFragment extends Fragment {
     //private SecondFragment sf;
     private Datuak datuak;
     private ArrayList<Produktua>produktuak;
+    private TextView izena;
+    private TextView kategoria;
+    private TextView prezioa;
 
     @Override
     public View onCreateView(
@@ -38,8 +41,14 @@ public class SecondFragment extends Fragment {
         //sf=new SecondFragment();
         datuak=new Datuak(view.getContext());
         produktuak=datuak.datuakItzuli();
-        TextView tx= (TextView) getView().findViewById(R.id.textViewIzenaInfo);
-        tx.setText(produktuak.get(0).getIzena());
+
+        izena= (TextView) getView().findViewById(R.id.textViewIzenaInfo);
+        kategoria=(TextView)getView().findViewById(R.id.textViewKategoriaInfo);
+        prezioa=(TextView) getView().findViewById(R.id.textViewPrezioaInfo);
+
+        izena.setText(produktuak.get(0).getIzena());
+        kategoria.setText(produktuak.get(0).getCategory());
+        prezioa.setText(String.valueOf(produktuak.get(0).getPrezio())+" €");
 
         /**binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override

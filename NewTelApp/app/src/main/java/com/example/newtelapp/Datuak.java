@@ -40,11 +40,13 @@ public class Datuak {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public ArrayList<Produktua> datuakItzuli(){
 
-    }public ArrayList<Produktua> datuakItzuli(){
         return produktuak;
     }
+
     public String datuakErakutsi(){
 
         return datuak.get(0);

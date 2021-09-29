@@ -35,21 +35,20 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
 
         TextView tv = findViewById(R.id.textview_second);
-        Datuak d = new Datuak(this);
-        ArrayList<Produktua> p =d.datuakItzuli();//datuak arraylistean
+
 
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+        /**binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Snackbar.make(view, d.datuakErakutsi(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });**/
     }
 
     @Override

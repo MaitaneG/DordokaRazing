@@ -11,15 +11,25 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.newtelapp.databinding.FragmentSecondBinding;
 
+import java.util.ArrayList;
+
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
+    private SecondFragment sf = new SecondFragment();
+    private  Datuak datuak = new Datuak(sf.getContext());
+    ArrayList<Produktua> produktuak;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+            Bundle savedInstanceState) {
+
+
+
+        produktuak =datuak.datuakItzuli();//datuak arraylistean
+
+
 
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();

@@ -8,34 +8,33 @@
     tools:context=".SecondFragment">
 
     <!-- Hurrengo produktura joango da -->
-    <Button
+
+    <!-- Aurreko produktura joango da -->
+    <ImageButton
         android:id="@+id/button_produktuak_aurrera"
         android:layout_width="160dp"
         android:layout_height="77dp"
-        android:alpha="0"
-        android:text="@string/next"
-        android:visibility="visible"
+        android:background="@drawable/aurrerabotoia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.984"
+        app:layout_constraintHorizontal_bias="0.996"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
+        app:layout_constraintVertical_bias="0.975"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-    <!-- Aurreko produktura joango da -->
-    <Button
+    <ImageButton
         android:id="@+id/button_produktuak_atzera"
         android:layout_width="158dp"
         android:layout_height="78dp"
-        android:alpha="0"
-        android:text="@string/next"
-        android:visibility="visible"
+        android:background="@drawable/atzerabotoia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.977" />
+        app:layout_constraintVertical_bias="0.977"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textview_second"

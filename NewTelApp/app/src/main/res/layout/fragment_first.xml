@@ -8,16 +8,15 @@
     tools:context=".FirstFragment">
 
     <!-- Produktuetara joateko botoia -->
-    <Button
+    <ImageButton
         android:id="@+id/button_first"
-        android:layout_width="252dp"
-        android:layout_height="130dp"
-        android:layout_marginBottom="300dp"
-        android:alpha="0"
-        android:text="@string/next"
-        android:visibility="visible"
+        android:layout_width="254dp"
+        android:layout_height="99dp"
+        android:background="@drawable/erakutsibotoia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.584"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.554"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

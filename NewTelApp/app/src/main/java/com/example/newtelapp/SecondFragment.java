@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,10 @@ public class SecondFragment extends Fragment {
     private TextView izena;
     private TextView kategoria;
     private TextView prezioa;
+    private ImageButton botoiaAurrera;
+    private ImageButton botoiaAtzera;
+
+    private int index=0;
 
     @Override
     public View onCreateView(
@@ -46,9 +51,13 @@ public class SecondFragment extends Fragment {
         kategoria=(TextView)getView().findViewById(R.id.textViewKategoriaInfo);
         prezioa=(TextView) getView().findViewById(R.id.textViewPrezioaInfo);
 
-        izena.setText(produktuak.get(0).getIzena());
-        kategoria.setText(produktuak.get(0).getCategory());
-        prezioa.setText(String.valueOf(produktuak.get(0).getPrezio())+" €");
+        botoiaAurrera=view.findViewById(R.id.button_produktuak_aurrera);
+        botoiaAtzera=view.findViewById(R.id.button_produktuak_atzera);
+
+        botoiaAurrera.setOnClickListener(this::produktuakAurrera);
+        botoiaAtzera.setOnClickListener(this::produktuakAtzera);
+
+        datuakAldatu(view);
 
         /**binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +72,30 @@ public class SecondFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void datuakAldatu(View view){
+        izena.setText(produktuak.get(index).getIzena());
+        kategoria.setText(produktuak.get(index).getCategory());
+        prezioa.setText(String.valueOf(produktuak.get(index).getPrezio())+" €");
+    }
+
+    public void produktuakAurrera( View view){
+        if(index==produktuak.size()-1){
+            index=0;
+        }else{
+            index=index+1;
+        }
+        datuakAldatu(view);
+    }
+
+    public void produktuakAtzera(View view){
+        if(index==0){
+            index=produktuak.size()-1;
+        }else{
+            index=index-1;
+        }
+        datuakAldatu(view);
     }
 
 }

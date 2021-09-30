@@ -40,12 +40,11 @@ public class SecondFragment extends Fragment {
 
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //sf=new SecondFragment();
+
         datuak=new Datuak(view.getContext());
         produktuak=datuak.datuakItzuli();
 

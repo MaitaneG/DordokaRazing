@@ -8,8 +8,6 @@
     tools:context=".SecondFragment">
 
     <!-- Hurrengo produktura joango da -->
-
-    <!-- Aurreko produktura joango da -->
     <ImageButton
         android:id="@+id/button_produktuak_aurrera"
         android:layout_width="160dp"
@@ -25,6 +23,7 @@
         app:layout_constraintVertical_bias="0.975"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Aurreko produktura joango da -->
     <ImageButton
         android:id="@+id/button_produktuak_atzera"
         android:layout_width="158dp"

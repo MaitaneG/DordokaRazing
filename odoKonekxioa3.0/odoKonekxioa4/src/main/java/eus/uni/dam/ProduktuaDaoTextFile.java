@@ -113,15 +113,15 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 			ClassPathResource fileResource = new ClassPathResource(filename);
 			outputStream = new PrintWriter(new FileWriter(fileResource.getFile()));*/
 
-			try {
+			/*try {
 			      File myObj = new File("Produktuak.csv");
 			      myObj.createNewFile();			      
 			    } catch (IOException e) {
 			      System.out.println("An error occurred.");
 			      e.printStackTrace();
-			    }
+			    }*/
 			try {
-			      FileWriter writer = new FileWriter( filename);
+			      FileWriter writer = new FileWriter(filename);
 			      writer.write("ID PRODUKTU ; DESKRIPZIOA ; KATEGORIA ; PREZ \n");
 			      
 			      for(Produktua p: produktuak) {

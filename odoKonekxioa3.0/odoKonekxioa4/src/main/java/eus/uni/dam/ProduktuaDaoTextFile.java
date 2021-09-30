@@ -46,7 +46,7 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 	public void init() {
 		String sql = "SELECT product_product.id, product_template.name, product_category.name as e, list_price FROM product_product INNER JOIN product_template ON product_product.id = product_template.id INNER JOIN product_category on product_template.id = product_category.id order by product_product.id asc";
 	       
-	    try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/prueba2", "Admin", "Admin123");
+	    try (Connection conn = DriverManager.getConnection("jdbc:postgresql://25.32.59.79:5432/NewTel1", "openpg", "openpgpwd");
 	            Statement stmt = conn.createStatement();
 	            ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -123,7 +123,7 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 			      writer.write("ID PRODUKTU ; DESKRIPZIOA ; KATEGORIA ; PREZ \n");
 			      
 			      for(Produktua p: produktuak) {
-			    	  writer.write(p.getIdProd() + ";" + p.getDeskripzioa() + ";"+ p.getCategory() + ";" + p.getPrize()+"€\n");
+			    	  writer.write(p.getIdProd() + ";" + p.getDeskripzioa() + ";"+ p.getCategory() + ";" + p.getPrize() + "€\n");
 			      }
 			      
 			      writer.close();

@@ -104,7 +104,9 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 	 */
 	@PreDestroy
 	public void destroy() {
-		String filename = "Produktuak.csv";
+		//String directory= System.getProperty("user.dir") + "\\outputa\\";
+		//System.out.println(directory);
+		String filename =  "../../NewTelApp/input/Produktuak.csv";
 		PrintWriter outputStream = null;
 
 		/*try {

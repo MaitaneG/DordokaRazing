@@ -1,5 +1,6 @@
 package com.example.newtelapp;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class SecondFragment extends Fragment {
     private TextView prezioa;
     private ImageButton botoiaAurrera;
     private ImageButton botoiaAtzera;
+    private ImageButton botoiaIrten;
 
     private int index=0;
 
@@ -53,9 +55,11 @@ public class SecondFragment extends Fragment {
 
         botoiaAurrera=view.findViewById(R.id.button_produktuak_aurrera);
         botoiaAtzera=view.findViewById(R.id.button_produktuak_atzera);
+        botoiaIrten=view.findViewById(R.id.button_irten);
 
         botoiaAurrera.setOnClickListener(this::produktuakAurrera);
         botoiaAtzera.setOnClickListener(this::produktuakAtzera);
+        botoiaIrten.setOnClickListener(this::irten);
 
         datuakAldatu(view);
 
@@ -96,6 +100,11 @@ public class SecondFragment extends Fragment {
             index=index-1;
         }
         datuakAldatu(view);
+    }
+
+    public void irten(View view){
+        NavHostFragment.findNavController(SecondFragment.this)
+                .navigate(R.id.action_SecondFragment_to_FirstFragment);
     }
 
 }

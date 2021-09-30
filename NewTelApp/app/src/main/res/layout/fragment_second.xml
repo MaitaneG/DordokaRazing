@@ -15,9 +15,11 @@
         android:layout_width="160dp"
         android:layout_height="77dp"
         android:background="@drawable/aurrerabotoia"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.996"
+        app:layout_constraintHorizontal_bias="0.976"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975"
@@ -27,6 +29,8 @@
         android:id="@+id/button_produktuak_atzera"
         android:layout_width="158dp"
         android:layout_height="78dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         android:background="@drawable/atzerabotoia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,5 +125,21 @@
         app:layout_constraintStart_toEndOf="@+id/textViewPrezioa"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.599" />
+
+    <ImageButton
+        android:id="@+id/button_irten"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@color/kolorea"
+        android:scaleType="fitCenter"
+        android:src="@drawable/irtenbotoia"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.864"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

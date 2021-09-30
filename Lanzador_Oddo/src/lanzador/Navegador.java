@@ -7,6 +7,7 @@ public class Navegador {
 		String url = args[0];
 		char backup = (args[1].toCharArray())[0];
 		ProcessBuilder pb, pb2;
+		String directory = "ruta/archivo.jar";
 		try {
 			
 			pb = new ProcessBuilder("\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\"" , url);
@@ -16,7 +17,7 @@ public class Navegador {
 			System.out.println("ok");
 			
 			if(backup == 'b') {
-				pb2 = new ProcessBuilder("java.exe", "-cp","\\bin\\", "eus.uni.damAppProduktuak");
+				pb2 = new ProcessBuilder("java.exe", "-jar",directory);
 				
 				pb2.redirectError(new File("error_logs\\Java_Error_log.txt"));
 				pb2.start();

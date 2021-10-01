@@ -39,14 +39,6 @@
         app:layout_constraintVertical_bias="0.977"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <!-- Produktua izena TextView -->
 
     <!-- Produktuaren izena agertzen da -->
@@ -170,13 +162,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.864"
         tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Translate Animation"
-        tools:layout_editor_absoluteX="168dp"
-        tools:layout_editor_absoluteY="228dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

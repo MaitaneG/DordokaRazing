@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -83,10 +86,19 @@ public class SecondFragment extends Fragment {
         izena.setText(produktuak.get(index).getIzena());
         kategoria.setText(produktuak.get(index).getCategory());
         prezioa.setText(String.valueOf(produktuak.get(index).getPrezio())+" €");
-        kantitatea.setText(produktuak.get(index).getKantitatea());
+        //kantitatea.setText(produktuak.get(index).getKantitatea());
+    }
+
+    public void animation(){
+        Animation an = AnimationUtils.loadAnimation(getContext(),R.anim.to_right);
+        izena.startAnimation(an);
+        kategoria.startAnimation(an);
+        prezioa.startAnimation(an);
+        //kantitatea.startAnimation(an);
     }
 
     public void produktuakAurrera( View view){
+        animation();
         if(index==produktuak.size()-1){
             index=0;
         }else{
@@ -96,6 +108,7 @@ public class SecondFragment extends Fragment {
     }
 
     public void produktuakAtzera(View view){
+        animation();
         if(index==0){
             index=produktuak.size()-1;
         }else{

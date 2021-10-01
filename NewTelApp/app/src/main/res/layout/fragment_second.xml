@@ -50,17 +50,6 @@
     <!-- Produktua izena TextView -->
 
     <!-- Produktuaren izena agertzen da -->
-    <TextView
-        android:id="@+id/textViewIzena"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:text=" Izena: "
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
 
     <!-- Produktua kategoria TextView -->
 
@@ -69,10 +58,22 @@
     <!-- Produktua prezioa TextView -->
 
     <TextView
+        android:id="@+id/textViewIzena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text=" Izena: "
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.447" />
+
+    <TextView
         android:id="@+id/textViewIzena2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
+        android:layout_marginStart="72dp"
         android:text=" Kantitatea: "
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,10 +88,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toEndOf="@+id/textViewIzena"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
+        app:layout_constraintVertical_bias="0.447" />
 
     <TextView
         android:id="@+id/textViewKantitateaInfo"

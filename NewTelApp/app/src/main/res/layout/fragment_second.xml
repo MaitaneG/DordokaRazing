@@ -48,19 +48,38 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Produktua izena TextView -->
+
+    <!-- Produktuaren izena agertzen da -->
     <TextView
         android:id="@+id/textViewIzena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
+        android:layout_marginStart="76dp"
         android:text=" Izena: "
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.312" />
+        app:layout_constraintVertical_bias="0.437" />
 
-    <!-- Produktuaren izena agertzen da -->
+    <!-- Produktua kategoria TextView -->
+
+    <!-- Produktuaren kategoria agertzen da -->
+
+    <!-- Produktua prezioa TextView -->
+
+    <TextView
+        android:id="@+id/textViewIzena2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:text=" Kantitatea: "
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.514" />
+
     <TextView
         android:id="@+id/textViewIzenaInfo"
         android:layout_width="wrap_content"
@@ -68,12 +87,23 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toEndOf="@+id/textViewIzena"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.312" />
+        app:layout_constraintVertical_bias="0.437" />
 
-    <!-- Produktua kategoria TextView -->
+    <TextView
+        android:id="@+id/textViewKantitateaInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toEndOf="@+id/textViewIzena2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.514" />
+
     <TextView
         android:id="@+id/textViewKategoria"
         android:layout_width="wrap_content"
@@ -84,9 +114,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.447" />
+        app:layout_constraintVertical_bias="0.579" />
 
-    <!-- Produktuaren kategoria agertzen da -->
+    <!-- Produktuaren prezioa agertzen da -->
+
     <TextView
         android:id="@+id/textViewKategoriaInfo"
         android:layout_width="wrap_content"
@@ -94,12 +125,11 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toEndOf="@+id/textViewKategoria"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.447" />
+        app:layout_constraintVertical_bias="0.579" />
 
-    <!-- Produktua prezioa TextView -->
     <TextView
         android:id="@+id/textViewPrezioa"
         android:layout_width="wrap_content"
@@ -110,9 +140,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.599" />
+        app:layout_constraintVertical_bias="0.649" />
 
-    <!-- Produktuaren prezioa agertzen da -->
     <TextView
         android:id="@+id/textViewPrezioaInfo"
         android:layout_width="wrap_content"
@@ -123,7 +152,7 @@
         app:layout_constraintHorizontal_bias="0.073"
         app:layout_constraintStart_toEndOf="@+id/textViewPrezioa"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.599" />
+        app:layout_constraintVertical_bias="0.649" />
 
     <ImageButton
         android:id="@+id/button_irten"

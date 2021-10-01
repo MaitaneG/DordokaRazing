@@ -25,6 +25,7 @@ public class SecondFragment extends Fragment {
     private TextView izena;
     private TextView kategoria;
     private TextView prezioa;
+    private TextView kantitatea;
     private ImageButton botoiaAurrera;
     private ImageButton botoiaAtzera;
     private ImageButton botoiaIrten;
@@ -51,6 +52,7 @@ public class SecondFragment extends Fragment {
         izena= (TextView) getView().findViewById(R.id.textViewIzenaInfo);
         kategoria=(TextView)getView().findViewById(R.id.textViewKategoriaInfo);
         prezioa=(TextView) getView().findViewById(R.id.textViewPrezioaInfo);
+        kantitatea=(TextView)getView().findViewById(R.id.textViewKantitateaInfo);
 
         botoiaAurrera=view.findViewById(R.id.button_produktuak_aurrera);
         botoiaAtzera=view.findViewById(R.id.button_produktuak_atzera);
@@ -81,6 +83,7 @@ public class SecondFragment extends Fragment {
         izena.setText(produktuak.get(index).getIzena());
         kategoria.setText(produktuak.get(index).getCategory());
         prezioa.setText(String.valueOf(produktuak.get(index).getPrezio())+" €");
+        kantitatea.setText(produktuak.get(index).getKantitatea());
     }
 
     public void produktuakAurrera( View view){

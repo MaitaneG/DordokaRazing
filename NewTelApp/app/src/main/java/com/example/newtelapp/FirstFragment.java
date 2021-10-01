@@ -49,7 +49,7 @@ public class FirstFragment extends Fragment {
     }
 
     public void itxi(View view){
-        new AlertDialog.Builder(getContext()).setTitle("Aplikazioa ixten").setMessage("Aplikazioa itxi nahi duzu?").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(getContext()).setTitle("Aplikazioa ixten ").setMessage("Aplikazioa itxi nahi duzu?").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 System.exit(0);

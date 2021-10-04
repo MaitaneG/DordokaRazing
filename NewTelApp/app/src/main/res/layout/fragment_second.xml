@@ -61,7 +61,11 @@
         app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toEndOf="@+id/textViewIzena"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
         app:layout_constraintVertical_bias="0.522" />
+=======
+        app:layout_constraintVertical_bias="0.434" />
+>>>>>>> 95f82734669d80629ddda497a8afe9d44d2da629
 
     <TextView
         android:id="@+id/textViewPrezioa"
@@ -76,16 +80,28 @@
         app:layout_constraintVertical_bias="0.724" />
 
     <TextView
+<<<<<<< HEAD
         android:id="@+id/textViewKantitateaInfo"
         android:layout_width="wrap_content"
+=======
+        android:id="@+id/textViewIzenaInfo"
+        android:layout_width="200dp"
+>>>>>>> 95f82734669d80629ddda497a8afe9d44d2da629
         android:layout_height="wrap_content"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toEndOf="@+id/textViewIzena2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.589" />
+=======
+        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintStart_toEndOf="@+id/textViewIzena"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.434" />
+>>>>>>> 95f82734669d80629ddda497a8afe9d44d2da629
 
     <TextView
         android:id="@+id/textViewKategoriaInfo"

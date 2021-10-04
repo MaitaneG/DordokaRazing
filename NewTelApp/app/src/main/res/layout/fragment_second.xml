@@ -52,22 +52,6 @@
     <!-- Produktuaren prezioa agertzen da -->
 
     <TextView
-        android:id="@+id/textViewIzenaInfo"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
-        app:layout_constraintStart_toEndOf="@+id/textViewIzena"
-        app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintVertical_bias="0.522" />
-=======
-        app:layout_constraintVertical_bias="0.434" />
->>>>>>> 95f82734669d80629ddda497a8afe9d44d2da629
-
-    <TextView
         android:id="@+id/textViewPrezioa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,28 +64,16 @@
         app:layout_constraintVertical_bias="0.724" />
 
     <TextView
-<<<<<<< HEAD
-        android:id="@+id/textViewKantitateaInfo"
+        android:id="@+id/textViewKategoria"
         android:layout_width="wrap_content"
-=======
-        android:id="@+id/textViewIzenaInfo"
-        android:layout_width="200dp"
->>>>>>> 95f82734669d80629ddda497a8afe9d44d2da629
         android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text=" Kategoria: "
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintHorizontal_bias="0.094"
-        app:layout_constraintStart_toEndOf="@+id/textViewIzena2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.589" />
-=======
-        app:layout_constraintHorizontal_bias="0.131"
-        app:layout_constraintStart_toEndOf="@+id/textViewIzena"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.434" />
->>>>>>> 95f82734669d80629ddda497a8afe9d44d2da629
+        app:layout_constraintVertical_bias="0.674" />
 
     <TextView
         android:id="@+id/textViewKategoriaInfo"
@@ -113,22 +85,10 @@
         app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toEndOf="@+id/textViewKategoria"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.654" />
+        app:layout_constraintVertical_bias="0.674" />
 
     <TextView
-        android:id="@+id/textViewKategoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:text=" Kategoria: "
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.654" />
-
-    <TextView
-        android:id="@+id/textViewIzena2"
+        android:id="@+id/textViewKantitatea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
@@ -137,7 +97,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.589" />
+        app:layout_constraintVertical_bias="0.617" />
+
+    <TextView
+        android:id="@+id/textViewKantitateaInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toEndOf="@+id/textViewKantitatea"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.617" />
 
     <TextView
         android:id="@+id/textViewIzena"
@@ -149,7 +121,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.522" />
+        app:layout_constraintVertical_bias="0.534" />
+
+    <TextView
+        android:id="@+id/textViewIzenaInfo"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toEndOf="@+id/textViewIzena"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.534" />
 
     <TextView
         android:id="@+id/textViewPrezioaInfo"
@@ -184,12 +168,13 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="131dp"
-        android:layout_marginTop="170dp"
         android:layout_marginEnd="152dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.327"
         tools:src="@drawable/i1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

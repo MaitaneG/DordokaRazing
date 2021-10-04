@@ -1,7 +1,6 @@
 package com.example.newtelapp;
 
 import android.app.Application;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -39,7 +37,6 @@ public class SecondFragment extends Fragment {
 
     private int index=0;
     public Integer[] nireIrudiak = {R.drawable.i1, R.drawable.i2, R.drawable.i3, R.drawable.i4};
-
 
     @Override
     public View onCreateView(
@@ -72,7 +69,6 @@ public class SecondFragment extends Fragment {
         botoiaAtzera.setOnClickListener(this::produktuakAtzera);
         botoiaIrten.setOnClickListener(this::irten);
 
-
         datuakAldatu();
 
         /**binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
@@ -96,8 +92,6 @@ public class SecondFragment extends Fragment {
         prezioa.setText(String.valueOf(produktuak.get(index).getPrezio())+" €");
         kantitatea.setText(Float.toString(produktuak.get(index).getKantitatea()));
         irudia.setImageResource(nireIrudiak[index]);
-
-
     }
 
     public void animation(){

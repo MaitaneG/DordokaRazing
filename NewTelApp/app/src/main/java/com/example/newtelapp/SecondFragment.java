@@ -65,6 +65,7 @@ public class SecondFragment extends Fragment {
         botoiaAtzera.setOnClickListener(this::produktuakAtzera);
         botoiaIrten.setOnClickListener(this::irten);
 
+
         datuakAldatu();
 
         /**binding.buttonSecond.setOnClickListener(new View.OnClickListener() {

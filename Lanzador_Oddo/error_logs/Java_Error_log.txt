@@ -1,0 +1,2 @@
+Error: Could not find or load main class eus.uni.damAppProduktuak
+Caused by: java.lang.ClassNotFoundException: eus.uni.damAppProduktuak

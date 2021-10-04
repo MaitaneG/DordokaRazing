@@ -1,6 +1,7 @@
 package com.example.newtelapp;
 
 import android.app.Application;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -32,8 +35,11 @@ public class SecondFragment extends Fragment {
     private ImageButton botoiaAurrera;
     private ImageButton botoiaAtzera;
     private ImageButton botoiaIrten;
+    private ImageView irudia;
 
     private int index=0;
+    public Integer[] nireIrudiak = {R.drawable.i1, R.drawable.i2, R.drawable.i3, R.drawable.i4};
+
 
     @Override
     public View onCreateView(
@@ -56,6 +62,7 @@ public class SecondFragment extends Fragment {
         kategoria=(TextView)getView().findViewById(R.id.textViewKategoriaInfo);
         prezioa=(TextView) getView().findViewById(R.id.textViewPrezioaInfo);
         kantitatea=(TextView)getView().findViewById(R.id.textViewKantitateaInfo);
+        irudia=view.findViewById(R.id.irudia);
 
         botoiaAurrera=view.findViewById(R.id.button_produktuak_aurrera);
         botoiaAtzera=view.findViewById(R.id.button_produktuak_atzera);
@@ -64,6 +71,7 @@ public class SecondFragment extends Fragment {
         botoiaAurrera.setOnClickListener(this::produktuakAurrera);
         botoiaAtzera.setOnClickListener(this::produktuakAtzera);
         botoiaIrten.setOnClickListener(this::irten);
+
 
         datuakAldatu();
 
@@ -87,6 +95,9 @@ public class SecondFragment extends Fragment {
         kategoria.setText(produktuak.get(index).getCategory());
         prezioa.setText(String.valueOf(produktuak.get(index).getPrezio())+" €");
         kantitatea.setText(Float.toString(produktuak.get(index).getKantitatea()));
+        irudia.setImageResource(nireIrudiak[index]);
+
+
     }
 
     public void animation(){
@@ -95,6 +106,7 @@ public class SecondFragment extends Fragment {
         kategoria.startAnimation(an);
         prezioa.startAnimation(an);
         kantitatea.startAnimation(an);
+        irudia.startAnimation(an);
     }
 
     public void produktuakAurrera( View view){

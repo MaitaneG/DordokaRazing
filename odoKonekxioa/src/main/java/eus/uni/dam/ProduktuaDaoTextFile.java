@@ -107,7 +107,7 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 	 */
 	@PreDestroy
 	public void destroy() {
-		String filename = "../NewTelApp/input/Produktuak.csv";
+		String filename = "../NewTelApp/app/src/main/assets/Produktuak.csv";
 
 		/*try {
 			File myObj = new File("Produktuak.csv");

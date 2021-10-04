@@ -50,7 +50,7 @@ public class Produktua {
 	}
 	@Override
 	public String toString() {
-		return idProd + "garren produktua, Deskripzioa => "+deskripzioa+".";
+		return idProd + ". produktua: "+deskripzioa+".";
 	}
 	
 	

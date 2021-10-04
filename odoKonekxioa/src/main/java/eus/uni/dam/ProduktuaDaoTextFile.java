@@ -1,6 +1,7 @@
 package eus.uni.dam;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,10 +13,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -49,8 +53,8 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 				+ "where stock_quant.location_id=8\n"
 				+ "order by product_product.id asc;";
 
-		try (//Connection conn = DriverManager.getConnection("jdbc:postgresql://25.32.59.79:5432/NewTel1", "openpg", "openpgpwd"); 
-				Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gauzak", "openpg", "openpgpwd");
+		try (Connection conn = DriverManager.getConnection("jdbc:postgresql://25.32.59.79:5432/NewTel1", "openpg", "openpgpwd"); 
+				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gauzak", "openpg", "openpgpwd");
 				Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
 			while (rs.next()) {
@@ -108,6 +112,96 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 	@PreDestroy
 	public void destroy() {
 		String filename = "../NewTelApp/input/Produktuak.csv";
+		File myObj = new File(filename);
+		try {
+			File logFile = new File ("logs/logs.txt");
+			if(!logFile.exists()) {
+				logFile.createNewFile();
+				FileWriter logWriter = new FileWriter("logs/logs.txt");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+				String formattedDateTime =(LocalDateTime.now()).format(formatter);
+				String toWrite= "- " + formattedDateTime + ", Orain, " + produktuak.size() + " produktu exportatu dira.\n";	
+				logWriter.write(toWrite);
+				logWriter.close();
+				System.out.println("log created");
+				
+			}else {
+				
+				Scanner logReader = new Scanner(myObj);
+				String line;
+				ArrayList<String> datuakLog = new ArrayList<>();
+				List<Produktua> produktuakLog = new ArrayList<>();
+				String logTxt="";
+				int idCount1=0;
+				int idCount2=0;
+				List<Produktua> falta = new ArrayList<>();
+				
+				while((logReader.hasNextLine())) {
+					line = logReader.nextLine();
+					
+					if(Character.isDigit(line.charAt(0))){ 					//tituloa kentzeko
+
+	                    line=line.substring(0, line.length()-1); 
+	                    datuakLog.add(line);								//logem datuen listara sartu
+	                    String[] strings = line.split(";");					//excel en tabulazioak kendu
+	                    produktuakLog.add(new Produktua((Integer.parseInt(strings[0])),strings[1],Double.parseDouble(strings[4]), Double.parseDouble(strings[3]),strings[2]));  //produktu bat sortu
+	                }					//p.getIdProd() + ";" + p.getDeskripzioa() + ";" + p.getKategoria() + ";" + p.getPrezioa()+ ";" + p.getKantitatea() + 
+				}
+				for(Produktua p : produktuak) {
+					idCount1 += p.getIdProd();
+				}for(Produktua p : produktuakLog) {
+					idCount2 += p.getIdProd();
+				}
+				if(produktuak.size() > produktuakLog.size()) {			//datubaseko produktuen kantitatea lehenago fitxategian baino handiagoa bada, x produktu gehitu ditugu, 
+					for(Produktua p: produktuak) {
+						if(!produktuakLog.contains(p)) {
+							falta.add(p);
+						}
+					}
+					int suma= produktuak.size() - produktuakLog.size();
+					logTxt = logTxt + suma + " produktu gehitu dira(" + falta.toString() + ")" ;
+					
+					
+				}else if(produktuak.size() < produktuakLog.size()) {		//berriz fitxategian produktu gehiago badaude datubasetik fitxategi hoiek ezabatu dira
+					int resta = produktuakLog.size() - produktuakLog.size();
+					logTxt = logTxt + resta + " produktu ezabatu dira(" + falta.toString() + ")";
+					for(Produktua p: produktuakLog) {
+						if(!produktuak.contains(p)) {
+							falta.add(p);
+						}
+					}
+						
+				}else if(produktuak.size() == produktuakLog.size() && idCount1 == idCount2) {
+					
+					logTxt = "Ez da egon aldaketarik.";
+				}else {
+						for(Produktua p: produktuakLog) {
+							if(!produktuak.contains(p)) {
+								falta.add(p);
+							}
+						}
+					logTxt = "Aldaketak egon dira";
+				}
+				//FileWriter logWriter = new FileWriter("C:\\Users\\kalboetxeaga.ager\\Documents\\aab\\newDdordoka\\DordokaRazing\\odoKonekxioa\\logs.txt", true);
+				BufferedWriter logWriter = new BufferedWriter(new FileWriter("logs/logs.txt", true));
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+				String formattedDateTime =(LocalDateTime.now()).format(formatter);
+				String toWrite= "\n- " + formattedDateTime + ", Orain, " + produktuak.size() + " produktu daude dira.\n \t" + logTxt;
+				logWriter.append(toWrite);
+				logWriter.close();
+				System.out.println("Log writted");//Azkenean zenbat produktu dauden eta ea ezabatu edo gehitu diren
+				
+				
+			}
+			
+			
+		}catch(IOException e) {
+			System.out.println("error");
+			e.printStackTrace();
+		}
+		
+		
+
 
 		/*try {
 			File myObj = new File("Produktuak.csv");

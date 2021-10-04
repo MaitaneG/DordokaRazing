@@ -5,12 +5,14 @@ public class Produktua {
     private String izena;
     private String category;
     private float prezio;
+    private float kantitatea;
 
-    public Produktua(int id, String izena, String category, float prezio) {
+    public Produktua(int id, String izena, String category, float prezio, float kant) {
         this.id = id;
         this.izena = izena;
         this.category = category;
         this.prezio = prezio;
+        this.kantitatea=kant;
     }
 
     public int getId() {
@@ -45,6 +47,14 @@ public class Produktua {
         this.prezio = prezio;
     }
 
+    public float getKantitatea() {
+        return kantitatea;
+    }
+
+    public void setKantitatea(int kantitatea) {
+        this.kantitatea = kantitatea;
+    }
+
     @Override
     public String toString() {
         return "Produktua{" +
@@ -52,6 +62,8 @@ public class Produktua {
                 ", izena='" + izena + '\'' +
                 ", category='" + category + '\'' +
                 ", prezio=" + prezio +
+                ", kantitatea=" + kantitatea +
                 '}';
     }
 }
+

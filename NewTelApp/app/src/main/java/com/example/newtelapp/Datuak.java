@@ -32,7 +32,7 @@ public class Datuak {
                     line=line.substring(0, line.length()-1);
                     datuak.add(line);
                     String[] strings = line.split(";");
-                    produktuak.add(new Produktua(Integer.parseInt(strings[0]),strings[1],strings[2], Float.parseFloat(strings[3])));
+                    produktuak.add(new Produktua(Integer.parseInt(strings[0]),strings[1],strings[2], Float.parseFloat(strings[3]),Float.parseFloat(strings[4])));
                     Log.d("linea",strings.toString());
                 }
             }

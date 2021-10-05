@@ -1,6 +1,6 @@
 @echo off
-title CSV Sortzailea
+title JAVA_Jaurtitzailea
 echo java aplikazioa abiarazten...
 cd ../odoKonekxioa/
-pause
-start mvn spring-boot:run
+start /MIN mvn spring-boot:run
+exit

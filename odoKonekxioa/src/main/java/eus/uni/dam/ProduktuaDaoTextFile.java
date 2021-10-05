@@ -162,13 +162,14 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 					
 					
 				}else if(produktuak.size() < produktuakLog.size()) {		//berriz fitxategian produktu gehiago badaude datubasetik fitxategi hoiek ezabatu dira
-					int resta = produktuakLog.size() - produktuakLog.size();
-					logTxt = logTxt + resta + " produktu ezabatu dira(" + falta.toString() + ")";
+					
 					for(Produktua p: produktuakLog) {
 						if(!produktuak.contains(p)) {
 							falta.add(p);
 						}
 					}
+					int resta = produktuakLog.size() - produktuakLog.size();
+					logTxt = logTxt + resta + " produktu ezabatu dira(" + falta.toString() + ")";
 						
 				}else if(produktuak.size() == produktuakLog.size() && idCount1 == idCount2) {
 					

@@ -28,7 +28,7 @@ public class FirstPage extends AppCompatActivity {
 
     public void bestePantilaraJoan(View view){
         Intent myIntent = new Intent(view.getContext(), SecondPage.class);
-        myIntent.putExtra("id", 5);
+
         startActivity(myIntent);
     }
 
@@ -42,7 +42,9 @@ public class FirstPage extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
-                        System.exit(0);
+                        if (getIntent().getBooleanExtra("EXIT", false)) {
+                            finish();
+                        }
                     }
                 })
 

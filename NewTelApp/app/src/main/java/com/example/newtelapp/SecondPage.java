@@ -97,6 +97,8 @@ public class SecondPage extends AppCompatActivity {
 
     public void irten(View view){
         Intent myIntent = new Intent(view.getContext(), FirstPage.class);
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        myIntent.putExtra("EXIT", true);
         startActivity(myIntent);
     }
 

@@ -1,5 +1,6 @@
 package com.example.newtelapp;
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,8 +29,8 @@ public class FirstPage extends AppCompatActivity {
 
     public void bestePantilaraJoan(View view){
         Intent myIntent = new Intent(view.getContext(), SecondPage.class);
-
-        startActivity(myIntent);
+        ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.to_right, R.anim.to_right);
+        this.startActivity(myIntent, options.toBundle());
     }
 
     public void itxi(View view){
@@ -44,6 +45,7 @@ public class FirstPage extends AppCompatActivity {
                         // Continue with delete operation
                         if (getIntent().getBooleanExtra("EXIT", false)) {
                             finish();
+                            System.exit(0);
                         }
                     }
                 })

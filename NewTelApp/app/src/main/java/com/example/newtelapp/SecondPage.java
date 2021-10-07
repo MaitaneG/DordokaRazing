@@ -1,5 +1,6 @@
 package com.example.newtelapp;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -97,9 +98,12 @@ public class SecondPage extends AppCompatActivity {
 
     public void irten(View view){
         Intent myIntent = new Intent(view.getContext(), FirstPage.class);
+        ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.to_right, R.anim.to_right);
+
         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         myIntent.putExtra("EXIT", true);
-        startActivity(myIntent);
+        this.startActivity(myIntent, options.toBundle());
+
     }
 
 }

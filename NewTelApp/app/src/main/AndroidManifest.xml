@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SecondPage">
+            android:name=".SecondPage"
+            android:theme="@style/Theme.NewTelApp.NoActionBar">
         </activity>
     </application>
 

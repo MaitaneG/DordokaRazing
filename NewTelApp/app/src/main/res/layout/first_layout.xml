@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Irten botoia -->
     <ImageButton
         android:id="@+id/button_irten"
         android:layout_width="162dp"

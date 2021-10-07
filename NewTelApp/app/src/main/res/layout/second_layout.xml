@@ -40,17 +40,6 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <!-- Produktua izena TextView -->
-
-    <!-- Produktuaren izena agertzen da -->
-
-    <!-- Produktua kategoria TextView -->
-
-    <!-- Produktuaren kategoria agertzen da -->
-
-    <!-- Produktua prezioa TextView -->
-
-    <!-- Produktuaren prezioa agertzen da -->
-
     <TextView
         android:id="@+id/textViewPrezioa"
         android:layout_width="wrap_content"
@@ -63,6 +52,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.724" />
 
+    <!-- Produktua kategoria TextView -->
     <TextView
         android:id="@+id/textViewKategoria"
         android:layout_width="wrap_content"
@@ -75,6 +65,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.674" />
 
+    <!-- Produktuaren kategoria agertzen da -->
     <TextView
         android:id="@+id/textViewKategoriaInfo"
         android:layout_width="wrap_content"
@@ -87,6 +78,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.674" />
 
+    <!-- Produktua kantitatea TextView -->
     <TextView
         android:id="@+id/textViewKantitatea"
         android:layout_width="wrap_content"
@@ -99,6 +91,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.617" />
 
+    <!-- Produktuaren kantitatea agertzen da -->
     <TextView
         android:id="@+id/textViewKantitateaInfo"
         android:layout_width="wrap_content"
@@ -111,6 +104,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.617" />
 
+    <!-- Produktuaren izena agertzen da -->
     <TextView
         android:id="@+id/textViewIzena"
         android:layout_width="wrap_content"
@@ -123,6 +117,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.534" />
 
+    <!-- Produktua prezioa TextView -->
     <TextView
         android:id="@+id/textViewIzenaInfo"
         android:layout_width="200dp"
@@ -135,6 +130,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.534" />
 
+    <!-- Produktuaren prezioa agertzen da -->
     <TextView
         android:id="@+id/textViewPrezioaInfo"
         android:layout_width="wrap_content"
@@ -147,6 +143,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.724" />
 
+    <!-- Irten botoia -->
     <ImageButton
         android:id="@+id/button_irten"
         android:layout_width="150dp"
@@ -163,18 +160,18 @@
         app:layout_constraintVertical_bias="0.864"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Produktuaren argazkia agertzen da -->
     <ImageView
         android:id="@+id/irudia"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_marginStart="131dp"
         android:layout_marginEnd="152dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.327"
+        app:layout_constraintVertical_bias="0.311"
         tools:src="@drawable/i1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

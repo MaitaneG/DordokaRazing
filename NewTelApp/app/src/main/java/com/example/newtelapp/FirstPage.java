@@ -10,39 +10,66 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
+/**
+ * Lehengo Layout-aren klasea
+ */
 public class FirstPage extends AppCompatActivity {
 
+    /**
+     * Atributoak
+     */
     private ImageButton irten_botoia;
     private ImageButton erakutsi_produktuak_botoia;
 
-
+    /**
+     * Layout-a sortzen denean
+     *
+     * @param savedInstanceState
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first_layout);
+        hasieratu();
+    }
 
+    /**
+     * Layout-eko objetu guztiak hasieratu
+     */
+    private void hasieratu() {
+        /* Botoiak aurkitzen eta aldagaietan gorde */
         erakutsi_produktuak_botoia = findViewById(R.id.button_erakutsi_produktuak);
-        erakutsi_produktuak_botoia.setOnClickListener(this::bestePantilaraJoan);
         irten_botoia = findViewById(R.id.button_irten);
+
+        /* Botoiei listenerra jarri */
+        erakutsi_produktuak_botoia.setOnClickListener(this::bestePantilaraJoan);
         irten_botoia.setOnClickListener(this::itxi);
     }
 
-    public void bestePantilaraJoan(View view){
+    /**
+     * Bigarren layout-era joatea
+     *
+     * @param view
+     */
+    private void bestePantilaraJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), SecondPage.class);
-        ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.to_right, R.anim.to_right);
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }
 
-    public void itxi(View view){
+    /**
+     * Aplikazioa guztiz itxi nahi denean
+     *
+     * @param view
+     */
+    private void itxi(View view) {
         new AlertDialog.Builder(this)
-                .setTitle("Aplikazioa ixten ")
-                .setMessage("Aplikazioa itxi nahi duzu?")
+                .setTitle("Aplikazioa ixten ")// Dialog-ari titulua jarri
+                .setMessage("Aplikazioa itxi nahi duzu?") // Dialog-aren mezua jarri
 
-                // Specifying a listener allows you to take an action before dismissing the dialog.
-                // The dialog is automatically dismissed when a dialog button is clicked.
+                // Baiezko aukera klikatzen bada, aplikazioa itxiko da
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // Continue with delete operation
+
                         if (getIntent().getBooleanExtra("EXIT", true)) {
                             finish();
                             System.exit(0);
@@ -50,11 +77,9 @@ public class FirstPage extends AppCompatActivity {
                     }
                 })
 
-                // A null listener allows the button to dismiss the dialog and take no further action.
+                // Listener juts bat, Ez klikatzen bada ez da aplikazioa itxiko
                 .setNegativeButton(android.R.string.no, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
-
-
     }
 }

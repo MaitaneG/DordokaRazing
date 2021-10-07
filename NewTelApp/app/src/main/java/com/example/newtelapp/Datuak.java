@@ -57,11 +57,21 @@ public class Datuak {
         }
     }
 
+    /**
+     *
+     * @return Produktuen ArrayList-a
+     */
     public ArrayList<Produktua> datuakItzuli(){
 
         return produktuak;
     }
 
+    /**
+     *
+     * Bakarrik probak egiteko
+     *
+     * @return lehengo produktuaren datuak String batean
+     */
     public String datuakErakutsi(){
 
         return datuak.get(0);

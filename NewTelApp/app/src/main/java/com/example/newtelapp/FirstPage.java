@@ -43,7 +43,7 @@ public class FirstPage extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
-                        if (getIntent().getBooleanExtra("EXIT", false)) {
+                        if (getIntent().getBooleanExtra("EXIT", true)) {
                             finish();
                             System.exit(0);
                         }

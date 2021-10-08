@@ -6,27 +6,36 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
  * Bigarren Layout-aren klasea
  */
-public class SecondPage extends AppCompatActivity {
+public class SecondPage extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     /**
      *
      * Atributoak
      */
     private Datuak datuak;
+
     private ArrayList<Produktua>produktuak;
+    private ArrayList<Produktua>produktuakBilatu;
+
     private TextView izena;
     private TextView kategoria;
     private TextView prezioa;
@@ -35,6 +44,9 @@ public class SecondPage extends AppCompatActivity {
     private ImageButton botoiaAtzera;
     private ImageButton botoiaIrten;
     private ImageView irudia;
+    private SearchView bilatzailea;
+    private ListView lista;
+    private ArrayAdapter<Produktua> adapter = null;
 
     private int index=0;
     public Integer[] nireIrudiak = {R.drawable.i1, R.drawable.i2, R.drawable.i3, R.drawable.i4};
@@ -59,6 +71,8 @@ public class SecondPage extends AppCompatActivity {
         /* Datuak hasieratu */
         datuak=new Datuak(this);
         produktuak=datuak.datuakItzuli();
+        produktuakBilatu=new ArrayList<>();
+        produktuakBilatu.addAll(produktuak);
 
         /* Botoiak aurkitzen eta aldagaietan gorde */
         izena=findViewById(R.id.textViewIzenaInfo);
@@ -66,6 +80,8 @@ public class SecondPage extends AppCompatActivity {
         prezioa=findViewById(R.id.textViewPrezioaInfo);
         kantitatea=findViewById(R.id.textViewKantitateaInfo);
         irudia=findViewById(R.id.irudia);
+        lista= findViewById(R.id.listaView);
+        bilatzailea=findViewById(R.id.bilatzailea);
 
         botoiaAurrera=findViewById(R.id.button_produktuak_aurrera);
         botoiaAtzera=findViewById(R.id.button_produktuak_atzera);
@@ -75,8 +91,59 @@ public class SecondPage extends AppCompatActivity {
         botoiaAurrera.setOnClickListener(this::produktuakAurrera);
         botoiaAtzera.setOnClickListener(this::produktuakAtzera);
         botoiaIrten.setOnClickListener(this::irten);
+        bilatzailea.setOnQueryTextListener(this);
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                int ida =   produktuakBilatu.get(i).getId();
+                datuakAldatuBilatzaile(ida-1);
+            }
+        });
+
+        /* Zabalgarria ezkutatzen du */
+        lista.setVisibility(View.INVISIBLE);
 
         datuakAldatu();
+    }
+
+    public void filtratu(String testua){
+        int luzera=testua.length();
+        if (luzera==0){
+            produktuakBilatu.clear();
+            produktuakBilatu.addAll(produktuak);
+            lista.setVisibility(View.INVISIBLE);
+
+
+        }else{
+            lista.setVisibility(View.VISIBLE);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<Produktua> kolekzioa=produktuakBilatu.stream().filter(i -> i.getIzena().toLowerCase().contains(testua.toLowerCase())).collect(Collectors.toList());
+                produktuakBilatu.clear();
+                produktuakBilatu.addAll(kolekzioa);
+            }else{
+                for (Produktua p: produktuakBilatu) {
+                    if(p.getIzena().toLowerCase().contains(testua.toLowerCase())){
+                        produktuakBilatu.add(p);
+                    }
+
+                }
+            }
+            adapter = new ArrayAdapter<Produktua>(this, android.R.layout.simple_list_item_1,produktuakBilatu);
+            lista.setAdapter(adapter);
+        }
+    }
+
+    public void datuakAldatuBilatzaile(int indexa){
+        lista.setVisibility(View.INVISIBLE);
+        bilatzailea.setQuery("", false);
+        bilatzailea .clearFocus();
+        izena.setText(produktuak.get(indexa-1).getIzena());
+        kategoria.setText(produktuak.get(indexa-1).getCategory());
+        prezioa.setText(String.valueOf(produktuak.get(indexa-1).getPrezio())+" €");
+        kantitatea.setText(Float.toString(produktuak.get(indexa-1).getKantitatea()));
+        irudia.setImageResource(nireIrudiak[indexa-1]);
+        index= produktuak.get(indexa-1).getId()-2;
     }
 
     /**
@@ -150,5 +217,17 @@ public class SecondPage extends AppCompatActivity {
         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         myIntent.putExtra("EXIT", true);
         this.startActivity(myIntent, options.toBundle());
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        filtratu(s);
+        return false;
     }
 }

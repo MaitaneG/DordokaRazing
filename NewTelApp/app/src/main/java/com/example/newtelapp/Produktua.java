@@ -124,13 +124,7 @@ public class Produktua {
      */
     @Override
     public String toString() {
-        return "Produktua{" +
-                "id=" + id +
-                ", izena='" + izena + '\'' +
-                ", category='" + category + '\'' +
-                ", prezio=" + prezio +
-                ", kantitatea=" + kantitatea +
-                '}';
+        return izena;
     }
 }
 

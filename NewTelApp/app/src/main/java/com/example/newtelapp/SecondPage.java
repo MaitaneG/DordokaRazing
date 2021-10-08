@@ -109,32 +109,31 @@ public class SecondPage extends AppCompatActivity implements SearchView.OnQueryT
 
     /**
      *
-     * 
+     * Bilatzailea erabili nahi izanez gero erabiliko dugun metodoa da.
+     * Bilatzailean idatzita dugun hitza konprobatzen joango da gure produktu guztien listan eta,
+     * produkturen batek bere izenean bilatzen ari garen testua baldin badu Listan agertuko da.
+     * Listako produkturen bat klikatu ezkero zuzenean produktu horretara joango da.
      * @param testua
      */
-    public void filtratu(String testua){
-        int luzera=testua.length();
-        if (luzera==0){
-            produktuakBilatu.clear();
+    public void filtratu(String testua) {
+        int luzera = testua.length();
+        produktuakBilatu.clear();
+        if (luzera == 0) {
             produktuakBilatu.addAll(produktuak);
             lista.setVisibility(View.INVISIBLE);
 
-
-        }else{
+            //Bilatzailean zerbait idatzita baldin badago hitz hori konprobatuko da.
+        } else {
             lista.setVisibility(View.VISIBLE);
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                List<Produktua> kolekzioa=produktuakBilatu.stream().filter(i -> i.getIzena().toLowerCase().contains(testua.toLowerCase())).collect(Collectors.toList());
-                produktuakBilatu.clear();
-                produktuakBilatu.addAll(kolekzioa);
-            }else{
-                for (Produktua p: produktuakBilatu) {
-                    if(p.getIzena().toLowerCase().contains(testua.toLowerCase())){
-                        produktuakBilatu.add(p);
-                    }
+            //produktu bakoitzaren izenean begiratuko dugu.
+            for (Produktua p : produktuak) {
+                //bilatzaileko testuak izenarekin koiziditzen badu erakutsiko den listara gehituko da.
+                if (p.getIzena().toLowerCase().contains(testua.toLowerCase())) {
 
+                    produktuakBilatu.add(p);
                 }
             }
-            adapter = new ArrayAdapter<Produktua>(this, android.R.layout.simple_list_item_1,produktuakBilatu);
+            adapter = new ArrayAdapter<Produktua>(this, android.R.layout.simple_list_item_1, produktuakBilatu);
             lista.setAdapter(adapter);
         }
     }
@@ -150,7 +149,7 @@ public class SecondPage extends AppCompatActivity implements SearchView.OnQueryT
         bilatzailea .clearFocus();
         izena.setText(produktuak.get(indexa-1).getIzena());
         kategoria.setText(produktuak.get(indexa-1).getCategory());
-        prezioa.setText(String.valueOf(produktuak.get(indexa-1).getPrezio())+" €");
+        prezioa.setText(produktuak.get(indexa-1).getPrezio()+" €");
         kantitatea.setText(Float.toString(produktuak.get(indexa-1).getKantitatea()));
         irudia.setImageResource(nireIrudiak[indexa-1]);
         index= produktuak.get(indexa-1).getId()-2;
@@ -163,7 +162,7 @@ public class SecondPage extends AppCompatActivity implements SearchView.OnQueryT
     public void datuakAldatu(){
         izena.setText(produktuak.get(index).getIzena());
         kategoria.setText(produktuak.get(index).getCategory());
-        prezioa.setText(String.valueOf(produktuak.get(index).getPrezio())+" €");
+        prezioa.setText(produktuak.get(index).getPrezio()+" €");
         kantitatea.setText(Float.toString(produktuak.get(index).getKantitatea()));
         irudia.setImageResource(nireIrudiak[index]);
     }

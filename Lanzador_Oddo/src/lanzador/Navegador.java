@@ -9,7 +9,7 @@ public class Navegador {
 		ProcessBuilder pb, pb2;
 
 
-		String directory = "C:\\Users\\kalboetxeaga.ager\\Documents\\aab\\newDordoka3\\DordokaRazing\\odoKonekxioa";
+		//String directory = "C:\\Users\\kalboetxeaga.ager\\Documents\\aab\\newDordoka3\\DordokaRazing\\odoKonekxioa";
 
 		try {
 			
@@ -23,7 +23,7 @@ public class Navegador {
 			if(backup == 'b') {
 
 
-				pb2 = new ProcessBuilder("C:\\Users\\kalboetxeaga.ager\\Documents\\aab\\newDordoka3\\DordokaRazing\\odoKonekxioa\\ejecutador.bat");
+				pb2 = new ProcessBuilder("C:\\DordokaRazing\\odoKonekxioa\\ejecutador.bat");
 				/*
 				 * prozesu honek bat fiitxategia exekutatzen du non fitxategi horrek cd bat eta spring aplikazioa exekutatzen du.
 				 * 

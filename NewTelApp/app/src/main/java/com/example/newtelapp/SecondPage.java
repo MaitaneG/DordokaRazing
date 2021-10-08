@@ -49,7 +49,7 @@ public class SecondPage extends AppCompatActivity implements SearchView.OnQueryT
     private ArrayAdapter<Produktua> adapter = null;
 
     private int index=0;
-    public Integer[] nireIrudiak = {R.drawable.i1, R.drawable.i2, R.drawable.i3, R.drawable.i4};
+    public Integer[] nireIrudiak = {R.drawable.i2, R.drawable.i3, R.drawable.i4, R.drawable.i5, R.drawable.i6, R.drawable.i7};
 
     /**
      *

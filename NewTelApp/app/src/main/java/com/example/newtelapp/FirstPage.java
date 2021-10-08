@@ -62,6 +62,10 @@ public class FirstPage extends AppCompatActivity {
      * @param view
      */
     private void itxi(View view) {
+        alert();
+    }
+
+    public void alert(){
         new AlertDialog.Builder(this)
                 .setTitle("Aplikazioa ixten ")// Dialog-ari titulua jarri
                 .setMessage("Aplikazioa itxi nahi duzu?") // Dialog-aren mezua jarri
@@ -81,5 +85,10 @@ public class FirstPage extends AppCompatActivity {
                 .setNegativeButton(android.R.string.no, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        alert();
     }
 }

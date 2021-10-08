@@ -1,4 +1,5 @@
 package eus.uni.dam;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -35,6 +36,7 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 	ProduktuaDaoTextFile() {
 
 	};
+
 	/**
 	 * Metodo honek produktuen guztien kolekzioa itzultzen dizu
 	 */
@@ -49,19 +51,24 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 	 */
 	@PostConstruct
 	public void init() {
-		//sql kontsulta sententzia
+		// sql kontsulta sententzia
 		String sql = "select product_product.id , product_template.name as deskripzioa, product_template.list_price , stock_quant.quantity as kantitatea, product_category.name as kategoria\n"
 				+ "from product_product inner join product_template on product_product.id = product_template.id inner join stock_quant on product_product.id = stock_quant.product_id inner join product_category on product_template.categ_id =product_category.id\n"
-				+ "where stock_quant.location_id=8\n"
-				+ "order by product_product.id asc;";
+				+ "where stock_quant.location_id=8\n" + "order by product_product.id asc;";
 
-		try (Connection conn = DriverManager.getConnection("jdbc:postgresql://25.32.59.79:5432/NewTel1", "openpg", "openpgpwd");  //Datubasera konektatzeko parametroak
-				//Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/gauzak", "openpg", "openpgpwd");
-				Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {	//sql kontsultaren emaitzak result set batean gordetzen ditugu
+		try (Connection conn = DriverManager.getConnection("jdbc:postgresql://25.32.59.79:5432/NewTel1", "openpg",
+				"openpgpwd"); // Datubasera konektatzeko parametroak
+				// Connection conn =
+				// DriverManager.getConnection("jdbc:postgresql://localhost:5432/gauzak",
+				// "openpg", "openpgpwd");
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql)) { // sql kontsultaren emaitzak result set batean gordetzen ditugu
 
 			while (rs.next()) {
-				Produktua p1 = new Produktua(rs.getInt("id"), rs.getString("deskripzioa"),rs.getDouble("kantitatea"),rs.getDouble("list_price"),rs.getString("kategoria")); //Informazioa Produktua klaseko objetuetan gordetzen du
-				produktuak.add(p1);																																			//Ondoren ArrayList era gehitzen ditu
+				Produktua p1 = new Produktua(rs.getInt("id"), rs.getString("deskripzioa"), rs.getDouble("kantitatea"),
+						rs.getDouble("list_price"), rs.getString("kategoria")); // Informazioa Produktua klaseko
+																				// objetuetan gordetzen du
+				produktuak.add(p1); // Ondoren ArrayList era gehitzen ditu
 
 			}
 
@@ -108,110 +115,139 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 
 	/**
 	 * Katalogoa berriz behar ez dugunean, memorian daukagun zerrenda testu
-	 * fitxategi baten egingo dugu persistente.
-	 *  Baita ere Log batean idatziko dugu ea zerbait aldatu den azkenekoz aplikazioa exekutatu zenetik
+	 * fitxategi baten egingo dugu persistente. Baita ere Log batean idatziko dugu
+	 * ea zerbait aldatu den azkenekoz aplikazioa exekutatu zenetik
 	 * 
 	 */
 	@PreDestroy
 	public void destroy() {
-		String filename = "../NewTelApp/app/src/main/assets/Produktuak.csv";												//Persistentzia fitxategia egongo den helbidea "Excel" csv formatuan
-		File myObj = new File(filename);																					//File objektu bat sortzen dugu helbidearen rutarekin (honek iadanik eginda dagoen excelaren balioa izango du)
+		String filename = "../NewTelApp/app/src/main/assets/Produktuak.csv"; // Persistentzia fitxategia egongo den
+																				// helbidea "Excel" csv formatuan
+		File myObj = new File(filename); // File objektu bat sortzen dugu helbidearen rutarekin (honek iadanik eginda
+											// dagoen excelaren balioa izango du)
 		try {
-			File logFile = new File ("logs/logs.txt");																		//Log fitxategia File objetu batean
-			if(!logFile.exists()) {																							//Log a sortuta ez badago orduan horain ditugun produktuen kantitatea idazten du
+			File logFile = new File("logs/logs.txt"); // Log fitxategia File objetu batean
+			if (!logFile.exists()) { // Log a sortuta ez badago orduan horain ditugun produktuen kantitatea idazten
+										// du
 				logFile.createNewFile();
 				FileWriter logWriter = new FileWriter("logs/logs.txt");
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-				String formattedDateTime =(LocalDateTime.now()).format(formatter);
-				String toWrite= "- " + formattedDateTime + ", Orain, " + produktuak.size() + " produktu exportatu dira.\n";	
+				String formattedDateTime = (LocalDateTime.now()).format(formatter);
+				String toWrite = "- " + formattedDateTime + ", Orain, " + produktuak.size()
+						+ " produktu exportatu dira.\n";
 				logWriter.write(toWrite);
 				logWriter.close();
 				System.out.println("log created");
-				
-			}else {
-				
-				Scanner logReader = new Scanner(myObj);																		//Scannerra erabiltzen du aurreko csv fitxategia erabiltzeko
+
+			} else {
+
+				Scanner logReader = new Scanner(myObj); // Scannerra erabiltzen du aurreko csv fitxategia erabiltzeko
 				String line;
 				ArrayList<String> datuakLog = new ArrayList<>();
 				List<Produktua> produktuakLog = new ArrayList<>();
-				String logTxt="";
-				int idCount1=0;
-				int idCount2=0;
+				String logTxt = "";
+				int idCount1 = 0;
+				int idCount2 = 0;
 				List<Produktua> falta = new ArrayList<>();
-				
-				while((logReader.hasNextLine())) {
-					line = logReader.nextLine();																			//Lerro bakoitza aldagai batean gordetzen da
-					
-					if(Character.isDigit(line.charAt(0))){ 																	//tituloa kentzeko
 
-	                    line=line.substring(0, line.length()-1); 
-	                    datuakLog.add(line);																				//logem datuen listara sartu
-	                    String[] strings = line.split(";");																	//excel en tabulazioak kendu
-	                    produktuakLog.add(new Produktua((Integer.parseInt(strings[0])),strings[1],Double.parseDouble(strings[4]), Double.parseDouble(strings[3]),strings[2]));  //produktu bat sortu eta gehitu array listera
-	                }					
+				while ((logReader.hasNextLine())) {
+					line = logReader.nextLine(); // Lerro bakoitza aldagai batean gordetzen da
+
+					if (Character.isDigit(line.charAt(0))) { // tituloa kentzeko
+
+						line = line.substring(0, line.length() - 1);
+						datuakLog.add(line); // logem datuen listara sartu
+						String[] strings = line.split(";"); // excel en tabulazioak kendu
+						produktuakLog.add(new Produktua((Integer.parseInt(strings[0])), strings[1],
+								Double.parseDouble(strings[4]), Double.parseDouble(strings[3]), strings[2])); // produktu
+																												// bat
+																												// sortu
+																												// eta
+																												// gehitu
+																												// array
+																												// listera
+					}
 				}
-				for(Produktua p : produktuak) {																				//Bi ArrayListetan dauden produktuen id-en batuketa egiten du 
+				for (Produktua p : produktuak) { // Bi ArrayListetan dauden produktuen id-en batuketa egiten du
 					idCount1 += p.getIdProd();
-				}for(Produktua p : produktuakLog) {
+				}
+				for (Produktua p : produktuakLog) {
 					idCount2 += p.getIdProd();
 				}
-				if(produktuak.size() > produktuakLog.size()) {																//datubaseko produktuen kantitatea lehenago fitxategian baino handiagoa bada, x produktu gehitu ditugu, 
-					for(Produktua p: produktuak) {
-						if(!produktuakLog.contains(p)) {
+				if (produktuak.size() > produktuakLog.size()) { // datubaseko produktuen kantitatea lehenago fitxategian
+																// baino handiagoa bada, x produktu gehitu ditugu,
+					for (Produktua p : produktuak) {
+						if (!produktuakLog.contains(p)) {
 							falta.add(p);
 						}
 					}
-					int suma= produktuak.size() - produktuakLog.size();
-					logTxt = logTxt + suma + " produktu gehitu dira(" + falta.toString() + ")" ;
-					
-					
-				}else if(produktuak.size() < produktuakLog.size()) {														//berriz fitxategian produktu gehiago badaude datubasetik fitxategi hoiek ezabatu dira
-					
-					for(Produktua p: produktuakLog) {
-						if(!produktuak.contains(p)) {
+					int suma = produktuak.size() - produktuakLog.size();
+					logTxt = logTxt + suma + " produktu gehitu dira(" + falta.toString() + ")";
+
+				} else if (produktuak.size() < produktuakLog.size()) { // berriz fitxategian produktu gehiago badaude
+																		// datubasetik fitxategi hoiek ezabatu dira
+
+					for (Produktua p : produktuakLog) {
+						if (!produktuak.contains(p)) {
 							falta.add(p);
 						}
 					}
 					int resta = produktuakLog.size() - produktuakLog.size();
 					logTxt = logTxt + resta + " produktu ezabatu dira(" + falta.toString() + ")";
-						
-				}else if(produktuak.size() == produktuakLog.size() && idCount1 == idCount2) {							//bi ArrayListetan dauden objetuen kantitatea eta id-en batuketaren emaitzak berdinak badira orduan bi arrayListetan objetu berak daude.
-																														//Berriz bietan kantitate bera baina iden baturak desberdinak badira orduan objetu desberdinak daude
-					
+
+				} else if (produktuak.size() == produktuakLog.size() && idCount1 == idCount2) { // bi ArrayListetan
+																								// dauden objetuen
+																								// kantitatea eta id-en
+																								// batuketaren emaitzak
+																								// berdinak badira
+																								// orduan bi
+																								// arrayListetan objetu
+																								// berak daude.
+																								// Berriz bietan
+																								// kantitate bera baina
+																								// iden baturak
+																								// desberdinak badira
+																								// orduan objetu
+																								// desberdinak daude
+
 					logTxt = "Ez da egon aldaketarik.";
-				}else {
-						for(Produktua p: produktuakLog) {																//ArrayLista zeharkatu falta diren produktuen bila
-							if(!produktuak.contains(p)) {
-								falta.add(p);
-							}
+				} else {
+					for (Produktua p : produktuakLog) { // ArrayLista zeharkatu falta diren produktuen bila
+						if (!produktuak.contains(p)) {
+							falta.add(p);
 						}
+					}
 					logTxt = "Aldaketak egon dira";
 				}
-				
-				BufferedWriter logWriter = new BufferedWriter(new FileWriter("logs/logs.txt", true));					//Log a sortuta dagoela esaten dugu true horrekin
+
+				BufferedWriter logWriter = new BufferedWriter(new FileWriter("logs/logs.txt", true)); // Log a sortuta
+																										// dagoela
+																										// esaten dugu
+																										// true horrekin
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-				String formattedDateTime =(LocalDateTime.now()).format(formatter);
-				String toWrite= "\n- " + formattedDateTime + ", Orain, " + produktuak.size() + " produktu daude.\n \t" + logTxt;
-				logWriter.append(toWrite);																				//Informazioa gehitzen da append metodoa erabiliz
+				String formattedDateTime = (LocalDateTime.now()).format(formatter);
+				String toWrite = "\n- " + formattedDateTime + ", Orain, " + produktuak.size() + " produktu daude.\n \t"
+						+ logTxt;
+				logWriter.append(toWrite); // Informazioa gehitzen da append metodoa erabiliz
 				logWriter.close();
-				System.out.println("Log writted");																		//Azkenean aurreko csvarekiko zenbat produktu dauden eta ea ezabatu edo gehitu diren idazten du
-				
-				
+				System.out.println("Log writted"); // Azkenean aurreko csvarekiko zenbat produktu dauden eta ea ezabatu
+													// edo gehitu diren idazten du
+
 			}
-			
-			
-		}catch(IOException e) {
+
+		} catch (IOException e) {
 			System.out.println("error");
 			e.printStackTrace();
 		}
-		
-	
+
 		try {
 			FileWriter writer = new FileWriter(filename);
-			writer.write("ID PRODUKTU ; DESKRIPZIOA ; KATEGORIA ; PREZIOA ; KANTITATEA \n");																//Excel fitxategirako goiburuak
+			writer.write("ID PRODUKTU ; DESKRIPZIOA ; KATEGORIA ; PREZIOA ; KANTITATEA \n"); // Excel fitxategirako
+																								// goiburuak
 
 			for (Produktua p : produktuak) {
-				writer.write(p.getIdProd() + ";" + p.getDeskripzioa() + ";" + p.getKategoria() + ";" + p.getPrezioa()+ ";" + p.getKantitatea() + "\n");		//Produktu bakoitza idatzi fitxategian
+				writer.write(p.getIdProd() + ";" + p.getDeskripzioa() + ";" + p.getKategoria() + ";" + p.getPrezioa()
+						+ ";" + p.getKantitatea() + "\n"); // Produktu bakoitza idatzi fitxategian
 			}
 
 			writer.close();
@@ -223,4 +259,3 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 		}
 	}
 }
-

@@ -1,18 +1,19 @@
 package eus.uni.dam;
-								//Bean klaseko interfazea
+
+//Bean klaseko interfazea
 import java.util.Collection;
 
 public interface ProduktuaDao {
 
 	public Collection<Produktua> getProduktuak();
-	
-    public void init();
 
-	public Collection<Produktua> findAll() ;
+	public void init();
+
+	public Collection<Produktua> findAll();
 
 	public void insert(Produktua produktua);
 
 	public void edit(Produktua produktua);
-	
-	public void delete(long id) ;
+
+	public void delete(long id);
 }

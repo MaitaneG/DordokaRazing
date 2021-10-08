@@ -65,6 +65,10 @@ public class FirstPage extends AppCompatActivity {
         alert();
     }
 
+    /**
+     *
+     * Alerta agertzen da, galdetzen irten nahi den ala ez
+     */
     public void alert(){
         new AlertDialog.Builder(this)
                 .setTitle("Aplikazioa ixten ")// Dialog-ari titulua jarri
@@ -87,6 +91,10 @@ public class FirstPage extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     *
+     * Mobilaren azterako botoia zakatzean
+     */
     @Override
     public void onBackPressed() {
         alert();

@@ -176,6 +176,7 @@
         android:layout_height="130dp"
         android:layout_marginStart="131dp"
         android:layout_marginEnd="152dp"
+        android:backgroundTint="@color/kolorea"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

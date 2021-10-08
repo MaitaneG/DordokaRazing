@@ -107,6 +107,11 @@ public class SecondPage extends AppCompatActivity implements SearchView.OnQueryT
         datuakAldatu();
     }
 
+    /**
+     *
+     * 
+     * @param testua
+     */
     public void filtratu(String testua){
         int luzera=testua.length();
         if (luzera==0){
@@ -134,6 +139,11 @@ public class SecondPage extends AppCompatActivity implements SearchView.OnQueryT
         }
     }
 
+    /**
+     *
+     * Bilatzailean aukerattuatakoa agertuko da
+     * @param indexa
+     */
     public void datuakAldatuBilatzaile(int indexa){
         lista.setVisibility(View.INVISIBLE);
         bilatzailea.setQuery("", false);
@@ -219,12 +229,24 @@ public class SecondPage extends AppCompatActivity implements SearchView.OnQueryT
         this.startActivity(myIntent, options.toBundle());
     }
 
+    /**
+     *
+     * Buskadorean submit egiterakoan
+     * @param s
+     * @return
+     */
     @Override
     public boolean onQueryTextSubmit(String s) {
 
         return false;
     }
 
+    /**
+     *
+     * Buskadorean zerbait aldatzerakoan
+     * @param s
+     * @return
+     */
     @Override
     public boolean onQueryTextChange(String s) {
         filtratu(s);

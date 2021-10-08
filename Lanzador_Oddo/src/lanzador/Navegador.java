@@ -23,7 +23,8 @@ public class Navegador {
 			if(backup == 'b') {
 
 
-				pb2 = new ProcessBuilder("C:\\DordokaRazing\\odoKonekxioa\\ejecutador.bat");
+				String value = System.getenv("USERPROFILE");
+				pb2 = new ProcessBuilder(value + "\\Documents\\DordokaRazing\\odoKonekxioa\\ejecutador.bat");
 				/*
 				 * prozesu honek bat fiitxategia exekutatzen du non fitxategi horrek cd bat eta spring aplikazioa exekutatzen du.
 				 * 

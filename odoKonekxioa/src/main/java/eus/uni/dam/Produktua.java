@@ -3,12 +3,12 @@ package eus.uni.dam;
 public class Produktua {
 
 	private int idProd;
-	private String deskripzioa="";
+	private String deskripzioa="";					//Aldagaien deklarazioa
 	private double kantitatea;
 	private double prezioa;
 	private String kategoria;
 	
-	
+													//Getter eta Setter -ak
 	public double getPrezioa() {
 		return prezioa;
 	}
@@ -37,9 +37,17 @@ public class Produktua {
 		return deskripzioa;
 	}
 	public void setDeskripzioa(String deskripzioa) {
-		deskripzioa = deskripzioa;
+		this.deskripzioa = deskripzioa;
 	}
-	
+	/**
+	 * Produktu klasearen konstruktorea
+	 * @param idProd
+	 * @param deskripzioa
+	 * @param kantitatea
+	 * @param prezioa
+	 * @param kategoria
+	 */
+	 
 	public Produktua(int idProd, String deskripzioa,double kantitatea, double prezioa, String kategoria) {
 		
 		this.idProd = idProd;
@@ -49,7 +57,10 @@ public class Produktua {
 		this.kategoria=kategoria;
 	}
 	@Override
-	public String toString() {
+	/**
+	 * ToString metodoa
+	 */
+	public String toString() {																				
 		return idProd + ". produktua: "+deskripzioa+".";
 	}
 	

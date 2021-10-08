@@ -1,5 +1,5 @@
 package eus.uni.dam;
-
+															//Aplikazioa exekutatzen duen main klasea.
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

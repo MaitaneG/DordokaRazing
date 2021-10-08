@@ -1,5 +1,5 @@
 package eus.uni.dam;
-
+								//Bean klaseko interfazea
 import java.util.Collection;
 
 public interface ProduktuaDao {

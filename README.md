@@ -3,8 +3,8 @@
   ### Java datubase Konexio aplikazioa:
    #### Helburua:
    Aplikazio honek remotoan daukagun Odoo-ren datubasearekin (Postgres) konektatzen da.
-      Ondoren Datubaseari dauden produktuen kontsulta egiten du, eta produktu bakoitzeko id-a, kantitatea, prezioa, mota eta izena hartzen da.
-      Datu guztiak Excel fitxategi batera (.csv) exportatzen da
+      Ondoren Datubaseari dauden produktuen kontsulta egiten du, eta produktu bakoitzeko id-a, kantitatea, prezioa, mota eta izena hartzen dugu. Lortutako
+      datu guztiak Excel fitxategi batera (.csv) exportatzen da.
       
    #### Abiaraztea:
    Programa abiarazteko mvn plugina instalatuta izan behar duzu zure Sistema Eragilean (Deskargatzeko eta gida esteka):

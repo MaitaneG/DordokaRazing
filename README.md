@@ -2,8 +2,8 @@
 
   ### Java datubase Konexio aplikazioa:
    #### Helburua:
-   Aplikazio honek remotoan Odoo datubasearekin (Postgres) konektatzen da.
-      Ondoren Datubaseari dauden produktuen kontsulta egiten du eta id-a, kantitatea, prezioa, mota eta izena hartzen da.
+   Aplikazio honek remotoan daukagun Odoo-ren datubasearekin (Postgres) konektatzen da.
+      Ondoren Datubaseari dauden produktuen kontsulta egiten du, eta produktu bakoitzeko id-a, kantitatea, prezioa, mota eta izena hartzen da.
       Datu guztiak Excel fitxategi batera (.csv) exportatzen da
       
    #### Abiaraztea:

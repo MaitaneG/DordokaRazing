@@ -24,9 +24,7 @@
          https://maven.apache.org/download.cgi
           ```
           
-   Ondoren Lanzador odoo aplikazioa exekutatu behar da eta orduan [BATCH](https://www.ionos.es/digitalguide/servidores/herramientas/crear-un-archivo-batch/) fitxategi bat  background ean cmd konsola bat agertuko da spring Boot aplikazioa exekutatzen hari dela esaten. Aplikazioa batch fitxategi batek exekutatzen du
-``` mvn spring-boot:run ```
-   komandoa sartuta. 
+   Ondoren Lanzador odoo aplikazioa exekutatu behar da eta orduan [BATCH](https://www.ionos.es/digitalguide/servidores/herramientas/crear-un-archivo-batch/) fitxategi bat exekutatzen du. Fitxategi honek dgoen karpetatik OdooKonexioko proiektuko karpetara mugituko da eta background-ean cmd konsola bat erabilita spring Boot aplikazioa exekutatzeko behar den komandoa sartuko du ``` mvn spring-boot:run ``` 
    
    Erroren bat egongo balitz Odo jaurtitzailearen karpetan "Error_log.txt" fitxategia egongo da non errorea azalduko du.
    

@@ -4,7 +4,7 @@
    ### Helburua
    ##### - Aplikazioa
    
- Aplikazio honek remotoan daukagun [Odoo-ren](https://www.odoo.com/es_ES) datubasearekin [(Postgres)](https://www.postgresql.org/) konektatzen da.
+ Aplikazio honek remotoan daukagun [Odoo-ren](https://www.odoo.com/es_ES) datubasearekin [(Postgres)](https://www.postgresql.org/) bidez konektatzen da.
       Ondoren Datubaseari dauden produktuen kontsulta egiten du, eta produktu bakoitzeko id-a, kantitatea, prezioa, mota eta izena hartzen dugu. Lortutako
       datu guztiak Excel fitxategi batera [(.csv)](https://help.cliengo.com/hc/es/articles/360020203574-C%C3%B3mo-abrir-un-archivo-CSV-en-Excel) exportatzen da.
      

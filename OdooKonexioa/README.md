@@ -1,10 +1,21 @@
 # DordokaRazing
 
-  ### Java datubase Konexio aplikazioa:
-   #### Helburua:
-   Aplikazio honek remotoan daukagun Odoo-ren datubasearekin (Postgres) konektatzen da.
+  ## *Java datubase Konexio aplikazioa:*
+   ### Helburua:
+   ##### Aplikazioa
+   
+ Aplikazio honek remotoan daukagun Odoo-ren datubasearekin (Postgres) konektatzen da.
       Ondoren Datubaseari dauden produktuen kontsulta egiten du, eta produktu bakoitzeko id-a, kantitatea, prezioa, mota eta izena hartzen dugu. Lortutako
       datu guztiak Excel fitxategi batera (.csv) exportatzen da.
+     
+        
+         
+
+      
+  ##### Log-a  
+  
+   Aplikazioak fitxategia sortzen duenean, log  fitxategi bat sortzen du. Fitxategi honetan aplikazioa azkeneko aldiz      exekutatu zenuenekiko datuen konparaketa egiten ditu eta, datu-basean datuak gehitu badituzu zenbat eta zeintzuk diren esango dizu; berriz, zerbait ezabatzerakoan zer produktu ezabatu den esango dizu.
+     ![Log fitxategi bat](https://github.com/agerKalboetxeaga/datu-atzipena2021/blob/main/log%20a.png)
       
       // Falta lo de log
    #### Abiaraztea:
@@ -19,8 +30,9 @@
    Erroren bat egongo balitz Odo jaurtitzailearen karpetan "Error_log.txt" fitxategia egongo da non errorea azalduko du.
    
    Aplikazioa exekutatu ostean, Excel fitxategia android proiektuko assets karpetan sortuko da eta log fitxategia proiektuaren logs karpetan egondo da
-
+   ![Aplikazioa CMDan exekutatzerakoan](https://github.com/agerKalboetxeaga/datu-atzipena2021/blob/main/cmd.png)
   #### Klase diagrama:
+  Gure aplikazioa osatzen dituzten klase eta interfaz desberdinen diagrama:
  ![Klase diagrama svg formatuan](https://github.com/agerKalboetxeaga/datu-atzipena2021/blob/main/NewTel.svg)
  
  

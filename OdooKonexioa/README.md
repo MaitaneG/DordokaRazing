@@ -41,3 +41,4 @@
   - [StackOverflow](https://stackoverflow.com/) 
   - [Baeldung (Spring Boot)](https://www.baeldung.com/)
   - [Youtube gidak](https://www.youtube.com/)
+  - [BATCH Scripting](https://www.ionos.es/digitalguide/servidores/herramientas/crear-un-archivo-batch/)

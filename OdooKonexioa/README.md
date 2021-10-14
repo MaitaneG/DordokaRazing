@@ -24,9 +24,9 @@
          https://maven.apache.org/download.cgi
           ```
           
-   Ondoren Lanzador odoo aplikazioa exekutatu behar da eta orduan [BATCH](https://github.com/MaitaneG/DordokaRazing/blob/b9a74022d098ea03c032af294de1fac2ab6876be/OdooKonexioa/ejecutador.bat#L1-L6) fitxategi bat exekutatzen du. Fitxategi honek dgoen karpetatik OdooKonexioko proiektuko karpetara mugituko da eta background-ean cmd konsola bat erabilita spring Boot aplikazioa exekutatzeko behar den komandoa sartuko du ``` mvn spring-boot:run ``` 
+   Ondoren, Lanzador odoo aplikazioa exekutatu behar da eta orduan [BATCH](https://github.com/MaitaneG/DordokaRazing/blob/b9a74022d098ea03c032af294de1fac2ab6876be/OdooKonexioa/ejecutador.bat#L1-L6) fitxategi bat exekutatzen du. Fitxategi honek dgoen karpetatik OdooKonexioko proiektuko karpetara mugituko da eta background-ean cmd konsola bat erabilita spring Boot aplikazioa exekutatzeko behar den komandoa sartuko du ``` mvn spring-boot:run ``` 
    
-   Erroren bat egongo balitz Odo jaurtitzailearen karpetan "Error_log.txt" fitxategia egongo da non errorea azalduko du.
+   Erroren bat egongo balitz, Odoo jaurtitzailearen karpetan "Error_log.txt" fitxategia egongo da, non errorea azalduko du.
    
    Aplikazioa exekutatu ostean, Excel fitxategia android proiektuko assets karpetan sortuko da eta log fitxategia proiektuaren logs karpetan egondo da.
    

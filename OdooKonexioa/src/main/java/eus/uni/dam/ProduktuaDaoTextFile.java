@@ -122,7 +122,8 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 	@PreDestroy
 	public void destroy() {
 		String filename = "../NewTelApp/app/src/main/assets/Produktuak.csv"; // Persistentzia fitxategia egongo den
-																				// helbidea "Excel" csv formatuan
+		String finalPath = System.getenv("USERPROFILE") + "\\Documents\\DordokaRazing\\NewTelApp\\app\\src\\main\\assets\\Produktuak.csv";
+		// helbidea "Excel" csv formatuan
 		File myObj = new File(filename); // File objektu bat sortzen dugu helbidearen rutarekin (honek iadanik eginda
 											// dagoen excelaren balioa izango du)
 		try {
@@ -251,7 +252,8 @@ public class ProduktuaDaoTextFile implements ProduktuaDao {
 			}
 
 			writer.close();
-			System.out.println("Successfully wrote to the file.");
+			
+			System.out.println("Successfully wrote to the file in " + finalPath);
 
 		} catch (IOException e) {
 			System.out.println("An error occurred.");

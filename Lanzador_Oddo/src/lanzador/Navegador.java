@@ -30,7 +30,7 @@ public class Navegador {
 			if (backup == 'b') {
 
 				String value = System.getenv("USERPROFILE"); // Ordenagailua erabiltzen hari den erabiltzailearen ruta
-				pb2 = new ProcessBuilder(value + "\\Documents\\DordokaRazing\\odoKonekxioa\\ejecutador.bat"); // Hemen
+				pb2 = new ProcessBuilder(value + "\\Documents\\DordokaRazing\\OdooKonexioa\\ejecutador.bat"); // Hemen
 																												// batch
 																												// fitxategi
 																												// bat

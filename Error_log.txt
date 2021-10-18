@@ -1,0 +1,2 @@
+Error: Could not find or load main class lanzador.Navegador
+Caused by: java.lang.ClassNotFoundException: lanzador.Navegador

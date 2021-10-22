@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewTelApp">
         <activity
-            android:name=".FirstPage"
+            android:name=".Menua"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.NewTelApp.NoActionBar">
@@ -21,7 +21,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SecondPage"
+            android:name=".ProduktuakErakutsi"
+            android:theme="@style/Theme.NewTelApp.NoActionBar">
+        </activity>
+        <activity
+            android:name=".AurrekontuaSortu"
+            android:theme="@style/Theme.NewTelApp.NoActionBar">
+        </activity>
+        <activity
+            android:name=".BezeroaSortu"
             android:theme="@style/Theme.NewTelApp.NoActionBar">
         </activity>
     </application>

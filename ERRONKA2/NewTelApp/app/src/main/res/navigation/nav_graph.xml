@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.newtelapp.FirstPage"
+        android:name="com.example.newtelapp.Menua"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/first_layout">
+        tools:layout="@layout/menu_layout">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -18,9 +18,9 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.newtelapp.SecondPage"
+        android:name="com.example.newtelapp.ProduktuakErakutsi"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/second_layout">
+        tools:layout="@layout/produktuak_layout">
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment"

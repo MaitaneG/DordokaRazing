@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/produktuakv2"
-    tools:context=".SecondPage">
+    android:background="@drawable/produktuak_hondoa"
+    tools:context=".ProduktuakErakutsi">
 
     <!-- Hurrengo produktura joango da -->
     <ImageButton
         android:id="@+id/button_produktuak_aurrera"
         android:layout_width="160dp"
         android:layout_height="77dp"
-        android:background="@drawable/aurrerabotoia"
+        android:background="@drawable/aurrera_botoia"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +30,7 @@
         android:layout_height="78dp"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:background="@drawable/atzerabotoia"
+        android:background="@drawable/atzera_botoia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.027"
@@ -164,7 +164,7 @@
         android:adjustViewBounds="true"
         android:backgroundTint="@color/kolorea"
         android:scaleType="fitCenter"
-        android:src="@drawable/irtenbotoia"
+        android:src="@drawable/irten_botoia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

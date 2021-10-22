@@ -11,52 +11,73 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
+ *
  * Lehengo Layout-aren klasea
  */
-public class FirstPage extends AppCompatActivity {
+public class Menua extends AppCompatActivity {
 
     /**
+     *
      * Atributoak
      */
     private ImageButton irten_botoia;
     private ImageButton erakutsi_produktuak_botoia;
+    private ImageButton aurrekontua_botoia;
 
     /**
+     *
      * Layout-a sortzen denean
      *
      * @param savedInstanceState
      */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.first_layout);
+        setContentView(R.layout.menu_layout);
         hasieratu();
     }
 
     /**
+     *
      * Layout-eko objetu guztiak hasieratu
      */
     private void hasieratu() {
         /* Botoiak aurkitzen eta aldagaietan gorde */
         erakutsi_produktuak_botoia = findViewById(R.id.button_erakutsi_produktuak);
+        aurrekontua_botoia = findViewById(R.id.button_aurrekontua_sortu);
         irten_botoia = findViewById(R.id.button_irten);
 
         /* Botoiei listenerra jarri */
-        erakutsi_produktuak_botoia.setOnClickListener(this::bestePantilaraJoan);
+        erakutsi_produktuak_botoia.setOnClickListener(this::produktuakErakutsiraJoan);
+        aurrekontua_botoia.setOnClickListener(this::aurrekontuSorturaJoan);
         irten_botoia.setOnClickListener(this::itxi);
     }
 
     /**
-     * Bigarren layout-era joatea
+     *
+     * Produktuak Erakutsi-ra joatea
      *
      * @param view
      */
-    private void bestePantilaraJoan(View view) {
-        Intent myIntent = new Intent(view.getContext(), SecondPage.class);
+    private void produktuakErakutsiraJoan(View view) {
+        Intent myIntent = new Intent(view.getContext(), ProduktuakErakutsi.class);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }
 
     /**
+     *
+     * Aurrekontua Sortu-ra joatea
+     *
+     * @param view
+     */
+    private void aurrekontuSorturaJoan(View view) {
+        Intent myIntent=new Intent(view.getContext(),AurrekontuaSortu.class);
+        ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.from_right,R.anim.from_right);
+        this.startActivity(myIntent,options.toBundle());
+    }
+
+    /**
+     *
      * Aplikazioa guztiz itxi nahi denean
      *
      * @param view
@@ -69,7 +90,7 @@ public class FirstPage extends AppCompatActivity {
      *
      * Alerta agertzen da, galdetzen irten nahi den ala ez
      */
-    public void alert(){
+    private void alert(){
         new AlertDialog.Builder(this)
                 .setTitle("Aplikazioa ixten ")// Dialog-ari titulua jarri
                 .setMessage("Aplikazioa itxi nahi duzu?") // Dialog-aren mezua jarri

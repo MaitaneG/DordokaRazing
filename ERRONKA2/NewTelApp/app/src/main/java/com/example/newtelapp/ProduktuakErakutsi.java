@@ -18,14 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  *
  * Bigarren Layout-aren klasea
  */
-public class SecondPage extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     /**
      *
@@ -59,7 +57,7 @@ public class SecondPage extends AppCompatActivity implements SearchView.OnQueryT
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.second_layout);
+        setContentView(R.layout.produktuak_layout);
         hasieratu();
     }
 
@@ -218,7 +216,7 @@ public class SecondPage extends AppCompatActivity implements SearchView.OnQueryT
      * @param view
      */
     public void irten(View view){
-        Intent myIntent = new Intent(view.getContext(), FirstPage.class);
+        Intent myIntent = new Intent(view.getContext(), Menua.class);
         // Animazioak definitu
         ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.from_right, R.anim.from_right);
 

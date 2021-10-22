@@ -77,7 +77,7 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
         kategoria=findViewById(R.id.textViewKategoriaInfo);
         prezioa=findViewById(R.id.textViewPrezioaInfo);
         kantitatea=findViewById(R.id.textViewKantitateaInfo);
-        irudia=findViewById(R.id.irudia);
+        irudia=findViewById(R.id.ImageView_irudia);
         lista= findViewById(R.id.ListViewProduktuLista);
         bilatzailea=findViewById(R.id.SearchViewBilatzailea);
 

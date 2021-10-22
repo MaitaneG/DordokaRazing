@@ -50,10 +50,10 @@ public class BezeroaSortu extends AppCompatActivity {
      * @param view
      */
     private void irten(View view){
-        Intent myIntent = new Intent(view.getContext(), Menua.class);
+        Intent myIntent = new Intent(view.getContext(), Aurrekontua.class);
         // Animazioak definitu
         ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.from_right, R.anim.from_right);
-
+        
         // Activity hau itxi eta besteari abisatu
         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         myIntent.putExtra("EXIT", true);

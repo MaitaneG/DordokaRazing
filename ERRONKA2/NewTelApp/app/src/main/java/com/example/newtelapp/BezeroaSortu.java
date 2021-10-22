@@ -38,7 +38,7 @@ public class BezeroaSortu extends AppCompatActivity {
      */
     private void hasieratu() {
         /* Botoiak aurkitzen eta aldagaietan gorde */
-        irten = findViewById(R.id.button_irten_aurrekontua);
+        irten = findViewById(R.id.buttonIrtenAurrekontua);
 
         /* Botoiei listenerra jarri */
         irten.setOnClickListener(this::irten);

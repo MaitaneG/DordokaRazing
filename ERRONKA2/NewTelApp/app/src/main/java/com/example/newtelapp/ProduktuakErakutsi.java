@@ -78,12 +78,12 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
         prezioa=findViewById(R.id.textViewPrezioaInfo);
         kantitatea=findViewById(R.id.textViewKantitateaInfo);
         irudia=findViewById(R.id.irudia);
-        lista= findViewById(R.id.listaView);
-        bilatzailea=findViewById(R.id.bilatzailea);
+        lista= findViewById(R.id.ListViewProduktuLista);
+        bilatzailea=findViewById(R.id.SearchViewBilatzailea);
 
         botoiaAurrera=findViewById(R.id.button_produktuak_aurrera);
-        botoiaAtzera=findViewById(R.id.button_produktuak_atzera);
-        botoiaIrten=findViewById(R.id.button_irten);
+        botoiaAtzera=findViewById(R.id.buttonProduktuakAtzera);
+        botoiaIrten=findViewById(R.id.buttonIrten);
 
         /* Botoiei listenerra jarri */
         botoiaAurrera.setOnClickListener(this::produktuakAurrera);

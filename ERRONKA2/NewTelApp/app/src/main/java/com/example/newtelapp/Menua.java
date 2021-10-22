@@ -42,9 +42,9 @@ public class Menua extends AppCompatActivity {
      */
     private void hasieratu() {
         /* Botoiak aurkitzen eta aldagaietan gorde */
-        erakutsi_produktuak_botoia = findViewById(R.id.button_erakutsi_produktuak);
-        aurrekontua_botoia = findViewById(R.id.button_aurrekontua_sortu);
-        irten_botoia = findViewById(R.id.button_irten);
+        erakutsi_produktuak_botoia = findViewById(R.id.buttonErakutsiProduktuak);
+        aurrekontua_botoia = findViewById(R.id.buttonAurrekontuaSortu);
+        irten_botoia = findViewById(R.id.buttonIrten);
 
         /* Botoiei listenerra jarri */
         erakutsi_produktuak_botoia.setOnClickListener(this::produktuakErakutsiraJoan);

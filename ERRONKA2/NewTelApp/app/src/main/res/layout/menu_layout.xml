@@ -8,10 +8,8 @@
     tools:context=".Menua">
 
     <!-- Produktuetara joateko botoia -->
-
-    <!--  -->
     <ImageButton
-        android:id="@+id/button_erakutsi_produktuak"
+        android:id="@+id/buttonErakutsiProduktuak"
         android:layout_width="254dp"
         android:layout_height="99dp"
         android:background="@drawable/erakutsi_botoia"
@@ -25,7 +23,7 @@
 
     <!-- Irten botoia -->
     <ImageButton
-        android:id="@+id/button_aurrekontua_sortu"
+        android:id="@+id/buttonAurrekontuaSortu"
         android:layout_width="254dp"
         android:layout_height="99dp"
         android:background="@drawable/aurrekontu_botoia"
@@ -37,8 +35,9 @@
         app:layout_constraintVertical_bias="0.645"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!--  -->
     <ImageButton
-        android:id="@+id/button_irten"
+        android:id="@+id/buttonIrten"
         android:layout_width="162dp"
         android:layout_height="50dp"
         android:adjustViewBounds="true"

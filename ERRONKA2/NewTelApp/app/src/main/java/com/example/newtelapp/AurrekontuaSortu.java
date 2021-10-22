@@ -39,8 +39,8 @@ public class AurrekontuaSortu extends AppCompatActivity {
      */
     private void hasieratu() {
         /* Botoiak aurkitzen eta aldagaietan gorde */
-        irten = findViewById(R.id.button_irten_aurrekontua);
-        bezeroaSortu=findViewById(R.id.button_bezeroa_sortu);
+        irten = findViewById(R.id.buttonIrtenAurrekontua);
+        bezeroaSortu=findViewById(R.id.buttonBezeroaSortu);
 
         /* Botoiei listenerra jarri */
         irten.setOnClickListener(this::irten);

@@ -25,7 +25,7 @@
 
     <!-- Aurreko produktura joango da -->
     <ImageButton
-        android:id="@+id/button_produktuak_atzera"
+        android:id="@+id/buttonProduktuakAtzera"
         android:layout_width="158dp"
         android:layout_height="78dp"
         android:scaleType="fitCenter"
@@ -39,11 +39,7 @@
         app:layout_constraintVertical_bias="0.977"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <!-- Produktua izena TextView -->
-
     <!-- Produktua kategoria TextView -->
-
-    <!-- Produktuaren kategoria agertzen da -->
     <TextView
         android:id="@+id/textViewKategoria"
         android:layout_width="wrap_content"
@@ -57,6 +53,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.686" />
 
+    <!-- Produktua kantitatea TextView -->
     <TextView
         android:id="@+id/textViewKantitatea"
         android:layout_width="wrap_content"
@@ -70,6 +67,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.629" />
 
+    <!-- Produktua prezioa TextView -->
     <TextView
         android:id="@+id/textViewPrezioa"
         android:layout_width="wrap_content"
@@ -83,6 +81,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.735" />
 
+    <!-- Produktuaren prezioa agertzen da -->
     <TextView
         android:id="@+id/textViewPrezioaInfo"
         android:layout_width="wrap_content"
@@ -96,6 +95,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.735" />
 
+    <!-- Produktuaren kategoria agertzen da -->
     <TextView
         android:id="@+id/textViewKategoriaInfo"
         android:layout_width="wrap_content"
@@ -109,11 +109,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.686" />
 
-    <!-- Produktua kantitatea TextView -->
-
     <!-- Produktuaren kantitatea agertzen da -->
-
-    <!-- Produktuaren izena agertzen da -->
     <TextView
         android:id="@+id/textViewKantitateaInfo"
         android:layout_width="wrap_content"
@@ -127,6 +123,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.629" />
 
+    <!-- Produktua izena TextView -->
     <TextView
         android:id="@+id/textViewIzena"
         android:layout_width="wrap_content"
@@ -140,7 +137,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.534" />
 
-    <!-- Produktua prezioa TextView -->
+    <!-- Produktuaren izena agertzen da -->
     <TextView
         android:id="@+id/textViewIzenaInfo"
         android:layout_width="200dp"
@@ -154,11 +151,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.534" />
 
-    <!-- Produktuaren prezioa agertzen da -->
-
     <!-- Irten botoia -->
     <ImageButton
-        android:id="@+id/button_irten"
+        android:id="@+id/buttonIrten"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:adjustViewBounds="true"
@@ -174,9 +169,8 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <!-- Produktuaren argazkia agertzen da -->
-
     <ImageView
-        android:id="@+id/irudia"
+        android:id="@+id/ImageView_irudia"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginStart="131dp"
@@ -190,8 +184,9 @@
         app:layout_constraintVertical_bias="0.316"
         tools:src="@drawable/i2" />
 
+    <!-- Produktuak aurkitzeko bilatzailea -->
     <SearchView
-        android:id="@+id/bilatzailea"
+        android:id="@+id/SearchViewBilatzailea"
         android:layout_width="410dp"
         android:layout_height="36dp"
         android:layout_marginStart="5dp"
@@ -201,8 +196,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Bilatzailearen produktu lista -->
     <ListView
-        android:id="@+id/listaView"
+        android:id="@+id/ListViewProduktuLista"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
@@ -211,8 +207,6 @@
         android:background="#D6D1D1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bilatzailea">
-
-    </ListView>
+        app:layout_constraintTop_toBottomOf="@+id/SearchViewBilatzailea"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

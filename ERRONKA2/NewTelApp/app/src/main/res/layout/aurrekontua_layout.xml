@@ -7,7 +7,7 @@
     android:background="@drawable/aurrekontua_sortu_hondoa">
 
     <ImageButton
-        android:id="@+id/button_gorde_aurrekontua"
+        android:id="@+id/buttonGordeAurrekontua"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:adjustViewBounds="true"
@@ -23,7 +23,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
-        android:id="@+id/button_bezeroa_sortu"
+        android:id="@+id/buttonBezeroaSortu"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:adjustViewBounds="true"
@@ -32,14 +32,14 @@
         android:src="@drawable/gehi_botoia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.871"
+        app:layout_constraintHorizontal_bias="0.817"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.263"
+        app:layout_constraintVertical_bias="0.226"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
-        android:id="@+id/button_irten_aurrekontua"
+        android:id="@+id/buttonIrtenAurrekontua"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:adjustViewBounds="true"
@@ -53,4 +53,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <Spinner
+        android:id="@+id/spinnerBezeroa"
+        android:layout_width="214dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="152dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <!--<DatePicker
+        android:layout_width="284dp"
+        android:layout_height="368dp"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="234dp" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

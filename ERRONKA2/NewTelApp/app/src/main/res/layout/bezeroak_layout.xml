@@ -7,7 +7,7 @@
     android:background="@drawable/bezeroa_sortu_hondoa">
 
     <ImageButton
-        android:id="@+id/button_irten_aurrekontua"
+        android:id="@+id/buttonIrtenAurrekontua"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:adjustViewBounds="true"
@@ -23,7 +23,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
-        android:id="@+id/button_gorde_bezeroa"
+        android:id="@+id/buttonGordeBezeroa"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:adjustViewBounds="true"
@@ -37,5 +37,136 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/editTextProbintzia"
+        android:layout_width="109dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="428dp"
+        android:ems="10"
+        android:hint="Probintzia"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="@color/grisa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextIzenaAbizena"
+        android:layout_width="188dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="168dp"
+        android:ems="10"
+        android:hint="@string/izen_abizenak"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textColor="@color/grisa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextKalea"
+        android:layout_width="188dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="352dp"
+        android:ems="10"
+        android:hint="@string/kalea"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textColor="@color/grisa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextKorreoa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="288dp"
+        android:ems="10"
+        android:hint="@string/korreo_elektronikoa"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textColor="@color/grisa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextMugikorra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="228dp"
+        android:ems="10"
+        android:hint="@string/mugikorreko_zenbakia"
+        android:inputType="phone"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textColor="@color/grisa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextKodigoPostala"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="428dp"
+        android:ems="10"
+        android:hint="@string/c_p"
+        android:inputType="textPostalAddress"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textColor="@color/grisa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Switch
+        android:id="@+id/switchEnpresa"
+        android:layout_width="113dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="168dp"
+        android:text="@string/enpresa"
+        android:textColor="@color/grisa"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextHerrialdea"
+        android:layout_width="188dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="496dp"
+        android:ems="10"
+        android:hint="@string/herrialdea"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textColor="@color/grisa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_Hiria"
+        android:layout_width="109dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="428dp"
+        android:ems="10"
+        android:hint="@string/hiria"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="@color/grisa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

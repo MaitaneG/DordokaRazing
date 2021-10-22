@@ -13,4 +13,12 @@
     <string name="kantitatea">Kantitatea:</string>
     <string name="kategoria">Kategoria:</string>
     <string name="prezioa">Prezioa:</string>
+    <string name="izen_abizenak">Izen-abizenak</string>
+    <string name="kalea">Kalea</string>
+    <string name="korreo_elektronikoa">Korreo elektronikoa</string>
+    <string name="mugikorreko_zenbakia">Mugikorreko zenbakia</string>
+    <string name="c_p">C.P.</string>
+    <string name="enpresa">Enpresa</string>
+    <string name="herrialdea">Herrialdea</string>
+    <string name="hiria">Hiria</string>
 </resources>

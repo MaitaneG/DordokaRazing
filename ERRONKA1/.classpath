@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Lanzador_Oddo/src"/>
+	<classpathentry kind="src" path="NewTelApp/app/src/androidTest/java"/>
+	<classpathentry kind="src" path="NewTelApp/app/src/main/java"/>
+	<classpathentry kind="src" path="NewTelApp/app/src/test/java"/>
+	<classpathentry kind="src" path="OdooKonexioa/.mvn/wrapper"/>
+	<classpathentry kind="src" path="OdooKonexioa/src/main/java"/>
+	<classpathentry kind="src" path="OdooKonexioa/src/test/java"/>
+	<classpathentry kind="lib" path="Jaurtitzailea.jar"/>
+	<classpathentry kind="lib" path="NewTelApp/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="OdooKonexioa/postgres/postgresql-42.2.24.jar"/>
+	<classpathentry kind="output" path="Lanzador_Oddo/bin"/>
+</classpath>

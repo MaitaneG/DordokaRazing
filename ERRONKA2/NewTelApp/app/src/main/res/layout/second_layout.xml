@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/produktuakv2"
+    tools:context=".SecondPage">
+
+    <!-- Hurrengo produktura joango da -->
+    <ImageButton
+        android:id="@+id/button_produktuak_aurrera"
+        android:layout_width="160dp"
+        android:layout_height="77dp"
+        android:background="@drawable/aurrerabotoia"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.976"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <!-- Aurreko produktura joango da -->
+    <ImageButton
+        android:id="@+id/button_produktuak_atzera"
+        android:layout_width="158dp"
+        android:layout_height="78dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:background="@drawable/atzerabotoia"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.977"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <!-- Produktua izena TextView -->
+
+    <!-- Produktua kategoria TextView -->
+
+    <!-- Produktuaren kategoria agertzen da -->
+    <TextView
+        android:id="@+id/textViewKategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text="@string/kategoria"
+        android:textColor="@color/grisa"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.686" />
+
+    <TextView
+        android:id="@+id/textViewKantitatea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text="@string/kantitatea"
+        android:textColor="@color/grisa"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.629" />
+
+    <TextView
+        android:id="@+id/textViewPrezioa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text="@string/prezioa"
+        android:textColor="@color/grisa"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.735" />
+
+    <TextView
+        android:id="@+id/textViewPrezioaInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grisa"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toEndOf="@+id/textViewPrezioa"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.735" />
+
+    <TextView
+        android:id="@+id/textViewKategoriaInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grisa"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toEndOf="@+id/textViewKategoria"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.686" />
+
+    <!-- Produktua kantitatea TextView -->
+
+    <!-- Produktuaren kantitatea agertzen da -->
+
+    <!-- Produktuaren izena agertzen da -->
+    <TextView
+        android:id="@+id/textViewKantitateaInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grisa"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toEndOf="@+id/textViewKantitatea"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.629" />
+
+    <TextView
+        android:id="@+id/textViewIzena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text="@string/izena"
+        android:textColor="@color/grisa"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.534" />
+
+    <!-- Produktua prezioa TextView -->
+    <TextView
+        android:id="@+id/textViewIzenaInfo"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grisa"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toEndOf="@+id/textViewIzena"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.534" />
+
+    <!-- Produktuaren prezioa agertzen da -->
+
+    <!-- Irten botoia -->
+    <ImageButton
+        android:id="@+id/button_irten"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@color/kolorea"
+        android:scaleType="fitCenter"
+        android:src="@drawable/irtenbotoia"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.864"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <!-- Produktuaren argazkia agertzen da -->
+
+    <ImageView
+        android:id="@+id/irudia"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="131dp"
+        android:layout_marginEnd="152dp"
+        android:backgroundTint="@color/kolorea"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.316"
+        tools:src="@drawable/i2" />
+
+    <SearchView
+        android:id="@+id/bilatzailea"
+        android:layout_width="410dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listaView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:background="#D6D1D1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bilatzailea">
+
+    </ListView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

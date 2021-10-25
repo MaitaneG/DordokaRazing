@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HasieraPantaila));
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxKorreoa = new System.Windows.Forms.TextBox();
             this.textBoxPasahitza = new System.Windows.Forms.TextBox();
             this.buttonSubmitLogin = new System.Windows.Forms.Button();
+            this.textBoxKorreoa = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -45,15 +45,6 @@
             this.label1.Size = new System.Drawing.Size(237, 38);
             this.label1.TabIndex = 0;
             this.label1.Text = "HASI SAIOA";
-            // 
-            // textBoxKorreoa
-            // 
-            this.textBoxKorreoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxKorreoa.Location = new System.Drawing.Point(258, 195);
-            this.textBoxKorreoa.Name = "textBoxKorreoa";
-            this.textBoxKorreoa.Size = new System.Drawing.Size(253, 26);
-            this.textBoxKorreoa.TabIndex = 1;
-            this.textBoxKorreoa.Text = "Korreo elektronikoa";
             // 
             // textBoxPasahitza
             // 
@@ -78,6 +69,16 @@
             this.buttonSubmitLogin.TabIndex = 3;
             this.buttonSubmitLogin.Text = "SARTU";
             this.buttonSubmitLogin.UseVisualStyleBackColor = false;
+            this.buttonSubmitLogin.Click += new System.EventHandler(this.ButtonSubmitLogin_Click);
+            // 
+            // textBoxKorreoa
+            // 
+            this.textBoxKorreoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxKorreoa.Location = new System.Drawing.Point(258, 188);
+            this.textBoxKorreoa.Name = "textBoxKorreoa";
+            this.textBoxKorreoa.Size = new System.Drawing.Size(253, 26);
+            this.textBoxKorreoa.TabIndex = 4;
+            this.textBoxKorreoa.Text = "Korreo elektronikoa";
             // 
             // HasieraPantaila
             // 
@@ -85,11 +86,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InfoText;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBoxKorreoa);
             this.Controls.Add(this.buttonSubmitLogin);
             this.Controls.Add(this.textBoxPasahitza);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HasieraPantaila";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOGIN";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -99,9 +102,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxKorreoa;
         private System.Windows.Forms.TextBox textBoxPasahitza;
         private System.Windows.Forms.Button buttonSubmitLogin;
+        private System.Windows.Forms.TextBox textBoxKorreoa;
     }
 }
 

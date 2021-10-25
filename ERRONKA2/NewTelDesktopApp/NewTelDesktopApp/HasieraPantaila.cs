@@ -12,9 +12,17 @@ namespace NewTelDesktopApp
 {
     public partial class HasieraPantaila : Form
     {
+        Menua menua;
+
         public HasieraPantaila()
         {
             InitializeComponent();
+        }
+
+        private void ButtonSubmitLogin_Click(object sender, EventArgs e)
+        {
+            menua = new Menua();
+            menua.Show();
         }
     }
 }

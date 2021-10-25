@@ -1,0 +1,11 @@
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\bin\Debug\NewTelDesktopApp.exe.config
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\bin\Debug\NewTelDesktopApp.exe
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\bin\Debug\NewTelDesktopApp.pdb
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.csprojAssemblyReference.cache
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.Properties.Resources.resources
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.csproj.GenerateResource.cache
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.csproj.CoreCompileInputs.cache
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.exe
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.pdb
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.HasieraPantaila.resources
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.Menua.resources

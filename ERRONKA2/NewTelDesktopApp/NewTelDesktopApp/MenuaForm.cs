@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace NewTelDesktopApp
 {
-    public partial class Menua : Form
+    public partial class MenuaForm : Form
     {
-        public Menua()
+        public MenuaForm()
         {
             InitializeComponent();
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            BezeroakFormcs bezeroakForms = new BezeroakFormcs();
+
+            bezeroakForms.Show();
         }
     }
 }

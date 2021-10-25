@@ -16,7 +16,7 @@ namespace NewTelDesktopApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HasieraPantaila());
+            Application.Run(new HasieraPantailaForm());
         }
     }
 }

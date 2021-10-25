@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,25 +47,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HasieraPantaila.cs">
+    <Compile Include="BezeroakFormcs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HasieraPantaila.Designer.cs">
-      <DependentUpon>HasieraPantaila.cs</DependentUpon>
+    <Compile Include="BezeroakFormcs.Designer.cs">
+      <DependentUpon>BezeroakFormcs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menua.cs">
+    <Compile Include="HasieraPantailaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menua.Designer.cs">
-      <DependentUpon>Menua.cs</DependentUpon>
+    <Compile Include="HasieraPantailaForm.Designer.cs">
+      <DependentUpon>HasieraPantailaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuaForm.Designer.cs">
+      <DependentUpon>MenuaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="HasieraPantaila.resx">
-      <DependentUpon>HasieraPantaila.cs</DependentUpon>
+    <EmbeddedResource Include="BezeroakFormcs.resx">
+      <DependentUpon>BezeroakFormcs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menua.resx">
-      <DependentUpon>Menua.cs</DependentUpon>
+    <EmbeddedResource Include="HasieraPantailaForm.resx">
+      <DependentUpon>HasieraPantailaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuaForm.resx">
+      <DependentUpon>MenuaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -89,9 +99,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\bezeroak.png" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

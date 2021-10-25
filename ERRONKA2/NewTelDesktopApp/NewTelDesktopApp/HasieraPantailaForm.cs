@@ -10,19 +10,24 @@ using System.Windows.Forms;
 
 namespace NewTelDesktopApp
 {
-    public partial class HasieraPantaila : Form
+    public partial class HasieraPantailaForm : Form
     {
-        Menua menua;
+        MenuaForm menua;
 
-        public HasieraPantaila()
+        public HasieraPantailaForm()
         {
             InitializeComponent();
         }
 
         private void ButtonSubmitLogin_Click(object sender, EventArgs e)
         {
-            menua = new Menua();
+            menua = new MenuaForm();
             menua.Show();
+        }
+
+        private void ButtonIrten_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

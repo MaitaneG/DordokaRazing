@@ -21,4 +21,7 @@
     <string name="enpresa">Enpresa</string>
     <string name="herrialdea">Herrialdea</string>
     <string name="hiria">Hiria</string>
+    <string name="produktuaren_izena">Produktuaren izena</string>
+    <string name="kantitatea_table">Kantitatea</string>
+    <string name="prezioa_table">Prezioa</string>
 </resources>

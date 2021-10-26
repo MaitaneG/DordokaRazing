@@ -47,11 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BezeroakFormcs.cs">
+    <Compile Include="BezeroakForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BezeroakFormcs.Designer.cs">
-      <DependentUpon>BezeroakFormcs.cs</DependentUpon>
+    <Compile Include="BezeroakForm.Designer.cs">
+      <DependentUpon>BezeroakForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FinantzakForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FinantzakForm.Designer.cs">
+      <DependentUpon>FinantzakForm.cs</DependentUpon>
     </Compile>
     <Compile Include="HasieraPantailaForm.cs">
       <SubType>Form</SubType>
@@ -67,8 +73,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BezeroakFormcs.resx">
-      <DependentUpon>BezeroakFormcs.cs</DependentUpon>
+    <EmbeddedResource Include="BezeroakForm.resx">
+      <DependentUpon>BezeroakForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FinantzakForm.resx">
+      <DependentUpon>FinantzakForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HasieraPantailaForm.resx">
       <DependentUpon>HasieraPantailaForm.cs</DependentUpon>

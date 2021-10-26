@@ -10,25 +10,18 @@ using System.Windows.Forms;
 
 namespace NewTelDesktopApp
 {
-    public partial class HasieraPantailaForm : Form
+    public partial class FinantzakForm : Form
     {
-        MenuaForm menua;
-
-        public HasieraPantailaForm()
+        public FinantzakForm()
         {
             InitializeComponent();
         }
 
-        private void ButtonSubmitLogin_Click(object sender, EventArgs e)
+        private void ButtonAtzeraBezeroak_Click(object sender, EventArgs e)
         {
-            menua = new MenuaForm();
+            MenuaForm menua = new MenuaForm();
             menua.Show();
             this.Hide();
-        }
-
-        private void ButtonIrten_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
     }
 }

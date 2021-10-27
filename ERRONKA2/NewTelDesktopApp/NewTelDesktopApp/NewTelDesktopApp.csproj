@@ -65,6 +65,12 @@
     <Compile Include="HasieraPantailaForm.Designer.cs">
       <DependentUpon>HasieraPantailaForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HornitzaileakForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HornitzaileakForm.Designer.cs">
+      <DependentUpon>HornitzaileakForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HasieraPantailaForm.resx">
       <DependentUpon>HasieraPantailaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HornitzaileakForm.resx">
+      <DependentUpon>HornitzaileakForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuaForm.resx">
       <DependentUpon>MenuaForm.cs</DependentUpon>
@@ -109,7 +118,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\bezeroak.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hornitzaileak.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\finantzak.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

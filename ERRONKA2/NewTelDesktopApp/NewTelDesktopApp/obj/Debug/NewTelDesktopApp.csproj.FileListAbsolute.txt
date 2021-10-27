@@ -23,3 +23,4 @@ C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\N
 C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.MenuaForm.resources
 C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.FinantzakForm.resources
 C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.BezeroakForm.resources
+C:\Users\gallastegui.maitane\Documents\DordokaRazing\ERRONKA2\NewTelDesktopApp\NewTelDesktopApp\obj\Debug\NewTelDesktopApp.HornitzaileakForm.resources

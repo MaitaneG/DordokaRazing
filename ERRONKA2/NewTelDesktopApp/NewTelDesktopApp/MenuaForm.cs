@@ -58,7 +58,7 @@ namespace NewTelDesktopApp
             this.linkLabel1.LinkVisited = true;
 
             // Navigate to a URL.
-            System.Diagnostics.Process.Start("25.35.135.250//localhost:8069/");
+            System.Diagnostics.Process.Start("http:25.35.135.250//localhost:8069/");
         }
     }
 }

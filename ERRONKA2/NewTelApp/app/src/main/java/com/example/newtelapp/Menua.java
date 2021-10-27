@@ -48,7 +48,7 @@ public class Menua extends AppCompatActivity {
 
         /* Botoiei listenerra jarri */
         erakutsi_produktuak_botoia.setOnClickListener(this::produktuakErakutsiraJoan);
-        aurrekontua_botoia.setOnClickListener(this::aurrekontuSorturaJoan);
+        aurrekontua_botoia.setOnClickListener(this::aurrekonturaJoan);
         irten_botoia.setOnClickListener(this::itxi);
     }
 
@@ -70,8 +70,8 @@ public class Menua extends AppCompatActivity {
      *
      * @param view
      */
-    private void aurrekontuSorturaJoan(View view) {
-        Intent myIntent=new Intent(view.getContext(),AurrekontuaSortu.class);
+    private void aurrekonturaJoan(View view) {
+        Intent myIntent=new Intent(view.getContext(),AurrekontuaMenua.class);
         ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.from_right,R.anim.from_right);
         this.startActivity(myIntent,options.toBundle());
     }

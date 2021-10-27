@@ -38,7 +38,7 @@ public class BezeroaSortu extends AppCompatActivity {
      */
     private void hasieratu() {
         /* Botoiak aurkitzen eta aldagaietan gorde */
-        irten = findViewById(R.id.buttonIrtenAurrekontua);
+        irten = findViewById(R.id.buttonIrtenAurrekontuaSortu);
 
         /* Botoiei listenerra jarri */
         irten.setOnClickListener(this::irten);
@@ -50,13 +50,8 @@ public class BezeroaSortu extends AppCompatActivity {
      * @param view
      */
     private void irten(View view){
-        Intent myIntent = new Intent(view.getContext(), Aurrekontua.class);
-        // Animazioak definitu
-        ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.from_right, R.anim.from_right);
-
-        // Activity hau itxi eta besteari abisatu
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        myIntent.putExtra("EXIT", true);
+        Intent myIntent = new Intent(view.getContext(), AurrekontuaSortu.class);
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }
 }

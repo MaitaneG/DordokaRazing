@@ -7,7 +7,7 @@
     android:background="@drawable/bezeroa_sortu_hondoa">
 
     <ImageButton
-        android:id="@+id/buttonIrtenAurrekontua"
+        android:id="@+id/buttonIrtenAurrekontuaSortu"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:adjustViewBounds="true"

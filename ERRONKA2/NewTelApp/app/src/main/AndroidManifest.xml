@@ -32,6 +32,14 @@
             android:name=".BezeroaSortu"
             android:theme="@style/Theme.NewTelApp.NoActionBar">
         </activity>
+        <activity
+            android:name=".AurrekontuaMenua"
+            android:theme="@style/Theme.NewTelApp.NoActionBar">
+        </activity>
+        <activity
+            android:name=".AurrekontuakIkusi"
+            android:theme="@style/Theme.NewTelApp.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

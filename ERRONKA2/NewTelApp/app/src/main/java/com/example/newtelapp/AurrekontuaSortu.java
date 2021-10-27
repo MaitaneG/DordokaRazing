@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 /**
  *
- * Bigarren Layout-aren klasea
+ * AurrekontuaSortu Layout-aren klasea
  */
 public class AurrekontuaSortu extends AppCompatActivity {
 
@@ -19,7 +19,8 @@ public class AurrekontuaSortu extends AppCompatActivity {
      * Atributoak
      */
     private ImageButton irten;
-    private ImageButton bezeroaSortu;
+    private ImageButton gorde;
+    private ImageButton bezeroak;
 
     /**
      *
@@ -29,7 +30,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.aurrekontua_layout);
+        setContentView(R.layout.aurrekontua_sortu_layout);
         hasieratu();
     }
 
@@ -39,12 +40,14 @@ public class AurrekontuaSortu extends AppCompatActivity {
      */
     private void hasieratu() {
         /* Botoiak aurkitzen eta aldagaietan gorde */
-        irten = findViewById(R.id.buttonIrtenAurrekontua);
-        bezeroaSortu=findViewById(R.id.buttonBezeroaSortu);
+        irten = findViewById(R.id.buttonIrtenAurrekontuaSortu);
+        gorde=findViewById(R.id.buttonGordeAurrekontua);
+        bezeroak=findViewById(R.id.buttonBezeroaSortu);
 
         /* Botoiei listenerra jarri */
         irten.setOnClickListener(this::irten);
-        bezeroaSortu.setOnClickListener(this::bezeroaSorturaJoan);
+        gorde.setOnClickListener(this::bezeroaSorturaJoan);
+        bezeroak.setOnClickListener(this::bezeroaSorturaJoan);
     }
 
     /**
@@ -65,13 +68,8 @@ public class AurrekontuaSortu extends AppCompatActivity {
      * @param view
      */
     private void irten(View view){
-        Intent myIntent = new Intent(view.getContext(), Menua.class);
-        // Animazioak definitu
-        ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.from_right, R.anim.from_right);
-
-        // Activity hau itxi eta besteari abisatu
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        myIntent.putExtra("EXIT", true);
+        Intent myIntent = new Intent(view.getContext(), AurrekontuaMenua.class);
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }
 }

@@ -105,6 +105,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:textAlignment="center"
+        android:textColor="@color/grisaa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -138,6 +139,7 @@
                 android:padding="3dip"
                 android:text="@string/produktuaren_izena"
                 android:textAlignment="center"
+                android:textColor="@color/grisaa"
                 android:textSize="12sp" />
 
             <TextView
@@ -147,6 +149,7 @@
                 android:padding="3dip"
                 android:text="@string/kantitatea_table"
                 android:textAlignment="center"
+                android:textColor="@color/grisaa"
                 android:textSize="12sp" />
 
             <TextView
@@ -156,6 +159,7 @@
                 android:padding="3dip"
                 android:text="@string/prezioa_table"
                 android:textAlignment="center"
+                android:textColor="@color/grisaa"
                 android:textSize="12sp" />
 
         </TableRow>

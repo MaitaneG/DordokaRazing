@@ -58,6 +58,7 @@ public class Menua extends AppCompatActivity {
         erakutsi_produktuak_botoia.setOnClickListener(this::produktuakErakutsiraJoan);
         aurrekontua_botoia.setOnClickListener(this::aurrekonturaJoan);
         irten_botoia.setOnClickListener(this::itxi);
+
         KonexioaDB con = new KonexioaDB(this);
         con.execute(url, username, pass);
         System.out.println();

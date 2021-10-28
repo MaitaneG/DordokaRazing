@@ -10,6 +10,8 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 /**
  *
  * Lehengo Layout-aren klasea
@@ -23,6 +25,11 @@ public class Menua extends AppCompatActivity {
     private ImageButton irten_botoia;
     private ImageButton erakutsi_produktuak_botoia;
     private ImageButton aurrekontua_botoia;
+
+    private String url="jdbc:postgresql://25.32.59.79:5432/NewTel1";
+    private String username="openpg";
+    private String pass ="openpgpwd";
+    public ArrayList<String> datuak;
 
     /**
      *
@@ -45,11 +52,20 @@ public class Menua extends AppCompatActivity {
         erakutsi_produktuak_botoia = findViewById(R.id.buttonErakutsiProduktuak);
         aurrekontua_botoia = findViewById(R.id.buttonAurrekontuaSortu);
         irten_botoia = findViewById(R.id.buttonIrten);
+        datuak = new ArrayList<String>();
 
         /* Botoiei listenerra jarri */
         erakutsi_produktuak_botoia.setOnClickListener(this::produktuakErakutsiraJoan);
         aurrekontua_botoia.setOnClickListener(this::aurrekonturaJoan);
         irten_botoia.setOnClickListener(this::itxi);
+        KonexioaDB con = new KonexioaDB(this);
+        con.execute(url, username, pass);
+        System.out.println();
+    }
+
+
+    public void setDatuak(ArrayList<String> datuak){
+        this.datuak = datuak;
     }
 
     /**

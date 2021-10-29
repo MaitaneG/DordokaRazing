@@ -1,10 +1,14 @@
 package com.example.newtelapp;
 
+import android.os.Parcel;
+
+import java.io.Serializable;
+
 /**
  *
  * Produktua klasea
  */
-public class Produktua {
+public class Produktua implements Serializable {
 
     /**
      *
@@ -126,5 +130,6 @@ public class Produktua {
     public String toString() {
         return izena;
     }
+
 }
 

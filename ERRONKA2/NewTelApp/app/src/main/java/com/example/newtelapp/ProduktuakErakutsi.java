@@ -13,17 +13,20 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import java.io.Serializable;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 /**
  *
  * Bigarren Layout-aren klasea
  */
-public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     /**
      *
@@ -67,8 +70,8 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
      */
     private void hasieratu() {
         /* Datuak hasieratu */
-        datuak=new Datuak(this);
-        produktuak=datuak.datuakItzuli();
+        //datuak=new Datuak(this);
+        produktuak=(ArrayList<Produktua>) getIntent().getSerializableExtra("id");
         produktuakBilatu=new ArrayList<>();
         produktuakBilatu.addAll(produktuak);
 
@@ -103,6 +106,11 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
         lista.setVisibility(View.INVISIBLE);
 
         datuakAldatu();
+
+        //Intent intent=getIntent();
+        //ArrayList<Produktua> produktua=
+        //System.out.println();
+        //Toast.makeText(getApplicationContext(), produktua.get(1).toString()+"",Toast.LENGTH_LONG).show();
     }
 
     /**

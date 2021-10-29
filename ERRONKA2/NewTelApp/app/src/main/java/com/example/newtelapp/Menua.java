@@ -3,6 +3,7 @@ package com.example.newtelapp;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -26,10 +28,14 @@ public class Menua extends AppCompatActivity {
     private ImageButton erakutsi_produktuak_botoia;
     private ImageButton aurrekontua_botoia;
 
-    private String url="jdbc:postgresql://25.32.59.79:5432/NewTel1";
-    private String username="openpg";
-    private String pass ="openpgpwd";
-    public ArrayList<String> datuak;
+    /**
+     *
+     * Postgres datu baseko informazioa
+     */
+    private String url="jdbc:postgresql://localhost/NewTel1"; // Postgres-eko url-a
+    private String username="openpg"; // Datu baseko erabiltzailea
+    private String pass ="openpgpwd"; // Datu baseko pasahitza
+    public ArrayList<Produktua> datuak; // Produktuen ArrayList-a
 
     /**
      *
@@ -52,7 +58,7 @@ public class Menua extends AppCompatActivity {
         erakutsi_produktuak_botoia = findViewById(R.id.buttonErakutsiProduktuak);
         aurrekontua_botoia = findViewById(R.id.buttonAurrekontuaSortu);
         irten_botoia = findViewById(R.id.buttonIrten);
-        datuak = new ArrayList<String>();
+        datuak = new ArrayList<Produktua>();
 
         /* Botoiei listenerra jarri */
         erakutsi_produktuak_botoia.setOnClickListener(this::produktuakErakutsiraJoan);
@@ -64,8 +70,7 @@ public class Menua extends AppCompatActivity {
         System.out.println();
     }
 
-
-    public void setDatuak(ArrayList<String> datuak){
+    public void setDatuak(ArrayList<Produktua> datuak){
         this.datuak = datuak;
     }
 
@@ -77,6 +82,8 @@ public class Menua extends AppCompatActivity {
      */
     private void produktuakErakutsiraJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), ProduktuakErakutsi.class);
+            myIntent.putExtra("id",datuak);
+        System.out.println();
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }

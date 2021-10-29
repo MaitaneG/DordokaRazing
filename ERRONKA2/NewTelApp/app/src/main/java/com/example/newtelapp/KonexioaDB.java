@@ -72,6 +72,7 @@ public class KonexioaDB extends AsyncTask <String, Void, ArrayList> {
 
             while(rs.next()){
                 produktua= new Produktua(/*ID*/rs.getInt(1), /*Product name*/rs.getString(2), /*Kategoria*/rs.getString(5), /*Prezioa*/ rs.getFloat(3), /*Kantitatea*/rs.getFloat(4));
+                System.out.println();
                 produktuakKatalogoa.add(produktua);
             }
         } catch (SQLException throwables) {

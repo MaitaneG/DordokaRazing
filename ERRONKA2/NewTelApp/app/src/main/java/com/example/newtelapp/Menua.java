@@ -32,7 +32,7 @@ public class Menua extends AppCompatActivity {
      *
      * Postgres datu baseko informazioa
      */
-    private String url="jdbc:postgresql://localhost/NewTel1"; // Postgres-eko url-a
+    private String url="jdbc:postgresql://25.32.59.79:5432/NewTel1"; // Postgres-eko url-a
     private String username="openpg"; // Datu baseko erabiltzailea
     private String pass ="openpgpwd"; // Datu baseko pasahitza
     public ArrayList<Produktua> datuak; // Produktuen ArrayList-a

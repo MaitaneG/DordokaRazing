@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class KonexioaDB extends AsyncTask <String, Void, ArrayList> {
 
     private ArrayList<Produktua> produktuakKatalogoa;
+    private ArrayList<Bezeroa> bezeroLista;
     private Menua menua;
 
     public KonexioaDB(Menua context){
@@ -40,7 +41,7 @@ public class KonexioaDB extends AsyncTask <String, Void, ArrayList> {
             Connection conn = null;
             conn = DriverManager.getConnection(url,username,pass);
             //Log.d("db", "conexion db");
-
+            ArrayList<Bezeroa>algo=bezeroakLortu(conn);
             return produktuakLortu(conn);
 
         } catch (ClassNotFoundException  e) {
@@ -78,10 +79,32 @@ public class KonexioaDB extends AsyncTask <String, Void, ArrayList> {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
-
         return produktuakKatalogoa;
+    }
 
+    private ArrayList<Bezeroa>bezeroakLortu(Connection conn) {
+        Bezeroa bezeroa;
+        PreparedStatement pstmt = null;
+
+        try {
+            pstmt = conn.prepareStatement("select res_partner.id , res_partner.name  as izenaAbizena, res_partner.company_name as enpresa, res_partner.phone_sanitized as mugikorra,\n" +
+                    "res_partner.email as korreoa,res_partner.street as kalea,res_partner.city as hiria,res_partner.zip as kodigoPostala ,res_country_state.name as probintzia,\n" +
+                    "res_country.name as herrialdea from  res_partner\n" +
+                    "inner join  res_country_state on res_partner.state_id = res_country_state.id\n" +
+                    "inner join res_country on res_partner.country_id = res_country.id\n" +
+                    "order by res_partner.id asc\n");
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()){
+                bezeroa= new Bezeroa(rs.getString(1),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8),rs.getString(9));
+                System.out.println();
+                bezeroLista.add(bezeroa);
+            }
+            return bezeroLista;
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }

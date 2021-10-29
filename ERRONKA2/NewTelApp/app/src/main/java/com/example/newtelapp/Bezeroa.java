@@ -10,7 +10,7 @@ public class Bezeroa {
      * Atributoak
      */
     private String izenaAbizena;
-    private boolean enpresa;
+    //private boolean enpresa;
     private int mugikorra;
     private String korreoa;
     private String kalea;
@@ -32,9 +32,9 @@ public class Bezeroa {
      * @param kodigoPostala
      * @param herrialdea
      */
-    public Bezeroa(String izenaAbizena, boolean enpresa, int mugikorra, String korreoa, String kalea, String hiria, String probintzia, int kodigoPostala, String herrialdea) {
+    public Bezeroa(String izenaAbizena/*, boolean enpresa*/, int mugikorra, String korreoa, String kalea, String hiria, String probintzia, int kodigoPostala, String herrialdea) {
         this.izenaAbizena = izenaAbizena;
-        this.enpresa = enpresa;
+        //this.enpresa = enpresa;
         this.mugikorra = mugikorra;
         this.korreoa = korreoa;
         this.kalea = kalea;
@@ -65,18 +65,18 @@ public class Bezeroa {
      *
      * @return Bezeroa enpresa bat edo pertsona bat den
      */
-    public boolean isEnpresa() {
+    /*public boolean isEnpresa() {
         return enpresa;
-    }
+    }*/
 
     /**
      *
      * Aldatzen du Bezeroa enpresa bat edo pertsona bat den
      * @param enpresa
      */
-    public void setEnpresa(boolean enpresa) {
+    /**public void setEnpresa(boolean enpresa) {
         this.enpresa = enpresa;
-    }
+    }**/
 
     /**
      *

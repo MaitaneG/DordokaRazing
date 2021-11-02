@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewTelApp">
         <activity
-            android:name=".Menua"
+            android:name=".view.Menua"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.NewTelApp.NoActionBar">
@@ -23,23 +23,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProduktuakErakutsi"
+            android:name=".view.ProduktuakErakutsi"
             android:theme="@style/Theme.NewTelApp.NoActionBar">
         </activity>
         <activity
-            android:name=".AurrekontuaSortu"
+            android:name=".view.AurrekontuaSortu"
             android:theme="@style/Theme.NewTelApp.NoActionBar">
         </activity>
         <activity
-            android:name=".BezeroaSortu"
+            android:name=".view.BezeroaSortu"
             android:theme="@style/Theme.NewTelApp.NoActionBar">
         </activity>
         <activity
-            android:name=".AurrekontuaMenua"
+            android:name=".view.AurrekontuaMenua"
             android:theme="@style/Theme.NewTelApp.NoActionBar">
         </activity>
         <activity
-            android:name=".AurrekontuakIkusi"
+            android:name=".view.AurrekontuakIkusi"
             android:theme="@style/Theme.NewTelApp.NoActionBar">
         </activity>
     </application>

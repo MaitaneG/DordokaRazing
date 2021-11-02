@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/produktuak_hondoa"
-    tools:context=".ProduktuakErakutsi">
+    tools:context=".view.ProduktuakErakutsi">
 
     <!-- Hurrengo produktura joango da -->
     <ImageButton

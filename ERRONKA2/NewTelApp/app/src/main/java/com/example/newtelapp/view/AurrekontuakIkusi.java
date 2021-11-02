@@ -1,4 +1,4 @@
-package com.example.newtelapp;
+package com.example.newtelapp.view;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.newtelapp.R;
 
 public class AurrekontuakIkusi extends AppCompatActivity {
     /**

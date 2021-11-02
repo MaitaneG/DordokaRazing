@@ -1,10 +1,12 @@
-package com.example.newtelapp;
+package com.example.newtelapp.model;
+
+import java.io.Serializable;
 
 /**
  *
  * Bezeroa klasea
  */
-public class Bezeroa {
+public class Bezeroa implements Serializable {
     /**
      *
      * Atributoak
@@ -23,7 +25,7 @@ public class Bezeroa {
      *
      * Bezeroa klasearen konstruktorea
      * @param izenaAbizena
-     * @param enpresa
+     * //@param enpresa
      * @param mugikorra
      * @param korreoa
      * @param kalea

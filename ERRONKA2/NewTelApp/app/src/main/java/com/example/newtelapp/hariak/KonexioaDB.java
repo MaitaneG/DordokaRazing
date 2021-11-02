@@ -1,9 +1,14 @@
-package com.example.newtelapp;
+package com.example.newtelapp.hariak;
 
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.newtelapp.model.Bezeroa;
+import com.example.newtelapp.model.Produktua;
+import com.example.newtelapp.view.Menua;
+
+import java.net.CookieHandler;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,28 +16,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class KonexioaDB extends AsyncTask <String, Void, ArrayList> {
+public class KonexioaDB extends AsyncTask <String, Connection, Connection> {
 
-    private ArrayList<Produktua> produktuakKatalogoa;
-    private ArrayList<Bezeroa> bezeroLista;
     private Menua menua;
 
-    public KonexioaDB(Menua context){
-        this.menua = context;
+    public KonexioaDB(){
+
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Toast.makeText(menua.getApplicationContext(), "Kargatzen...", Toast.LENGTH_SHORT).show();
+        System.out.println();
     }
 
     @Override
-    protected ArrayList<Produktua> doInBackground(String... strings) {
+    protected Connection doInBackground(String... strings) {
         String url = strings[0];
         String username = strings[1];
         String pass = strings[2];
-        produktuakKatalogoa = new ArrayList<>();
 
         try {
 
@@ -41,8 +43,9 @@ public class KonexioaDB extends AsyncTask <String, Void, ArrayList> {
             Connection conn = null;
             conn = DriverManager.getConnection(url,username,pass);
             //Log.d("db", "conexion db");
-            ArrayList<Bezeroa>algo=bezeroakLortu(conn);
-            return produktuakLortu(conn);
+            //ArrayList<Bezeroa>algo=bezeroakLortu(conn);
+            publishProgress(conn);
+            return conn;
 
         } catch (ClassNotFoundException  e) {
             e.printStackTrace();
@@ -54,14 +57,15 @@ public class KonexioaDB extends AsyncTask <String, Void, ArrayList> {
     }
 
     @Override
-    protected void onPostExecute(ArrayList arrayList) {
-        super.onPostExecute(arrayList);
-        menua.setDatuak(arrayList);
-        Toast.makeText(menua.getApplicationContext(), "Datu guztiak kargatuta!!!", Toast.LENGTH_SHORT).show();
+    protected void onProgressUpdate(Connection... values) {
+        super.onProgressUpdate(values);
+
     }
 
-    private ArrayList<Produktua> produktuakLortu(Connection conn) {
+
+    /**private ArrayList<Produktua> produktuakLortu(Connection conn) {
         Produktua produktua;
+
         PreparedStatement pstmt = null;
 
         try {
@@ -72,7 +76,7 @@ public class KonexioaDB extends AsyncTask <String, Void, ArrayList> {
             ResultSet rs = pstmt.executeQuery();
 
             while(rs.next()){
-                produktua= new Produktua(/*ID*/rs.getInt(1), /*Product name*/rs.getString(2), /*Kategoria*/rs.getString(5), /*Prezioa*/ rs.getFloat(3), /*Kantitatea*/rs.getFloat(4));
+                produktua= new Produktua(rs.getInt(1), rs.getString(2), rs.getString(5), rs.getFloat(3), rs.getFloat(4));
                 System.out.println();
                 produktuakKatalogoa.add(produktua);
             }
@@ -80,10 +84,11 @@ public class KonexioaDB extends AsyncTask <String, Void, ArrayList> {
             throwables.printStackTrace();
         }
         return produktuakKatalogoa;
-    }
+    }**/
 
-    private ArrayList<Bezeroa>bezeroakLortu(Connection conn) {
+    /**private ArrayList<Bezeroa>bezeroakLortu(Connection conn) {
         Bezeroa bezeroa;
+        bezeroLista=new ArrayList<>();
         PreparedStatement pstmt = null;
 
         try {
@@ -106,5 +111,5 @@ public class KonexioaDB extends AsyncTask <String, Void, ArrayList> {
             throwables.printStackTrace();
         }
         return null;
-    }
+    }**/
 }

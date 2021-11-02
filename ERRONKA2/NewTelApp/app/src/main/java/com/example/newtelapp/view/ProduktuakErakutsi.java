@@ -1,4 +1,4 @@
-package com.example.newtelapp;
+package com.example.newtelapp.view;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -13,13 +13,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import java.io.Serializable;
-import java.sql.SQLOutput;
+import com.example.newtelapp.Datuak;
+import com.example.newtelapp.R;
+import com.example.newtelapp.model.Produktua;
+
 import java.util.ArrayList;
 
 /**

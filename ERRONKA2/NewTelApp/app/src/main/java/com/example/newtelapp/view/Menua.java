@@ -1,4 +1,4 @@
-package com.example.newtelapp;
+package com.example.newtelapp.view;
 
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
@@ -11,7 +11,11 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.Serializable;
+import com.example.newtelapp.hariak.KonexioaDB;
+import com.example.newtelapp.R;
+import com.example.newtelapp.hariak.ProduktuakKargatu;
+import com.example.newtelapp.model.Produktua;
+
 import java.util.ArrayList;
 
 /**
@@ -32,9 +36,7 @@ public class Menua extends AppCompatActivity {
      *
      * Postgres datu baseko informazioa
      */
-    private String url="jdbc:postgresql://25.32.59.79:5432/NewTel1"; // Postgres-eko url-a
-    private String username="openpg"; // Datu baseko erabiltzailea
-    private String pass ="openpgpwd"; // Datu baseko pasahitza
+
     public ArrayList<Produktua> datuak; // Produktuen ArrayList-a
 
     /**
@@ -65,9 +67,8 @@ public class Menua extends AppCompatActivity {
         aurrekontua_botoia.setOnClickListener(this::aurrekonturaJoan);
         irten_botoia.setOnClickListener(this::itxi);
 
-        KonexioaDB con = new KonexioaDB(this);
-        con.execute(url, username, pass);
-        System.out.println();
+        ProduktuakKargatu produktuakKargatu=new ProduktuakKargatu(datuak);
+        produktuakKargatu.run();
     }
 
     public void setDatuak(ArrayList<Produktua> datuak){
@@ -95,7 +96,7 @@ public class Menua extends AppCompatActivity {
      * @param view
      */
     private void aurrekonturaJoan(View view) {
-        Intent myIntent=new Intent(view.getContext(),AurrekontuaMenua.class);
+        Intent myIntent=new Intent(view.getContext(), AurrekontuaMenua.class);
         ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.from_right,R.anim.from_right);
         this.startActivity(myIntent,options.toBundle());
     }

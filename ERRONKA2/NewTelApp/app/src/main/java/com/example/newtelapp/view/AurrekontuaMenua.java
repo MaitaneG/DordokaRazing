@@ -1,4 +1,4 @@
-package com.example.newtelapp;
+package com.example.newtelapp.view;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.newtelapp.R;
 
 public class AurrekontuaMenua extends AppCompatActivity {
 

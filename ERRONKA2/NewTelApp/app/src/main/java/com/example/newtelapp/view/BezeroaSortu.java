@@ -1,4 +1,4 @@
-package com.example.newtelapp;
+package com.example.newtelapp.view;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -8,19 +8,20 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.newtelapp.R;
+import com.example.newtelapp.view.AurrekontuaSortu;
+
 /**
  *
- * AurrekontuaSortu Layout-aren klasea
+ * Bigarren Layout-aren klasea
  */
-public class AurrekontuaSortu extends AppCompatActivity {
+public class BezeroaSortu extends AppCompatActivity {
 
     /**
      *
      * Atributoak
      */
     private ImageButton irten;
-    private ImageButton gorde;
-    private ImageButton bezeroak;
 
     /**
      *
@@ -30,7 +31,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.aurrekontua_sortu_layout);
+        setContentView(R.layout.bezeroak_layout);
         hasieratu();
     }
 
@@ -41,25 +42,9 @@ public class AurrekontuaSortu extends AppCompatActivity {
     private void hasieratu() {
         /* Botoiak aurkitzen eta aldagaietan gorde */
         irten = findViewById(R.id.buttonIrtenAurrekontuaSortu);
-        gorde=findViewById(R.id.buttonGordeAurrekontua);
-        bezeroak=findViewById(R.id.buttonBezeroaSortu);
 
         /* Botoiei listenerra jarri */
         irten.setOnClickListener(this::irten);
-        gorde.setOnClickListener(this::bezeroaSorturaJoan);
-        bezeroak.setOnClickListener(this::bezeroaSorturaJoan);
-    }
-
-    /**
-     *
-     * Bezeroa Sortu-ra joatea
-     *
-     * @param view
-     */
-    private void bezeroaSorturaJoan(View view) {
-        Intent myIntent=new Intent(view.getContext(),BezeroaSortu.class);
-        ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.from_right,R.anim.from_right);
-        this.startActivity(myIntent,options.toBundle());
     }
 
     /**
@@ -68,7 +53,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
      * @param view
      */
     private void irten(View view){
-        Intent myIntent = new Intent(view.getContext(), AurrekontuaMenua.class);
+        Intent myIntent = new Intent(view.getContext(), AurrekontuaSortu.class);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }

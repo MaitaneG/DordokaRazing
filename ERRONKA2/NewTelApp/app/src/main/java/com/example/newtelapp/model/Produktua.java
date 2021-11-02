@@ -1,4 +1,4 @@
-package com.example.newtelapp;
+package com.example.newtelapp.model;
 
 import android.os.Parcel;
 

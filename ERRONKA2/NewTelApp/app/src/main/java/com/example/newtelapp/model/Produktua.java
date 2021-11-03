@@ -16,25 +16,25 @@ public class Produktua implements Serializable {
      */
     private int id;
     private String izena;
-    private String category;
-    private float prezio;
-    private float kantitatea;
+    private String kategoria;
+    private float prezioa;
+    private float kantitatea; 
 
     /**
      *
      * Produktua klasearen kontruktorea
      * @param id
      * @param izena
-     * @param category
-     * @param prezio
-     * @param kant
+     * @param kategoria
+     * @param prezioa
+     * @param kantitatea
      */
-    public Produktua(int id, String izena, String category, float prezio, float kant) {
+    public Produktua(int id, String izena, String kategoria, float prezioa, float kantitatea) {
         this.id = id;
         this.izena = izena;
-        this.category = category;
-        this.prezio = prezio;
-        this.kantitatea=kant;
+        this.kategoria = kategoria;
+        this.prezioa = prezioa;
+        this.kantitatea=kantitatea;
     }
 
     /**
@@ -75,34 +75,34 @@ public class Produktua implements Serializable {
      *
      * @return Produktuaren kategoria
      */
-    public String getCategory() {
-        return category;
+    public String getKategoria() {
+        return kategoria;
     }
 
     /**
      *
      * Aldatzen du Produktuaren kategoria
-     * @param category
+     * @param kategoria
      */
-    public void setCategory(String category) {
-        this.category = category;
+    public void setKategoria(String kategoria) {
+        this.kategoria = kategoria;
     }
 
     /**
      *
      * @return Produktuaren prezioa
      */
-    public float getPrezio() {
-        return prezio;
+    public float getPrezioa() {
+        return prezioa;
     }
 
     /**
      *
      * Aldatzen du Produktuaren prezioa
-     * @param prezio
+     * @param prezioa
      */
-    public void setPrezio(float prezio) {
-        this.prezio = prezio;
+    public void setPrezioa(float prezioa) {
+        this.prezioa = prezioa;
     }
 
     /**

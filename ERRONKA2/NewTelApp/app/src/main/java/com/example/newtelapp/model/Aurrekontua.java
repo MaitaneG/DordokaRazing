@@ -22,7 +22,7 @@ public class Aurrekontua {
 
     public Aurrekontua(int id, String izena, String bezeroaIzena, String produktuaIzena, int kantitatea, Date data) {
         this.id = id;
-        this.name=name;
+        this.name=izena;
         this.bezeroaIzena = bezeroaIzena;
         this.produktuaIzena = produktuaIzena;
         this.kantitatea = kantitatea;

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtelapp.hariak.Konexioa;
 import com.example.newtelapp.R;
+import com.example.newtelapp.model.Aurrekontua;
 import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
 
@@ -40,6 +41,7 @@ public class Menua extends AppCompatActivity {
 
     public ArrayList<Produktua> datuak; // Produktuen ArrayList-a
     public ArrayList<Bezeroa>bezeroak;
+    public ArrayList<Aurrekontua>aurrekontuak;
 
     /**
      *
@@ -72,6 +74,7 @@ public class Menua extends AppCompatActivity {
         Konexioa konexioa =new Konexioa();
         datuak= konexioa.selectProduktuak();
         bezeroak= konexioa.selectBezeroak();
+        aurrekontuak=konexioa.selectAurrekontuak();
     }
 
     /**

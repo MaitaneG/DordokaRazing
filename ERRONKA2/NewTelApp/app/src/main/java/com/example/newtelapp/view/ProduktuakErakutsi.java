@@ -17,7 +17,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.example.newtelapp.Datuak;
 import com.example.newtelapp.R;
 import com.example.newtelapp.model.Produktua;
 
@@ -33,8 +32,6 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
      *
      * Atributoak
      */
-    private Datuak datuak;
-
     private ArrayList<Produktua>produktuak;
     private ArrayList<Produktua>produktuakBilatu;
 
@@ -98,8 +95,8 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                int ida =   produktuakBilatu.get(i).getId();
-                datuakAldatuBilatzaile(ida-1);
+                int id =   produktuakBilatu.get(i).getId();
+                datuakAldatuBilatzaile(id-1);
             }
         });
 
@@ -107,11 +104,6 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
         lista.setVisibility(View.INVISIBLE);
 
         datuakAldatu();
-
-        //Intent intent=getIntent();
-        //ArrayList<Produktua> produktua=
-        //System.out.println();
-        //Toast.makeText(getApplicationContext(), produktua.get(1).toString()+"",Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -155,8 +147,8 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
         bilatzailea.setQuery("", false);
         bilatzailea .clearFocus();
         izena.setText(produktuak.get(indexa-1).getIzena());
-        kategoria.setText(produktuak.get(indexa-1).getCategory());
-        prezioa.setText(produktuak.get(indexa-1).getPrezio()+" €");
+        kategoria.setText(produktuak.get(indexa-1).getKategoria());
+        prezioa.setText(produktuak.get(indexa-1).getPrezioa()+" €");
         kantitatea.setText(Float.toString(produktuak.get(indexa-1).getKantitatea()));
         irudia.setImageResource(nireIrudiak[indexa-1]);
         index= produktuak.get(indexa-1).getId()-2;
@@ -168,8 +160,8 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
      */
     public void datuakAldatu(){
         izena.setText(produktuak.get(index).getIzena());
-        kategoria.setText(produktuak.get(index).getCategory());
-        prezioa.setText(produktuak.get(index).getPrezio()+" €");
+        kategoria.setText(produktuak.get(index).getKategoria());
+        prezioa.setText(produktuak.get(index).getPrezioa()+" €");
         kantitatea.setText(Float.toString(produktuak.get(index).getKantitatea()));
         irudia.setImageResource(nireIrudiak[index]);
     }

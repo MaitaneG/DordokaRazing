@@ -11,11 +11,12 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.newtelapp.hariak.KonexioaDB;
+import com.example.newtelapp.hariak.Konexioa;
 import com.example.newtelapp.R;
-import com.example.newtelapp.hariak.ProduktuakKargatu;
+import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 /**
@@ -38,6 +39,7 @@ public class Menua extends AppCompatActivity {
      */
 
     public ArrayList<Produktua> datuak; // Produktuen ArrayList-a
+    public ArrayList<Bezeroa>bezeroak;
 
     /**
      *
@@ -67,12 +69,9 @@ public class Menua extends AppCompatActivity {
         aurrekontua_botoia.setOnClickListener(this::aurrekonturaJoan);
         irten_botoia.setOnClickListener(this::itxi);
 
-        ProduktuakKargatu produktuakKargatu=new ProduktuakKargatu(datuak);
-        produktuakKargatu.run();
-    }
-
-    public void setDatuak(ArrayList<Produktua> datuak){
-        this.datuak = datuak;
+        Konexioa konexioa =new Konexioa();
+        datuak= konexioa.selectProduktuak();
+        bezeroak= konexioa.selectBezeroak();
     }
 
     /**

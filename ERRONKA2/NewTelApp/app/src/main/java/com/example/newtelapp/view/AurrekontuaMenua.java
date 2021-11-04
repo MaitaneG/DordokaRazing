@@ -9,8 +9,15 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtelapp.R;
+import com.example.newtelapp.hariak.Konexioa;
+import com.example.newtelapp.model.Aurrekontua;
+import com.example.newtelapp.model.Bezeroa;
+import com.example.newtelapp.model.Produktua;
 
-public class AurrekontuaMenua extends AppCompatActivity {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class AurrekontuaMenua extends AppCompatActivity implements Serializable {
 
     /**
      *
@@ -20,6 +27,9 @@ public class AurrekontuaMenua extends AppCompatActivity {
     private ImageButton aurrrekontuakIkusi;
     private ImageButton irten;
 
+    private ArrayList<Bezeroa> bezeroak;
+    private ArrayList<Aurrekontua> aurrekontuak;
+    private ArrayList<Produktua>produktuak;
     /**
      *
      * Layout-a sortzen denean
@@ -40,6 +50,10 @@ public class AurrekontuaMenua extends AppCompatActivity {
         aurrekontuaSortu.setOnClickListener(this::aurrekontuaSorturaJoan);
         aurrrekontuakIkusi.setOnClickListener(this::aurrekontuakIkusiraJoan);
         irten.setOnClickListener(this::irten);
+
+        bezeroak=Menua.konexioa.selectBezeroak();
+        //aurrekontuak=Menua.konexioa.selectAurrekontuak();
+        produktuak=Menua.konexioa.selectProduktuak();
     }
 
     private void irten(View view) {
@@ -55,12 +69,15 @@ public class AurrekontuaMenua extends AppCompatActivity {
 
     private void aurrekontuakIkusiraJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), AurrekontuakIkusi.class);
+            myIntent.putExtra("aurrekontuak", aurrekontuak);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }
 
     private void aurrekontuaSorturaJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), AurrekontuaSortu.class);
+            myIntent.putExtra("bezeroak",bezeroak);
+            myIntent.putExtra("produktuak",produktuak);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }

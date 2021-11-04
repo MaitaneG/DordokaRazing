@@ -76,6 +76,8 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="152dp"
         android:background="@drawable/spinner"
+        android:prompt="@string/produktuak"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />

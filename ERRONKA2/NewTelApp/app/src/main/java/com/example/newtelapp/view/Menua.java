@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -17,6 +19,7 @@ import com.example.newtelapp.model.Aurrekontua;
 import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -24,7 +27,7 @@ import java.util.ArrayList;
  *
  * Lehengo Layout-aren klasea
  */
-public class Menua extends AppCompatActivity {
+public class Menua extends AppCompatActivity implements Serializable{
 
     /**
      *
@@ -39,9 +42,10 @@ public class Menua extends AppCompatActivity {
      * Postgres datu baseko informazioa
      */
 
-    public ArrayList<Produktua> datuak; // Produktuen ArrayList-a
-    public ArrayList<Bezeroa>bezeroak;
-    public ArrayList<Aurrekontua>aurrekontuak;
+    private ArrayList<Produktua> produktuak; // Produktuen ArrayList-a
+    private ArrayList<Bezeroa>bezeroak;
+    private ArrayList<Aurrekontua>aurrekontuak;
+    public static Konexioa konexioa;
 
     /**
      *
@@ -64,17 +68,17 @@ public class Menua extends AppCompatActivity {
         erakutsi_produktuak_botoia = findViewById(R.id.buttonErakutsiProduktuak);
         aurrekontua_botoia = findViewById(R.id.buttonAurrekontuaSortu);
         irten_botoia = findViewById(R.id.buttonIrten);
-        datuak = new ArrayList<Produktua>();
+        produktuak = new ArrayList<>();
+        bezeroak=new ArrayList<>();
+        aurrekontuak=new ArrayList<>();
 
         /* Botoiei listenerra jarri */
         erakutsi_produktuak_botoia.setOnClickListener(this::produktuakErakutsiraJoan);
         aurrekontua_botoia.setOnClickListener(this::aurrekonturaJoan);
         irten_botoia.setOnClickListener(this::itxi);
 
-        Konexioa konexioa =new Konexioa();
-        datuak= konexioa.selectProduktuak();
-        bezeroak= konexioa.selectBezeroak();
-        aurrekontuak=konexioa.selectAurrekontuak();
+        konexioa =new Konexioa();
+        produktuak= konexioa.selectProduktuak();
     }
 
     /**
@@ -85,8 +89,7 @@ public class Menua extends AppCompatActivity {
      */
     private void produktuakErakutsiraJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), ProduktuakErakutsi.class);
-            myIntent.putExtra("id",datuak);
-        System.out.println();
+            myIntent.putExtra("produktuak",produktuak);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }

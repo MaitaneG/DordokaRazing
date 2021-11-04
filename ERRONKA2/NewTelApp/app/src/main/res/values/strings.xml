@@ -24,4 +24,6 @@
     <string name="produktuaren_izena">Produktuaren izena</string>
     <string name="kantitatea_table">Kantitatea</string>
     <string name="prezioa_table">Prezioa</string>
+    <string name="produktuak">PRODUKTUAK</string>
+    <string name="oharraBezeroaSortu">Gako guztiak bete behar dituzu</string>
 </resources>

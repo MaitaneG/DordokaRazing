@@ -68,8 +68,7 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
      */
     private void hasieratu() {
         /* Datuak hasieratu */
-        //datuak=new Datuak(this);
-        produktuak=(ArrayList<Produktua>) getIntent().getSerializableExtra("id");
+        produktuak=(ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
         produktuakBilatu=new ArrayList<>();
         produktuakBilatu.addAll(produktuak);
 

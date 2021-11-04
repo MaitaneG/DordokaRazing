@@ -13,7 +13,7 @@ public class Bezeroa implements Serializable {
      */
     private String izenaAbizena;
     //private boolean enpresa;
-    private int mugikorra;
+    private String mugikorra;
     private String korreoa;
     private String kalea;
     private String hiria;
@@ -34,7 +34,7 @@ public class Bezeroa implements Serializable {
      * @param kodigoPostala
      * @param herrialdea
      */
-    public Bezeroa(String izenaAbizena/*, boolean enpresa*/, int mugikorra, String korreoa, String kalea, String hiria, String probintzia, int kodigoPostala, String herrialdea) {
+    public Bezeroa(String izenaAbizena/*, boolean enpresa*/, String mugikorra, String korreoa, String kalea, String hiria, String probintzia, int kodigoPostala, String herrialdea) {
         this.izenaAbizena = izenaAbizena;
         //this.enpresa = enpresa;
         this.mugikorra = mugikorra;
@@ -76,15 +76,15 @@ public class Bezeroa implements Serializable {
      * Aldatzen du Bezeroa enpresa bat edo pertsona bat den
      * @param enpresa
      */
-    /**public void setEnpresa(boolean enpresa) {
+    /*public void setEnpresa(boolean enpresa) {
         this.enpresa = enpresa;
-    }**/
+    }*/
 
     /**
      *
      * @return Bezeroaren mugikor zenbakia
      */
-    public int getMugikorra() {
+    public String getMugikorra() {
         return mugikorra;
     }
 
@@ -93,7 +93,7 @@ public class Bezeroa implements Serializable {
      * Aldatzen du Bezeroaren mugikor zenbakia
      * @param mugikorra
      */
-    public void setMugikorra(int mugikorra) {
+    public void setMugikorra(String mugikorra) {
         this.mugikorra = mugikorra;
     }
 

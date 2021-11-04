@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -39,8 +40,8 @@ public class SaleOrder implements Serializable {
 	@Column(name="campaign_id")
 	private Integer campaignId;
 
-	@Column(name="cart_recovery_email_sent")
-	private Boolean cartRecoveryEmailSent;
+//	@Column(name="cart_recovery_email_sent")
+//	private Boolean cartRecoveryEmailSent;
 
 	@Column(name="client_order_ref")
 	private String clientOrderRef;
@@ -104,17 +105,17 @@ public class SaleOrder implements Serializable {
 
 	private String reference;
 
-	@Column(name="require_payment")
-	private Boolean requirePayment;
-
-	@Column(name="require_signature")
-	private Boolean requireSignature;
+//	@Column(name="require_payment")
+//	private Boolean requirePayment;
+//
+//	@Column(name="require_signature")
+//	private Boolean requireSignature;
 
 	@Column(name="sale_order_template_id")
 	private Integer saleOrderTemplateId;
 
-	@Column(name="show_update_pricelist")
-	private Boolean showUpdatePricelist;
+//	@Column(name="show_update_pricelist")
+//	private Boolean showUpdatePricelist;
 
 	@Column(name="signed_by")
 	private String signedBy;
@@ -166,6 +167,9 @@ public class SaleOrder implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="partner_shipping_id")
 	private ResPartner resPartner3;
+	//bi-directional many-to-one association to SaleOrderLine
+	@OneToMany(mappedBy="saleOrder")
+	private List<SaleOrderLine> saleOrderLines;
 
 	public SaleOrder() {
 	}
@@ -226,13 +230,13 @@ public class SaleOrder implements Serializable {
 		this.campaignId = campaignId;
 	}
 
-	public Boolean getCartRecoveryEmailSent() {
-		return this.cartRecoveryEmailSent;
-	}
-
-	public void setCartRecoveryEmailSent(Boolean cartRecoveryEmailSent) {
-		this.cartRecoveryEmailSent = cartRecoveryEmailSent;
-	}
+//	public Boolean getCartRecoveryEmailSent() {
+//		return this.cartRecoveryEmailSent;
+//	}
+//
+//	public void setCartRecoveryEmailSent(Boolean cartRecoveryEmailSent) {
+//		this.cartRecoveryEmailSent = cartRecoveryEmailSent;
+//	}
 
 	public String getClientOrderRef() {
 		return this.clientOrderRef;
@@ -410,21 +414,21 @@ public class SaleOrder implements Serializable {
 		this.reference = reference;
 	}
 
-	public Boolean getRequirePayment() {
-		return this.requirePayment;
-	}
-
-	public void setRequirePayment(Boolean requirePayment) {
-		this.requirePayment = requirePayment;
-	}
-
-	public Boolean getRequireSignature() {
-		return this.requireSignature;
-	}
-
-	public void setRequireSignature(Boolean requireSignature) {
-		this.requireSignature = requireSignature;
-	}
+//	public Boolean getRequirePayment() {
+//		return this.requirePayment;
+//	}
+//
+//	public void setRequirePayment(Boolean requirePayment) {
+//		this.requirePayment = requirePayment;
+//	}
+//
+//	public Boolean getRequireSignature() {
+//		return this.requireSignature;
+//	}
+//
+//	public void setRequireSignature(Boolean requireSignature) {
+//		this.requireSignature = requireSignature;
+//	}
 
 	public Integer getSaleOrderTemplateId() {
 		return this.saleOrderTemplateId;
@@ -434,13 +438,13 @@ public class SaleOrder implements Serializable {
 		this.saleOrderTemplateId = saleOrderTemplateId;
 	}
 
-	public Boolean getShowUpdatePricelist() {
-		return this.showUpdatePricelist;
-	}
-
-	public void setShowUpdatePricelist(Boolean showUpdatePricelist) {
-		this.showUpdatePricelist = showUpdatePricelist;
-	}
+//	public Boolean getShowUpdatePricelist() {
+//		return this.showUpdatePricelist;
+//	}
+//
+//	public void setShowUpdatePricelist(Boolean showUpdatePricelist) {
+//		this.showUpdatePricelist = showUpdatePricelist;
+//	}
 
 	public String getSignedBy() {
 		return this.signedBy;
@@ -562,4 +566,25 @@ public class SaleOrder implements Serializable {
 		this.resPartner3 = resPartner3;
 	}
 
+	public List<SaleOrderLine> getSaleOrderLines() {
+		return this.saleOrderLines;
+	}
+
+	public void setSaleOrderLines(List<SaleOrderLine> saleOrderLines) {
+		this.saleOrderLines = saleOrderLines;
+	}
+
+	public SaleOrderLine addSaleOrderLine(SaleOrderLine saleOrderLine) {
+		getSaleOrderLines().add(saleOrderLine);
+		saleOrderLine.setSaleOrder(this);
+
+		return saleOrderLine;
+	}
+
+	public SaleOrderLine removeSaleOrderLine(SaleOrderLine saleOrderLine) {
+		getSaleOrderLines().remove(saleOrderLine);
+		saleOrderLine.setSaleOrder(null);
+
+		return saleOrderLine;
+	}
 }

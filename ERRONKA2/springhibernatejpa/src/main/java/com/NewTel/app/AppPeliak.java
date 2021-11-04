@@ -1,12 +1,11 @@
 package com.NewTel.app;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.sound.sampled.*;
 
-import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,7 +14,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Attr;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -38,25 +37,30 @@ public class AppPeliak {
 	public static ProductProductDao productDao;
 	public static SaleOrderDao salesDao;
 	public static ResPartnerDao resPartnerDao;
+	public static SaleOrderLineDao saoLineDao;
 	public static ApplicationContext appContext;
 	public static ApplicationContext appContext2;
 
 	public static List<ProductProduct> products;
 	public static List<ResPartner> clients;
 	public static List<SaleOrder> sales;
+	public static List<SaleOrderLine> salesLines;
 
 	public static boolean bExported=false;
 	public static boolean pExported=false;
 	public static boolean sExported=false;
 
-	public static String path = "ruta xml";
+	public static String path = "config.xml";
 
 	public static void main(String[] args) {
 		appContext = new AnnotationConfigApplicationContext(DatuBasearenKonfigurazioa_Postgres.class);
 
 		productDao = appContext.getBean(ProductProductDao.class);
 		salesDao = appContext.getBean(SaleOrderDao.class);
+		saoLineDao = appContext.getBean(SaleOrderLineDao.class);
+
 		resPartnerDao = appContext.getBean(ResPartnerDao.class);
+
 		File file = new File(path);
 		if (!file.exists())
 			menuOsoaBistaratu();
@@ -81,9 +85,10 @@ public class AppPeliak {
 		Scanner sc = new Scanner(System.in);
 
 		// Menua bistaratu
-		while (!exit) {
+
 			System.out.println(
-					"\t\t XML SORTZAILEA:\n\tAukeratu zer exportatu nahi duzun(1,...):\n1-Bezeroak\n2-Produktuak\n3-Salmentak\n\n4-Eginda");
+					"\n\n\n\n\n\n\t\t XML SORTZAILEA:\n\tAukeratu zer exportatu nahi duzun(1,...):\n1-Bezeroak\n2-Produktuak\n3-Salmentak\n\n4-Eginda");
+			while (!exit) {
 			election = sc.nextInt();
 
 			switch (election) {
@@ -102,15 +107,20 @@ public class AppPeliak {
 			case 4:
 				Thread th = new Thread("datuak gordetzen...");
 
-				/*try {
+				try {
 					th.sleep(3000);
+					//xmlSortu(aukerak);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}*/
-				if (!xmlSortu(aukerak))
-					System.out.println("Ezin izan da xml fitxategia sortu.");
-				updateDB();
+				}
+				if (xmlSortu(aukerak)) { //= true
+
+				System.out.println("Ezin izan da xml fitxategia sortu.");}
+				else{
+					//updateDB();
+					openSound();
+			}
 				exit = true;
 
 			}
@@ -125,15 +135,17 @@ public class AppPeliak {
 
 		boolean success = false;
 		System.out.println("\n\n\n\n\tXML FITXATEGIA SORTZEN");
-		if (aukerak.contains("bezeroak"))
+		if (aukerak.contains("bezeroak")) {
 			clients = new ArrayList<ResPartner>();
-			clients = resPartnerDao.getAll();
-		if (aukerak.contains("produktuak"))
+		clients = resPartnerDao.getAll();}
+		if (aukerak.contains("produktuak")){
 			products = new ArrayList<ProductProduct>();
-			products = productDao.getAll();
-		if (aukerak.contains("salmentak"))
+			products = productDao.getAll();}
+		if (aukerak.contains("salmentak")){
 			sales = new ArrayList<SaleOrder>();
 			sales = salesDao.getAll();
+			salesLines = new ArrayList<SaleOrderLine>();
+			salesLines = saoLineDao.getAll();}
 		// xml sortzeko kodigoa:
 
 		try {
@@ -151,32 +163,34 @@ public class AppPeliak {
 			Element bezeroa = document.createElement("bezeroak");
 			root.appendChild(bezeroa);
 
-			Element attr = document.createElement("exported");
-			if (!clients.isEmpty() || clients!= null)
-				attr.setTextContent("true");
+			Element battr = document.createElement("exported");
+			if (clients!= null)
+				battr.setTextContent("true");
 			else
-				attr.setTextContent("false");
-			bezeroa.appendChild(attr);
+				battr.setTextContent("false");
+			bezeroa.appendChild(battr);
 
 			// produktua
 			Element produktua = document.createElement("produktuak");
 			root.appendChild(produktua);
+			Element pattr = document.createElement("exported");
 
-			if (!products.isEmpty())
-				attr.setTextContent("true");
+			if (products!= null)
+				pattr.setTextContent("true");
 			else
-				attr.setTextContent("false");
-			produktua.appendChild(attr);
+				pattr.setTextContent("false");
+			produktua.appendChild(pattr);
 
 			// salmentak
 			Element salmenta = document.createElement("salmentak");
 			root.appendChild(salmenta);
+			Element sattr = document.createElement("exported");
 
-			if (!sales.isEmpty())
-				attr.setTextContent("true");
+			if (sales!= null)
+				sattr.setTextContent("true");
 			else
-				attr.setTextContent("false");
-			salmenta.appendChild(attr);
+				sattr.setTextContent("false");
+			salmenta.appendChild(sattr);
 
 			// Create xml
 			TransformerFactory transformers = TransformerFactory.newInstance();
@@ -207,24 +221,29 @@ public class AppPeliak {
 		ProductProductDao productDao;
 		SaleOrderDao salesDao;
 		ResPartnerDao resPartnerDao;
+		SaleOrderLineDao saoLineDao;
 		
 		
 		productDao = appContext2.getBean(ProductProductDao.class);
 		
 		salesDao = appContext2.getBean(SaleOrderDao.class);
-	
+
+		saoLineDao = appContext2.getBean(SaleOrderLineDao.class);
+
 		resPartnerDao = appContext2.getBean(ResPartnerDao.class);
 
 		try {
 			if (clients!=null)
 				for (ResPartner rp : clients)
-					resPartnerDao.create(rp);
+					resPartnerDao.update(rp);
 			if ( products!=null)					//!products.isEmpty() ||
 				for (ProductProduct p : products)
-					productDao.create(p);
+					productDao.update(p);
 			if ( sales!=null)						//!sales.isEmpty() ||
 				for (SaleOrder s : sales)
-					salesDao.create(s);
+					salesDao.update(s);
+				for(SaleOrderLine s : salesLines)
+					saoLineDao.update(s);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -238,7 +257,7 @@ public class AppPeliak {
 	public static void menuaBistaratu() {
 		irakurriXML();
 		System.out.println(
-				"\t\tKAIXO!\n\n\tHiadanik badaukagu aurreko konfigurazioa gordeta\nErabiltzea nahi duzu(bai/ez)?");
+				"\n\n\n\n\n\n\t\tKAIXO!\n\n\tHiadanik badaukagu aurreko konfigurazioa gordeta\nErabiltzea nahi duzu(bai/ez)?");
 		Scanner sc = new Scanner(System.in);
 
 		String aukera = sc.next().toLowerCase();
@@ -256,7 +275,8 @@ public class AppPeliak {
 					sales = new ArrayList<SaleOrder>();
 					sales = salesDao.getAll();}
 
-				updateDB();
+				//updateDB();
+				openSound();
 			} catch (Exception ex) {
 				System.out.println("Errorea datubase prozesuan (menuaBistaratu)");
 				ex.printStackTrace();
@@ -333,6 +353,46 @@ public class AppPeliak {
 			System.out.println("Ez Dakit zer gertatu den");
 			e.printStackTrace();
 
+		}
+
+	}
+	public static void openSound(){
+		Thread th = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+
+					File sound = new File("sounds/Gemidos.wav");//"sounds/Download_succeed.wav"
+					AudioInputStream stream;
+					AudioFormat format;
+					DataLine.Info info;
+					Clip clip;
+
+					stream = AudioSystem.getAudioInputStream(sound);
+					format = stream.getFormat();
+					info = new DataLine.Info(Clip.class, format);
+					clip = (Clip) AudioSystem.getLine(info);
+					clip.open(stream);
+					clip.start();
+
+//			for(int x=0; x < 1000;){
+//
+//		}
+
+
+				}
+				catch (Exception e) {
+					//whatevers
+					e.printStackTrace();
+				}
+			}
+		});
+
+		try {
+			th.start();//soinuaren haria hasi
+			Thread.sleep(4000);//programa nagusia gelditu soinua erreproduzitzeko
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 
 	}

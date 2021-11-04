@@ -18,6 +18,8 @@ public class SaleOrderDao {
 	 * @param saleo
 	 */
 	public void create(SaleOrder saleo) {
+		String sqlQuery="CREATE TABLE";
+		entityManager.createQuery(sqlQuery);
 		entityManager.persist(saleo);
 		return;
 	}

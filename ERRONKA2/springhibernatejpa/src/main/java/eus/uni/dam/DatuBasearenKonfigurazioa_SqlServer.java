@@ -131,6 +131,10 @@ public class DatuBasearenKonfigurazioa_SqlServer {
     public SaleOrderDao getSaleOrderDao() {
     	return new SaleOrderDao();
     }
+    @Bean
+    public SaleOrderLineDao getSaleOrderLineDao() {
+        return new SaleOrderLineDao();
+    }
     
     
     

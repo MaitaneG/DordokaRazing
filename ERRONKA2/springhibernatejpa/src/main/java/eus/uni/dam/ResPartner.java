@@ -21,7 +21,7 @@ public class ResPartner implements Serializable {
 	@Id
 	private Integer id;
 
-	private Boolean active;
+	//private Boolean active;
 
 	@Column(name="additional_info")
 	private String additionalInfo;
@@ -73,9 +73,9 @@ public class ResPartner implements Serializable {
 	@Column(name="email_normalized")
 	private String emailNormalized;
 
-	private Boolean employee;
+	//private Boolean employee;
 
-	private String function;
+
 
 	@Column(name="industry_id")
 	private Integer industryId;
@@ -86,11 +86,11 @@ public class ResPartner implements Serializable {
 	@Column(name="invoice_warn_msg")
 	private String invoiceWarnMsg;
 
-	@Column(name="is_company")
-	private Boolean isCompany;
+//	@Column(name="is_company")
+//	private Boolean isCompany;
 
-	@Column(name="is_published")
-	private Boolean isPublished;
+//	@Column(name="is_published")
+//	private Boolean isPublished;
 
 	private String lang;
 
@@ -116,8 +116,8 @@ public class ResPartner implements Serializable {
 	@Column(name="partner_longitude")
 	private BigDecimal partnerLongitude;
 
-	@Column(name="partner_share")
-	private Boolean partnerShare;
+//	@Column(name="partner_share")
+//	private Boolean partnerShare;
 
 	private String phone;
 
@@ -196,8 +196,7 @@ public class ResPartner implements Serializable {
 	private ResPartner resPartner1;
 
 	//bi-directional many-to-one association to ResPartner
-	@OneToMany(mappedBy="resPartner1")
-	private List<ResPartner> resPartners1;
+
 
 	//bi-directional many-to-one association to ResPartner
 	@ManyToOne
@@ -220,6 +219,10 @@ public class ResPartner implements Serializable {
 	@OneToMany(mappedBy="resPartner3")
 	private List<SaleOrder> saleOrders3;
 
+	//bi-directional many-to-one association to SaleOrderLine
+	@OneToMany(mappedBy="resPartner")
+	private List<SaleOrderLine> saleOrderLines;
+
 	public ResPartner() {
 	}
 
@@ -231,13 +234,13 @@ public class ResPartner implements Serializable {
 		this.id = id;
 	}
 
-	public Boolean getActive() {
-		return this.active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
+//	public Boolean getActive() {
+//		return this.active;
+//	}
+//
+//	public void setActive(Boolean active) {
+//		this.active = active;
+//	}
 
 	public String getAdditionalInfo() {
 		return this.additionalInfo;
@@ -383,21 +386,15 @@ public class ResPartner implements Serializable {
 		this.emailNormalized = emailNormalized;
 	}
 
-	public Boolean getEmployee() {
-		return this.employee;
-	}
+//	public Boolean getEmployee() {
+//		return this.employee;
+//	}
+//
+//	public void setEmployee(Boolean employee) {
+//		this.employee = employee;
+//	}
 
-	public void setEmployee(Boolean employee) {
-		this.employee = employee;
-	}
 
-	public String getFunction() {
-		return this.function;
-	}
-
-	public void setFunction(String function) {
-		this.function = function;
-	}
 
 	public Integer getIndustryId() {
 		return this.industryId;
@@ -423,21 +420,21 @@ public class ResPartner implements Serializable {
 		this.invoiceWarnMsg = invoiceWarnMsg;
 	}
 
-	public Boolean getIsCompany() {
-		return this.isCompany;
-	}
-
-	public void setIsCompany(Boolean isCompany) {
-		this.isCompany = isCompany;
-	}
-
-	public Boolean getIsPublished() {
-		return this.isPublished;
-	}
-
-	public void setIsPublished(Boolean isPublished) {
-		this.isPublished = isPublished;
-	}
+//	public Boolean getIsCompany() {
+//		return this.isCompany;
+//	}
+//
+//	public void setIsCompany(Boolean isCompany) {
+//		this.isCompany = isCompany;
+//	}
+//
+//	public Boolean getIsPublished() {
+//		return this.isPublished;
+//	}
+//
+//	public void setIsPublished(Boolean isPublished) {
+//		this.isPublished = isPublished;
+//	}
 
 	public String getLang() {
 		return this.lang;
@@ -511,13 +508,13 @@ public class ResPartner implements Serializable {
 		this.partnerLongitude = partnerLongitude;
 	}
 
-	public Boolean getPartnerShare() {
-		return this.partnerShare;
-	}
-
-	public void setPartnerShare(Boolean partnerShare) {
-		this.partnerShare = partnerShare;
-	}
+//	public Boolean getPartnerShare() {
+//		return this.partnerShare;
+//	}
+//
+//	public void setPartnerShare(Boolean partnerShare) {
+//		this.partnerShare = partnerShare;
+//	}
 
 	public String getPhone() {
 		return this.phone;
@@ -743,27 +740,27 @@ public class ResPartner implements Serializable {
 		this.resPartner1 = resPartner1;
 	}
 
-	public List<ResPartner> getResPartners1() {
-		return this.resPartners1;
-	}
+//	public List<ResPartner> getResPartners1() {
+//		return this.resPartners1;
+//	}
+//
+//	public void setResPartners1(List<ResPartner> resPartners1) {
+//		this.resPartners1 = resPartners1;
+//	}
 
-	public void setResPartners1(List<ResPartner> resPartners1) {
-		this.resPartners1 = resPartners1;
-	}
-
-	public ResPartner addResPartners1(ResPartner resPartners1) {
-		getResPartners1().add(resPartners1);
-		resPartners1.setResPartner1(this);
-
-		return resPartners1;
-	}
-
-	public ResPartner removeResPartners1(ResPartner resPartners1) {
-		getResPartners1().remove(resPartners1);
-		resPartners1.setResPartner1(null);
-
-		return resPartners1;
-	}
+//	public ResPartner addResPartners1(ResPartner resPartners1) {
+//		getResPartners1().add(resPartners1);
+//		resPartners1.setResPartner1(this);
+//
+//		return resPartners1;
+//	}
+//
+//	public ResPartner removeResPartners1(ResPartner resPartners1) {
+//		getResPartners1().remove(resPartners1);
+//		resPartners1.setResPartner1(null);
+//
+//		return resPartners1;
+//	}
 
 	public ResPartner getResPartner2() {
 		return this.resPartner2;
@@ -859,6 +856,28 @@ public class ResPartner implements Serializable {
 		saleOrders3.setResPartner3(null);
 
 		return saleOrders3;
+	}
+
+	public List<SaleOrderLine> getSaleOrderLines() {
+		return this.saleOrderLines;
+	}
+
+	public void setSaleOrderLines(List<SaleOrderLine> saleOrderLines) {
+		this.saleOrderLines = saleOrderLines;
+	}
+
+	public SaleOrderLine addSaleOrderLine(SaleOrderLine saleOrderLine) {
+		getSaleOrderLines().add(saleOrderLine);
+		saleOrderLine.setResPartner(this);
+
+		return saleOrderLine;
+	}
+
+	public SaleOrderLine removeSaleOrderLine(SaleOrderLine saleOrderLine) {
+		getSaleOrderLines().remove(saleOrderLine);
+		saleOrderLine.setResPartner(null);
+
+		return saleOrderLine;
 	}
 
 }

@@ -99,6 +99,11 @@ public class DatuBasearenKonfigurazioa_Postgres {
 		return new SaleOrderDao();
 	}
 
+	@Bean
+	public SaleOrderLineDao getSaleOrderLineDao() {
+		return new SaleOrderLineDao();
+	}
+
 	@Autowired
 	private Environment env;
 

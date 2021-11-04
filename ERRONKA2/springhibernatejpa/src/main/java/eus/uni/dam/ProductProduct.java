@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -19,12 +20,12 @@ public class ProductProduct implements Serializable {
 	@Id
 	private Integer id;
 
-	private Boolean active;
+//	private Boolean active;
 
 	private String barcode;
 
-	@Column(name="can_image_variant_1024_be_zoomed")
-	private Boolean canImageVariant1024BeZoomed;
+//	@Column(name="can_image_variant_1024_be_zoomed")
+//	private Boolean canImageVariant1024BeZoomed;
 
 	@Column(name="combination_indices")
 	private String combinationIndices;
@@ -54,6 +55,10 @@ public class ProductProduct implements Serializable {
 	@Column(name="write_uid")
 	private Integer writeUid;
 
+	@OneToMany(mappedBy="productProduct")
+	private List<SaleOrderLine> saleOrderLines;
+
+
 	public ProductProduct() {
 	}
 
@@ -65,13 +70,13 @@ public class ProductProduct implements Serializable {
 		this.id = id;
 	}
 
-	public Boolean getActive() {
-		return this.active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
+//	public Boolean getActive() {
+//		return this.active;
+//	}
+//
+//	public void setActive(Boolean active) {
+//		this.active = active;
+//	}
 
 	public String getBarcode() {
 		return this.barcode;
@@ -81,13 +86,13 @@ public class ProductProduct implements Serializable {
 		this.barcode = barcode;
 	}
 
-	public Boolean getCanImageVariant1024BeZoomed() {
-		return this.canImageVariant1024BeZoomed;
-	}
-
-	public void setCanImageVariant1024BeZoomed(Boolean canImageVariant1024BeZoomed) {
-		this.canImageVariant1024BeZoomed = canImageVariant1024BeZoomed;
-	}
+//	public Boolean getCanImageVariant1024BeZoomed() {
+//		return this.canImageVariant1024BeZoomed;
+//	}
+//
+//	public void setCanImageVariant1024BeZoomed(Boolean canImageVariant1024BeZoomed) {
+//		this.canImageVariant1024BeZoomed = canImageVariant1024BeZoomed;
+//	}
 
 	public String getCombinationIndices() {
 		return this.combinationIndices;
@@ -169,4 +174,25 @@ public class ProductProduct implements Serializable {
 		this.writeUid = writeUid;
 	}
 
+	public List<SaleOrderLine> getSaleOrderLines() {
+		return this.saleOrderLines;
+	}
+
+	public void setSaleOrderLines(List<SaleOrderLine> saleOrderLines) {
+		this.saleOrderLines = saleOrderLines;
+	}
+
+	public SaleOrderLine addSaleOrderLine(SaleOrderLine saleOrderLine) {
+		getSaleOrderLines().add(saleOrderLine);
+		saleOrderLine.setProductProduct(this);
+
+		return saleOrderLine;
+	}
+
+	public SaleOrderLine removeSaleOrderLine(SaleOrderLine saleOrderLine) {
+		getSaleOrderLines().remove(saleOrderLine);
+		saleOrderLine.setProductProduct(null);
+
+		return saleOrderLine;
+	}
 }

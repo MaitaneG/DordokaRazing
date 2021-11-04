@@ -32,21 +32,27 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
      *
      * Atributoak
      */
+    /** ArrayList-ak **/
     private ArrayList<Produktua>produktuak;
     private ArrayList<Produktua>produktuakBilatu;
-
+    /** TextView-ak **/
     private TextView izena;
     private TextView kategoria;
     private TextView prezioa;
     private TextView kantitatea;
+    /** ImageButton-ak **/
     private ImageButton botoiaAurrera;
     private ImageButton botoiaAtzera;
     private ImageButton botoiaIrten;
+    /** ImageView-a **/
     private ImageView irudia;
+    /** SearchView-a **/
     private SearchView bilatzailea;
+    /** ListView-a **/
     private ListView lista;
+    /** ArrayAdapter-a **/
     private ArrayAdapter<Produktua> adapter = null;
-
+    /** Argazkien gauzak **/
     private int index=0;
     public Integer[] nireIrudiak = {R.drawable.i2, R.drawable.i3, R.drawable.i4, R.drawable.i5, R.drawable.i6, R.drawable.i7};
 
@@ -67,25 +73,29 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
      * Datuak jaso eta layout-eko objetu guztiak hasieratu
      */
     private void hasieratu() {
-        /* Datuak hasieratu */
+        /** Datuak hasieratu **/
         produktuak=(ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
         produktuakBilatu=new ArrayList<>();
         produktuakBilatu.addAll(produktuak);
 
-        /* Botoiak aurkitzen eta aldagaietan gorde */
+        /** Konponenteak aurkitu eta aldagaietan gorde **/
+        // TextView
         izena=findViewById(R.id.textViewIzenaInfo);
         kategoria=findViewById(R.id.textViewKategoriaInfo);
         prezioa=findViewById(R.id.textViewPrezioaInfo);
         kantitatea=findViewById(R.id.textViewKantitateaInfo);
+        // ImageView
         irudia=findViewById(R.id.ImageView_irudia);
+        // ListView
         lista= findViewById(R.id.ListViewProduktuLista);
+        // SearchView
         bilatzailea=findViewById(R.id.SearchViewBilatzailea);
-
+        // Button
         botoiaAurrera=findViewById(R.id.button_produktuak_aurrera);
         botoiaAtzera=findViewById(R.id.buttonProduktuakAtzera);
         botoiaIrten=findViewById(R.id.buttonIrten);
 
-        /* Botoiei listenerra jarri */
+        /** Botoiei listenerra jarri **/
         botoiaAurrera.setOnClickListener(this::produktuakAurrera);
         botoiaAtzera.setOnClickListener(this::produktuakAtzera);
         botoiaIrten.setOnClickListener(this::irten);
@@ -99,9 +109,10 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
             }
         });
 
-        /* Zabalgarria ezkutatzen du */
+        /** Zabalgarria ezkutatzen du **/
         lista.setVisibility(View.INVISIBLE);
 
+        /** Datuak kargatu **/
         datuakAldatu();
     }
 

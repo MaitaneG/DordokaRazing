@@ -3,16 +3,14 @@ package com.example.newtelapp.model;
 import java.io.Serializable;
 
 /**
- *
  * Bezeroa klasea
  */
 public class Bezeroa implements Serializable {
     /**
-     *
      * Atributoak
      */
     private String izenaAbizena;
-    //private boolean enpresa;
+    private boolean enpresa;
     private String mugikorra;
     private String korreoa;
     private String kalea;
@@ -22,10 +20,9 @@ public class Bezeroa implements Serializable {
     private String herrialdea;
 
     /**
-     *
      * Bezeroa klasearen konstruktorea
-     * @param izenaAbizena
-     * //@param enpresa
+     *
+     * @param izenaAbizena  //@param enpresa
      * @param mugikorra
      * @param korreoa
      * @param kalea
@@ -34,9 +31,9 @@ public class Bezeroa implements Serializable {
      * @param kodigoPostala
      * @param herrialdea
      */
-    public Bezeroa(String izenaAbizena/*, boolean enpresa*/, String mugikorra, String korreoa, String kalea, String hiria, String probintzia, int kodigoPostala, String herrialdea) {
+    public Bezeroa(String izenaAbizena, boolean enpresa, String mugikorra, String korreoa, String kalea, String hiria, String probintzia, int kodigoPostala, String herrialdea) {
         this.izenaAbizena = izenaAbizena;
-        //this.enpresa = enpresa;
+        this.enpresa = enpresa;
         this.mugikorra = mugikorra;
         this.korreoa = korreoa;
         this.kalea = kalea;
@@ -47,7 +44,6 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * @return Bezeroaren izen-abizenak
      */
     public String getIzenaAbizena() {
@@ -55,8 +51,8 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * Aldatzen du Bezeroaren izen-abizenak
+     *
      * @param izenaAbizena
      */
     public void setIzenaAbizena(String izenaAbizena) {
@@ -67,21 +63,20 @@ public class Bezeroa implements Serializable {
      *
      * @return Bezeroa enpresa bat edo pertsona bat den
      */
-    /*public boolean isEnpresa() {
+    public boolean isEnpresa() {
         return enpresa;
-    }*/
+    }
 
     /**
      *
      * Aldatzen du Bezeroa enpresa bat edo pertsona bat den
      * @param enpresa
      */
-    /*public void setEnpresa(boolean enpresa) {
+    public void setEnpresa(boolean enpresa) {
         this.enpresa = enpresa;
-    }*/
+    }
 
     /**
-     *
      * @return Bezeroaren mugikor zenbakia
      */
     public String getMugikorra() {
@@ -89,8 +84,8 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * Aldatzen du Bezeroaren mugikor zenbakia
+     *
      * @param mugikorra
      */
     public void setMugikorra(String mugikorra) {
@@ -98,7 +93,6 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * @return Bezeroaren korreo elektronikoa
      */
     public String getKorreoa() {
@@ -106,8 +100,8 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * Aldatzen du Bezeroaren korreo elektronikoa
+     *
      * @param korreoa
      */
     public void setKorreoa(String korreoa) {
@@ -115,7 +109,6 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * @return Bezeroaren kalea
      */
     public String getKalea() {
@@ -123,8 +116,8 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * Aldatzen du Bezeroaren kalea
+     *
      * @param kalea
      */
     public void setKalea(String kalea) {
@@ -132,7 +125,6 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * @return Bezeroaren hiria
      */
     public String getHiria() {
@@ -140,8 +132,8 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * Aldatzen du Bezeroaren hiria
+     *
      * @param hiria
      */
     public void setHiria(String hiria) {
@@ -149,7 +141,6 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * @return Bezeroaren probintzia
      */
     public String getProbintzia() {
@@ -157,8 +148,8 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * Aldatzen du Bezeroaren probintzia
+     *
      * @param probintzia
      */
     public void setProbintzia(String probintzia) {
@@ -166,7 +157,6 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * @return Bezeroaren kodigo postala
      */
     public int getKodigoPostala() {
@@ -174,8 +164,8 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * Aldatzen du Bezeroaren kodigo postala
+     *
      * @param kodigoPostala
      */
     public void setKodigoPostala(int kodigoPostala) {
@@ -183,7 +173,6 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * @return Bezeroaren herrialdea
      */
     public String getHerrialdea() {
@@ -191,8 +180,8 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * Aldatzen du Bezeroaren herrialdea
+     *
      * @param herrialdea
      */
     public void setHerrialdea(String herrialdea) {
@@ -200,7 +189,6 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     *
      * @return Bezeroaren informazioaren String-a
      */
     @Override

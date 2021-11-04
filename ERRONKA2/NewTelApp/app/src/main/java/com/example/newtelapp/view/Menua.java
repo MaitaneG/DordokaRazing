@@ -24,13 +24,11 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 /**
- *
  * Lehengo Layout-aren klasea
  */
-public class Menua extends AppCompatActivity implements Serializable{
+public class Menua extends AppCompatActivity implements Serializable {
 
     /**
-     *
      * Atributoak
      */
     private ImageButton irten_botoia;
@@ -38,17 +36,15 @@ public class Menua extends AppCompatActivity implements Serializable{
     private ImageButton aurrekontua_botoia;
 
     /**
-     *
      * Postgres datu baseko informazioa
      */
 
     private ArrayList<Produktua> produktuak; // Produktuen ArrayList-a
-    private ArrayList<Bezeroa>bezeroak;
-    private ArrayList<Aurrekontua>aurrekontuak;
+    private ArrayList<Bezeroa> bezeroak;
+    private ArrayList<Aurrekontua> aurrekontuak;
     public static Konexioa konexioa;
 
     /**
-     *
      * Layout-a sortzen denean
      *
      * @param savedInstanceState
@@ -60,7 +56,6 @@ public class Menua extends AppCompatActivity implements Serializable{
     }
 
     /**
-     *
      * Layout-eko objetu guztiak hasieratu
      */
     private void hasieratu() {
@@ -69,45 +64,42 @@ public class Menua extends AppCompatActivity implements Serializable{
         aurrekontua_botoia = findViewById(R.id.buttonAurrekontuaSortu);
         irten_botoia = findViewById(R.id.buttonIrten);
         produktuak = new ArrayList<>();
-        bezeroak=new ArrayList<>();
-        aurrekontuak=new ArrayList<>();
+        bezeroak = new ArrayList<>();
+        aurrekontuak = new ArrayList<>();
 
         /* Botoiei listenerra jarri */
         erakutsi_produktuak_botoia.setOnClickListener(this::produktuakErakutsiraJoan);
         aurrekontua_botoia.setOnClickListener(this::aurrekonturaJoan);
         irten_botoia.setOnClickListener(this::itxi);
 
-        konexioa =new Konexioa();
-        produktuak= konexioa.selectProduktuak();
+        konexioa = new Konexioa();
+        produktuak = konexioa.selectProduktuak();
     }
 
     /**
-     *
      * Produktuak Erakutsi-ra joatea
      *
      * @param view
      */
     private void produktuakErakutsiraJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), ProduktuakErakutsi.class);
-            myIntent.putExtra("produktuak",produktuak);
+        myIntent.putExtra("produktuak", produktuak); // Produktuen arrayList-a eramaten du
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }
 
     /**
-     *
      * Aurrekontua Sortu-ra joatea
      *
      * @param view
      */
     private void aurrekonturaJoan(View view) {
-        Intent myIntent=new Intent(view.getContext(), AurrekontuaMenua.class);
-        ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.from_right,R.anim.from_right);
-        this.startActivity(myIntent,options.toBundle());
+        Intent myIntent = new Intent(view.getContext(), AurrekontuaMenua.class);
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right);
+        this.startActivity(myIntent, options.toBundle());
     }
 
     /**
-     *
      * Aplikazioa guztiz itxi nahi denean
      *
      * @param view
@@ -117,10 +109,9 @@ public class Menua extends AppCompatActivity implements Serializable{
     }
 
     /**
-     *
      * Alerta agertzen da, galdetzen irten nahi den ala ez
      */
-    private void alert(){
+    private void alert() {
         new AlertDialog.Builder(this)
                 .setTitle("Aplikazioa ixten ")// Dialog-ari titulua jarri
                 .setMessage("Aplikazioa itxi nahi duzu?") // Dialog-aren mezua jarri
@@ -143,7 +134,6 @@ public class Menua extends AppCompatActivity implements Serializable{
     }
 
     /**
-     *
      * Mobilaren azterako botoia zakatzean
      */
     @Override

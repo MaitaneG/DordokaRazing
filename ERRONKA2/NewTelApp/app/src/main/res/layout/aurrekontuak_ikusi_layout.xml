@@ -13,8 +13,8 @@
         android:id="@+id/buttonAurrekontuaAldatu"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="292dp"
-        android:layout_marginTop="204dp"
+        android:layout_marginStart="308dp"
+        android:layout_marginTop="236dp"
         android:adjustViewBounds="true"
         android:backgroundTint="@color/kolorea"
         android:scaleType="fitCenter"
@@ -27,8 +27,8 @@
         android:id="@+id/buttonAurrekontuaBorratu"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="288dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginStart="304dp"
+        android:layout_marginTop="320dp"
         android:adjustViewBounds="true"
         android:backgroundTint="@color/kolorea"
         android:scaleType="fitCenter"
@@ -52,6 +52,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textView_aurrekontuak"
+        android:layout_width="235dp"
+        android:layout_height="463dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="160dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--<DatePicker
         android:layout_width="284dp"

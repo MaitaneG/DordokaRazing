@@ -11,32 +11,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AurrekontuakKargatu extends Thread{
+public class AurrekontuakKargatu extends Thread {
     private Connection conn;
     private ArrayList<Aurrekontua> aurrekuntuakLista;
 
-    public AurrekontuakKargatu(String url, String username, String password, ArrayList<Aurrekontua>aurrekuntuakLista){
+    public AurrekontuakKargatu(String url, String username, String password, ArrayList<Aurrekontua> aurrekuntuakLista) {
         try {
 
             Class.forName("org.postgresql.Driver"); //postgres
             //Class.forName("com.mysql.jdbc.Driver"); mysql
             Connection conn = null;
-            conn = DriverManager.getConnection(url,username,password);
+            conn = DriverManager.getConnection(url, username, password);
 
-            this.conn=conn;
-            this.aurrekuntuakLista=aurrekuntuakLista;
+            this.conn = conn;
+            this.aurrekuntuakLista = aurrekuntuakLista;
 
-        } catch (ClassNotFoundException  e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Log.d("Salbuespena Aurrekontuak kargatzean", String.valueOf(ex));
             ex.printStackTrace();
-        };
+        }
+        ;
     }
 
     @Override
     public void run() {
-        aurrekuntuakLista=new ArrayList<>();
+        aurrekuntuakLista = new ArrayList<>();
         Aurrekontua aurrekontua;
         PreparedStatement pstmt = null;
 
@@ -50,12 +51,12 @@ public class AurrekontuakKargatu extends Thread{
 
             ResultSet rs = pstmt.executeQuery();
 
-            while(rs.next()){
-                aurrekontua= new Aurrekontua(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDate(6));
+            while (rs.next()) {
+                aurrekontua = new Aurrekontua(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDate(6));
                 System.out.println();
                 aurrekuntuakLista.add(aurrekontua);
             }
-        }catch (SQLException throwables){
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }

@@ -9,7 +9,6 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtelapp.R;
-import com.example.newtelapp.hariak.Konexioa;
 import com.example.newtelapp.model.Aurrekontua;
 import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
@@ -20,18 +19,18 @@ import java.util.ArrayList;
 public class AurrekontuaMenua extends AppCompatActivity implements Serializable {
 
     /**
-     *
      * Atributoak
      */
+    // ImageButton
     private ImageButton aurrekontuaSortu;
     private ImageButton aurrrekontuakIkusi;
     private ImageButton irten;
-
+    // ArrayList-a
     private ArrayList<Bezeroa> bezeroak;
     private ArrayList<Aurrekontua> aurrekontuak;
-    private ArrayList<Produktua>produktuak;
+    private ArrayList<Produktua> produktuak;
+
     /**
-     *
      * Layout-a sortzen denean
      *
      * @param savedInstanceState
@@ -42,24 +41,35 @@ public class AurrekontuaMenua extends AppCompatActivity implements Serializable 
         hasieratu();
     }
 
+    /**
+     * Konponente guztiak hasieratzen dira
+     */
     private void hasieratu() {
-        aurrekontuaSortu=findViewById(R.id.buttonAurrekontuaSortu);
-        aurrrekontuakIkusi=findViewById(R.id.buttonErakutsiProduktuak);
-        irten=findViewById(R.id.buttonIrten);
+        /** Botoiak hasieratu **/
+        aurrekontuaSortu = findViewById(R.id.buttonAurrekontuaSortu);
+        aurrrekontuakIkusi = findViewById(R.id.buttonErakutsiProduktuak);
+        irten = findViewById(R.id.buttonIrten);
 
+        /** Botoiei listerrenak jarri **/
         aurrekontuaSortu.setOnClickListener(this::aurrekontuaSorturaJoan);
         aurrrekontuakIkusi.setOnClickListener(this::aurrekontuakIkusiraJoan);
         irten.setOnClickListener(this::irten);
 
-        bezeroak=Menua.konexioa.selectBezeroak();
+        /** ArrayList-ak informazioz bete **/
+        bezeroak = Menua.konexioa.selectBezeroak();
         //aurrekontuak=Menua.konexioa.selectAurrekontuak();
-        produktuak=Menua.konexioa.selectProduktuak();
+        produktuak = Menua.konexioa.selectProduktuak();
     }
 
+    /**
+     * Aurreko pantailara doa
+     *
+     * @param view
+     */
     private void irten(View view) {
         Intent myIntent = new Intent(view.getContext(), Menua.class);
         // Animazioak definitu
-        ActivityOptions options=ActivityOptions.makeCustomAnimation(this,R.anim.from_right, R.anim.from_right);
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right);
 
         // Activity hau itxi eta besteari abisatu
         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -67,17 +77,28 @@ public class AurrekontuaMenua extends AppCompatActivity implements Serializable 
         this.startActivity(myIntent, options.toBundle());
     }
 
+    /**
+     * AurrekontuakIkusi activity-ra doa
+     *
+     * @param view
+     */
     private void aurrekontuakIkusiraJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), AurrekontuakIkusi.class);
-            myIntent.putExtra("aurrekontuak", aurrekontuak);
+        myIntent.putExtra("aurrekontuak", aurrekontuak);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }
 
+    /**
+     * AurrekontuaSortu activity-ra doa
+     *
+     * @param view
+     */
     private void aurrekontuaSorturaJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), AurrekontuaSortu.class);
-            myIntent.putExtra("bezeroak",bezeroak);
-            myIntent.putExtra("produktuak",produktuak);
+        // Bezeroen eta produktuen ArrayList-ak eramaten du
+        myIntent.putExtra("bezeroak", bezeroak);
+        myIntent.putExtra("produktuak", produktuak);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }

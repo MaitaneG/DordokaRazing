@@ -132,7 +132,7 @@ public class Konexioa extends Thread {
 
                     /** Bezeroen select-a **/
                     pstmt = conn.prepareStatement("select res_partner.id as id, res_partner.name  as izenaAbizena, " +
-                            "res_partner.company_name as enpresa, res_partner.mobile as mugikorra,\n" +
+                            "res_partner.is_company as enpresa, res_partner.mobile as mugikorra,\n" +
                             "res_partner.email as korreoa,res_partner.street as kalea,res_partner.city as hiria," +
                             "res_partner.zip as kodigoPostala, res_country_state.name as probintzia,\n" +
                             "res_country.name as herrialdea from  res_partner\n" +
@@ -145,7 +145,7 @@ public class Konexioa extends Thread {
 
                     /** Select-an jaso den informazioa Bezeroa ArrayList batean gordetzen da **/
                     while(rs.next()){
-                        Bezeroa bezeroa= new Bezeroa(rs.getString("izenaAbizena"),rs.getString("mugikorra"),rs.getString("korreoa"),
+                        Bezeroa bezeroa= new Bezeroa(rs.getString("izenaAbizena"),rs.getBoolean("is_company"),rs.getString("mugikorra"),rs.getString("korreoa"),
                                 rs.getString("kalea"),rs.getString("hiria"),rs.getString("probintzia"),rs.getInt("kodigoPostala"),
                                 rs.getString("herrialdea"));
                         System.out.println();
@@ -193,7 +193,7 @@ public class Konexioa extends Thread {
                             "(\"name\", create_date, display_name, lang, tz, active, \"type\", street,zip, city, email, mobile, is_company)\n" +
                             "VALUES(?, CURRENT_DATE, ? , 'es_ES', 'Europe/Madrid',\n" +
                             "true,  'contact', ? , ? , ? ,\n" +
-                            " ? , ? , false);\n");
+                            " ? , ? , ?);\n");
                     pstmt.setString(1,bezeroa.getIzenaAbizena());
                     pstmt.setString(2,bezeroa.getIzenaAbizena());
                     pstmt.setString(3,bezeroa.getKalea());
@@ -201,6 +201,7 @@ public class Konexioa extends Thread {
                     pstmt.setString(5,bezeroa.getHiria());
                     pstmt.setString(6,bezeroa.getKorreoa());
                     pstmt.setString(7,bezeroa.getMugikorra());
+                    pstmt.setBoolean(8, bezeroa.isEnpresa());
 
                     /** Sententzia exekutatzen da **/
                     pstmt.executeUpdate();
@@ -240,8 +241,8 @@ public class Konexioa extends Thread {
                     pstmt = conn.prepareStatement("select sale_order.id as id, sale_order.name as izena, res_partner.name as bezeroaIzena," +
                             "sale_order_line.name as produktuaIzena,sale_order_line.product_uom_qty as kantitatea, sale_order.date_order as data" +
                             "from  sale_order " +
-                            "inner join  res_partner on sale_order.id = res_partner.id " +
-                            "inner join  sale_order_line on sale_order.id = sale_order_line.order_id\n" +
+                            "inner join res_partner on sale_order.id = res_partner.id " +
+                            "inner join sale_order_line on sale_order.id = sale_order_line.order_id\n" +
                             "where sale_order.state = 'draft' order by sale_order.id asc\n");
 
                     /** Sententzia exekutatzen da **/

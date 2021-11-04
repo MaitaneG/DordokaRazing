@@ -19,16 +19,17 @@ public class AurrekontuakGehitu extends Thread {
             Class.forName("org.postgresql.Driver"); //postgres
             //Class.forName("com.mysql.jdbc.Driver"); mysql
             Connection conn = null;
-            conn = DriverManager.getConnection(url,username,password);
+            conn = DriverManager.getConnection(url, username, password);
 
-            this.conn=conn;
+            this.conn = conn;
 
-        } catch (ClassNotFoundException  e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Log.d("Salbuespena Bezeroak kargatzean", String.valueOf(ex));
             ex.printStackTrace();
-        };
+        }
+        ;
     }
 
     /*@Override

@@ -41,7 +41,6 @@ public class BezeroaSortu extends AppCompatActivity {
     private EditText kodigoPostala;
     private EditText herrialdea;
     //Switch
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch enpresaDa;
     // ArrayList-a
     private ArrayList<Produktua> produktuak; // Produktuen ArrayList-a
@@ -100,9 +99,12 @@ public class BezeroaSortu extends AppCompatActivity {
                 hiria.getText().toString().trim().equals("") || probintzia.getText().toString().trim().equals("") ||
                 kodigoPostala.getText().toString().trim().equals("") || herrialdea.getText().toString().trim().equals("")) {
             Toast.makeText(this, "Gako guztiak bete behar dira", Toast.LENGTH_LONG).show();
-            // Informazio guztia beteta badago
-        } else {
-            Bezeroa bezeroa = new Bezeroa(izenAbizena.getText().toString(), enpresaDa.isSelected(), mugikorZenbakia.getText().toString().trim(),
+
+        } else if(!korreoElektronikoa.getText().toString().trim().contains("@")&&!korreoElektronikoa.getText().toString().trim().contains(".")){
+            Toast.makeText(this,"Korreoaren formatua gaizki dago",Toast.LENGTH_SHORT).show();
+            // Informazio guztia beteta badago eta ondo
+        } else{
+            Bezeroa bezeroa = new Bezeroa(izenAbizena.getText().toString(), enpresaDa.isChecked(), mugikorZenbakia.getText().toString().trim(),
                     korreoElektronikoa.getText().toString().trim(), kalea.getText().toString(), hiria.getText().toString().trim(),
                     probintzia.getText().toString().trim(), Integer.parseInt(kodigoPostala.getText().toString().trim()),
                     herrialdea.getText().toString().trim());

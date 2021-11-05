@@ -2,21 +2,25 @@ package com.example.newtelapp.view;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtelapp.R;
-import com.example.newtelapp.model.Aurrekontua;
 import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
@@ -28,15 +32,21 @@ public class AurrekontuaSortu extends AppCompatActivity {
     /**
      * Atributoak
      */
+    // ImageButton
     private ImageButton irtenBotoia;
     private ImageButton gordeBotoia;
     private ImageButton bezeroakBotoia;
     private ImageButton produktuakBotoia;
+    // Spinner
     private Spinner bezeroSpinner;
     private Spinner produktuSpinner;
-
+    // ArrayList-ak
     private ArrayList<Bezeroa> bezeroak;
     private ArrayList<Produktua> produktuak;
+    // EditText
+    private EditText kantitatea;
+
+    private TableLayout taula;
 
     /**
      * Layout-a sortzen denean
@@ -55,12 +65,16 @@ public class AurrekontuaSortu extends AppCompatActivity {
      */
     private void hasieratu() {
         /** Botoiak aurkitzen eta aldagaietan gorde **/
+        // Botoiak
         irtenBotoia = findViewById(R.id.buttonIrtenAurrekontuaSortu);
         gordeBotoia = findViewById(R.id.buttonGordeAurrekontua);
         bezeroakBotoia = findViewById(R.id.buttonBezeroaSortu);
         produktuakBotoia = findViewById(R.id.buttonProduktuaGehitu);
+        // Spinner
         bezeroSpinner = findViewById(R.id.spinnerBezeroa);
         produktuSpinner = findViewById(R.id.spinnerProduktua);
+        // EditText
+        kantitatea = findViewById(R.id.editTextNumberKantitatea);
 
         /** Botoiei listenerra jarri **/
         irtenBotoia.setOnClickListener(this::irten);
@@ -72,6 +86,47 @@ public class AurrekontuaSortu extends AppCompatActivity {
         bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
         produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
 
+        /**Spinnerak kargatu**/
+        spinnerrakKargatu();
+
+        /** Taula sortu **/
+        taula = findViewById(R.id.taula);
+        taula.removeAllViews();
+
+        /** Tituloak jartzen ditu**/
+        /** Ilara bat sortzen du **/
+        TableRow tableRow=new TableRow(this);
+
+        /** Hiru zutabe sortzen du **/
+        TextView column1 = new TextView(this);
+        column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        column1.setWidth(350);
+        TextView column2 = new TextView(this);
+        column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        column2.setWidth(200);
+        TextView column3 = new TextView(this);
+        column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        column3.setWidth(150);
+
+        /** Zutabeak betzen du **/
+        column1.setText("Produktua");
+        column2.setText("Kantitatea");
+        column3.setText("Prezioa");
+
+        /** Zutabeak ilaran sartu **/
+        tableRow.addView(column1);
+        tableRow.addView(column2);
+        tableRow.addView(column3);
+
+        /** Ilara taulan sartzen du **/
+        taula.addView(tableRow);
+
+    }
+
+    /**
+     * Spinnerrak informazioarekin bete
+     */
+    private void spinnerrakKargatu() {
         /** Bezeroen ArrayList-etik bezeroaren izena hartzen du **/
         String[] bezeroIzena = new String[bezeroak.size()];
         for (int i = 0; i < bezeroak.size(); i++) {
@@ -97,9 +152,39 @@ public class AurrekontuaSortu extends AppCompatActivity {
 
     /**
      * Produktu bat bere kantitatearekin gehitzeko
+     *
      * @param view
      */
     private void produktuBatGehitu(View view) {
+        /** Ilara bat sortzen du **/
+        TableRow tableRow=new TableRow(this);
+
+        /** Hiru zutabe sortzen du **/
+        TextView column1 = new TextView(this);
+        column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        column1.setWidth(350);
+        TextView column2 = new TextView(this);
+        column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        column2.setWidth(200);
+        TextView column3 = new TextView(this);
+        column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        column3.setWidth(150);
+
+
+
+        /** Zutabeak betzen du **/
+        column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());
+        column2.setText(kantitatea.getText().toString());
+        column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa()+"");
+
+        /** Zutabeak ilaran sartu **/
+        tableRow.addView(column1);
+        tableRow.addView(column2);
+        tableRow.addView(column3);
+
+        /** Ilara taulan sartzen du **/
+        taula.addView(tableRow);
+
         Toast.makeText(this, produktuSpinner.getSelectedItemPosition() + "", Toast.LENGTH_SHORT);
     }
 

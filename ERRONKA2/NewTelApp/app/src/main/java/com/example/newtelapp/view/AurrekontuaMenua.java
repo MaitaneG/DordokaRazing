@@ -57,7 +57,7 @@ public class AurrekontuaMenua extends AppCompatActivity implements Serializable 
 
         /** ArrayList-ak informazioz bete **/
         bezeroak = Menua.konexioa.selectBezeroak();
-        //aurrekontuak=Menua.konexioa.selectAurrekontuak();
+        aurrekontuak=Menua.konexioa.selectAurrekontuak();
         produktuak = Menua.konexioa.selectProduktuak();
     }
 
@@ -84,7 +84,8 @@ public class AurrekontuaMenua extends AppCompatActivity implements Serializable 
      */
     private void aurrekontuakIkusiraJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), AurrekontuakIkusi.class);
-        myIntent.putExtra("aurrekontuak", aurrekontuak);
+        // Aurrekontuen ArrayList-a eramaten
+        myIntent.putExtra("aurrekontu", aurrekontuak);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }

@@ -30,7 +30,7 @@ public class AurrekontuakIkusi extends AppCompatActivity {
 
     private ListView aurrekontuaListView;
 
-    private ArrayAdapter<Aurrekontua> adapter=null;
+    private ArrayAdapter<Aurrekontua> adapter = null;
 
     /**
      * Layout-a sortzen denean
@@ -53,26 +53,24 @@ public class AurrekontuakIkusi extends AppCompatActivity {
         aldatu = findViewById(R.id.buttonAurrekontuaAldatu);
         borratu = findViewById(R.id.buttonAurrekontuaBorratu);
         // TextView
-        aurrekontuaListView=findViewById(R.id.listView_aurrekontuak);
+        aurrekontuaListView = findViewById(R.id.listView_aurrekontuak);
         /** Botoiei listerrenak jarri **/
         irten.setOnClickListener(this::irten);
         aldatu.setOnClickListener(this::aldaturaJoan);
         borratu.setOnClickListener(this::borratu);
         /** Aurrekontuen ArrayList-a betetzen da **/
-        aurrekontuak=(ArrayList<Aurrekontua>) getIntent().getSerializableExtra("aurrekontu");
+        aurrekontuak = (ArrayList<Aurrekontua>) getIntent().getSerializableExtra("aurrekontu");
 
         datuakErakutsi();
     }
 
-    private void datuakErakutsi(){
-        adapter = new ArrayAdapter<Aurrekontua>(this, android.R.layout.simple_list_item_1, aurrekontuak);
+    /**
+     * ListView-ko datuak kargatu
+     */
+    private void datuakErakutsi() {
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, aurrekontuak);
         aurrekontuaListView.setAdapter(adapter);
 
-//        String lista="";
-//        for(int i=0;i<aurrekontuak.size();i++){
-//            lista=lista+aurrekontuak.get(i)+"\n\n";
-//            aurrekontuaListView.setText(lista);
-//        }
     }
 
     /**
@@ -81,6 +79,10 @@ public class AurrekontuakIkusi extends AppCompatActivity {
      * @param view
      */
     private void borratu(View view) {
+        Aurrekontua borratzekoAurrekontua = (Aurrekontua) aurrekontuaListView.getSelectedItem();
+
+        aurrekontuak.remove(borratzekoAurrekontua); // Falta borrarlo de la base de datos
+
         Toast toast1 = Toast.makeText(getApplicationContext(), "Borratu", Toast.LENGTH_LONG);
         toast1.show();
     }

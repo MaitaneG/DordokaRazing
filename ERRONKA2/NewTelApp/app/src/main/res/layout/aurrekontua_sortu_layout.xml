@@ -29,8 +29,8 @@
         android:id="@+id/buttonBezeroaSortu"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="296dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginStart="290dp"
+        android:layout_marginTop="140dp"
         android:adjustViewBounds="true"
         android:backgroundTint="@color/kolorea"
         android:scaleType="fitCenter"
@@ -43,8 +43,8 @@
         android:id="@+id/buttonProduktuaGehitu"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="284dp"
-        android:layout_marginTop="276dp"
+        android:layout_marginStart="290dp"
+        android:layout_marginTop="245dp"
         android:adjustViewBounds="true"
         android:backgroundTint="@color/kolorea"
         android:scaleType="fitCenter"
@@ -73,8 +73,8 @@
         android:id="@+id/spinnerBezeroa"
         android:layout_width="214dp"
         android:layout_height="52dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="145dp"
         android:background="@drawable/spinner"
         android:prompt="@string/produktuak"
         android:textAlignment="center"
@@ -86,8 +86,8 @@
         android:id="@+id/spinnerProduktua"
         android:layout_width="214dp"
         android:layout_height="52dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="248dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="210dp"
         android:background="@drawable/spinner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -97,8 +97,8 @@
         android:id="@+id/editTextNumberKantitatea"
         android:layout_width="67dp"
         android:layout_height="57dp"
-        android:layout_marginStart="204dp"
-        android:layout_marginTop="312dp"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="280dp"
         android:background="@drawable/edit_text_small"
         android:ems="10"
         android:inputType="number"
@@ -112,61 +112,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="281dp"
-        android:layout_height="180dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="392dp"
-        android:background="@drawable/edit_text_tall"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TableLayout
         android:id="@+id/taula"
         android:layout_width="255dp"
         android:layout_height="164dp"
         android:layout_marginStart="76dp"
-        android:layout_marginTop="396dp"
+        android:layout_marginTop="364dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
             android:id="@+id/tituloa"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="115dp"
-                android:layout_height="25dp"
-                android:background="@drawable/taula_label"
-                android:padding="3dip"
-                android:text="@string/produktuaren_izena"
-                android:textAlignment="center"
-                android:textColor="@color/grisaa"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="25dp"
-                android:background="@drawable/taula_label"
-                android:padding="3dip"
-                android:text="@string/kantitatea_table"
-                android:textAlignment="center"
-                android:textColor="@color/grisaa"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="25dp"
-                android:background="@drawable/taula_label"
-                android:padding="3dip"
-                android:text="@string/prezioa_table"
-                android:textAlignment="center"
-                android:textColor="@color/grisaa"
-                android:textSize="12sp" />
-
-        </TableRow>
+            android:layout_height="match_parent" />
 
         <TableRow
             android:id="@+id/informazioa"
@@ -202,6 +160,35 @@
         </TableRow>
 
     </TableLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="279dp"
+        android:layout_height="179dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="360dp"
+        android:background="@drawable/edit_text_tall"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewPrezioaGuztira"
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="196dp"
+        android:layout_marginTop="552dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="552dp"
+        android:text="GUZTIRA: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--<DatePicker
         android:layout_width="284dp"

@@ -45,8 +45,10 @@ public class AurrekontuaSortu extends AppCompatActivity {
     private ArrayList<Produktua> produktuak;
     // EditText
     private EditText kantitatea;
-
+    // TableLayout
     private TableLayout taula;
+    // TextView
+    private TextView prezioaGuztira;
 
     /**
      * Layout-a sortzen denean
@@ -75,6 +77,8 @@ public class AurrekontuaSortu extends AppCompatActivity {
         produktuSpinner = findViewById(R.id.spinnerProduktua);
         // EditText
         kantitatea = findViewById(R.id.editTextNumberKantitatea);
+        // TextView
+        prezioaGuztira=findViewById(R.id.textViewPrezioaGuztira);
 
         /** Botoiei listenerra jarri **/
         irtenBotoia.setOnClickListener(this::irten);
@@ -89,38 +93,8 @@ public class AurrekontuaSortu extends AppCompatActivity {
         /**Spinnerak kargatu**/
         spinnerrakKargatu();
 
-        /** Taula sortu **/
-        taula = findViewById(R.id.taula);
-        taula.removeAllViews();
-
-        /** Tituloak jartzen ditu**/
-        /** Ilara bat sortzen du **/
-        TableRow tableRow=new TableRow(this);
-
-        /** Hiru zutabe sortzen du **/
-        TextView column1 = new TextView(this);
-        column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column1.setWidth(350);
-        TextView column2 = new TextView(this);
-        column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column2.setWidth(200);
-        TextView column3 = new TextView(this);
-        column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column3.setWidth(150);
-
-        /** Zutabeak betzen du **/
-        column1.setText("Produktua");
-        column2.setText("Kantitatea");
-        column3.setText("Prezioa");
-
-        /** Zutabeak ilaran sartu **/
-        tableRow.addView(column1);
-        tableRow.addView(column2);
-        tableRow.addView(column3);
-
-        /** Ilara taulan sartzen du **/
-        taula.addView(tableRow);
-
+        /** Taula sortu eta hasieratu**/
+        taulaHasieratu();
     }
 
     /**
@@ -151,6 +125,46 @@ public class AurrekontuaSortu extends AppCompatActivity {
     }
 
     /**
+     * Taula sortzen du eta zutabeen tituloak hasieratu
+     */
+    private void taulaHasieratu() {
+        /** Taula sortu **/
+        taula = findViewById(R.id.taula);
+        taula.removeAllViews();
+
+        /** Tituloak jartzen ditu**/
+        /** Ilara bat sortzen du **/
+        TableRow tableRow=new TableRow(this);
+
+        /** Hiru zutabe sortzen du **/
+        // Lehenengo zutabea
+        TextView column1 = new TextView(this);
+        column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        column1.setWidth(350);
+        // Bigarren zutabea
+        TextView column2 = new TextView(this);
+        column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        column2.setWidth(180);
+        // Hirugarren zutabea
+        TextView column3 = new TextView(this);
+        column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        column3.setWidth(150);
+
+        /** Zutabeak betzen du **/
+        column1.setText("Produktua");
+        column2.setText("Kantitatea");
+        column3.setText("Prezioa");
+
+        /** Zutabeak ilaran sartu **/
+        tableRow.addView(column1);
+        tableRow.addView(column2);
+        tableRow.addView(column3);
+
+        /** Ilara taulan sartzen du **/
+        taula.addView(tableRow);
+    }
+
+    /**
      * Produktu bat bere kantitatearekin gehitzeko
      *
      * @param view
@@ -160,17 +174,18 @@ public class AurrekontuaSortu extends AppCompatActivity {
         TableRow tableRow=new TableRow(this);
 
         /** Hiru zutabe sortzen du **/
+        // Lehenengo zutabea
         TextView column1 = new TextView(this);
         column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         column1.setWidth(350);
+        // Bigarren zutabea
         TextView column2 = new TextView(this);
         column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         column2.setWidth(200);
+        // Hirugarren zutabea
         TextView column3 = new TextView(this);
         column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         column3.setWidth(150);
-
-
 
         /** Zutabeak betzen du **/
         column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());
@@ -185,7 +200,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
         /** Ilara taulan sartzen du **/
         taula.addView(tableRow);
 
-        Toast.makeText(this, produktuSpinner.getSelectedItemPosition() + "", Toast.LENGTH_SHORT);
+        //Toast.makeText(this, produktuSpinner.getSelectedItemPosition() + "", Toast.LENGTH_SHORT);
     }
 
     /**

@@ -21,7 +21,7 @@ public class Konexioa extends Thread {
      *
      * Datu baseko informazioa
      */
-    private final String url = "jdbc:postgresql://25.32.59.79:5432/NewTel1"; // Zerbitzariaren Postgres-eko url-a
+    private final String url = "jdbc:postgresql://localhost:5432/NewTel1"; // Zerbitzariaren Postgres-eko url-a
     private final String username = "openpg"; // Datu baseko erabiltzailea
     private final String password = "openpgpwd"; // Datu baseko pasahitza
 

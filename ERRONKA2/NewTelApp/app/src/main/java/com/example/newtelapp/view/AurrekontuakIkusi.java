@@ -4,13 +4,19 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtelapp.R;
+import com.example.newtelapp.model.Aurrekontua;
+import com.example.newtelapp.model.Produktua;
+
+import java.util.ArrayList;
 
 public class AurrekontuakIkusi extends AppCompatActivity {
     /**
@@ -20,7 +26,11 @@ public class AurrekontuakIkusi extends AppCompatActivity {
     private ImageButton aldatu;
     private ImageButton borratu;
 
-    private TextView aurrekontuaTextView;
+    private ArrayList<Aurrekontua> aurrekontuak;
+
+    private ListView aurrekontuaListView;
+
+    private ArrayAdapter<Aurrekontua> adapter=null;
 
     /**
      * Layout-a sortzen denean
@@ -43,11 +53,26 @@ public class AurrekontuakIkusi extends AppCompatActivity {
         aldatu = findViewById(R.id.buttonAurrekontuaAldatu);
         borratu = findViewById(R.id.buttonAurrekontuaBorratu);
         // TextView
-        aurrekontuaTextView=findViewById(R.id.textView_aurrekontuak);
+        aurrekontuaListView=findViewById(R.id.listView_aurrekontuak);
         /** Botoiei listerrenak jarri **/
         irten.setOnClickListener(this::irten);
         aldatu.setOnClickListener(this::aldaturaJoan);
         borratu.setOnClickListener(this::borratu);
+        /** Aurrekontuen ArrayList-a betetzen da **/
+        aurrekontuak=(ArrayList<Aurrekontua>) getIntent().getSerializableExtra("aurrekontu");
+
+        datuakErakutsi();
+    }
+
+    private void datuakErakutsi(){
+        adapter = new ArrayAdapter<Aurrekontua>(this, android.R.layout.simple_list_item_1, aurrekontuak);
+        aurrekontuaListView.setAdapter(adapter);
+
+//        String lista="";
+//        for(int i=0;i<aurrekontuak.size();i++){
+//            lista=lista+aurrekontuak.get(i)+"\n\n";
+//            aurrekontuaListView.setText(lista);
+//        }
     }
 
     /**

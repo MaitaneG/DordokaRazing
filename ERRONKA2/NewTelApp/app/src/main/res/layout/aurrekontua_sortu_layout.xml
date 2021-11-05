@@ -94,7 +94,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/editTextNumberKantitatea"
         android:layout_width="67dp"
         android:layout_height="57dp"
         android:layout_marginStart="204dp"
@@ -123,6 +123,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
+        android:id="@+id/taula"
         android:layout_width="255dp"
         android:layout_height="164dp"
         android:layout_marginStart="76dp"
@@ -131,8 +132,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
+            android:id="@+id/tituloa"
             android:layout_width="match_parent"
-            android:layout_height="12dp">
+            android:layout_height="match_parent">
 
             <TextView
                 android:layout_width="115dp"
@@ -166,7 +168,38 @@
 
         </TableRow>
 
+        <TableRow
+            android:id="@+id/informazioa"
+            android:layout_width="match_parent"
+            android:layout_height="12dp">
 
+            <TextView
+                android:id="@+id/produktuaIzena"
+                android:layout_width="115dp"
+                android:layout_height="25dp"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textColor="@color/grisaa"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produktuaKantitatea"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textColor="@color/grisaa"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/produktuaPrezioa"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:padding="3dip"
+                android:textAlignment="center"
+                android:textColor="@color/grisaa"
+                android:textSize="12sp" />
+        </TableRow>
 
     </TableLayout>
 

@@ -21,7 +21,7 @@ public class Konexioa extends Thread {
      *
      * Datu baseko informazioa
      */
-    private final String url = "jdbc:postgresql://25.32.59.79:5432/NewTel1"; // Zerbitzariaren Postgres-eko url-a
+    private final String url = "jdbc:postgresql://localhost:5432/NewTel1"; // Zerbitzariaren Postgres-eko url-a
     private final String username = "openpg"; // Datu baseko erabiltzailea
     private final String password = "openpgpwd"; // Datu baseko pasahitza
 
@@ -145,7 +145,7 @@ public class Konexioa extends Thread {
 
                     /** Select-an jaso den informazioa Bezeroa ArrayList batean gordetzen da **/
                     while(rs.next()){
-                        Bezeroa bezeroa= new Bezeroa(rs.getString("izenaAbizena"),rs.getBoolean("is_company"),rs.getString("mugikorra"),rs.getString("korreoa"),
+                        Bezeroa bezeroa= new Bezeroa(rs.getString("izenaAbizena"),rs.getBoolean("enpresa"),rs.getString("mugikorra"),rs.getString("korreoa"),
                                 rs.getString("kalea"),rs.getString("hiria"),rs.getString("probintzia"),rs.getInt("kodigoPostala"),
                                 rs.getString("herrialdea"));
                         System.out.println();
@@ -239,7 +239,8 @@ public class Konexioa extends Thread {
 
                     /** Aurrekontuen select-a **/
                     pstmt = conn.prepareStatement("select sale_order.id as id, sale_order.name as izena, res_partner.name as bezeroaIzena," +
-                            "sale_order_line.name as produktuaIzena,sale_order_line.product_uom_qty as kantitatea, sale_order.date_order as data" +
+                            "sale_order_line.name as produktuaIzena, sale_order_line.product_uom_qty as kantitatea, sale_order.date_order as data, " +
+                            "sale_order.state as egoera " +
                             "from  sale_order " +
                             "inner join res_partner on sale_order.id = res_partner.id " +
                             "inner join sale_order_line on sale_order.id = sale_order_line.order_id\n" +
@@ -251,7 +252,7 @@ public class Konexioa extends Thread {
                     /** Select-an jaso den informazioa Aurrekontua ArrayList batean gordetzen da **/
                     while(rs.next()){
                         Aurrekontua aurrekontua= new Aurrekontua(rs.getInt("id"),rs.getString("izena"),rs.getString("bezeroaIzena"),
-                                rs.getString("produktuaIzena"),rs.getInt("kantitatea"),rs.getDate("data"));
+                                rs.getString("produktuaIzena"),rs.getInt("kantitatea"),rs.getString("egoera"),rs.getDate("data"));
                         System.out.println();
                         aurrekontuakLista.add(aurrekontua);
                     }

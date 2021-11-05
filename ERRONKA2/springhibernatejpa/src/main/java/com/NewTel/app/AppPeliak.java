@@ -1,6 +1,7 @@
 package com.NewTel.app;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +16,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import com.NewTel.song.Festi;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -30,371 +32,459 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+
 @ComponentScan(basePackages = {"eus.uni.dam"})
 @SpringBootApplication
 public class AppPeliak {
 
-	public static ProductProductDao productDao;
-	public static SaleOrderDao salesDao;
-	public static ResPartnerDao resPartnerDao;
-	public static SaleOrderLineDao saoLineDao;
-	public static ApplicationContext appContext;
-	public static ApplicationContext appContext2;
+    public static ProductProductDao productDao;
+    public static SaleOrderDao salesDao;
+    public static ResPartnerDao resPartnerDao;
+    public static SaleOrderLineDao saoLineDao;
+    public static ApplicationContext appContext;
+    public static ApplicationContext appContext2;
 
-	public static List<ProductProduct> products;
-	public static List<ResPartner> clients;
-	public static List<SaleOrder> sales;
-	public static List<SaleOrderLine> salesLines;
+    public static List<ProductProduct> products;
+    public static List<ResPartner> clients;
+    public static List<SaleOrder> sales;
+    public static List<SaleOrderLine> salesLines;
 
-	public static boolean bExported=false;
-	public static boolean pExported=false;
-	public static boolean sExported=false;
+    public static boolean bExported = false;
+    public static boolean pExported = false;
+    public static boolean sExported = false;
 
-	public static String path = "config.xml";
+    public static String path = "config.xml";
 
-	public static void main(String[] args) {
-		appContext = new AnnotationConfigApplicationContext(DatuBasearenKonfigurazioa_Postgres.class);
+    public static Festi song = new Festi();
 
-		productDao = appContext.getBean(ProductProductDao.class);
-		salesDao = appContext.getBean(SaleOrderDao.class);
-		saoLineDao = appContext.getBean(SaleOrderLineDao.class);
 
-		resPartnerDao = appContext.getBean(ResPartnerDao.class);
+    public static void main(String[] args) {
+        song.setPriority(Thread.MAX_PRIORITY);
+        song.start();
 
-		File file = new File(path);
-		if (!file.exists())
-			menuOsoaBistaratu();
-		else
-			menuaBistaratu();
 
-		// ((AnnotationConfigApplicationContext) appContext).close();
-		/**
-		 * appContext = new
-		 * AnnotationConfigApplicationContext(DatuBasearenKonfigurazioa_SqlServer.class);
-		 * productDao = appContext.getBean(ProductProductDao.class); salesDao =
-		 * appContext.getBean(SaleOrderDao.class); resPartnerDao =
-		 * appContext.getBean(ResPartnerDao.class);
-		 **/
+        appContext = new AnnotationConfigApplicationContext(DatuBasearenKonfigurazioa_Postgres.class);
 
-	}
+        productDao = appContext.getBean(ProductProductDao.class);
+        salesDao = appContext.getBean(SaleOrderDao.class);
+        saoLineDao = appContext.getBean(SaleOrderLineDao.class);
 
-	public static void menuOsoaBistaratu() {
-		int election;
-		List<String> aukerak = new ArrayList<String>();
-		boolean exit = false;
-		Scanner sc = new Scanner(System.in);
+        resPartnerDao = appContext.getBean(ResPartnerDao.class);
 
-		// Menua bistaratu
+        File file = new File(path);
 
-			System.out.println(
-					"\n\n\n\n\n\n\t\t XML SORTZAILEA:\n\tAukeratu zer exportatu nahi duzun(1,...):\n1-Bezeroak\n2-Produktuak\n3-Salmentak\n\n4-Eginda");
-			while (!exit) {
-			election = sc.nextInt();
+        if (!file.exists()) {        //XML konfigurazio Fitxategia existitzen den konprobatzen du
+            menuOsoaBistaratu();
+        } else {
+            menuaBistaratu();
+        }
 
-			switch (election) {
-			case 1:
-				System.out.println("Bezeroak aukeratu duzu.");
-				aukerak.add("bezeroak");
-				break;
-			case 2:
-				System.out.println("Produktuak aukeratu dituzu");
-				aukerak.add("produktuak");
-				break;
-			case 3:
-				System.out.println("Salmentak aukeratu dituzu");
-				aukerak.add("salmentak");
-				break;
-			case 4:
-				Thread th = new Thread("datuak gordetzen...");
+    }
 
-				try {
-					th.sleep(3000);
-					//xmlSortu(aukerak);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (xmlSortu(aukerak)) { //= true
+    /***
+     * Menua lehen aldiz bistaratzen duzunean erabiltzen den menua
+     */
+    public static void menuOsoaBistaratu() {
+        int election;
+        List<String> aukerak = new ArrayList<String>();     //erabiltzaileak aukeratuko dituen objetuak esportatzeko
+        boolean exit = false;
+        Scanner sc = new Scanner(System.in);
 
-				System.out.println("Ezin izan da xml fitxategia sortu.");}
-				else{
-					//updateDB();
-					openSound();
-			}
-				exit = true;
+        // Menua bistaratu
 
-			}
+        System.out.println(
+                "\n\n\n\n\n\n\t\t XML SORTZAILEA:\n\tAukeratu zer exportatu nahi duzun(1,...):\n1-Bezeroak\n2-Produktuak\n3-Salmentak\n\n4-Eginda");
+        while (!exit) {
+            election = sc.nextInt();
 
-		}
+            switch (election) {
+                case 1:
+                    System.out.println("Bezeroak aukeratu duzu.");
+                    aukerak.add("bezeroak");
+                    break;
+                case 2:
+                    System.out.println("Produktuak aukeratu dituzu");
+                    aukerak.add("produktuak");
+                    break;
+                case 3:
+                    System.out.println("Salmentak aukeratu dituzu");
+                    aukerak.add("salmentak");
+                    break;
+                case 4:
+                    Thread th = new Thread("datuak gordetzen...");
+                    if (!song.isAlive()) {
+                        song.run();
+                    }
+                    try {
+                        th.sleep(3000);
+                        //xmlSortu(aukerak);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    if (xmlSortu(aukerak)) { //= true
 
-		// Hemen un AsyncTask?
+                        System.out.println("Ezin izan da xml fitxategia sortu.");
+                    } else {
+                        logMaker();
+                        updateDB();
+                        openSound();
+                    }
+                    exit = true;
 
-	}
+            }
 
-	public static boolean xmlSortu(List<String> aukerak) {
+        }
 
-		boolean success = false;
-		System.out.println("\n\n\n\n\tXML FITXATEGIA SORTZEN");
-		if (aukerak.contains("bezeroak")) {
-			clients = new ArrayList<ResPartner>();
-		clients = resPartnerDao.getAll();}
-		if (aukerak.contains("produktuak")){
-			products = new ArrayList<ProductProduct>();
-			products = productDao.getAll();}
-		if (aukerak.contains("salmentak")){
-			sales = new ArrayList<SaleOrder>();
-			sales = salesDao.getAll();
-			salesLines = new ArrayList<SaleOrderLine>();
-			salesLines = saoLineDao.getAll();}
-		// xml sortzeko kodigoa:
+        // Hemen un AsyncTask?
 
-		try {
-			DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+    }
 
-			DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+    public static boolean xmlSortu(List<String> aukerak) {
 
-			Document document = (Document) documentBuilder.newDocument();
+        boolean success = false;
+        System.out.println("\n\n\n\n\tXML FITXATEGIA SORTZEN");
+        if (aukerak.contains("bezeroak")) {
+            clients = new ArrayList<ResPartner>();
+            clients = resPartnerDao.getAll();
+        }
+        if (aukerak.contains("produktuak")) {
+            products = new ArrayList<ProductProduct>();
+            products = productDao.getAll();
+        }
+        if (aukerak.contains("salmentak")) {
+            sales = new ArrayList<SaleOrder>();
+            sales = salesDao.getAll();
+            salesLines = new ArrayList<SaleOrderLine>();
+            salesLines = saoLineDao.getAll();
+        }
+        // xml sortzeko kodigoa:
 
-			// elemento raiz:
-			Element root = document.createElement("CONFIGURATION");
-			document.appendChild(root);
+        try {
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
 
-			// bezeroa
-			Element bezeroa = document.createElement("bezeroak");
-			root.appendChild(bezeroa);
+            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
 
-			Element battr = document.createElement("exported");
-			if (clients!= null)
-				battr.setTextContent("true");
-			else
-				battr.setTextContent("false");
-			bezeroa.appendChild(battr);
+            Document document = (Document) documentBuilder.newDocument();
 
-			// produktua
-			Element produktua = document.createElement("produktuak");
-			root.appendChild(produktua);
-			Element pattr = document.createElement("exported");
+            // elemento raiz:
+            Element root = document.createElement("CONFIGURATION");
+            document.appendChild(root);
 
-			if (products!= null)
-				pattr.setTextContent("true");
-			else
-				pattr.setTextContent("false");
-			produktua.appendChild(pattr);
+            // bezeroa
+            Element bezeroa = document.createElement("bezeroak");
+            root.appendChild(bezeroa);
 
-			// salmentak
-			Element salmenta = document.createElement("salmentak");
-			root.appendChild(salmenta);
-			Element sattr = document.createElement("exported");
+            Element battr = document.createElement("exported");
+            if (clients != null)
+                battr.setTextContent("true");
+            else
+                battr.setTextContent("false");
+            bezeroa.appendChild(battr);
 
-			if (sales!= null)
-				sattr.setTextContent("true");
-			else
-				sattr.setTextContent("false");
-			salmenta.appendChild(sattr);
+            // produktua
+            Element produktua = document.createElement("produktuak");
+            root.appendChild(produktua);
+            Element pattr = document.createElement("exported");
 
-			// Create xml
-			TransformerFactory transformers = TransformerFactory.newInstance();
-			Transformer bambelbi = transformers.newTransformer();
-			DOMSource doomSlayer = new DOMSource(document);
-			StreamResult streamResult = new StreamResult(new File(path));
+            if (products != null)
+                pattr.setTextContent("true");
+            else
+                pattr.setTextContent("false");
+            produktua.appendChild(pattr);
 
-			bambelbi.transform(doomSlayer, streamResult);
-			System.out.println("\t\t FITXATEGIA SORTU DA " + path + " RUTAN");
+            // salmentak
+            Element salmenta = document.createElement("salmentak");
+            root.appendChild(salmenta);
+            Element sattr = document.createElement("exported");
 
-		} catch (ParserConfigurationException pce) {
-			pce.printStackTrace();
-			success = false;
-		} catch (TransformerException tfe) {
-			tfe.printStackTrace();
-			success = false;
-		}
+            if (sales != null)
+                sattr.setTextContent("true");
+            else
+                sattr.setTextContent("false");
+            salmenta.appendChild(sattr);
 
-		return success;
-	}
- // server? jdbc:sqlserver//DESKTOP-UJGJBG5\\sqlexpress;databaseName=NewTel
-	//DESKTOP-UJGJBG5\admin USER
-	public static boolean updateDB() {
-		boolean success = true;
-		((AnnotationConfigApplicationContext) appContext).close();
+            // Create xml
+            TransformerFactory transformers = TransformerFactory.newInstance();
+            Transformer bambelbi = transformers.newTransformer();
+            DOMSource doomSlayer = new DOMSource(document);
+            StreamResult streamResult = new StreamResult(new File(path));
 
-		appContext2 = new AnnotationConfigApplicationContext(DatuBasearenKonfigurazioa_SqlServer.class);
-		ProductProductDao productDao;
-		SaleOrderDao salesDao;
-		ResPartnerDao resPartnerDao;
-		SaleOrderLineDao saoLineDao;
-		
-		
-		productDao = appContext2.getBean(ProductProductDao.class);
-		
-		salesDao = appContext2.getBean(SaleOrderDao.class);
+            bambelbi.transform(doomSlayer, streamResult);
+            System.out.println("\t\t FITXATEGIA SORTU DA " + path + " RUTAN");
 
-		saoLineDao = appContext2.getBean(SaleOrderLineDao.class);
 
-		resPartnerDao = appContext2.getBean(ResPartnerDao.class);
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+            success = false;
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+            success = false;
+        }
 
-		try {
-			if (clients!=null)
-				for (ResPartner rp : clients)
-					resPartnerDao.update(rp);
-			if ( products!=null)					//!products.isEmpty() ||
-				for (ProductProduct p : products)
-					productDao.update(p);
-			if ( sales!=null)						//!sales.isEmpty() ||
-				for (SaleOrder s : sales)
-					salesDao.update(s);
-				for(SaleOrderLine s : salesLines)
-					saoLineDao.update(s);
+        return success;
+    }
 
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			success = false;
-		}
+
+    public static boolean updateDB() {
+        boolean success = true;
+        ((AnnotationConfigApplicationContext) appContext).close();
+
+        appContext2 = new AnnotationConfigApplicationContext(DatuBasearenKonfigurazioa_SqlServer.class);
+        ProductProductDao productDao;
+        SaleOrderDao salesDao;
+        ResPartnerDao resPartnerDao;
+        SaleOrderLineDao saoLineDao;
+
+
+        productDao = appContext2.getBean(ProductProductDao.class);
+
+        salesDao = appContext2.getBean(SaleOrderDao.class);
+
+        saoLineDao = appContext2.getBean(SaleOrderLineDao.class);
+
+        resPartnerDao = appContext2.getBean(ResPartnerDao.class);
+
+        try {
+            if (clients != null)
+                for (ResPartner rp : clients)
+                    resPartnerDao.update(rp);
+            if (products != null)                    //!products.isEmpty() ||
+                for (ProductProduct p : products)
+                    productDao.update(p);
+            if (sales != null)                        //!sales.isEmpty() ||
+                for (SaleOrder s : sales)
+                    salesDao.update(s);
+            for (SaleOrderLine s : salesLines)
+                saoLineDao.update(s);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            success = false;
+        }
 //jdbc:sqlserver//25.32.59.79\sqlexpress:1433;databaseName=NewTel
-		((AnnotationConfigApplicationContext) appContext2).close();
-		return success;
-	}
+        ((AnnotationConfigApplicationContext) appContext2).close();
+        return success;
+    }
 
-	public static void menuaBistaratu() {
-		irakurriXML();
-		System.out.println(
-				"\n\n\n\n\n\n\t\tKAIXO!\n\n\tHiadanik badaukagu aurreko konfigurazioa gordeta\nErabiltzea nahi duzu(bai/ez)?");
-		Scanner sc = new Scanner(System.in);
+    public static void menuaBistaratu() {
+        irakurriXML();
+        System.out.println(
+                "\n\n\n\n\n\n\t\tKAIXO!\n\n\tHiadanik badaukagu aurreko konfigurazioa gordeta\nErabiltzea nahi duzu(bai/ez)?");
+        Scanner sc = new Scanner(System.in);
 
-		String aukera = sc.next().toLowerCase();
-		if (aukera.equals("bai") || aukera.equals("b")) {
-			// movida xml de configuracion
+        String aukera = sc.next().toLowerCase();
+        if (aukera.equals("bai") || aukera.equals("b")) {
+            // movida xml de configuracion
+            if (!song.isAlive()) {
+                song.start();
+            }
+            try {
+                if (bExported) {
+                    clients = new ArrayList<ResPartner>();
+                    clients = resPartnerDao.getAll();
+                }
+                if (pExported) {
+                    products = new ArrayList<ProductProduct>();
+                    products = productDao.getAll();
+                }
+                if (sExported) {
+                    sales = new ArrayList<SaleOrder>();
+                    sales = salesDao.getAll();
+                }
+                logMaker();
+                updateDB();
+                openSound();
+            } catch (Exception ex) {
+                System.out.println("Errorea datubase prozesuan (menuaBistaratu)");
+                ex.printStackTrace();
+            }
 
-			try {
-				if (bExported) {
-					clients = new ArrayList<ResPartner>();
-					clients = resPartnerDao.getAll();}
-				if (pExported) {
-					products = new ArrayList<ProductProduct>();
-					products = productDao.getAll();}
-				if (sExported) {
-					sales = new ArrayList<SaleOrder>();
-					sales = salesDao.getAll();}
+        } else if (aukera.equals("ez") || aukera.equals("e")) {
+            System.out.println("Ongi da, aurreko menua zabaltzen...");
+            menuOsoaBistaratu();
+        }
 
-				//updateDB();
-				openSound();
-			} catch (Exception ex) {
-				System.out.println("Errorea datubase prozesuan (menuaBistaratu)");
-				ex.printStackTrace();
-			}
+    }
 
-		} else if (aukera.equals("ez") || aukera.equals("e")) {
-			System.out.println("Ongi da, aurreko menua zabaltzen...");
-		menuOsoaBistaratu();
-		}
+    public static void irakurriXML() {
 
-	}
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
-	public static void irakurriXML() {
+        DocumentBuilder db;
+        try {
 
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            db = dbf.newDocumentBuilder();
 
-		DocumentBuilder db;
-		try {
+            Document doc = db.parse(new File(path));
 
-			db = dbf.newDocumentBuilder();
+            doc.getDocumentElement().normalize();
 
-			Document doc = db.parse(new File(path));
+            NodeList bezList = doc.getElementsByTagName("bezeroak");
 
-			doc.getDocumentElement().normalize();
+            // bezero tag bat baino gehiago balego
 
-			NodeList bezList = doc.getElementsByTagName("bezeroak");
+            Node nodo = bezList.item(0);
 
-			// bezero tag bat baino gehiago balego
+            if (nodo.getNodeType() == Node.ELEMENT_NODE) {
 
-			Node nodo = bezList.item(0);
+                Element bezeroa = (Element) nodo;
 
-			if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                // get staff's attribute
+                if (bezeroa.getFirstChild() != null)
+                    bExported = Boolean.parseBoolean(bezeroa.getFirstChild().getTextContent());
 
-				Element bezeroa = (Element) nodo;
+            }
+            NodeList prodList = doc.getElementsByTagName("produktuak");
 
-				// get staff's attribute
-				if(bezeroa.getFirstChild()!=null)
-				bExported = Boolean.parseBoolean(bezeroa.getFirstChild().getTextContent());
+            // bezero tag bat baino gehiago balego
 
-			}
-			NodeList prodList = doc.getElementsByTagName("produktuak");
+            nodo = prodList.item(0);
 
-			// bezero tag bat baino gehiago balego
+            if (nodo.getNodeType() == Node.ELEMENT_NODE) {
 
-			nodo = prodList.item(0);
+                Element produktua = (Element) nodo;
 
-			if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                // get staff's attribute
+                if (produktua.getFirstChild() != null)
+                    pExported = Boolean.parseBoolean(produktua.getFirstChild().getTextContent());
 
-				Element produktua = (Element) nodo;
+            }
+            NodeList saleList = doc.getElementsByTagName("salmentak");
 
-				// get staff's attribute
-				if(produktua.getFirstChild()!=null)
-				pExported =  Boolean.parseBoolean(produktua.getFirstChild().getTextContent());
+            // bezero tag bat baino gehiago balego
 
-			}
-			NodeList saleList = doc.getElementsByTagName("salmentak");
+            nodo = saleList.item(0);
 
-			// bezero tag bat baino gehiago balego
+            if (nodo.getNodeType() == Node.ELEMENT_NODE) {
 
-			nodo = saleList.item(0);
+                Element salmenta = (Element) nodo;
 
-			if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                // get staff's attribute
+                if (salmenta.getFirstChild() != null)
+                    sExported = Boolean.parseBoolean(salmenta.getFirstChild().getTextContent());
 
-				Element salmenta = (Element) nodo;
+            }
 
-				// get staff's attribute
-				if(salmenta.getFirstChild()!=null)
-				sExported =  Boolean.parseBoolean(salmenta.getFirstChild().getTextContent());
+        } catch (SAXException | IOException | ParserConfigurationException e) {
+            // TODO Auto-generated catch block
+            System.out.println("Ez Dakit zer gertatu den");
+            e.printStackTrace();
 
-			}
+        }
 
-		} catch (SAXException | IOException | ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Ez Dakit zer gertatu den");
-			e.printStackTrace();
+    }
 
-		}
+    public static void openSound() {
+        Thread th = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
 
-	}
-	public static void openSound(){
-		Thread th = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
+                    File sound = new File("sounds/Gemidos.wav");//"sounds/Download_succeed.wav"
+                    AudioInputStream stream;
+                    AudioFormat format;
+                    DataLine.Info info;
+                    Clip clip;
 
-					File sound = new File("sounds/Gemidos.wav");//"sounds/Download_succeed.wav"
-					AudioInputStream stream;
-					AudioFormat format;
-					DataLine.Info info;
-					Clip clip;
+                    stream = AudioSystem.getAudioInputStream(sound);
+                    format = stream.getFormat();
+                    info = new DataLine.Info(Clip.class, format);
+                    clip = (Clip) AudioSystem.getLine(info);
+                    clip.open(stream);
+                    clip.start();
+                } catch (Exception e) {
+                    //whatevers
+                    e.printStackTrace();
+                }
+            }
+        });
 
-					stream = AudioSystem.getAudioInputStream(sound);
-					format = stream.getFormat();
-					info = new DataLine.Info(Clip.class, format);
-					clip = (Clip) AudioSystem.getLine(info);
-					clip.open(stream);
-					clip.start();
+        try {
+            th.start();//soinuaren haria hasi
+            Thread.sleep(4000);//programa nagusia gelditu soinua erreproduzitzeko 3000 para el otro sonido
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-//			for(int x=0; x < 1000;){
-//
-//		}
+    }
+
+    public static void logMaker() {
+        File log = new File("logs/log.xml");
+        try {
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+
+            DocumentBuilder documentBuilder = null;
+
+            documentBuilder = documentFactory.newDocumentBuilder();
+
+            if (!log.exists()) {
+
+                Document document = (Document) documentBuilder.newDocument();
+                Element root = document.createElement("LOG");
+                document.appendChild(root);
+                Element logtxt = document.createElement("Exportazioa");
+                LocalDate date = LocalDate.now();
+                String txt = date.toString() + ", ";
+                if (clients != null) {
+                    txt = txt + clients.size() + " clients were exported ";
+                }
+                if (products != null) {
+                    txt = txt + products.size() + " products were exported ";
+                }
+                if (sales != null) {
+                    txt = txt + sales.size() + " sales were exported";
+                }
+                if (clients == null && products == null && sales == null) {
+                    txt = txt + "I dont know you haven´t exported anything";
+                }
+                logtxt.setTextContent(txt);
+                root.appendChild(logtxt);
+
+                TransformerFactory transformers = TransformerFactory.newInstance();
+                Transformer bambelbi = transformers.newTransformer();
+                DOMSource doomSlayer = new DOMSource(document);
+                StreamResult streamResult = new StreamResult(log);
+                bambelbi.transform(doomSlayer, streamResult);
+
+            } else {
+                Document document = documentBuilder.parse(log);
+                Element root = document.getDocumentElement();
+                Element rootElement = document.getDocumentElement();
+
+                Element logtxt = document.createElement("Exportazioa");
+                LocalDate date = LocalDate.now();
+                String txt = date.toString() + ", ";
+                if (clients != null) {
+                    txt = txt + clients.size() + " clients were exported ";
+                }
+                if (products != null) {
+                    txt = txt + products.size() + " products were exported ";
+                }
+                if (sales != null) {
+                    txt = txt + sales.size() + " sales were exported";
+                }
+                if (clients == null && products == null && sales == null) {
+                    txt = txt + "I dont know you haven´t exported anything";
+                }
+                logtxt.setTextContent(txt);
+                rootElement.appendChild(logtxt);
+
+                root.appendChild(logtxt);
+
+                DOMSource source = new DOMSource(document);
+
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                StreamResult result = new StreamResult(log);
+                transformer.transform(source, result);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-				}
-				catch (Exception e) {
-					//whatevers
-					e.printStackTrace();
-				}
-			}
-		});
-
-		try {
-			th.start();//soinuaren haria hasi
-			Thread.sleep(4000);//programa nagusia gelditu soinua erreproduzitzeko
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-	}
+    }
 
 }

@@ -10,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtelapp.R;
 import com.example.newtelapp.model.Aurrekontua;
+import com.example.newtelapp.model.AurrekontuaLerroa;
 import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AurrekontuaMenua extends AppCompatActivity implements Serializable {
+public class AurrekontuaMenua extends AppCompatActivity {
 
     /**
      * Atributoak
@@ -28,6 +29,7 @@ public class AurrekontuaMenua extends AppCompatActivity implements Serializable 
     // ArrayList-a
     private ArrayList<Bezeroa> bezeroak;
     private ArrayList<Aurrekontua> aurrekontuak;
+    private ArrayList<AurrekontuaLerroa>aurrekontuaLerroa;
     private ArrayList<Produktua> produktuak;
 
     /**
@@ -58,7 +60,8 @@ public class AurrekontuaMenua extends AppCompatActivity implements Serializable 
         /** ArrayList-ak informazioz bete **/
         bezeroak = Menua.konexioa.selectBezeroak();
         aurrekontuak=Menua.konexioa.selectAurrekontuak();
-        produktuak = Menua.konexioa.selectProduktuak();
+        aurrekontuaLerroa=Menua.konexioa.selectAurrekontuaLerroa();
+        produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
     }
 
     /**
@@ -83,9 +86,13 @@ public class AurrekontuaMenua extends AppCompatActivity implements Serializable 
      * @param view
      */
     private void aurrekontuakIkusiraJoan(View view) {
-        Intent myIntent = new Intent(view.getContext(), AurrekontuakIkusi.class);
-        // Aurrekontuen ArrayList-a eramaten
-        myIntent.putExtra("aurrekontu", aurrekontuak);
+        Intent myIntent = new Intent(this, AurrekontuakIkusi.class);
+        // Aurrekontuen ArrayList-ak eramaten
+        myIntent.putExtra("aurrekontuak", aurrekontuak);
+        myIntent.putExtra("aurrekontuaLerroa", aurrekontuaLerroa);
+
+        //myIntent.putExtra("bezeroak", bezeroak);
+        //myIntent.putExtra("produktuak", produktuak);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }
@@ -96,7 +103,7 @@ public class AurrekontuaMenua extends AppCompatActivity implements Serializable 
      * @param view
      */
     private void aurrekontuaSorturaJoan(View view) {
-        Intent myIntent = new Intent(view.getContext(), AurrekontuaSortu.class);
+        Intent myIntent = new Intent(this, AurrekontuaSortu.class);
         // Bezeroen eta produktuen ArrayList-ak eramaten du
         myIntent.putExtra("bezeroak", bezeroak);
         myIntent.putExtra("produktuak", produktuak);

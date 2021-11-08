@@ -38,10 +38,7 @@ public class Menua extends AppCompatActivity implements Serializable {
     /**
      * Postgres datu baseko informazioa
      */
-
     private ArrayList<Produktua> produktuak; // Produktuen ArrayList-a
-    private ArrayList<Bezeroa> bezeroak;
-    private ArrayList<Aurrekontua> aurrekontuak;
     public static Konexioa konexioa;
 
     /**
@@ -64,8 +61,6 @@ public class Menua extends AppCompatActivity implements Serializable {
         aurrekontua_botoia = findViewById(R.id.buttonAurrekontuaSortu);
         irten_botoia = findViewById(R.id.buttonIrten);
         produktuak = new ArrayList<>();
-        bezeroak = new ArrayList<>();
-        aurrekontuak = new ArrayList<>();
 
         /* Botoiei listenerra jarri */
         erakutsi_produktuak_botoia.setOnClickListener(this::produktuakErakutsiraJoan);
@@ -95,6 +90,7 @@ public class Menua extends AppCompatActivity implements Serializable {
      */
     private void aurrekonturaJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), AurrekontuaMenua.class);
+        myIntent.putExtra("produktuak", produktuak); // Produktuen arrayList-a eramaten du
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right);
         this.startActivity(myIntent, options.toBundle());
     }
@@ -112,6 +108,7 @@ public class Menua extends AppCompatActivity implements Serializable {
      * Alerta agertzen da, galdetzen irten nahi den ala ez
      */
     private void alert() {
+        /** Alert-a sortu eta hasieratu **/
         new AlertDialog.Builder(this)
                 .setTitle("Aplikazioa ixten ")// Dialog-ari titulua jarri
                 .setMessage("Aplikazioa itxi nahi duzu?") // Dialog-aren mezua jarri
@@ -127,7 +124,7 @@ public class Menua extends AppCompatActivity implements Serializable {
                     }
                 })
 
-                // Listener juts bat, Ez klikatzen bada ez da aplikazioa itxiko
+                // Listener huts bat, Ez klikatzen bada ez da aplikazioa itxiko
                 .setNegativeButton(android.R.string.no, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();

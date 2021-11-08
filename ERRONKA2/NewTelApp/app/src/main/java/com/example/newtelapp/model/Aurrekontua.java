@@ -15,9 +15,8 @@ public class Aurrekontua implements Serializable {
     private int id;
     private String name;
     private String bezeroaIzena;
-    private String produktuaIzena;
-    private int kantitatea;
     private String state; //Select-a egitean ez du balio, baina bai insert-a egiterakoan
+
     private Date data;
 
     /**
@@ -26,17 +25,13 @@ public class Aurrekontua implements Serializable {
      * @param id
      * @param izena
      * @param bezeroaIzena
-     * @param produktuaIzena
-     * @param kantitatea
      * @param state
      * @param data
      */
-    public Aurrekontua(int id, String izena, String bezeroaIzena, String produktuaIzena, int kantitatea, String state, Date data) {
+    public Aurrekontua(int id, String izena, String bezeroaIzena, String state, Date data) {
         this.id = id;
         this.name = izena;
         this.bezeroaIzena = bezeroaIzena;
-        this.produktuaIzena = produktuaIzena;
-        this.kantitatea = kantitatea;
         this.state = state;
         this.data = data;
     }
@@ -68,20 +63,8 @@ public class Aurrekontua implements Serializable {
         this.bezeroaIzena = bezeroaIzena;
     }
 
-    public String getProduktuaIzena() {
-        return produktuaIzena;
-    }
-
-    public void setProduktuaIzena(String produktuaIzena) {
-        this.produktuaIzena = produktuaIzena;
-    }
-
-    public int getKantitatea() {
-        return kantitatea;
-    }
-
-    public void setKantitatea(int kantitatea) {
-        this.kantitatea = kantitatea;
+    public String getState() {
+        return state;
     }
 
     public String getStatus() {
@@ -102,10 +85,8 @@ public class Aurrekontua implements Serializable {
 
     @Override
     public String toString() {
-        return "Izena= " + name +
-                ", bezeroa= " + bezeroaIzena +
-                ", produktuak= " + produktuaIzena +
-                ", kantitatea= " + kantitatea +
-                ", data= " + data;
+        return "Izena: " + name + '\n' +
+                "Bezeroa: " + bezeroaIzena + '\n' +
+                "Data: " + data;
     }
 }

@@ -4,6 +4,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.newtelapp.R;
 import com.example.newtelapp.model.Bezeroa;
@@ -82,7 +84,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
 
         /** Botoiei listenerra jarri **/
         irtenBotoia.setOnClickListener(this::irten);
-        gordeBotoia.setOnClickListener(this::bezeroaSorturaJoan);
+        gordeBotoia.setOnClickListener(this::gorde);
         bezeroakBotoia.setOnClickListener(this::bezeroaSorturaJoan);
         produktuakBotoia.setOnClickListener(this::produktuBatGehitu);
 
@@ -130,38 +132,6 @@ public class AurrekontuaSortu extends AppCompatActivity {
     private void taulaHasieratu() {
         /** Taula sortu **/
         taula = findViewById(R.id.taula);
-        taula.removeAllViews();
-
-        /** Tituloak jartzen ditu**/
-        /** Ilara bat sortzen du **/
-        TableRow tableRow=new TableRow(this);
-
-        /** Hiru zutabe sortzen du **/
-        // Lehenengo zutabea
-        TextView column1 = new TextView(this);
-        column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column1.setWidth(350);
-        // Bigarren zutabea
-        TextView column2 = new TextView(this);
-        column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column2.setWidth(180);
-        // Hirugarren zutabea
-        TextView column3 = new TextView(this);
-        column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column3.setWidth(150);
-
-        /** Zutabeak betzen du **/
-        column1.setText("Produktua");
-        column2.setText("Kantitatea");
-        column3.setText("Prezioa");
-
-        /** Zutabeak ilaran sartu **/
-        tableRow.addView(column1);
-        tableRow.addView(column2);
-        tableRow.addView(column3);
-
-        /** Ilara taulan sartzen du **/
-        taula.addView(tableRow);
     }
 
     /**
@@ -174,23 +144,34 @@ public class AurrekontuaSortu extends AppCompatActivity {
         TableRow tableRow=new TableRow(this);
 
         /** Hiru zutabe sortzen du **/
+        // Zutabeen zabalera definitzeko (dp-tik pixeletara pasatu)
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        int px1 = Math.round(115 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        int px23 = Math.round(70 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+
         // Lehenengo zutabea
         TextView column1 = new TextView(this);
         column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column1.setWidth(350);
+        //column1.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.taula_row));
+        column1.setWidth(px1);
         // Bigarren zutabea
         TextView column2 = new TextView(this);
         column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column2.setWidth(200);
+        //column2.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.taula_row));
+        column2.setWidth(px23);
         // Hirugarren zutabea
         TextView column3 = new TextView(this);
         column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column3.setWidth(150);
+        //column3.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.taula_row));
+        column3.setWidth(px23);
 
         /** Zutabeak betzen du **/
-        column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());
+        //column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());
         column2.setText(kantitatea.getText().toString());
-        column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa()+"");
+        //column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa()+"");
+
+        /** Kantitatea gakoa hustu**/
+        kantitatea.setText("");
 
         /** Zutabeak ilaran sartu **/
         tableRow.addView(column1);
@@ -215,6 +196,10 @@ public class AurrekontuaSortu extends AppCompatActivity {
         myIntent.putExtra("bezeroak", bezeroak);
         myIntent.putExtra("produktuak", produktuak);
         this.startActivity(myIntent, options.toBundle());
+    }
+
+    private void gorde(View view) {
+
     }
 
     /**

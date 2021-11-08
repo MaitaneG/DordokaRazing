@@ -124,18 +124,15 @@
         <TableRow
             android:id="@+id/tituloa"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:id="@+id/informazioa"
-            android:layout_width="match_parent"
-            android:layout_height="12dp">
+            android:layout_height="match_parent" >
 
             <TextView
                 android:id="@+id/produktuaIzena"
                 android:layout_width="115dp"
                 android:layout_height="25dp"
+                android:background="@drawable/taula_label"
                 android:padding="3dip"
+                android:text="Produktua"
                 android:textAlignment="center"
                 android:textColor="@color/grisaa"
                 android:textSize="12sp" />
@@ -144,7 +141,9 @@
                 android:id="@+id/produktuaKantitatea"
                 android:layout_width="70dp"
                 android:layout_height="25dp"
+                android:background="@drawable/taula_label"
                 android:padding="3dip"
+                android:text="Kantitatea"
                 android:textAlignment="center"
                 android:textColor="@color/grisaa"
                 android:textSize="12sp" />
@@ -153,7 +152,9 @@
                 android:id="@+id/produktuaPrezioa"
                 android:layout_width="70dp"
                 android:layout_height="25dp"
+                android:background="@drawable/taula_label"
                 android:padding="3dip"
+                android:text="Prezioa"
                 android:textAlignment="center"
                 android:textColor="@color/grisaa"
                 android:textSize="12sp" />

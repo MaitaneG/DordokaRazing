@@ -2,6 +2,11 @@ package eus.uni.dam;
 
 import java.util.Properties;
 import javax.sql.DataSource;
+
+import com.NewTel.dao.ProductProductDao;
+import com.NewTel.dao.ResPartnerDao;
+import com.NewTel.dao.SaleOrderDao;
+import com.NewTel.dao.SaleOrderLineDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,23 +23,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource("classpath:/application.properties")
 @EnableTransactionManagement
 public class DatuBasearenKonfigurazioa_SqlServer {
-
     /**
-     * Definición del DataSource para la conexión a nuestra base de datos.
-     * Las propiedades son establecidas desde el fichero de properties, y
-     * asignadas usando el objeto env.
-     *
-     
-    @Bean("dataSourceIn")
-    public DataSource dataSourceIn() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("dbin.driver"));
-        dataSource.setUrl(env.getProperty("dbin.url"));
-        dataSource.setUsername(env.getProperty("dbin.username"));
-        dataSource.setPassword(env.getProperty("dbin.password"));
-        return dataSource;
-    }
-*/
+     * Microsoft SQL Server datubaseko DataSource definitzea gure datu-basera konektatzeko.
+     * Propietateak propertie-en fitxategitik ezartzen dira,
+     * eta esleitu egiten dira Env Objektua erabiliz
+     */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -44,35 +37,6 @@ public class DatuBasearenKonfigurazioa_SqlServer {
         dataSource.setPassword(env.getProperty("dbout.password"));
         return dataSource;
     }
-    
-    /**
-     *
-     * Declaración del EntityManagerFactory de JPA
-    
-    @Bean("factoryIn")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryin() {
-        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
-
-        //Le asignamos el dataSource que acabamos de definir.
-        entityManagerFactory.setDataSource(dataSourceIn());
-
-        // Le indicamos la ruta donde tiene que buscar las clases anotadas
-        entityManagerFactory.setPackagesToScan(env.getProperty("entitymanagerin.packagesToScan"));
-
-        // Implementación de JPA a usar: Hibernate
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
-
-        // Propiedades de Hibernate
-        Properties additionalProperties = new Properties();
-        additionalProperties.put("hibernate.dialect", env.getProperty("hibernatein.dialect"));
-        additionalProperties.put("hibernate.show_sql", env.getProperty("hibernatein.show_sql"));
-        additionalProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernatein.hbm2ddl.auto"));
-        entityManagerFactory.setJpaProperties(additionalProperties);
-
-        return entityManagerFactory;
-    } 
-    */
     
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {

@@ -2,6 +2,11 @@ package eus.uni.dam;
 
 import java.util.Properties;
 import javax.sql.DataSource;
+
+import com.NewTel.dao.ProductProductDao;
+import com.NewTel.dao.ResPartnerDao;
+import com.NewTel.dao.SaleOrderDao;
+import com.NewTel.dao.SaleOrderLineDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,14 +25,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class DatuBasearenKonfigurazioa_Postgres {
 
 	/**
-	 * Definición del DataSource para la conexión a nuestra base de datos. Las
-	 * propiedades son establecidas desde el fichero de properties, y asignadas
-	 * usando el objeto env.
-	 *
+	 * Postgres datubaseko DataSource definitzea gure datu-basera konektatzeko. Propietateak propertie-en fitxategitik ezartzen dira,
+	 * eta esleitu egiten dira Env Objektua erabiliz
 	 */
 	@Bean
 	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();	//Env objetuari propietateak ezartzen dio
 		dataSource.setDriverClassName(env.getProperty("db.driver"));
 		dataSource.setUrl(env.getProperty("db.url"));
 		dataSource.setUsername(env.getProperty("db.username"));
@@ -37,7 +40,7 @@ public class DatuBasearenKonfigurazioa_Postgres {
 
 	/**
 	 *
-	 * Declaración del EntityManagerFactory de JPA
+	 * EntityManagerFactory de JPA ren konfigurazioa
 	 */
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {

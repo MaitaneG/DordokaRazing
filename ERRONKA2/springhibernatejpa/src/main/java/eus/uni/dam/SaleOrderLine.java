@@ -43,12 +43,6 @@ public class SaleOrderLine implements Serializable {
 	@Column(name="invoice_status")
 	private String invoiceStatus;
 
-//	@Column(name="is_downpayment")
-//	private Boolean isDownpayment;
-
-//	@Column(name="is_expense")
-//	private Boolean isExpense;
-
 	private String name;
 
 	@Column(name="price_reduce")
@@ -219,22 +213,6 @@ public class SaleOrderLine implements Serializable {
 	public void setInvoiceStatus(String invoiceStatus) {
 		this.invoiceStatus = invoiceStatus;
 	}
-
-//	public Boolean getIsDownpayment() {
-//		return this.isDownpayment;
-//	}
-//
-//	public void setIsDownpayment(Boolean isDownpayment) {
-//		this.isDownpayment = isDownpayment;
-//	}
-//
-//	public Boolean getIsExpense() {
-//		return this.isExpense;
-//	}
-//
-//	public void setIsExpense(Boolean isExpense) {
-//		this.isExpense = isExpense;
-//	}
 
 	public String getName() {
 		return this.name;

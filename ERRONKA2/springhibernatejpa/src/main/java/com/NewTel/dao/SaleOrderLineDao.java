@@ -1,8 +1,10 @@
-package eus.uni.dam;
+package com.NewTel.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+
+import eus.uni.dam.SaleOrderLine;
 import org.springframework.stereotype.Repository;
 
 @Repository

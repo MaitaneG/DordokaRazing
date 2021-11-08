@@ -1,4 +1,4 @@
-package com.NewTel.Model;
+package com.NewTel.dao;
 
 import java.util.List;
 import java.util.Objects;
@@ -6,8 +6,6 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-import org.springframework.stereotype.Component;
 
 @Entity
 public class Pelicula {

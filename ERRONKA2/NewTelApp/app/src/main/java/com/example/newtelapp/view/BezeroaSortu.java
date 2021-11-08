@@ -2,6 +2,8 @@ package com.example.newtelapp.view;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -93,27 +95,42 @@ public class BezeroaSortu extends AppCompatActivity {
      * @param view
      */
     private void gorde(View view) {
-        // Gako guztiak beteta daudela konprobatzen du
-        if (izenAbizena.getText().toString().trim().equals("") || mugikorZenbakia.getText().toString().trim().equals("") ||
-                korreoElektronikoa.getText().toString().trim().equals("") || kalea.getText().toString().trim().equals("") ||
-                hiria.getText().toString().trim().equals("") || probintzia.getText().toString().trim().equals("") ||
-                kodigoPostala.getText().toString().trim().equals("") || herrialdea.getText().toString().trim().equals("")) {
-            Toast.makeText(this, "Gako guztiak bete behar dira", Toast.LENGTH_LONG).show();
+        new AlertDialog.Builder(this)
+                .setTitle("Bezeroa gordetzen")// Dialog-ari titulua jarri
+                .setMessage("Ziur zaude bezeroa gehitu nahi duzula?") // Dialog-aren mezua jarri
 
-        } else if(!korreoElektronikoa.getText().toString().trim().contains("@")&&!korreoElektronikoa.getText().toString().trim().contains(".")){
-            Toast.makeText(this,"Korreoaren formatua gaizki dago",Toast.LENGTH_SHORT).show();
-            // Informazio guztia beteta badago eta ondo
-        } else{
-            Bezeroa bezeroa = new Bezeroa(izenAbizena.getText().toString(), enpresaDa.isChecked(), mugikorZenbakia.getText().toString().trim(),
-                    korreoElektronikoa.getText().toString().trim(), kalea.getText().toString(), hiria.getText().toString().trim(),
-                    probintzia.getText().toString().trim(), Integer.parseInt(kodigoPostala.getText().toString().trim()),
-                    herrialdea.getText().toString().trim());
-            // Bezeroa datu basean sartzen du
-            Menua.konexioa.insertBezeroak(bezeroa);
-            Toast.makeText(this, "Bezeroa behar bezala sortu da", Toast.LENGTH_SHORT).show();
-            // Pantaila honetatik irtetzen da
-            irten(view);
-        }
+                // Baiezko aukera klikatzen bada, bezeroa gordeko da
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Gako guztiak beteta daudela konprobatzen du
+                        if (izenAbizena.getText().toString().trim().equals("") || mugikorZenbakia.getText().toString().trim().equals("") ||
+                                korreoElektronikoa.getText().toString().trim().equals("") || kalea.getText().toString().trim().equals("") ||
+                                hiria.getText().toString().trim().equals("") || probintzia.getText().toString().trim().equals("") ||
+                                kodigoPostala.getText().toString().trim().equals("") || herrialdea.getText().toString().trim().equals("")) {
+                            Toast.makeText(view.getContext(), "Gako guztiak bete behar dira", Toast.LENGTH_SHORT).show();
+
+                        } else if (!korreoElektronikoa.getText().toString().trim().contains("@") && !korreoElektronikoa.getText().toString().trim().contains(".")) {
+                            Toast.makeText(view.getContext(), "Korreoaren formatua gaizki dago", Toast.LENGTH_SHORT).show();
+                            // Informazio guztia beteta badago eta ondo
+                        } else {
+                            Bezeroa bezeroa = new Bezeroa(izenAbizena.getText().toString(), enpresaDa.isChecked(), mugikorZenbakia.getText().toString().trim(),
+                                    korreoElektronikoa.getText().toString().trim(), kalea.getText().toString(), hiria.getText().toString().trim(),
+                                    probintzia.getText().toString().trim(), Integer.parseInt(kodigoPostala.getText().toString().trim()),
+                                    herrialdea.getText().toString().trim());
+                            // Bezeroa datu basean sartzen du
+                            Menua.konexioa.insertBezeroak(bezeroa);
+                            Toast.makeText(view.getContext(), "Bezeroa behar bezala sortu da", Toast.LENGTH_SHORT).show();
+                            // Pantaila honetatik irtetzen da
+                            irten(view);
+                        }
+
+                    }
+                })
+
+                // Listener huts bat, Ez klikatzen bada ez da gordeko
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     /**
@@ -122,21 +139,37 @@ public class BezeroaSortu extends AppCompatActivity {
      * @param view
      */
     private void irten(View view) {
-        // Gakoak husten du
-        izenAbizena.setText("");
-        mugikorZenbakia.setText("");
-        korreoElektronikoa.setText("");
-        kalea.setText("");
-        hiria.setText("");
-        probintzia.setText("");
-        kodigoPostala.setText("");
-        herrialdea.setText("");
-        // Aurreko layout-era doa
-        Intent myIntent = new Intent(view.getContext(), AurrekontuaSortu.class);
-        // Bezeroen eta produktuen ArrayList-a eramaten du
-        myIntent.putExtra("bezeroak", bezeroak);
-        myIntent.putExtra("produktuak", produktuak);
-        ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
-        this.startActivity(myIntent, options.toBundle());
+        new AlertDialog.Builder(this)
+                .setTitle("Pantaila honetatik irtetzen")// Dialog-ari titulua jarri
+                .setMessage("Ziur zaude atzera joan nahi zarela gorde gabe?") // Dialog-aren mezua jarri
+
+                // Baiezko aukera klikatzen bada, bezeroa gordeko da
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Gakoak husten du
+                        izenAbizena.setText("");
+                        mugikorZenbakia.setText("");
+                        korreoElektronikoa.setText("");
+                        kalea.setText("");
+                        hiria.setText("");
+                        probintzia.setText("");
+                        kodigoPostala.setText("");
+                        herrialdea.setText("");
+                        // Aurreko layout-era doa
+                        Intent myIntent = new Intent(view.getContext(), AurrekontuaSortu.class);
+                        // Bezeroen eta produktuen ArrayList-a eramaten du
+                        myIntent.putExtra("bezeroak", bezeroak);
+                        myIntent.putExtra("produktuak", produktuak);
+                        ActivityOptions options = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.from_right, R.anim.from_right); // Animazioa definitzen
+                        view.getContext().startActivity(myIntent, options.toBundle());
+                    }
+                })
+
+                // Listener huts bat, Ez klikatzen bada ez da atzera egingo
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+
     }
 }

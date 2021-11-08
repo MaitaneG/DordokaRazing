@@ -1,6 +1,9 @@
 package com.example.newtelapp.view;
 
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -78,11 +81,11 @@ public class AurrekontuaSortu extends AppCompatActivity {
         // EditText
         kantitatea = findViewById(R.id.editTextNumberKantitatea);
         // TextView
-        prezioaGuztira=findViewById(R.id.textViewPrezioaGuztira);
+        prezioaGuztira = findViewById(R.id.textViewPrezioaGuztira);
 
         /** Botoiei listenerra jarri **/
         irtenBotoia.setOnClickListener(this::irten);
-        gordeBotoia.setOnClickListener(this::bezeroaSorturaJoan);
+        gordeBotoia.setOnClickListener(this::gorde);
         bezeroakBotoia.setOnClickListener(this::bezeroaSorturaJoan);
         produktuakBotoia.setOnClickListener(this::produktuBatGehitu);
 
@@ -134,7 +137,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
 
         /** Tituloak jartzen ditu**/
         /** Ilara bat sortzen du **/
-        TableRow tableRow=new TableRow(this);
+        TableRow tableRow = new TableRow(this);
 
         /** Hiru zutabe sortzen du **/
         // Lehenengo zutabea
@@ -171,7 +174,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
      */
     private void produktuBatGehitu(View view) {
         /** Ilara bat sortzen du **/
-        TableRow tableRow=new TableRow(this);
+        TableRow tableRow = new TableRow(this);
 
         /** Hiru zutabe sortzen du **/
         // Lehenengo zutabea
@@ -190,7 +193,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
         /** Zutabeak betzen du **/
         column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());
         column2.setText(kantitatea.getText().toString());
-        column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa()+"");
+        column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() + "");
 
         /** Zutabeak ilaran sartu **/
         tableRow.addView(column1);
@@ -217,14 +220,62 @@ public class AurrekontuaSortu extends AppCompatActivity {
         this.startActivity(myIntent, options.toBundle());
     }
 
+    private void gorde(View view) {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Aurrekontua gordetzan")// Dialog-ari titulua jarri
+                .setMessage("Ziur zaude aurrekontua gehitu nahi duzula?") // Dialog-aren mezua jarri
+
+                // Baiezko aukera klikatzen bada, aplikazioa itxiko da
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (getIntent().getBooleanExtra("EXIT", true)) {
+                            // Aqui todo el codigo
+                            System.exit(0);
+                        }
+                    }
+                })
+
+                // Listener huts bat, Ez klikatzen bada ez da aplikazioa itxiko
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    public void alertAtzera(View view) {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Pantaila honetatik irtetzen")// Dialog-ari titulua jarri
+                .setMessage("Ziur zaude atzera joan nahi zarela gorde gabe?") // Dialog-aren mezua jarri
+
+                // Baiezko aukera klikatzen bada, aplikazioa itxiko da
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (getIntent().getBooleanExtra("EXIT", true)) {
+                            Intent myIntent = new Intent(getBaseContext(), AurrekontuaMenua.class);
+                            ActivityOptions options = ActivityOptions.makeCustomAnimation(getBaseContext(), R.anim.from_right, R.anim.from_right); // Animazioa definitzen
+                            view.getContext().startActivity(myIntent, options.toBundle());
+                        }
+                    }
+                })
+
+                // Listener huts bat, Ez klikatzen bada ez da aplikazioa itxiko
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
     /**
      * Aurreko layout-era joateko
-     *
-     * @param view
      */
     private void irten(View view) {
-        Intent myIntent = new Intent(view.getContext(), AurrekontuaMenua.class);
-        ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
-        this.startActivity(myIntent, options.toBundle());
+        alertAtzera(view);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //alertAtzera();
     }
 }

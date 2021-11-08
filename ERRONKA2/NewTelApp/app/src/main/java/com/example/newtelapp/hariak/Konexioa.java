@@ -1,6 +1,7 @@
 package com.example.newtelapp.hariak;
 
 import com.example.newtelapp.model.Aurrekontua;
+import com.example.newtelapp.model.AurrekontuaLerroa;
 import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
 
@@ -13,21 +14,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
  * Datu basearekin konektazen den haria
  */
 public class Konexioa extends Thread {
     /**
-     *
      * Datu baseko informazioa
      */
-    private final String url = "jdbc:postgresql://localhost:5432/NewTel1"; // Zerbitzariaren Postgres-eko url-a
+    private final String url = "jdbc:postgresql://192.168.65.6:5432/NewTel1"; // Zerbitzariaren Postgres-eko url-a
     private final String username = "openpg"; // Datu baseko erabiltzailea
     private final String password = "openpgpwd"; // Datu baseko pasahitza
 
-    private boolean exekutatuDa=false;
     /**
-     *
      * Konexioa lortzeko metodoa
      *
      * @return Zerbitzaren Postgres-eko datu basearekiko konexioa bueltatzen du
@@ -37,7 +34,8 @@ public class Konexioa extends Thread {
             Class.forName("org.postgresql.Driver"); // Driver-a
 
             /** Konexioa lortzen du **/
-            Connection connection=DriverManager.getConnection(url, username, password);
+            Connection connection =null;
+            connection=DriverManager.getConnection(url, username, password);
             return connection;
         } catch (Exception e) {
             System.out.print(e.getMessage());
@@ -47,13 +45,12 @@ public class Konexioa extends Thread {
     }
 
     /**
-     *
      * Produktuak lortzeko metodoa
      *
      * @return Produktuen ArrayList-a
      */
     public ArrayList<Produktua> selectProduktuak() {
-        ArrayList<Produktua> produktuakKatalogoa=new ArrayList<>(); // Produktuen ArrayList-a
+        ArrayList<Produktua> produktuakKatalogoa = new ArrayList<>(); // Produktuen ArrayList-a
 
         /**
          *
@@ -68,7 +65,7 @@ public class Konexioa extends Thread {
             public void run() {
                 try {
                     /** Konexioa lortzeko connect metodoari deitzen dio **/
-                    Connection conn=connect();
+                    Connection conn = connect();
                     Class.forName("org.postgresql.Driver");
                     PreparedStatement pstmt = null;
 
@@ -88,7 +85,7 @@ public class Konexioa extends Thread {
                     /** Select-an jaso den informazioa Produktuen ArrayList batean gordetzen da **/
                     while (rs.next()) {
                         Produktua produktua = new Produktua(/**ID**/rs.getInt("id"), /**Product name**/rs.getString("izena"),
-                                /**Kategoria**/rs.getString("kategoria"), /**Prezioa**/ rs.getFloat("prezioa"),
+                                /**Kategoria**/rs.getString("kategoria"), /**Prezioa**/rs.getFloat("prezioa"),
                                 /**Kantitatea*/rs.getFloat("kantitatea"));
                         System.out.println();
                         produktuakKatalogoa.add(produktua);
@@ -105,13 +102,12 @@ public class Konexioa extends Thread {
     }
 
     /**
-     *
      * Bezeroak lortzeko metodoa
      *
      * @return Bezeroen ArrayList-a
      */
     public ArrayList<Bezeroa> selectBezeroak() {
-        ArrayList<Bezeroa> bezeroakLista=new ArrayList<>();
+        ArrayList<Bezeroa> bezeroakLista = new ArrayList<>();
 
         /**
          *
@@ -126,7 +122,7 @@ public class Konexioa extends Thread {
             public void run() {
                 try {
                     /** Konexioa lortzeko connect metodoari deitzen dio **/
-                    Connection conn=connect();
+                    Connection conn = connect();
                     Class.forName("org.postgresql.Driver");
                     PreparedStatement pstmt = null;
 
@@ -138,15 +134,16 @@ public class Konexioa extends Thread {
                             "res_country.name as herrialdea from  res_partner\n" +
                             "inner join  res_country_state on res_partner.state_id = res_country_state.id\n" +
                             "inner join res_country on res_partner.country_id = res_country.id\n" +
+                            "where res_partner.customer_rank !=0" + // A ver si funciona
                             "order by res_partner.id asc\n");
 
                     /** Sententzia exekutatzen da **/
                     ResultSet rs = pstmt.executeQuery();
 
                     /** Select-an jaso den informazioa Bezeroa ArrayList batean gordetzen da **/
-                    while(rs.next()){
-                        Bezeroa bezeroa= new Bezeroa(rs.getString("izenaAbizena"),rs.getBoolean("enpresa"),rs.getString("mugikorra"),rs.getString("korreoa"),
-                                rs.getString("kalea"),rs.getString("hiria"),rs.getString("probintzia"),rs.getInt("kodigoPostala"),
+                    while (rs.next()) {
+                        Bezeroa bezeroa = new Bezeroa(rs.getString("izenaAbizena"), rs.getBoolean("enpresa"), rs.getString("mugikorra"), rs.getString("korreoa"),
+                                rs.getString("kalea"), rs.getString("hiria"), rs.getString("probintzia"), rs.getInt("kodigoPostala"),
                                 rs.getString("herrialdea"));
                         System.out.println();
                         bezeroakLista.add(bezeroa);
@@ -163,13 +160,9 @@ public class Konexioa extends Thread {
     }
 
     /**
-     *
-     * Bezeroak lortzeko metodoa
-     *
-     * @return Bezeroen ArrayList-a
+     * Bezeroak sortzeko metodoa
      */
     public void insertBezeroak(Bezeroa bezeroa) {
-        //ArrayList<Bezeroa> bezeroakLista=new ArrayList<>();
 
         /**
          *
@@ -184,23 +177,23 @@ public class Konexioa extends Thread {
             public void run() {
                 try {
                     /** Konexioa lortzeko connect metodoari deitzen dio **/
-                    Connection conn=connect();
+                    Connection conn = connect();
                     Class.forName("org.postgresql.Driver");
                     PreparedStatement pstmt = null;
 
                     /** Bezeroaren insert-a **/
                     pstmt = conn.prepareStatement("INSERT INTO res_partner\n" +
-                            "(\"name\", create_date, display_name, lang, tz, active, \"type\", street,zip, city, email, mobile, is_company)\n" +
+                            "(\"name\", create_date, display_name, lang, tz, active, \"type\", street,zip, city, email, mobile, is_company, customer_rank)\n" +
                             "VALUES(?, CURRENT_DATE, ? , 'es_ES', 'Europe/Madrid',\n" +
                             "true,  'contact', ? , ? , ? ,\n" +
-                            " ? , ? , ?);\n");
-                    pstmt.setString(1,bezeroa.getIzenaAbizena());
-                    pstmt.setString(2,bezeroa.getIzenaAbizena());
-                    pstmt.setString(3,bezeroa.getKalea());
-                    pstmt.setInt(4,bezeroa.getKodigoPostala());
-                    pstmt.setString(5,bezeroa.getHiria());
-                    pstmt.setString(6,bezeroa.getKorreoa());
-                    pstmt.setString(7,bezeroa.getMugikorra());
+                            " ? , ? , ?, 1);\n");
+                    pstmt.setString(1, bezeroa.getIzenaAbizena());
+                    pstmt.setString(2, bezeroa.getIzenaAbizena());
+                    pstmt.setString(3, bezeroa.getKalea());
+                    pstmt.setInt(4, bezeroa.getKodigoPostala());
+                    pstmt.setString(5, bezeroa.getHiria());
+                    pstmt.setString(6, bezeroa.getKorreoa());
+                    pstmt.setString(7, bezeroa.getMugikorra());
                     pstmt.setBoolean(8, bezeroa.isEnpresa());
 
                     /** Sententzia exekutatzen da **/
@@ -216,13 +209,12 @@ public class Konexioa extends Thread {
     }
 
     /**
-     *
      * Aurrekontuak lortzeko metodoa
      *
      * @return Aurrekontuak ArrayList-a
      */
     public ArrayList<Aurrekontua> selectAurrekontuak() {
-        ArrayList<Aurrekontua> aurrekontuakLista=new ArrayList<>();
+        ArrayList<Aurrekontua> aurrekontuakLista = new ArrayList<>();
 
         Thread selectAurrekontuak = new Thread(new Runnable() {
             /**
@@ -233,29 +225,29 @@ public class Konexioa extends Thread {
             public void run() {
                 try {
                     /** Konexioa lortzeko connect metodoari deitzen dio **/
-                    Connection conn=connect();
+                    Connection conn = connect();
                     Class.forName("org.postgresql.Driver");
                     PreparedStatement pstmt = null;
 
                     /** Aurrekontuen select-a **/
                     pstmt = conn.prepareStatement("select sale_order.id as id, sale_order.name as izena, res_partner.name as bezeroaIzena," +
-                            "sale_order_line.name as produktuaIzena, sale_order_line.product_uom_qty as kantitatea, sale_order.date_order as data, " +
-                            "sale_order.state as egoera " +
+                            "sale_order.date_order as data, sale_order.state as egoera " +
                             "from  sale_order " +
-                            "inner join res_partner on sale_order.id = res_partner.id " +
-                            "inner join sale_order_line on sale_order.id = sale_order_line.order_id\n" +
+                            "inner join res_partner on sale_order.id = res_partner.id \n" +
                             "where sale_order.state = 'draft' order by sale_order.id asc\n");
 
                     /** Sententzia exekutatzen da **/
                     ResultSet rs = pstmt.executeQuery();
 
                     /** Select-an jaso den informazioa Aurrekontua ArrayList batean gordetzen da **/
-                    while(rs.next()){
-                        Aurrekontua aurrekontua= new Aurrekontua(rs.getInt("id"),rs.getString("izena"),rs.getString("bezeroaIzena"),
-                                rs.getString("produktuaIzena"),rs.getInt("kantitatea"),rs.getString("egoera"),rs.getDate("data"));
+                    while (rs.next()) {
+                        Aurrekontua aurrekontua = new Aurrekontua(rs.getInt("id"), rs.getString("izena"),
+                                rs.getString("bezeroaIzena"), rs.getString("egoera"), rs.getDate("data"));
                         System.out.println();
                         aurrekontuakLista.add(aurrekontua);
                     }
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -268,19 +260,14 @@ public class Konexioa extends Thread {
     }
 
     /**
+     * AurrekontuaLerroak lortzeko metodoa
      *
-     * Bezeroak lortzeko metodoa
-     *
-     * @return Bezeroen ArrayList-a
+     * @return AurrekontuaLerroen ArrayList-a
      */
-    public boolean insertAurrekontuak() {
-        //ArrayList<Bezeroa> bezeroakLista=new ArrayList<>();
+    public ArrayList<AurrekontuaLerroa> selectAurrekontuaLerroa() {
+        ArrayList<AurrekontuaLerroa> aurrekontuaLerroaLista = new ArrayList<>();
 
-        /**
-         *
-         * Hari bat sortzen da bezeroen insert bat egiteko
-         */
-        Thread insertAurrekontuak = new Thread(new Runnable() {
+        Thread selectAurrekontuaLerroa = new Thread(new Runnable() {
             /**
              *
              * Hariaren exekutagarria da
@@ -289,7 +276,58 @@ public class Konexioa extends Thread {
             public void run() {
                 try {
                     /** Konexioa lortzeko connect metodoari deitzen dio **/
-                    Connection conn=connect();
+                    Connection conn = connect();
+                    Class.forName("org.postgresql.Driver");
+                    PreparedStatement pstmt = null;
+
+                    /** AurrekontuaLerroen select-a **/
+                    pstmt = conn.prepareStatement("SELECT sale_order_line.id as lerroa, sale_order_line.order_id as aurrekontua, \n" +
+                            "product_template.name as ProduktuIzena, sale_order_line.product_uom_qty as kantitatea\n" +
+                            "FROM sale_order_line\n" +
+                            "inner join product_template on sale_order_line.product_id = product_template.id\n" +
+                            "where sale_order_line.state = 'draft';");
+
+                    /** Sententzia exekutatzen da **/
+                    ResultSet rs = pstmt.executeQuery();
+
+                    /** Select-an jaso den informazioa Aurrekontua ArrayList batean gordetzen da **/
+                    while (rs.next()) {
+                        AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(rs.getInt("lerroa"),rs.getInt("aurrekontua"),rs.getString("produktuIzena"),rs.getFloat("kantitatea"));
+                        System.out.println();
+                        aurrekontuaLerroaLista.add(aurrekontuaLerroa);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        /** Haria exekutatzen da **/
+        selectAurrekontuaLerroa.start();
+        /** Aurrekontuen ArrayList-a bueltatzen du **/
+        return aurrekontuaLerroaLista;
+    }
+
+
+    // FALTA LA SENTENCIA SQL
+
+    /**
+     * Aurrekontuak sortzeko metodoa
+     */
+    public void insertAurrekontua(Aurrekontua aurrekontua) {
+        /**
+         *
+         * Hari bat sortzen da aurrekontuen insert bat egiteko
+         */
+        Thread insertAurrekontua = new Thread(new Runnable() {
+            /**
+             *
+             * Hariaren exekutagarria da
+             */
+            @Override
+            public void run() {
+                try {
+                    /** Konexioa lortzeko connect metodoari deitzen dio **/
+                    Connection conn = connect();
                     Class.forName("org.postgresql.Driver");
                     PreparedStatement pstmt = null;
 
@@ -303,25 +341,56 @@ public class Konexioa extends Thread {
                             "inner join res_country on res_partner.country_id = res_country.id\n" +
                             "order by res_partner.id asc\n");*/
 
+                    pstmt.setInt(1, aurrekontua.getId());
+
                     /** Sententzia exekutatzen da **/
                     ResultSet rs = pstmt.executeQuery();
 
-                    /** Select-an jaso den informazioa Bezeroa ArrayList batean gordetzen da **/
-                    while(rs.next()){
-                        /*Bezeroa bezeroa= new Bezeroa(rs.getString("izenaAbizena"),rs.getString("mugikorra"),rs.getString("korreoa"),
-                                rs.getString("kalea"),rs.getString("hiria"),rs.getString("probintzia"),rs.getInt("kodigoPostala"),
-                                rs.getString("herrialdea"));
-                        System.out.println();
-                        bezeroakLista.add(bezeroa);*/
-                    }
+                    /** Sententzia exekutatzen da **/
+                    pstmt.executeUpdate();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
         /** Haria exekutatzen da **/
-        insertAurrekontuak.start();
-        /** Bezeroen ArrayList-a bueltatzen du **/
-        return false;
+        insertAurrekontua.start();
+    }
+
+    /**
+     * Aurrekontuak sortzeko metodoa
+     */
+    public void deleteAurrekontua(Aurrekontua aurrekontua) {
+        /**
+         *
+         * Hari bat sortzen da aurrekontuen insert bat egiteko
+         */
+        Thread deleteAurrekontuak = new Thread(new Runnable() {
+            /**
+             *
+             * Hariaren exekutagarria da
+             */
+            @Override
+            public void run() {
+                try {
+                    /** Konexioa lortzeko connect metodoari deitzen dio **/
+                    Connection conn = connect();
+                    Class.forName("org.postgresql.Driver");
+                    PreparedStatement pstmt = null;
+
+                    /** Aurrekontuen insert-a **/
+                    pstmt = conn.prepareStatement("delete from sale_order  where id = ?\n");
+
+                    pstmt.setInt(1, aurrekontua.getId());
+
+                    /** Sententzia exekutatzen da **/
+                    ResultSet rs = pstmt.executeQuery();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        /** Haria exekutatzen da **/
+        deleteAurrekontuak.start();
     }
 }

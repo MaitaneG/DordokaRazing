@@ -1,5 +1,6 @@
 package com.example.newtelapp.view;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -142,6 +143,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
      *
      * @param view
      */
+    @SuppressLint("ResourceAsColor")
     private void produktuBatGehitu(View view) {
         /** Ilara bat sortzen du **/
         TableRow tableRow = new TableRow(this);
@@ -155,23 +157,23 @@ public class AurrekontuaSortu extends AppCompatActivity {
         // Lehenengo zutabea
         TextView column1 = new TextView(this);
         column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        //column1.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.taula_row));
+        column1.setTextColor(R.color.black);
         column1.setWidth(px1);
         // Bigarren zutabea
         TextView column2 = new TextView(this);
         column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        //column2.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.taula_row));
+        column1.setTextColor(R.color.black);
         column2.setWidth(px23);
         // Hirugarren zutabea
         TextView column3 = new TextView(this);
         column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        //column3.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.taula_row));
+        column1.setTextColor(R.color.black);
         column3.setWidth(px23);
 
         /** Zutabeak betzen du **/
-        //column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());
+        column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());
         column2.setText(kantitatea.getText().toString());
-        //column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa()+"");
+        column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa()+" €");
 
         /** Zutabeak ilaran sartu **/
         tableRow.addView(column1);
@@ -180,6 +182,8 @@ public class AurrekontuaSortu extends AppCompatActivity {
 
         /** Ilara taulan sartzen du **/
         taula.addView(tableRow);
+
+        prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString())+(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString()))+"");
 
         /** Kantitatea gakoa hustu**/
         kantitatea.setText("");

@@ -233,7 +233,7 @@ public class Konexioa extends Thread {
                     pstmt = conn.prepareStatement("select sale_order.id as id, sale_order.name as izena, res_partner.name as bezeroaIzena," +
                             "sale_order.date_order as data, sale_order.state as egoera " +
                             "from  sale_order " +
-                            "inner join res_partner on sale_order.id = res_partner.id \n" +
+                            "inner join res_partner on sale_order.partner_id= res_partner.id \n" +
                             "where sale_order.state = 'draft' order by sale_order.id asc\n");
 
                     /** Sententzia exekutatzen da **/
@@ -384,7 +384,7 @@ public class Konexioa extends Thread {
                     pstmt.setInt(1, aurrekontua.getId());
 
                     /** Sententzia exekutatzen da **/
-                    ResultSet rs = pstmt.executeQuery();
+                    pstmt.executeUpdate();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

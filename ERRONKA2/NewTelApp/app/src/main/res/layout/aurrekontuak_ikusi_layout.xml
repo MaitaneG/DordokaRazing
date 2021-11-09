@@ -55,10 +55,10 @@
 
     <ListView
         android:id="@+id/listView_aurrekontuak"
-        android:layout_width="238dp"
-        android:layout_height="434dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="172dp"
+        android:layout_width="226dp"
+        android:layout_height="415dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="136dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

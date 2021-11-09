@@ -2,11 +2,14 @@ package com.example.newtelapp.view;
 
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
+import android.app.AuthenticationRequiredException;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -33,7 +36,7 @@ public class AurrekontuakIkusi extends AppCompatActivity {
     // ArrayList-ak
     private ArrayList<Aurrekontua> aurrekontuak;
     private ArrayList<AurrekontuaLerroa> aurrekontuaLerroa;
-    private ArrayList<Object>arrayListPolita;
+    private ArrayList<Object> arrayListPolita;
     //private ArrayList<Bezeroa> bezeroak;
     //private ArrayList<Produktua> produktuak;
 
@@ -67,7 +70,7 @@ public class AurrekontuakIkusi extends AppCompatActivity {
         /** Botoiei listerrenak jarri **/
         irten.setOnClickListener(this::irten);
         //aldatu.setOnClickListener(this::aldaturaJoan);
-        borratu.setOnClickListener(this::borratu);
+        //borratu.setOnClickListener(this::borratu);
         /** Aurrekontuen ArrayList-a betetzen da **/
         aurrekontuak = (ArrayList<Aurrekontua>) getIntent().getSerializableExtra("aurrekontuak");
         aurrekontuaLerroa = (ArrayList<AurrekontuaLerroa>) getIntent().getSerializableExtra("aurrekontuaLerroa");
@@ -85,58 +88,50 @@ public class AurrekontuakIkusi extends AppCompatActivity {
 //        }
 //        arrayListPolita= new ArrayList<>();
 
-        /** Adapterra sortu eta adatuak jarri **/
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, aurrekontuak);
+        /** Adapterra sortu, datuak jarri eta listenerra izendatu **/
+        adapter = new ArrayAdapter<>(AurrekontuakIkusi.this, android.R.layout.simple_list_item_1, aurrekontuak);
         aurrekontuaListView.setAdapter(adapter);
+        aurrekontuaListView.setOnItemClickListener(this::aldatuBorratu);
     }
 
     /**
-     * Aurrekontu bat borratzeko
+     * Aurrekontuak aldatzeko edo ezabatzeko
      *
+     * @param adapterView
      * @param view
+     * @param i
+     * @param l
      */
-    private void borratu(View view) {
-        /** Alert-a sortu eta hasieratu **/
+    private void aldatuBorratu(AdapterView<?> adapterView, View view, int i, long l) {
         new AlertDialog.Builder(this)
-                .setTitle("Aurrekontu bat ezabatzen")// Dialog-ari titulua jarri
-                .setMessage("Ziur zaude aurrekontua ezabatu nahi duzula?") // Dialog-aren mezua jarri
 
-                // Baiezko aukera klikatzen bada, aplikazioa itxiko da
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+        .setTitle("Aurrekontuak Aldatu / Ezabatu")
+        .setMessage("Aurrekontu hau ezabatu edo aldatu nahi duzu?")
+        .setPositiveButton("Aldatu", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        })
+        .setNegativeButton("Ezabatu", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Menua.konexioa.deleteAurrekontua(aurrekontuak.get((int) l));
+                Toast.makeText(AurrekontuakIkusi.this, aurrekontuak.get((int) l).getName() + " aurrekontua behar bezala ezabatu da", Toast.LENGTH_SHORT).show();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(AurrekontuakIkusi.this, "Sartu berriro pantaila honetara aldaketak ikusteko", Toast.LENGTH_SHORT).show();
 
-                        if (getIntent().getBooleanExtra("EXIT", true)) {
-                            Aurrekontua borratzekoAurrekontua = (Aurrekontua) aurrekontuaListView.getSelectedItem();
-
-                            //Menua.konexioa.deleteAurrekontua(borratzekoAurrekontua);
-
-                            Toast.makeText(AurrekontuakIkusi.this, "Aurrekontua behar bezala borratu da", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-
-                // Listener huts bat, Ez klikatzen bada ez da aplikazioa itxiko
-                .setNegativeButton(android.R.string.no, null)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+            }
+        })
+        .setNeutralButton("Utzi", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        })
+        .show();
     }
-
-    /**
-     * Aurrekontu bat aldatzeko pantailara doa
-     *
-     * @param view
-     */
-//    private void aldaturaJoan(View view) {
-//        Intent myIntent = new Intent(view.getContext(), AurrekontuaSortu.class);
-//            myIntent.putExtra("aurrekontuak",aurrekontuak);
-//            myIntent.putExtra("produktuak",produktuak);
-//            myIntent.putExtra("bezeroak",bezeroak);
-//            // Tambien tiene que mandarle productos y clientes para que no de error
-//        ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
-//        this.startActivity(myIntent, options.toBundle());
-//
-//        Toast.makeText(getApplicationContext(), "Beste pantila batera joaten", Toast.LENGTH_LONG).show();
-//    }
 
     /**
      * Aurreko pantailara doa

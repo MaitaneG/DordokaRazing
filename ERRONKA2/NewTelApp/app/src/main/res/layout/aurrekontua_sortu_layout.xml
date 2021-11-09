@@ -134,8 +134,9 @@
                 android:padding="3dip"
                 android:text="Produktua"
                 android:textAlignment="center"
-                android:textColor="@color/grisaa"
-                android:textSize="12sp" />
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/produktuaKantitatea"
@@ -145,8 +146,9 @@
                 android:padding="3dip"
                 android:text="Kantitatea"
                 android:textAlignment="center"
-                android:textColor="@color/grisaa"
-                android:textSize="12sp" />
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/produktuaPrezioa"
@@ -156,8 +158,9 @@
                 android:padding="3dip"
                 android:text="Prezioa"
                 android:textAlignment="center"
-                android:textColor="@color/grisaa"
-                android:textSize="12sp" />
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </TableRow>
 
     </TableLayout>
@@ -178,6 +181,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="196dp"
         android:layout_marginTop="552dp"
+        android:text="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -34,8 +34,8 @@ public class Konexioa extends Thread {
             Class.forName("org.postgresql.Driver"); // Driver-a
 
             /** Konexioa lortzen du **/
-            Connection connection =null;
-            connection=DriverManager.getConnection(url, username, password);
+            Connection connection = null;
+            connection = DriverManager.getConnection(url, username, password);
             return connection;
         } catch (Exception e) {
             System.out.print(e.getMessage());
@@ -142,7 +142,7 @@ public class Konexioa extends Thread {
 
                     /** Select-an jaso den informazioa Bezeroa ArrayList batean gordetzen da **/
                     while (rs.next()) {
-                        Bezeroa bezeroa = new Bezeroa(rs.getString("izenaAbizena"), rs.getBoolean("enpresa"), rs.getString("mugikorra"), rs.getString("korreoa"),
+                        Bezeroa bezeroa = new Bezeroa(rs.getInt("id"), rs.getString("izenaAbizena"), rs.getBoolean("enpresa"), rs.getString("mugikorra"), rs.getString("korreoa"),
                                 rs.getString("kalea"), rs.getString("hiria"), rs.getString("probintzia"), rs.getInt("kodigoPostala"),
                                 rs.getString("herrialdea"));
                         System.out.println();
@@ -230,7 +230,8 @@ public class Konexioa extends Thread {
                     PreparedStatement pstmt = null;
 
                     /** Aurrekontuen select-a **/
-                    pstmt = conn.prepareStatement("select sale_order.id as id, sale_order.name as izena, res_partner.name as bezeroaIzena," +
+                    pstmt = conn.prepareStatement("select sale_order.id as id, sale_order.partner_id as bezeoaId, " +
+                            "sale_order.name as izena, res_partner.name as bezeroaIzena, " +
                             "sale_order.date_order as data, sale_order.state as egoera " +
                             "from  sale_order " +
                             "inner join res_partner on sale_order.partner_id= res_partner.id \n" +
@@ -241,7 +242,7 @@ public class Konexioa extends Thread {
 
                     /** Select-an jaso den informazioa Aurrekontua ArrayList batean gordetzen da **/
                     while (rs.next()) {
-                        Aurrekontua aurrekontua = new Aurrekontua(rs.getInt("id"), rs.getString("izena"),
+                        Aurrekontua aurrekontua = new Aurrekontua(rs.getInt("id"), rs.getString("izena"), rs.getInt("bezeoaId"),
                                 rs.getString("bezeroaIzena"), rs.getString("egoera"), rs.getDate("data"));
                         System.out.println();
                         aurrekontuakLista.add(aurrekontua);
@@ -292,7 +293,7 @@ public class Konexioa extends Thread {
 
                     /** Select-an jaso den informazioa Aurrekontua ArrayList batean gordetzen da **/
                     while (rs.next()) {
-                        AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(rs.getInt("lerroa"),rs.getInt("aurrekontua"),rs.getString("produktuIzena"),rs.getFloat("kantitatea"));
+                        AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(rs.getInt("lerroa"), rs.getInt("aurrekontua"), rs.getString("produktuIzena"), rs.getFloat("kantitatea"));
                         System.out.println();
                         aurrekontuaLerroaLista.add(aurrekontuaLerroa);
                     }

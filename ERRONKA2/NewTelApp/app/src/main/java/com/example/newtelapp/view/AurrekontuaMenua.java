@@ -107,6 +107,7 @@ public class AurrekontuaMenua extends AppCompatActivity {
         // Bezeroen eta produktuen ArrayList-ak eramaten du
         myIntent.putExtra("bezeroak", bezeroak);
         myIntent.putExtra("produktuak", produktuak);
+        myIntent.putExtra("aurrekontuak", aurrekontuak);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }

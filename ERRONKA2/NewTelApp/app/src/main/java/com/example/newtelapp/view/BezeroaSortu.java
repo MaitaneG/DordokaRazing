@@ -33,6 +33,7 @@ public class BezeroaSortu extends AppCompatActivity {
     // ImageButton
     private ImageButton irtenBotoia;
     private ImageButton gordeBotoia;
+    private ImageButton borratu;
     // EditText
     private EditText izenAbizena;
     private EditText mugikorZenbakia;
@@ -68,6 +69,7 @@ public class BezeroaSortu extends AppCompatActivity {
         // Botoiak
         irtenBotoia = findViewById(R.id.buttonIrtenAurrekontuaSortu);
         gordeBotoia = findViewById(R.id.buttonGordeBezeroa);
+        borratu =findViewById(R.id.imageButtonBorratu);
         // EditText
         izenAbizena = findViewById(R.id.editTextIzenaAbizena);
         mugikorZenbakia = findViewById(R.id.editTextMugikorra);
@@ -83,10 +85,26 @@ public class BezeroaSortu extends AppCompatActivity {
         /** Botoiei listenerra jarri **/
         irtenBotoia.setOnClickListener(this::irten);
         gordeBotoia.setOnClickListener(this::gorde);
+        borratu.setOnClickListener(this::borratu);
 
         /** ArrayList-ak informazioz bete **/
         bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
         produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
+    }
+
+    private void borratu(View view) {
+        garbitu();
+    }
+
+    private void garbitu(){
+        izenAbizena.setText("");
+        mugikorZenbakia.setText("");
+        korreoElektronikoa.setText("");
+        kalea.setText("");
+        hiria.setText("");
+        probintzia.setText("");
+        kodigoPostala.setText("");
+        herrialdea.setText("");
     }
 
     /**
@@ -103,6 +121,7 @@ public class BezeroaSortu extends AppCompatActivity {
                 // Baiezko aukera klikatzen bada, bezeroa gordeko da
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        /** Bezeroa gordetzen du **/
                         // Gako guztiak beteta daudela konprobatzen du
                         if (izenAbizena.getText().toString().trim().equals("") || mugikorZenbakia.getText().toString().trim().equals("") ||
                                 korreoElektronikoa.getText().toString().trim().equals("") || kalea.getText().toString().trim().equals("") ||
@@ -114,7 +133,7 @@ public class BezeroaSortu extends AppCompatActivity {
                             Toast.makeText(view.getContext(), "Korreoaren formatua gaizki dago", Toast.LENGTH_SHORT).show();
                             // Informazio guztia beteta badago eta ondo
                         } else {
-                            Bezeroa bezeroa = new Bezeroa(izenAbizena.getText().toString(), enpresaDa.isChecked(), mugikorZenbakia.getText().toString().trim(),
+                            Bezeroa bezeroa = new Bezeroa(/*El id no lo uso*/1,izenAbizena.getText().toString(), enpresaDa.isChecked(), mugikorZenbakia.getText().toString().trim(),
                                     korreoElektronikoa.getText().toString().trim(), kalea.getText().toString(), hiria.getText().toString().trim(),
                                     probintzia.getText().toString().trim(), Integer.parseInt(kodigoPostala.getText().toString().trim()),
                                     herrialdea.getText().toString().trim());
@@ -136,10 +155,8 @@ public class BezeroaSortu extends AppCompatActivity {
 
     /**
      * Aurreko layout-era joateko
-     *
-     * @param view
      */
-    private void irten(View view) {
+    private void alertAtzera() {
         /** Alert-a sortu eta hasieratu **/
         new AlertDialog.Builder(this)
                 .setTitle("Pantaila honetatik irtetzen")// Dialog-ari titulua jarri
@@ -149,21 +166,15 @@ public class BezeroaSortu extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Gakoak husten du
-                        izenAbizena.setText("");
-                        mugikorZenbakia.setText("");
-                        korreoElektronikoa.setText("");
-                        kalea.setText("");
-                        hiria.setText("");
-                        probintzia.setText("");
-                        kodigoPostala.setText("");
-                        herrialdea.setText("");
+                        garbitu();
+
                         // Aurreko layout-era doa
-                        Intent myIntent = new Intent(view.getContext(), AurrekontuaSortu.class);
+                        Intent myIntent = new Intent(BezeroaSortu.this, AurrekontuaSortu.class);
                         // Bezeroen eta produktuen ArrayList-a eramaten du
                         myIntent.putExtra("bezeroak", bezeroak);
                         myIntent.putExtra("produktuak", produktuak);
-                        ActivityOptions options = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.from_right, R.anim.from_right); // Animazioa definitzen
-                        view.getContext().startActivity(myIntent, options.toBundle());
+                        ActivityOptions options = ActivityOptions.makeCustomAnimation(BezeroaSortu.this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
+                        BezeroaSortu.this.startActivity(myIntent, options.toBundle());
                     }
                 })
 
@@ -171,7 +182,20 @@ public class BezeroaSortu extends AppCompatActivity {
                 .setNegativeButton(android.R.string.no, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
 
+    /**
+     * Aurreko layout-era joateko
+     */
+    private void irten(View view) {
+        alertAtzera();
+    }
 
+    /**
+     * Atzera joateko botoia klikatzean
+     */
+    @Override
+    public void onBackPressed() {
+        alertAtzera();
     }
 }

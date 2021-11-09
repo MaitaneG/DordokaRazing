@@ -24,11 +24,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.newtelapp.R;
+import com.example.newtelapp.model.Aurrekontua;
 import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * AurrekontuaSortu Layout-aren klasea
@@ -49,6 +51,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
     // ArrayList-ak
     private ArrayList<Bezeroa> bezeroak;
     private ArrayList<Produktua> produktuak;
+    private ArrayList<Aurrekontua> aurrekontuak;
     // EditText
     private EditText kantitatea;
     // TableLayout
@@ -95,6 +98,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
         /** ArrayList-ak bete **/
         bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
         produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
+        aurrekontuak = (ArrayList<Aurrekontua>) getIntent().getSerializableExtra("aurrekontuak");
 
         /**Spinnerak kargatu**/
         spinnerrakKargatu();
@@ -173,7 +177,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
         /** Zutabeak betzen du **/
         column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());
         column2.setText(kantitatea.getText().toString());
-        column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa()+" €");
+        column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() + " €");
 
         /** Zutabeak ilaran sartu **/
         tableRow.addView(column1);
@@ -183,12 +187,10 @@ public class AurrekontuaSortu extends AppCompatActivity {
         /** Ilara taulan sartzen du **/
         taula.addView(tableRow);
 
-        prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString())+(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString()))+"");
+        prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString()) + (produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString())) + "");
 
         /** Kantitatea gakoa hustu**/
         kantitatea.setText("");
-
-        //Toast.makeText(this, produktuSpinner.getSelectedItemPosition() + "", Toast.LENGTH_SHORT);
     }
 
     /**
@@ -217,7 +219,16 @@ public class AurrekontuaSortu extends AppCompatActivity {
 
                         if (getIntent().getBooleanExtra("EXIT", true)) {
                             // Aqui todo el codigo
+                            String aurrekontuIzena="";
+                            int ida=0;
+                            for(int i=0;i<aurrekontuak.size();i++){
+                                ida=aurrekontuak.get(i).getId();
+                            }
+                            aurrekontuIzena="SM000"+ida;
+                            Toast.makeText(AurrekontuaSortu.this, aurrekontuIzena, Toast.LENGTH_SHORT).show();
 
+                            Date data= new Date();
+//                            Aurrekontua aurrekontua=new Aurrekontua(1,aurrekontuIzena,bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getIzenaAbizena(),"draft",data)
                         }
                     }
                 })
@@ -242,6 +253,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         if (getIntent().getBooleanExtra("EXIT", true)) {
+                            /** Aurreko pantailara joaten da**/
                             Intent myIntent = new Intent(AurrekontuaSortu.this, AurrekontuaMenua.class);
                             ActivityOptions options = ActivityOptions.makeCustomAnimation(getBaseContext(), R.anim.from_right, R.anim.from_right); // Animazioa definitzen
                             AurrekontuaSortu.this.startActivity(myIntent, options.toBundle());

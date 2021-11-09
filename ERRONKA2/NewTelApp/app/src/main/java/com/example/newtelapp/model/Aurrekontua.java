@@ -13,10 +13,10 @@ public class Aurrekontua implements Serializable {
      * Atributoak
      */
     private int id;
-    private String name;
+    private String izena;
+    private int bezeroaId;
     private String bezeroaIzena;
     private String state; //Select-a egitean ez du balio, baina bai insert-a egiterakoan
-
     private Date data;
 
     /**
@@ -24,14 +24,15 @@ public class Aurrekontua implements Serializable {
      *
      * @param id
      * @param izena
-     * @param bezeroaIzena
+     * @param bezeroaId
      * @param state
      * @param data
      */
-    public Aurrekontua(int id, String izena, String bezeroaIzena, String state, Date data) {
+    public Aurrekontua(int id, String izena, int bezeroaId, String bezeroaIzena, String state, Date data) {
         this.id = id;
-        this.name = izena;
-        this.bezeroaIzena = bezeroaIzena;
+        this.izena = izena;
+        this.bezeroaId = bezeroaId;
+        this.bezeroaIzena=bezeroaIzena;
         this.state = state;
         this.data = data;
     }
@@ -47,12 +48,20 @@ public class Aurrekontua implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getIzena() {
+        return izena;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIzena(String izena) {
+        this.izena = izena;
+    }
+
+    public int getBezeroaId() {
+        return bezeroaId;
+    }
+
+    public void setBezeroaId(int bezeroaId) {
+        this.bezeroaId = bezeroaId;
     }
 
     public String getBezeroaIzena() {
@@ -85,7 +94,7 @@ public class Aurrekontua implements Serializable {
 
     @Override
     public String toString() {
-        return "Izena: " + name + '\n' +
+        return "Izena: " + izena + '\n' +
                 "Bezeroa: " + bezeroaIzena + '\n' +
                 "Data: " + data;
     }

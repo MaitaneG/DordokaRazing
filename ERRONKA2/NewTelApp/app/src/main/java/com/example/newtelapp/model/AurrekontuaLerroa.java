@@ -5,14 +5,17 @@ import java.io.Serializable;
 public class AurrekontuaLerroa implements Serializable {
     private int idLine;
     private int idAurrekontua;
-    private String nameProduct;
+    private int idProduktua;
+    private String izenaProduktua;
+    private float prezioaProduktua;
     private float kantitatea;
 
-
-    public AurrekontuaLerroa(int idLine, int idAurrekontua, String name, float kantitatea) {
+    public AurrekontuaLerroa(int idLine, int idAurrekontua ,int idProduktua, String izenaProduktua, float prezioaProduktua, float kantitatea) {
         this.idLine = idLine;
         this.idAurrekontua = idAurrekontua;
-        this.nameProduct = name;
+        this.idProduktua=idProduktua;
+        this.izenaProduktua = izenaProduktua;
+        this.prezioaProduktua = prezioaProduktua;
         this.kantitatea = kantitatea;
 
     }
@@ -33,27 +36,43 @@ public class AurrekontuaLerroa implements Serializable {
         this.idAurrekontua = idAurrekontua;
     }
 
-    public String getName() {
-        return nameProduct;
+    public int getIdProduktua() {
+        return idProduktua;
     }
 
-    public void setName(String nameProduct) {
-        this.nameProduct = nameProduct;
+    public void setIdProduktua(int idProduktua) {
+        this.idProduktua = idProduktua;
+    }
+
+    public String getIzenaProduktua() {
+        return izenaProduktua;
+    }
+
+    public void setIzenaProduktua(String izenaProduktua) {
+        this.izenaProduktua = izenaProduktua;
+    }
+
+    public float getPrezioaProduktua() {
+        return prezioaProduktua;
+    }
+
+    public void setPrezioaProduktua(float prezioaProduktua) {
+        this.prezioaProduktua = prezioaProduktua;
+    }
+
+    public void setKantitatea(float kantitatea) {
+        this.kantitatea = kantitatea;
     }
 
     public float getKantitatea() {
         return kantitatea;
     }
 
-    public void setKantitatea(int kantitatea) {
-        this.kantitatea = kantitatea;
-    }
-
     @Override
     public String toString() {
         return "Produktu lerroa: " + idLine +
                 "Aurrekontu id-a: " + idAurrekontua +
-                "Izena: " + nameProduct +
-                "Kantitatea " + kantitatea;
+                "Izena: " + izenaProduktua +
+                "Kantatitatea " + kantitatea;
     }
 }

@@ -115,12 +115,14 @@ public class AurrekontuakIkusi extends AppCompatActivity {
         .setNegativeButton("Ezabatu", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Menua.konexioa.deleteAurrekontua(aurrekontuak.get((int) l));
-                Toast.makeText(AurrekontuakIkusi.this, aurrekontuak.get((int) l).getName() + " aurrekontua behar bezala ezabatu da", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AurrekontuakIkusi.this, aurrekontuak.get((int) l).getIzena() + " aurrekontua behar bezala ezabatu da", Toast.LENGTH_SHORT).show();
+
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 Toast.makeText(AurrekontuakIkusi.this, "Sartu berriro pantaila honetara aldaketak ikusteko", Toast.LENGTH_SHORT).show();
 
             }

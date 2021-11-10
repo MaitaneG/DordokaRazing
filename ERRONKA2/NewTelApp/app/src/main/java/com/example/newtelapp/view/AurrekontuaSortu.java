@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -25,12 +26,14 @@ import androidx.core.content.ContextCompat;
 
 import com.example.newtelapp.R;
 import com.example.newtelapp.model.Aurrekontua;
+import com.example.newtelapp.model.AurrekontuaLerroa;
 import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.Semaphore;
 
 /**
  * AurrekontuaSortu Layout-aren klasea
@@ -58,6 +61,15 @@ public class AurrekontuaSortu extends AppCompatActivity {
     private TableLayout taula;
     // TextView
     private TextView prezioaGuztira;
+    // SemaforoaInsertAurrekontua
+    private Semaphore semaforoaInsertAurrekontua;
+
+    String produktuIzena = "";
+    float produktuKantitatea = (float) 0.1;
+    float produktuPrezioa = (float) 0.1;
+
+    String aurrekontuIzena;
+    int ida;
 
     /**
      * Layout-a sortzen denean
@@ -99,6 +111,9 @@ public class AurrekontuaSortu extends AppCompatActivity {
         bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
         produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
         aurrekontuak = (ArrayList<Aurrekontua>) getIntent().getSerializableExtra("aurrekontuak");
+
+        /** Semaforoa hasieratu **/
+        semaforoaInsertAurrekontua = new Semaphore(1, true);
 
         /**Spinnerak kargatu**/
         spinnerrakKargatu();
@@ -149,48 +164,55 @@ public class AurrekontuaSortu extends AppCompatActivity {
      */
     @SuppressLint("ResourceAsColor")
     private void produktuBatGehitu(View view) {
-        /** Ilara bat sortzen du **/
-        TableRow tableRow = new TableRow(this);
+        // Kantitatea hutsik badago
+        if (kantitatea.getText().toString().equals("")) {
+            Toast.makeText(this, "Produktuen kantitatea sartu behar duzu", Toast.LENGTH_SHORT).show();
+            // Knatitatea ez badago hutsik
+        } else {
+            /** Ilara bat sortzen du **/
+            TableRow tableRow = new TableRow(this);
 
-        /** Hiru zutabe sortzen du **/
-        // Zutabeen zabalera definitzeko (dp-tik pixeletara pasatu)
-        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-        int px1 = Math.round(115 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-        int px23 = Math.round(70 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+            /** Hiru zutabe sortzen du **/
+            // Zutabeen zabalera definitzeko (dp-tik pixeletara pasatu)
+            DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+            int px1 = Math.round(115 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+            int px23 = Math.round(70 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
 
-        // Lehenengo zutabea
-        TextView column1 = new TextView(this);
-        column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column1.setTextColor(R.color.black);
-        column1.setWidth(px1);
-        // Bigarren zutabea
-        TextView column2 = new TextView(this);
-        column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column1.setTextColor(R.color.black);
-        column2.setWidth(px23);
-        // Hirugarren zutabea
-        TextView column3 = new TextView(this);
-        column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        column1.setTextColor(R.color.black);
-        column3.setWidth(px23);
+            // Lehenengo zutabea
+            TextView column1 = new TextView(this);
+            column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            column1.setTextColor(R.color.black);
+            column1.setWidth(px1);
+            // Bigarren zutabea
+            TextView column2 = new TextView(this);
+            column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            column1.setTextColor(R.color.black);
+            column2.setWidth(px23);
+            // Hirugarren zutabea
+            TextView column3 = new TextView(this);
+            column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            column1.setTextColor(R.color.black);
+            column3.setWidth(px23);
 
-        /** Zutabeak betzen du **/
-        column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());
-        column2.setText(kantitatea.getText().toString());
-        column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() + " €");
+            /** Zutabeak betzen du **/
+            column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());
+            column2.setText(kantitatea.getText().toString());
+            column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() + "");
 
-        /** Zutabeak ilaran sartu **/
-        tableRow.addView(column1);
-        tableRow.addView(column2);
-        tableRow.addView(column3);
+            /** Zutabeak ilaran sartu **/
+            tableRow.addView(column1);
+            tableRow.addView(column2);
+            tableRow.addView(column3);
 
-        /** Ilara taulan sartzen du **/
-        taula.addView(tableRow);
+            /** Ilara taulan sartzen du **/
+            taula.addView(tableRow);
 
-        prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString()) + (produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString())) + "");
+            prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString()) + (produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString())) + "");
 
-        /** Kantitatea gakoa hustu**/
-        kantitatea.setText("");
+            /** Kantitatea gakoa hustu**/
+            kantitatea.setText("");
+        }
+
     }
 
     /**
@@ -218,17 +240,84 @@ public class AurrekontuaSortu extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         if (getIntent().getBooleanExtra("EXIT", true)) {
-                            // Aqui todo el codigo
-                            String aurrekontuIzena="";
-                            int ida=0;
-                            for(int i=0;i<aurrekontuak.size();i++){
-                                ida=aurrekontuak.get(i).getId();
-                            }
-                            aurrekontuIzena="SM000"+ida;
-                            Toast.makeText(AurrekontuaSortu.this, aurrekontuIzena, Toast.LENGTH_SHORT).show();
 
-                            Date data= new Date();
-//                            Aurrekontua aurrekontua=new Aurrekontua(1,aurrekontuIzena,bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getIzenaAbizena(),"draft",data)
+                            /** Datuen lehengo ilara hartzen du **/
+                            View child = taula.getChildAt(1);
+
+                            /** Hutsik badago **/
+                            if (child == null) {
+                                Toast.makeText(AurrekontuaSortu.this, "Ez dago daturik taulan. Datuak sartu behar dituzu gorde ahal izateko", Toast.LENGTH_LONG).show();
+                                /** Datuak badaude **/
+                            } else {
+                                /** Sortzen du aurrekontuaren izena **/
+                                aurrekontuIzena = "";
+                                ida = 0;
+                                for (int i = 0; i < aurrekontuak.size(); i++) {
+                                    ida = aurrekontuak.get(i).getId();
+                                }
+                                aurrekontuIzena = "SM000" + ida;
+                                Toast.makeText(AurrekontuaSortu.this, aurrekontuIzena, Toast.LENGTH_SHORT).show();
+
+                                Date data = new Date(2002, 11, 28);
+                                /** Aurrekontu objetu bat sortzen du **/
+                                Aurrekontua aurrekontua = new Aurrekontua(1, aurrekontuIzena, bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getId(), bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getIzenaAbizena(), "draft", Float.parseFloat(prezioaGuztira.getText().toString()), data);
+
+                                Thread insertAurrekontuak = new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            semaforoaInsertAurrekontua.acquire();
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Menua.konexioa.insertAurrekontua(aurrekontua);
+                                        semaforoaInsertAurrekontua.release();
+                                    }
+                                });
+                                insertAurrekontuak.setPriority(Thread.MAX_PRIORITY);
+                                insertAurrekontuak.start();
+
+                                Thread insertAurrekontuaLerroa = new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        /** Ilara bakoitzeko **/
+                                        for (int i = 1; i < taula.getChildCount(); i++) {
+                                            /** Sortzen du ilara bat **/
+                                            View row = taula.getChildAt(i);
+                                            if (row instanceof TableRow) {
+                                                TableRow rowC = (TableRow) row;
+                                                /** Zutabe bakoitzeko **/
+                                                for (int j = 0; j < rowC.getChildCount(); j++) {
+                                                    /** Sortzen du zutabe bat **/
+                                                    TextView texto = (TextView) rowC.getChildAt(j);
+                                                    /** Datuen lehenengo zutabea bada **/
+                                                    if (j == 0) {
+                                                        produktuIzena = texto.getText().toString();
+                                                        //Toast.makeText(AurrekontuaSortu.this, "Produktua: " + produktuIzena, Toast.LENGTH_LONG).show();
+                                                        /** Datuen bigarren zutabea bada **/
+                                                    } else if (j == 1) {
+                                                        produktuKantitatea = Float.parseFloat(texto.getText().toString());
+                                                        //Toast.makeText(AurrekontuaSortu.this, "Kantitatea: " + produktuKantitatea, Toast.LENGTH_LONG).show();
+                                                        /** Datuen hirugarren zutabea bada **/
+                                                    } else {
+                                                        produktuPrezioa = Float.parseFloat(texto.getText().toString());
+                                                        //Toast.makeText(AurrekontuaSortu.this, "prezioa: " + produktuPrezioa, Toast.LENGTH_LONG).show();
+                                                    }
+                                                    for(int h=0;h<produktuak.size();h++){
+                                                        if(produktuak.get(h).getIzena().equals(produktuIzena)){
+                                                            AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(1, ida + 1, produktuak.get(h).getId(),produktuIzena, produktuPrezioa, produktuKantitatea);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                                insertAurrekontuaLerroa.start();
+                            }
+
+                            taulaHasieratu();
+                            prezioaGuztira.setText("");
                         }
                     }
                 })

@@ -232,7 +232,7 @@ public class Konexioa extends Thread {
                     /** Aurrekontuen select-a **/
                     pstmt = conn.prepareStatement("select sale_order.id as id, sale_order.partner_id as bezeoaId, " +
                             "sale_order.name as izena, res_partner.name as bezeroaIzena, " +
-                            "sale_order.date_order as data, sale_order.state as egoera " +
+                            "sale_order.date_order as data, sale_order.state as egoera, sale_order.amount_total as totala " +
                             "from  sale_order " +
                             "inner join res_partner on sale_order.partner_id= res_partner.id \n" +
                             "where sale_order.state = 'draft' order by sale_order.id asc\n");
@@ -243,7 +243,7 @@ public class Konexioa extends Thread {
                     /** Select-an jaso den informazioa Aurrekontua ArrayList batean gordetzen da **/
                     while (rs.next()) {
                         Aurrekontua aurrekontua = new Aurrekontua(rs.getInt("id"), rs.getString("izena"), rs.getInt("bezeoaId"),
-                                rs.getString("bezeroaIzena"), rs.getString("egoera"), rs.getDate("data"));
+                                rs.getString("bezeroaIzena"), rs.getString("egoera"), rs.getFloat("totala"), rs.getDate("data"));
                         System.out.println();
                         aurrekontuakLista.add(aurrekontua);
                     }
@@ -282,7 +282,8 @@ public class Konexioa extends Thread {
                     PreparedStatement pstmt = null;
 
                     /** AurrekontuaLerroen select-a **/
-                    pstmt = conn.prepareStatement("SELECT sale_order_line.id as lerroa, sale_order_line.order_id as aurrekontua, \n" +
+                    pstmt = conn.prepareStatement("SELECT sale_order_line.id as lerroa, sale_order_line.order_id as aurrekontua, " +
+                            "sale_order_line.product_id as produktuId, sale_order_line.price_unit as prezioa, " +
                             "product_template.name as ProduktuIzena, sale_order_line.product_uom_qty as kantitatea\n" +
                             "FROM sale_order_line\n" +
                             "inner join product_template on sale_order_line.product_id = product_template.id\n" +
@@ -293,7 +294,8 @@ public class Konexioa extends Thread {
 
                     /** Select-an jaso den informazioa Aurrekontua ArrayList batean gordetzen da **/
                     while (rs.next()) {
-                        AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(rs.getInt("lerroa"), rs.getInt("aurrekontua"), rs.getString("produktuIzena"), rs.getFloat("kantitatea"));
+                        AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(rs.getInt("lerroa"), rs.getInt("aurrekontua"),
+                                rs.getInt("produktuId"), rs.getString("produktuIzena"), rs.getFloat("prezioa"), rs.getFloat("kantitatea"));
                         System.out.println();
                         aurrekontuaLerroaLista.add(aurrekontuaLerroa);
                     }
@@ -307,9 +309,6 @@ public class Konexioa extends Thread {
         /** Aurrekontuen ArrayList-a bueltatzen du **/
         return aurrekontuaLerroaLista;
     }
-
-
-    // FALTA LA SENTENCIA SQL
 
     /**
      * Aurrekontuak sortzeko metodoa
@@ -333,19 +332,17 @@ public class Konexioa extends Thread {
                     PreparedStatement pstmt = null;
 
                     /** Aurrekontuen insert-a **/
-                    /*pstmt = conn.prepareStatement("select res_partner.id as id, res_partner.name  as izenaAbizena, " +
-                            "res_partner.company_name as enpresa, res_partner.mobile as mugikorra,\n" +
-                            "res_partner.email as korreoa,res_partner.street as kalea,res_partner.city as hiria," +
-                            "res_partner.zip as kodigoPostala, res_country_state.name as probintzia,\n" +
-                            "res_country.name as herrialdea from  res_partner\n" +
-                            "inner join  res_country_state on res_partner.state_id = res_country_state.id\n" +
-                            "inner join res_country on res_partner.country_id = res_country.id\n" +
-                            "order by res_partner.id asc\n");*/
+                    pstmt = conn.prepareStatement("INSERT INTO sale_order(name, reference, date_order, user_id,partner_id, partner_invoice_id, " +
+                            "partner_shipping_id, pricelist_id, company_id, picking_policy, warehouse_id, require_signature, require_payment, create_date, " +
+                            "state, currency_id, invoice_status, note, amount_total, currency_rate, payment_term_id, create_uid, write_uid, write_date)\n" +
+                            "VALUES (?, ?, CURRENT_DATE , 7, ?, ?, ?,'1','1','direct','1', true, false, CURRENT_DATE,'draft',1,'no', '', ?, 1, 1, 1, 1, CURRENT_DATE);\n");
 
-                    pstmt.setInt(1, aurrekontua.getId());
-
-                    /** Sententzia exekutatzen da **/
-                    ResultSet rs = pstmt.executeQuery();
+                    pstmt.setString(1, aurrekontua.getIzena());
+                    pstmt.setString(2, aurrekontua.getIzena());
+                    pstmt.setInt(3, aurrekontua.getBezeroaId());
+                    pstmt.setInt(4, aurrekontua.getBezeroaId());
+                    pstmt.setInt(5, aurrekontua.getBezeroaId());
+                    pstmt.setFloat(6, aurrekontua.getTotal());
 
                     /** Sententzia exekutatzen da **/
                     pstmt.executeUpdate();
@@ -356,6 +353,48 @@ public class Konexioa extends Thread {
         });
         /** Haria exekutatzen da **/
         insertAurrekontua.start();
+    }
+
+    /**
+     * Aurrekontuak sortzeko metodoa
+     */
+    public void insertAurrekontuaLerroa(AurrekontuaLerroa aurrekontualerroa) {
+        /**
+         *
+         * Hari bat sortzen da aurrekontuLerroaren insert bat egiteko
+         */
+        Thread insertAurrekontuaLerroa = new Thread(new Runnable() {
+            /**
+             *
+             * Hariaren exekutagarria da
+             */
+            @Override
+            public void run() {
+                try {
+                    /** Konexioa lortzeko connect metodoari deitzen dio **/
+                    Connection conn = connect();
+                    Class.forName("org.postgresql.Driver");
+                    PreparedStatement pstmt = null;
+
+                    /** AurrekontuLerroen insert-a **/
+                    pstmt = conn.prepareStatement("INSERT INTO sale_order_line(order_id, name, price_unit, " +
+                            "product_uom_qty, customer_lead, display_type, product_id, product_uom, price_total, state)\n" +
+                            "VALUES ((select max(id)from sale_order ), ?, ?, 4,0, null, '3', '1', '5.3', 'draft');\n");
+
+//                    pstmt.setString(1, aurrekontualerroa.getIzenaProduktua());
+//                    pstmt.setInt(2, aurrekontualerroa.get);
+//                    pstmt.setInt(3, aurrekontualerroa.getBezeroaId());
+//                    pstmt.setInt(4, aurrekontualerroa.getBezeroaId());
+
+                    /** Sententzia exekutatzen da **/
+                    pstmt.executeUpdate();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        /** Haria exekutatzen da **/
+        insertAurrekontuaLerroa.start();
     }
 
     /**

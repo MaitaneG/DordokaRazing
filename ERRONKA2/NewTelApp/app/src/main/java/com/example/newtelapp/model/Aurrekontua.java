@@ -17,6 +17,7 @@ public class Aurrekontua implements Serializable {
     private int bezeroaId;
     private String bezeroaIzena;
     private String state; //Select-a egitean ez du balio, baina bai insert-a egiterakoan
+    private float total;
     private Date data;
 
     /**
@@ -28,12 +29,13 @@ public class Aurrekontua implements Serializable {
      * @param state
      * @param data
      */
-    public Aurrekontua(int id, String izena, int bezeroaId, String bezeroaIzena, String state, Date data) {
+    public Aurrekontua(int id, String izena, int bezeroaId, String bezeroaIzena, String state, float total, Date data) {
         this.id = id;
         this.izena = izena;
         this.bezeroaId = bezeroaId;
-        this.bezeroaIzena=bezeroaIzena;
+        this.bezeroaIzena = bezeroaIzena;
         this.state = state;
+        this.total = total;
         this.data = data;
     }
 
@@ -82,6 +84,14 @@ public class Aurrekontua implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
     }
 
     public Date getData() {

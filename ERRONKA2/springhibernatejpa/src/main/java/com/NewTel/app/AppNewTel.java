@@ -4,6 +4,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import javax.sound.sampled.*;
@@ -18,6 +19,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import com.NewTel.song.Festi;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -43,6 +45,10 @@ public class AppNewTel {
     public static SaleOrderDao salesDao;
     public static ResPartnerDao resPartnerDao;
     public static SaleOrderLineDao saoLineDao;
+    public static PurchaseOrderDao purchaseOrderDao;
+    public static PurchaseOrderLineDao purchaseOrderLineDao;
+
+    private static RunHelper runHelper;
     public static ApplicationContext appContext;
     public static ApplicationContext appContext2;
     //ArrayListak
@@ -50,9 +56,13 @@ public class AppNewTel {
     public static List<ResPartner> clients;
     public static List<SaleOrder> sales;
     public static List<SaleOrderLine> salesLines;
+    public static List<PurchaseOrder> purchases;
+    public static List<PurchaseOrderLine> purchasesLines;
+
     //Booleano batzuk
     public static boolean bExported = false;
     public static boolean pExported = false;
+    public static boolean puExported = false;
     public static boolean sExported = false;
     //xml-en  rutak
     public static String path = "config.xml";
@@ -61,26 +71,47 @@ public class AppNewTel {
     public static Festi song = new Festi();         //Abestiaren klasea
 
 
+
+
+
+
+
+
+
     public static void main(String[] args) {
+
         song.setPriority(Thread.MAX_PRIORITY);      //Abestiaren hariari prioritate handiena emango diogu, horrela
         // programa nagusia baino garrantzitsuagoa izango da eta hasieratik entzungo da
         song.start();
 
         appContext = new AnnotationConfigApplicationContext(DatuBasearenKonfigurazioa_Postgres.class);  //kontextua eta postgres daoak abiarazi
-
+       //
+        runHelper = appContext.getBean(RunHelper.class);
+        purchaseOrderDao = appContext.getBean(PurchaseOrderDao.class);
+        purchaseOrderLineDao = appContext.getBean(PurchaseOrderLineDao.class);
         productDao = appContext.getBean(ProductProductDao.class);
         salesDao = appContext.getBean(SaleOrderDao.class);
         saoLineDao = appContext.getBean(SaleOrderLineDao.class);
 
         resPartnerDao = appContext.getBean(ResPartnerDao.class);
+        runMain(args);
 
-        File file = new File(path);  // Konfigurazio xml a
 
-        if (!file.exists()) {        //ea XML konfigurazio Fitxategia existitzen den konprobatzen du
-            menuOsoaBistaratu();
-        } else {
-            menuaBistaratu();
-        }
+
+
+
+
+
+
+
+
+//        File file = new File(path);  // Konfigurazio xml a
+//
+//        if (!file.exists()) {        //ea XML konfigurazio Fitxategia existitzen den konprobatzen du
+//            runMain(args);
+//        } else {
+//            menuaBistaratu();
+//        }
 
     }
 
@@ -114,10 +145,13 @@ public class AppNewTel {
                     aukerak.add("salmentak");
                     break;
                 case 4:
+                    System.out.println("Erosketak aukeratu dituzu");
+                    aukerak.add("erosketak");
+                case 5:
                     Thread th = new Thread("datuak gordetzen...");
-                    if (!song.isAlive()) {                                  //Aukeraketa amaitzean abestia martxan ez badago
-                        song.run();                                         //martxan jartzen du
-                    }
+//                    if (!song.isAlive()) {                                  //Aukeraketa amaitzean abestia martxan ez badago
+//                        song.run();                                         //martxan jartzen du
+//                    }
                     try {
                         th.sleep(2000);
 
@@ -132,7 +166,7 @@ public class AppNewTel {
 
                         updateDB();
                         logMaker();
-                        openSound();
+                        openSound(1);
                     }
                     exit = true;                                        //Amaiera
 
@@ -143,6 +177,8 @@ public class AppNewTel {
         // Hemen un AsyncTask?
 
     }
+
+
 
     /**
      * Metodo honek xml konfigurazio fitxategia sortzen du
@@ -162,7 +198,8 @@ public class AppNewTel {
         if (aukerak.contains("bezeroak")) {
             clients = new ArrayList<ResPartner>();
             clients = resPartnerDao.getAll(); //Hibernate jpa
-        }
+
+                    }
         if (aukerak.contains("produktuak")) {
             products = new ArrayList<ProductProduct>();
             products = productDao.getAll();
@@ -172,6 +209,12 @@ public class AppNewTel {
             sales = salesDao.getAll();
             salesLines = new ArrayList<SaleOrderLine>();
             salesLines = saoLineDao.getAll();
+        }
+        if (aukerak.contains("erosketak")){
+            purchases = new ArrayList<PurchaseOrder>();
+            purchases = purchaseOrderDao.getAll();
+            purchasesLines = new ArrayList<PurchaseOrderLine>();
+            purchasesLines = purchaseOrderLineDao.getAll();
         }
         // xml sortzeko kodigoa:
 
@@ -222,6 +265,18 @@ public class AppNewTel {
                 sattr.setTextContent("false");
             salmenta.appendChild(sattr);
 
+            // erosketak
+            Element erosketak = document.createElement("erosketak");
+            root.appendChild(erosketak);
+            Element eattr = document.createElement("exported");
+
+            if(purchases != null)
+                eattr.setTextContent("true");
+            else
+                eattr.setTextContent("false");
+
+            erosketak.appendChild(eattr);
+
             // Create xml
             TransformerFactory transformers = TransformerFactory.newInstance();
             Transformer bambelbi = transformers.newTransformer();
@@ -261,6 +316,8 @@ public class AppNewTel {
         SaleOrderDao salesDao;
         ResPartnerDao resPartnerDao;
         SaleOrderLineDao saoLineDao;
+        PurchaseOrderDao purchaseOrderDao;
+        PurchaseOrderLineDao purchaseOrderLineDao;
 
 
         productDao = appContext2.getBean(ProductProductDao.class);
@@ -271,10 +328,15 @@ public class AppNewTel {
 
         resPartnerDao = appContext2.getBean(ResPartnerDao.class);
 
+        purchaseOrderDao = appContext2.getBean(PurchaseOrderDao.class);
+
+        purchaseOrderLineDao = appContext2.getBean(PurchaseOrderLineDao.class);
+
         try {
             if (clients != null)                //Exportatzeko zer dagoen begiratzen du
                 for (ResPartner rp : clients)
-                    if( rp.getCustomerRank()!=null) if( rp.getCustomerRank()!=0) resPartnerDao.update(rp);
+                   // if( rp.getCustomerRank()!=null) if( rp.getCustomerRank()!=0)
+                    resPartnerDao.update(rp);
 
             if (products != null)
                 for (ProductProduct p : products)
@@ -284,6 +346,12 @@ public class AppNewTel {
                     salesDao.update(s);
                 for (SaleOrderLine s : salesLines)
                     saoLineDao.update(s);
+            }
+            if(purchases != null){
+                for (PurchaseOrder p : purchases)
+                    purchaseOrderDao.update(p);
+                for (PurchaseOrderLine p : purchasesLines)
+                    purchaseOrderLineDao.update(p);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -307,9 +375,9 @@ public class AppNewTel {
         String aukera = sc.next().toLowerCase();    //Erabiltzailearen input -a
         if (aukera.equals("bai") || aukera.equals("b")) {
             // movida xml de configuracion
-            if (!song.isAlive()) {                  //Abestia amaitu bada berriz hasi.
-                song.run();
-            }
+//            if (!song.isAlive()) {                  //Abestia amaitu bada berriz hasi.
+//                song.run();
+//            }
             try {
                 if (bExported) {                            //Ea zer objetu exportatu diren begiratzen du.
                     clients = new ArrayList<ResPartner>();
@@ -324,10 +392,15 @@ public class AppNewTel {
                     sales = salesDao.getAll();
                     salesLines = new ArrayList<SaleOrderLine>();
                     salesLines = saoLineDao.getAll();
+                }if(puExported) {
+                    purchases = new ArrayList<PurchaseOrder>();
+                    purchases = purchaseOrderDao.getAll();
+                    purchasesLines = new ArrayList<PurchaseOrderLine>();
+                    purchasesLines = purchaseOrderLineDao.getAll();
                 }
                 updateDB();                             //Aurreko menuan bezala
                 logMaker();
-                openSound();
+                openSound(1);
             } catch (Exception ex) {
                 System.out.println("Errorea datubase prozesuan (menuaBistaratu)");
                 ex.printStackTrace();
@@ -401,6 +474,21 @@ public class AppNewTel {
                     sExported = Boolean.parseBoolean(salmenta.getFirstChild().getTextContent());
 
             }
+            NodeList purchaseList = doc.getElementsByTagName("purchases");
+
+            // bezero tag bat baino gehiago balego
+
+            nodo = saleList.item(0);
+
+            if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+
+                Element salmenta = (Element) nodo;
+
+                // get staff's attribute
+                if (salmenta.getFirstChild() != null)
+                    puExported = Boolean.parseBoolean(salmenta.getFirstChild().getTextContent());
+
+            }
 
         } catch (SAXException | IOException | ParserConfigurationException e) {
             // TODO Auto-generated catch block
@@ -414,13 +502,18 @@ public class AppNewTel {
     /**
      * Metodo honek soinu bat abiarazten du hari moduan
      */
-    public static void openSound() {
+    public static void openSound(int soundType) {
         Thread th = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    File sound= null;
+                    if(soundType == 1) {
+                      sound  = new File("sounds/Download_succeed.wav");
+                    }else if(soundType == 2){                                       //fitxategia asignatu
+                        sound = new File("sounds/Gemidos.wav");
 
-                    File sound = new File("sounds/Download_succeed.wav");  //fitxategia asignatu
+                    }
                     AudioInputStream stream;                                        //Audio motako stream bat sortu
                     AudioFormat format;                                             //Formatua ezartzeko (wav)
                     DataLine.Info info;                                             //Clip klaseak behar duen soinuaren konfigurazio informazioa
@@ -480,12 +573,16 @@ public class AppNewTel {
                 if (products != null) {
                     txt = txt + products.size() + " products were exported ";
                 }
+                if (purchases != null){
+                    txt = txt + purchases.size() + " purchases were exported ";
+                }
                 if (sales != null) {
                     txt = txt + sales.size() + " sales were exported";
                 }
                 if (clients == null && products == null && sales == null) {
                     txt = txt + "I dont know you haven´t exported anything";
                 }
+
                 logtxt.setTextContent(txt);
                 root.appendChild(logtxt);
 
@@ -533,6 +630,158 @@ public class AppNewTel {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+
+    }
+    private static void runMain(String[] args){
+        List<String> argumentos = Arrays.asList(args);
+        //runHelper = new RunHelper();
+//        if (args.length < 1) {
+//            System.out.println("Syntax error, type -h or -help for help");
+//            runHelper.getHelper();
+//        }
+                if (args.length == 1){
+                switch(args[0].toLowerCase()){
+                    case "-h" :
+                    case "-help":
+                        System.out.println(runHelper.getHelper());
+
+                        System.exit(-1);
+                        break;
+                    case "-b":
+                        clients = resPartnerDao.getAll();
+
+                        break;
+                    case "-p":
+                        products = productDao.getAll();
+
+                        break;
+                    case "-s":
+                        sales = salesDao.getAll();
+                        salesLines = saoLineDao.getAll();
+
+                        break;
+                    case "-e":
+                        purchases = purchaseOrderDao.getAll();
+                        purchasesLines = purchaseOrderLineDao.getAll();
+
+                        break;
+                    case "-a":
+                        clients = resPartnerDao.getAll();
+                        products = productDao.getAll();
+                        sales = salesDao.getAll();
+                        salesLines = saoLineDao.getAll();
+                        purchases = purchaseOrderDao.getAll();
+                        purchasesLines = purchaseOrderLineDao.getAll();
+
+                        break;
+                    case "-sapo":
+                        System.out.println("\n\n\n\n\n\n\n\nJaja pringauu");
+                        openSound(2);
+                        System.exit(-1);
+                        break;
+                    default:
+                        System.out.println("Syntax error");
+                        System.out.println(runHelper.getHelper());
+                        System.exit(-1);
+                        break;
+
+
+            }
+            updateDB();
+            logMaker();
+            openSound(1);
+
+//            }else if(args.length % 2 != 0){
+//            System.out.println("Syntax error");
+//            System.out.println(runHelper.getHelper());
+
+        }else if(!argumentos.contains("sapo") && args.length > 3 ){
+            System.out.println("Syntax error");
+            System.out.println(runHelper.getHelper());
+            System.exit(-1);
+        }else if(args.length == 0){
+            File file = new File(path);
+            if(file.exists()){
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Konfigurazioa gordeta daukagu erabiltzea nahi duzu?\n\t\t(b/e)");
+                String election = sc.next();
+                if(election.equals("b")){
+                    try {
+                        if (bExported) {                            //Ea zer objetu exportatu diren begiratzen du.
+                            clients = new ArrayList<ResPartner>();
+                            clients = resPartnerDao.getAll();
+                        }
+                        if (pExported) {
+                            products = new ArrayList<ProductProduct>();
+                            products = productDao.getAll();
+                        }
+                        if (sExported) {
+                            sales = new ArrayList<SaleOrder>();
+                            sales = salesDao.getAll();
+                            salesLines = new ArrayList<SaleOrderLine>();
+                            salesLines = saoLineDao.getAll();
+                        }
+                        updateDB();                             //Aurreko menuan bezala
+                        logMaker();
+                        openSound(1);
+                    } catch (Exception ex) {
+                        System.out.println("Errorea datubase prozesuan (menuaBistaratu)");
+                        ex.printStackTrace();
+                    }
+                }else{
+                    System.out.println("Ongi da");
+                    file.delete();
+                    System.exit(-1);
+                }
+
+            }
+        }
+        else{
+            List<String[]> arguments = new ArrayList<String[]>();
+
+            for(String arg: args){
+                switch (arg.toLowerCase()){
+                    case "-h" :
+                    case "-help":
+                        System.out.println(runHelper.getHelper());
+                        System.exit(-1);
+                        break;
+                    case "-b":
+                        clients = resPartnerDao.getAll();
+
+                        break;
+                    case "-p":
+                        products = productDao.getAll();
+
+                        break;
+                    case "-s":
+                        sales = salesDao.getAll();
+                        salesLines = saoLineDao.getAll();
+
+                        break;
+                    case "-a":
+                        clients = resPartnerDao.getAll();
+                        products = productDao.getAll();
+                        sales = salesDao.getAll();
+                        salesLines = saoLineDao.getAll();
+
+                        break;
+                    case "-sapo":
+                        System.out.println("\n\n\n\n\n\n\n\nJaja pringauu");
+                        System.exit(-1);
+                    default:
+                        System.out.println("Syntax error");
+                        System.out.println(runHelper.getHelper());
+                        System.exit(-1);
+                        break;
+
+                }
+            }
+            updateDB();
+            logMaker();
+            openSound(1);
         }
 
 

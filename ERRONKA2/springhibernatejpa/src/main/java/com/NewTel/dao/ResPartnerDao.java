@@ -17,17 +17,17 @@ public class ResPartnerDao {
 	
 	/**
 	 * Datubasean objetua sortzeko metodoa
-	 * @param saleo
+	 * @param respartner
 	 */
 	public void create(ResPartner respartner) {
 		entityManager.persist(respartner);
-		return;
+
 	}
 	
 	
 	/**
 	 * Datubaseko objetu bat ezabatzeko
-	 * @param saleo
+	 * @param respartner
 	 */
 	public void delete(ResPartner respartner) {
 		if(entityManager.contains(respartner)) entityManager.remove(respartner);
@@ -59,10 +59,10 @@ public class ResPartnerDao {
 	
 	/**
 	 * Produktua datubasean aktualizatzeko metodoa
-	 * @param saleo
+	 * @param respartner
 	 */
 	public void update(ResPartner respartner) {
 		entityManager.merge(respartner);
-		return;
+
 	}
 }

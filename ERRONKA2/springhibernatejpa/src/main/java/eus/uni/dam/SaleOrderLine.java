@@ -115,6 +115,10 @@ public class SaleOrderLine implements Serializable {
 	@Column(name="write_uid")
 	private Integer writeUid;
 
+	//bi-directional many-to-one association to PurchaseOrderLine
+	@OneToMany(mappedBy="saleOrderLine")
+	private List<PurchaseOrderLine> purchaseOrderLines;
+
 	//bi-directional many-to-one association to ProductProduct
 	@ManyToOne
 	@JoinColumn(name="product_id")
@@ -148,6 +152,28 @@ public class SaleOrderLine implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public List<PurchaseOrderLine> getPurchaseOrderLines() {
+		return this.purchaseOrderLines;
+	}
+
+	public void setPurchaseOrderLines(List<PurchaseOrderLine> purchaseOrderLines) {
+		this.purchaseOrderLines = purchaseOrderLines;
+	}
+
+	public PurchaseOrderLine addPurchaseOrderLine(PurchaseOrderLine purchaseOrderLine) {
+		getPurchaseOrderLines().add(purchaseOrderLine);
+		purchaseOrderLine.setSaleOrderLine(this);
+
+		return purchaseOrderLine;
+	}
+
+	public PurchaseOrderLine removePurchaseOrderLine(PurchaseOrderLine purchaseOrderLine) {
+		getPurchaseOrderLines().remove(purchaseOrderLine);
+		purchaseOrderLine.setSaleOrderLine(null);
+
+		return purchaseOrderLine;
 	}
 
 	public Integer getCompanyId() {

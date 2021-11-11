@@ -223,7 +223,78 @@ public class ResPartner implements Serializable {
 	@OneToMany(mappedBy="resPartner")
 	private List<SaleOrderLine> saleOrderLines;
 
+	//bi-directional many-to-one association to PurchaseOrder
+	@OneToMany(mappedBy="resPartner1")
+	private List<PurchaseOrder> purchaseOrders1;
+
+	//bi-directional many-to-one association to PurchaseOrder
+	@OneToMany(mappedBy="resPartner2")
+	private List<PurchaseOrder> purchaseOrders2;
+
+	//bi-directional many-to-one association to PurchaseOrderLine
+	@OneToMany(mappedBy="resPartner")
+	private List<PurchaseOrderLine> purchaseOrderLines;
+
+
 	public ResPartner() {
+	}
+	public List<PurchaseOrder> getPurchaseOrders1() {
+		return this.purchaseOrders1;
+	}
+
+	public void setPurchaseOrders1(List<PurchaseOrder> purchaseOrders1) {
+		this.purchaseOrders1 = purchaseOrders1;
+	}
+
+	public PurchaseOrder removePurchaseOrders1(PurchaseOrder purchaseOrders1) {
+		getPurchaseOrders1().remove(purchaseOrders1);
+		purchaseOrders1.setResPartner1(null);
+
+		return purchaseOrders1;
+	}
+
+	public List<PurchaseOrder> getPurchaseOrders2() {
+		return this.purchaseOrders2;
+	}
+
+	public void setPurchaseOrders2(List<PurchaseOrder> purchaseOrders2) {
+		this.purchaseOrders2 = purchaseOrders2;
+	}
+
+	public PurchaseOrder addPurchaseOrders2(PurchaseOrder purchaseOrders2) {
+		getPurchaseOrders2().add(purchaseOrders2);
+		purchaseOrders2.setResPartner2(this);
+
+		return purchaseOrders2;
+	}
+
+	public PurchaseOrder removePurchaseOrders2(PurchaseOrder purchaseOrders2) {
+		getPurchaseOrders2().remove(purchaseOrders2);
+		purchaseOrders2.setResPartner2(null);
+
+		return purchaseOrders2;
+	}
+
+	public List<PurchaseOrderLine> getPurchaseOrderLines() {
+		return this.purchaseOrderLines;
+	}
+
+	public void setPurchaseOrderLines(List<PurchaseOrderLine> purchaseOrderLines) {
+		this.purchaseOrderLines = purchaseOrderLines;
+	}
+
+	public PurchaseOrderLine addPurchaseOrderLine(PurchaseOrderLine purchaseOrderLine) {
+		getPurchaseOrderLines().add(purchaseOrderLine);
+		purchaseOrderLine.setResPartner(this);
+
+		return purchaseOrderLine;
+	}
+
+	public PurchaseOrderLine removePurchaseOrderLine(PurchaseOrderLine purchaseOrderLine) {
+		getPurchaseOrderLines().remove(purchaseOrderLine);
+		purchaseOrderLine.setResPartner(null);
+
+		return purchaseOrderLine;
 	}
 
 	public Integer getId() {

@@ -3,10 +3,7 @@ package eus.uni.dam;
 import java.util.Properties;
 import javax.sql.DataSource;
 
-import com.NewTel.dao.ProductProductDao;
-import com.NewTel.dao.ResPartnerDao;
-import com.NewTel.dao.SaleOrderDao;
-import com.NewTel.dao.SaleOrderLineDao;
+import com.NewTel.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -88,6 +85,12 @@ public class DatuBasearenKonfigurazioa_Postgres {
 	}
 
 	@Bean
+	public PurchaseOrderDao getPurchaseOrderDao() {return new PurchaseOrderDao(); }
+
+	@Bean
+	public PurchaseOrderLineDao getPurchaseOrderLineDao() {return new PurchaseOrderLineDao();}
+
+	@Bean
 	public ProductProductDao getProductDao() {
 		return new ProductProductDao();
 	}
@@ -106,6 +109,9 @@ public class DatuBasearenKonfigurazioa_Postgres {
 	public SaleOrderLineDao getSaleOrderLineDao() {
 		return new SaleOrderLineDao();
 	}
+
+	@Bean
+	public RunHelper getRunHelper(){return new RunHelper();}
 
 	@Autowired
 	private Environment env;

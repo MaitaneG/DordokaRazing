@@ -20,7 +20,7 @@ import com.example.newtelapp.model.Produktua;
 import java.util.ArrayList;
 
 /**
- * Bigarren Layout-aren klasea
+ * BezeroaSortu Layout-aren klasea
  */
 public class BezeroaSortu extends AppCompatActivity {
 
@@ -66,7 +66,7 @@ public class BezeroaSortu extends AppCompatActivity {
         // Botoiak
         irtenBotoia = findViewById(R.id.buttonIrtenAurrekontuaSortu);
         gordeBotoia = findViewById(R.id.buttonGordeBezeroa);
-        borratu =findViewById(R.id.imageButtonBorratu);
+        borratu = findViewById(R.id.imageButtonBorratu);
         // EditText
         izenAbizena = findViewById(R.id.editTextIzenaAbizena);
         mugikorZenbakia = findViewById(R.id.editTextMugikorra);
@@ -89,11 +89,7 @@ public class BezeroaSortu extends AppCompatActivity {
         produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
     }
 
-    private void borratu(View view) {
-        garbitu();
-    }
-
-    private void garbitu(){
+    private void garbitu() {
         izenAbizena.setText("");
         mugikorZenbakia.setText("");
         korreoElektronikoa.setText("");
@@ -102,6 +98,10 @@ public class BezeroaSortu extends AppCompatActivity {
         probintzia.setText("");
         kodigoPostala.setText("");
         herrialdea.setText("");
+    }
+
+    private void borratu(View view) {
+        garbitu();
     }
 
     /**
@@ -130,7 +130,7 @@ public class BezeroaSortu extends AppCompatActivity {
                             Toast.makeText(view.getContext(), "Korreoaren formatua gaizki dago", Toast.LENGTH_SHORT).show();
                             // Informazio guztia beteta badago eta ondo
                         } else {
-                            Bezeroa bezeroa = new Bezeroa(/*El id no lo uso*/1,izenAbizena.getText().toString(), enpresaDa.isChecked(), mugikorZenbakia.getText().toString().trim(),
+                            Bezeroa bezeroa = new Bezeroa(/*El id no lo uso*/1, izenAbizena.getText().toString(), enpresaDa.isChecked(), mugikorZenbakia.getText().toString().trim(),
                                     korreoElektronikoa.getText().toString().trim(), kalea.getText().toString(), hiria.getText().toString().trim(),
                                     probintzia.getText().toString().trim(), Integer.parseInt(kodigoPostala.getText().toString().trim()),
                                     herrialdea.getText().toString().trim());

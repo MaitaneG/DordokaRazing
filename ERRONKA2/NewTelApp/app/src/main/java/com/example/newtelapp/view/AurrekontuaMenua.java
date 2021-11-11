@@ -17,6 +17,9 @@ import com.example.newtelapp.model.Produktua;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * AurrekontuaMenua-ren Layout-aren klasea
+ */
 public class AurrekontuaMenua extends AppCompatActivity {
 
     /**
@@ -29,7 +32,7 @@ public class AurrekontuaMenua extends AppCompatActivity {
     // ArrayList-a
     private ArrayList<Bezeroa> bezeroak;
     private ArrayList<Aurrekontua> aurrekontuak;
-    private ArrayList<AurrekontuaLerroa>aurrekontuaLerroa;
+    private ArrayList<AurrekontuaLerroa> aurrekontuaLerroa;
     private ArrayList<Produktua> produktuak;
 
     /**
@@ -59,25 +62,9 @@ public class AurrekontuaMenua extends AppCompatActivity {
 
         /** ArrayList-ak informazioz bete **/
         bezeroak = Menua.konexioa.selectBezeroak();
-        aurrekontuak=Menua.konexioa.selectAurrekontuak();
-        aurrekontuaLerroa=Menua.konexioa.selectAurrekontuaLerroa();
+        aurrekontuak = Menua.konexioa.selectAurrekontuak();
+        aurrekontuaLerroa = Menua.konexioa.selectAurrekontuaLerroa();
         produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
-    }
-
-    /**
-     * Aurreko pantailara doa
-     *
-     * @param view
-     */
-    private void irten(View view) {
-        Intent myIntent = new Intent(view.getContext(), Menua.class);
-        // Animazioak definitu
-        ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right);
-
-        // Activity hau itxi eta besteari abisatu
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        myIntent.putExtra("EXIT", true);
-        this.startActivity(myIntent, options.toBundle());
     }
 
     /**
@@ -87,12 +74,14 @@ public class AurrekontuaMenua extends AppCompatActivity {
      */
     private void aurrekontuakIkusiraJoan(View view) {
         Intent myIntent = new Intent(this, AurrekontuakIkusi.class);
+
         // Aurrekontuen ArrayList-ak eramaten
         myIntent.putExtra("aurrekontuak", aurrekontuak);
         myIntent.putExtra("aurrekontuaLerroa", aurrekontuaLerroa);
         // Beeroen eta produktuen aurrekontuak eramaten
         myIntent.putExtra("bezeroak", bezeroak);
         myIntent.putExtra("produktuak", produktuak);
+
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }
@@ -104,11 +93,44 @@ public class AurrekontuaMenua extends AppCompatActivity {
      */
     private void aurrekontuaSorturaJoan(View view) {
         Intent myIntent = new Intent(this, AurrekontuaSortu.class);
+
         // Bezeroen eta produktuen ArrayList-ak eramaten du
         myIntent.putExtra("bezeroak", bezeroak);
         myIntent.putExtra("produktuak", produktuak);
         myIntent.putExtra("aurrekontuak", aurrekontuak);
+
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
+    }
+
+    /**
+     * Aurreko pantailara doa
+     */
+    private void irten() {
+        Intent myIntent = new Intent(AurrekontuaMenua.this, Menua.class);
+        // Animazioak definitu
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right);
+
+        // Activity hau itxi eta besteari abisatu
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        myIntent.putExtra("EXIT", true);
+        this.startActivity(myIntent, options.toBundle());
+    }
+
+    /**
+     * Aurreko pantailara doa
+     *
+     * @param view
+     */
+    private void irten(View view) {
+        irten();
+    }
+
+    /**
+     * Atzera joateko botoia klikatzean
+     */
+    @Override
+    public void onBackPressed() {
+        irten();
     }
 }

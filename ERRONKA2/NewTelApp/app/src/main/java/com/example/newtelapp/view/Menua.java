@@ -24,7 +24,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 /**
- * Lehengo Layout-aren klasea
+ * Menu Layout-aren klasea
  */
 public class Menua extends AppCompatActivity implements Serializable {
 
@@ -56,17 +56,18 @@ public class Menua extends AppCompatActivity implements Serializable {
      * Layout-eko objetu guztiak hasieratu
      */
     private void hasieratu() {
-        /* Botoiak aurkitzen eta aldagaietan gorde */
+        /** Botoiak aurkitzen eta aldagaietan gorde **/
         erakutsi_produktuak_botoia = findViewById(R.id.buttonErakutsiProduktuak);
         aurrekontua_botoia = findViewById(R.id.buttonAurrekontuaSortu);
         irten_botoia = findViewById(R.id.buttonIrten);
         produktuak = new ArrayList<>();
 
-        /* Botoiei listenerra jarri */
+        /** Botoiei listenerra jarri **/
         erakutsi_produktuak_botoia.setOnClickListener(this::produktuakErakutsiraJoan);
         aurrekontua_botoia.setOnClickListener(this::aurrekonturaJoan);
         irten_botoia.setOnClickListener(this::itxi);
 
+        /** Konexioa lortu eta produktuen datuak lortu **/
         konexioa = new Konexioa();
         produktuak = konexioa.selectProduktuak();
     }
@@ -78,7 +79,10 @@ public class Menua extends AppCompatActivity implements Serializable {
      */
     private void produktuakErakutsiraJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), ProduktuakErakutsi.class);
+
+        /** Produktuen ArrayList-a eramaten du **/
         myIntent.putExtra("produktuak", produktuak); // Produktuen arrayList-a eramaten du
+
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }
@@ -90,18 +94,12 @@ public class Menua extends AppCompatActivity implements Serializable {
      */
     private void aurrekonturaJoan(View view) {
         Intent myIntent = new Intent(view.getContext(), AurrekontuaMenua.class);
+
+        /** Produktuen ArrayList-a eramaten du **/
         myIntent.putExtra("produktuak", produktuak); // Produktuen arrayList-a eramaten du
+
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right);
         this.startActivity(myIntent, options.toBundle());
-    }
-
-    /**
-     * Aplikazioa guztiz itxi nahi denean
-     *
-     * @param view
-     */
-    private void itxi(View view) {
-        alert();
     }
 
     /**
@@ -128,6 +126,15 @@ public class Menua extends AppCompatActivity implements Serializable {
                 .setNegativeButton("EZ", null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    /**
+     * Aplikazioa guztiz itxi nahi denean
+     *
+     * @param view
+     */
+    private void itxi(View view) {
+        alert();
     }
 
     /**

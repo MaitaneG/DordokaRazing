@@ -115,7 +115,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TableLayout
-        android:id="@+id/taula"
+        android:id="@+id/taulaAurrekontuaSortu"
         android:layout_width="255dp"
         android:layout_height="164dp"
         android:layout_marginStart="76dp"
@@ -124,7 +124,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
-            android:id="@+id/tituloa"
+            android:id="@+id/tituloaAurrekontuaSortu"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 

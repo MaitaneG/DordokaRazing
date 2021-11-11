@@ -7,7 +7,7 @@
     android:background="@drawable/aurrekontua_aldatu">
 
     <ImageButton
-        android:id="@+id/buttonGordeAurrekontua2"
+        android:id="@+id/buttonGordeAurrekontuaAldatu"
         android:layout_width="85dp"
         android:layout_height="35dp"
         android:adjustViewBounds="true"
@@ -21,10 +21,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.958"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
-        android:id="@+id/buttonIrtenAurrekontuaSortu2"
+        android:id="@+id/buttonIrtenAurrekontuaSortuAurrekontuaAldatu"
         android:layout_width="85dp"
         android:layout_height="35dp"
         android:adjustViewBounds="true"
@@ -41,7 +41,7 @@
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TableLayout
-        android:id="@+id/taula"
+        android:id="@+id/taulaAurrekontuaAldatu"
         android:layout_width="255dp"
         android:layout_height="164dp"
         android:layout_marginStart="96dp"
@@ -50,12 +50,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
-            android:id="@+id/tituloa"
+            android:id="@+id/tituloaAurrekontuaAldatu"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/produktuaIzena"
+                android:id="@+id/produktuaIzenaAurrekontuaAldatu"
                 android:layout_width="115dp"
                 android:layout_height="25dp"
                 android:background="@drawable/taula_label"
@@ -67,7 +67,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/produktuaKantitatea"
+                android:id="@+id/produktuaKantitateaAurrekontuaAldatu"
                 android:layout_width="70dp"
                 android:layout_height="25dp"
                 android:background="@drawable/taula_label"
@@ -79,7 +79,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/produktuaPrezioa"
+                android:id="@+id/produktuaPrezioaAurrekontuaAldatu"
                 android:layout_width="70dp"
                 android:layout_height="25dp"
                 android:background="@drawable/taula_label"
@@ -94,7 +94,7 @@
     </TableLayout>
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textView6"
         android:layout_width="279dp"
         android:layout_height="179dp"
         android:layout_marginStart="88dp"
@@ -104,7 +104,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewPrezioaGuztira2"
+        android:id="@+id/textViewPrezioaGuztiraAurrekontuaAldatu"
         android:layout_width="140dp"
         android:layout_height="30dp"
         android:layout_marginStart="216dp"
@@ -114,7 +114,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textViewPrezioaTituloa"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginStart="96dp"
@@ -154,7 +154,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
-        android:id="@+id/buttonProduktuaGehitu2"
+        android:id="@+id/buttonProduktuaGehituAurrekontuaAldatu"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="320dp"
@@ -171,7 +171,9 @@
         android:id="@+id/textViewBezeroaAldatu"
         android:layout_width="210dp"
         android:layout_height="62dp"
-        tools:layout_editor_absoluteX="96dp"
-        tools:layout_editor_absoluteY="159dp" />
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="164dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

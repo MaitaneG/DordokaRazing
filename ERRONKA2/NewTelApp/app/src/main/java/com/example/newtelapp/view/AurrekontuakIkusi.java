@@ -22,6 +22,9 @@ import com.example.newtelapp.model.Produktua;
 
 import java.util.ArrayList;
 
+/**
+ * AurrekontuakIkusi-ren Layout-aren klasea
+ */
 public class AurrekontuakIkusi extends AppCompatActivity {
     /**
      * Atributoak
@@ -33,7 +36,6 @@ public class AurrekontuakIkusi extends AppCompatActivity {
     private ArrayList<AurrekontuaLerroa> aurrekontuaLerroa;
     private ArrayList<Bezeroa> bezeroak;
     private ArrayList<Produktua> produktuak;
-
     // ListView
     private ListView aurrekontuaListView;
     // ArrayAdapter
@@ -67,17 +69,6 @@ public class AurrekontuakIkusi extends AppCompatActivity {
         bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
         produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
 
-        /** ListView-ko datuak kargatu **/
-//        for(int i=0;i<aurrekontuaLerroa.size();i++){ //Movidas Maitane
-//            for(int j=0;j<aurrekontuak.size();j++){
-//                if(aurrekontuaLerroa.get(i).getIdAurrekontua()==aurrekontuak.get()){
-//
-//                }
-//            }
-//
-//        }
-//        arrayListPolita= new ArrayList<>();
-
         /** Adapterra sortu, datuak jarri eta listenerra izendatu **/
         adapter = new ArrayAdapter<>(AurrekontuakIkusi.this, android.R.layout.simple_list_item_1, aurrekontuak);
         aurrekontuaListView.setAdapter(adapter);
@@ -93,54 +84,67 @@ public class AurrekontuakIkusi extends AppCompatActivity {
      * @param l
      */
     private void aldatuBorratu(AdapterView<?> adapterView, View view, int i, long l) {
+        /** Alert-a sortu eta hasieratu **/
         new AlertDialog.Builder(this)
+                .setTitle("Aurrekontuak Aldatu / Ezabatu") // Dialog-ari titulua jarri
+                .setMessage("Aurrekontu hau ezabatu edo aldatu nahi duzu?") // Dialog-aren mezua jarri
 
-        .setTitle("Aurrekontuak Aldatu / Ezabatu")
-        .setMessage("Aurrekontu hau ezabatu edo aldatu nahi duzu?")
-        .setPositiveButton("Aldatu", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                Intent myIntent = new Intent(AurrekontuakIkusi.this, AurrekontuaSortu.class);
-                // Aurrekontuen ArrayList-ak eramaten
-                myIntent.putExtra("aurrekontuak", aurrekontuak);
-                myIntent.putExtra("aurrekontuaLerroa", aurrekontuaLerroa);
-                // Beeroen eta produktuen aurrekontuak eramaten
-                myIntent.putExtra("bezeroak", bezeroak);
-                myIntent.putExtra("produktuak", produktuak);
-                ActivityOptions options = ActivityOptions.makeCustomAnimation(AurrekontuakIkusi.this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
-                AurrekontuakIkusi.this.startActivity(myIntent, options.toBundle());
-            }
-        })
-        .setNegativeButton("Ezabatu", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                Menua.konexioa.deleteAurrekontua(aurrekontuak.get((int) l));
-                Toast.makeText(AurrekontuakIkusi.this, aurrekontuak.get((int) l).getIzena() + " aurrekontua behar bezala ezabatu da", Toast.LENGTH_SHORT).show();
+                // Aldatu aukera klikatzen bada, AurrekontuakAldatzera doa
+                .setPositiveButton("Aldatu", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent myIntent = new Intent(AurrekontuakIkusi.this, AurrekontuaAldatu.class);
 
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                        // Aurrekontuen ArrayList-ak eramaten
+                        myIntent.putExtra("aurrekontuak", aurrekontuak);
+                        myIntent.putExtra("aurrekontuaLerroa", aurrekontuaLerroa);
+                        // Beeroen eta produktuen aurrekontuak eramaten
+                        myIntent.putExtra("bezeroak", bezeroak);
+                        myIntent.putExtra("produktuak", produktuak);
 
-                Toast.makeText(AurrekontuakIkusi.this, "Sartu berriro pantaila honetara aldaketak ikusteko", Toast.LENGTH_SHORT).show();
+                        ActivityOptions options = ActivityOptions.makeCustomAnimation(AurrekontuakIkusi.this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
+                        AurrekontuakIkusi.this.startActivity(myIntent, options.toBundle());
+                    }
+                })
 
-            }
-        })
-        .setNeutralButton("Utzi", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        })
-        .show();
+                // Ezabatu aukera klikatzen bada, aurrekontu bat ezabatzen da
+                .setNegativeButton("Ezabatu", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Menua.konexioa.deleteAurrekontua(aurrekontuak.get((int) l));
+                        Toast.makeText(AurrekontuakIkusi.this, aurrekontuak.get((int) l).getIzena() + " aurrekontua behar bezala ezabatu da", Toast.LENGTH_SHORT).show();
+
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        Toast.makeText(AurrekontuakIkusi.this, "Sartu berriro pantaila honetara aldaketak ikusteko", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+
+                // Utzi aukera klikatzen bada, ez da ezer gertatzen
+                .setNeutralButton("Utzi", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
     }
 
-    public void irten(){
+    /**
+     * Aurreko pantailara joaten da
+     */
+    public void irten() {
         Intent myIntent = new Intent(AurrekontuakIkusi.this, AurrekontuaMenua.class);
+
         // Aurrekontuen ArrayList-ak eramaten
         myIntent.putExtra("aurrekontuak", aurrekontuak);
         myIntent.putExtra("aurrekontuaLerroa", aurrekontuaLerroa);
         // Beeroen eta produktuen aurrekontuak eramaten
         myIntent.putExtra("bezeroak", bezeroak);
         myIntent.putExtra("produktuak", produktuak);
+
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         AurrekontuakIkusi.this.startActivity(myIntent, options.toBundle());
     }
@@ -152,6 +156,13 @@ public class AurrekontuakIkusi extends AppCompatActivity {
      */
     private void irten(View view) {
         irten();
+    }
 
+    /**
+     * Atzera joateko botoia klikatzean
+     */
+    @Override
+    public void onBackPressed() {
+        irten();
     }
 }

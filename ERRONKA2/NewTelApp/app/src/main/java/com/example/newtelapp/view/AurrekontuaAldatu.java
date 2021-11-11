@@ -1,15 +1,11 @@
 package com.example.newtelapp.view;
 
-import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -30,31 +26,27 @@ import java.util.Date;
 import java.util.concurrent.Semaphore;
 
 /**
- * AurrekontuaSortu Layout-aren klasea
+ * AurrekontuakAldatu-ren Layout-aren klasea
  */
-public class AurrekontuaSortu extends AppCompatActivity {
-
+public class AurrekontuaAldatu extends AppCompatActivity {
     /**
      * Atributoak
-     */
+     **/
     // ImageButton
-    private ImageButton irtenBotoia;
-    private ImageButton gordeBotoia;
-    private ImageButton bezeroakBotoia;
-    private ImageButton produktuakBotoia;
+    private ImageButton irten;
+    private ImageButton gorde;
+    private ImageButton produktuaGehitu;
+    // TextView
+    private TextView textViewBezeroaAldatu;
+    private TextView prezioaGuztira;
     // Spinner
-    private Spinner bezeroSpinner;
-    private Spinner produktuSpinner;
+    private Spinner spinnerProdukttuAldatu;
     // ArrayList-ak
     private ArrayList<Bezeroa> bezeroak;
     private ArrayList<Produktua> produktuak;
     private ArrayList<Aurrekontua> aurrekontuak;
-    // EditText
-    private EditText kantitatea;
     // TableLayout
     private TableLayout taula;
-    // TextView
-    private TextView prezioaGuztira;
     // SemaforoaInsertAurrekontua
     private Semaphore semaforoaInsertAurrekontua;
     // TableRow bakoitzeko izena
@@ -72,165 +64,48 @@ public class AurrekontuaSortu extends AppCompatActivity {
      *
      * @param savedInstanceState
      */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.aurrekontua_sortu_layout);
-        hasieratu();
+        setContentView(R.layout.aurrekontuak_aldatu_layout);
+        hasieratu(); // Konponenteak hasieratu
     }
 
     /**
-     * Datuak jaso eta layout-eko objetu guztiak hasieratu
+     * Konponente guztiak hasieratzen dira
      */
     private void hasieratu() {
-        /** Botoiak aurkitzen eta aldagaietan gorde **/
+        /** Konponenteak hasieratu **/
         // Botoiak
-        irtenBotoia = findViewById(R.id.buttonIrtenAurrekontuaSortu);
-        gordeBotoia = findViewById(R.id.buttonGordeAurrekontua);
-        bezeroakBotoia = findViewById(R.id.buttonBezeroaSortu);
-        produktuakBotoia = findViewById(R.id.buttonProduktuaGehitu);
-        // Spinner
-        bezeroSpinner = findViewById(R.id.spinnerBezeroa);
-        produktuSpinner = findViewById(R.id.spinnerProduktua);
-        // EditText
-        kantitatea = findViewById(R.id.editTextNumberKantitatea);
+        irten = findViewById(R.id.buttonIrtenAurrekontuaSortuAurrekontuaAldatu);
+        gorde = findViewById(R.id.buttonGordeAurrekontuaAldatu);
+        produktuaGehitu = findViewById(R.id.buttonProduktuaGehituAurrekontuaAldatu);
         // TextView
-        prezioaGuztira = findViewById(R.id.textViewPrezioaGuztira);
+        textViewBezeroaAldatu = findViewById(R.id.textViewBezeroaAldatu);
+        prezioaGuztira = findViewById(R.id.textViewPrezioaGuztiraAurrekontuaAldatu);
+        // Spinner
+        spinnerProdukttuAldatu = findViewById(R.id.spinnerProduktuaAurrekontuaAldatu);
 
-        /** Botoiei listenerra jarri **/
-        irtenBotoia.setOnClickListener(this::irten);
-        gordeBotoia.setOnClickListener(this::gorde);
-        bezeroakBotoia.setOnClickListener(this::bezeroaSorturaJoan);
-        produktuakBotoia.setOnClickListener(this::produktuBatGehitu);
-
-        /** ArrayList-ak bete **/
-        bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
-        produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
-        aurrekontuak = (ArrayList<Aurrekontua>) getIntent().getSerializableExtra("aurrekontuak");
-
-        /** Semaforoa hasieratu **/
-        semaforoaInsertAurrekontua = new Semaphore(1, true);
-
-        /**Spinnerak kargatu**/
-        spinnerrakKargatu();
-
-        /** Taula sortu eta hasieratu**/
-        taulaHasieratu();
+        /** Botoiei listerrenak jarri **/
+        irten.setOnClickListener(this::irten);
+        gorde.setOnClickListener(this::gorde);
+        produktuaGehitu.setOnClickListener(this::produktuaGehitu);
     }
 
     /**
-     * Spinnerrak informazioarekin bete
-     */
-    private void spinnerrakKargatu() {
-        /** Bezeroen ArrayList-etik bezeroaren izena hartzen du **/
-        String[] bezeroIzena = new String[bezeroak.size()];
-        for (int i = 0; i < bezeroak.size(); i++) {
-            bezeroIzena[i] = bezeroak.get(i).getIzenaAbizena();
-        }
-
-        /** Adapter bat sortzen da Bezeroaren spinner batean jartzeko **/
-        ArrayAdapter adapterB = new ArrayAdapter(this, android.R.layout.simple_spinner_item, bezeroIzena);
-        adapterB.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bezeroSpinner.setAdapter(adapterB);
-
-        /** Produktuen ArrayList-etik bezeroaren izena hartzen du **/
-        String[] produktuIzena = new String[produktuak.size()];
-        for (int i = 0; i < produktuak.size(); i++) {
-            produktuIzena[i] = produktuak.get(i).getIzena();
-        }
-
-        /** Adapter bat sortzen da Produktuen spinner batean jartzeko **/
-        ArrayAdapter adapterP = new ArrayAdapter(this, android.R.layout.simple_spinner_item, produktuIzena);
-        adapterB.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        produktuSpinner.setAdapter(adapterP);
-    }
-
-    /**
-     * Taula sortzen du eta zutabeen tituloak hasieratu
-     */
-    private void taulaHasieratu() {
-        /** Taula sortu **/
-        taula = findViewById(R.id.taulaAurrekontuaSortu);
-    }
-
-    /**
-     * Produktu bat bere kantitatearekin gehitzeko
+     * Produktu bat gehitzeko taulara
      *
      * @param view
      */
-    @SuppressLint("ResourceAsColor")
-    private void produktuBatGehitu(View view) {
-        // Kantitatea hutsik badago
-        if (kantitatea.getText().toString().equals("")) {
-            Toast.makeText(this, "Produktuen kantitatea sartu behar duzu", Toast.LENGTH_SHORT).show();
-            // Knatitatea ez badago hutsik
-        } else {
-            /** Ilara bat sortzen du **/
-            TableRow tableRow = new TableRow(this);
+    private void produktuaGehitu(View view) {
 
-            /** Hiru zutabe sortzen du **/
-            // Zutabeen zabalera definitzeko (dp-tik pixeletara pasatu)
-            DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-            int px1 = Math.round(115 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-            int px23 = Math.round(70 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-
-            // Lehenengo zutabea
-            TextView column1 = new TextView(this);
-            column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
-            column1.setWidth(px1);
-            // Bigarren zutabea
-            TextView column2 = new TextView(this);
-            column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
-            column2.setWidth(px23);
-            // Hirugarren zutabea
-            TextView column3 = new TextView(this);
-            column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
-            column3.setWidth(px23);
-
-            /** Zutabeak betzen du **/
-            column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());
-            column2.setText(kantitatea.getText().toString());
-            column3.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() + "");
-
-            /** Zutabeak ilaran sartu **/
-            tableRow.addView(column1);
-            tableRow.addView(column2);
-            tableRow.addView(column3);
-
-            /** Ilara taulan sartzen du **/
-            taula.addView(tableRow);
-
-            prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString()) + (produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString())) + "");
-
-            /** Kantitatea gakoa hustu**/
-            kantitatea.setText("");
-        }
     }
 
     /**
-     * Bezeroa Sortu-ra joatea
-     *
-     * @param view
-     */
-    private void bezeroaSorturaJoan(View view) {
-        Intent myIntent = new Intent(AurrekontuaSortu.this, BezeroaSortu.class);
-        ActivityOptions options = ActivityOptions.makeCustomAnimation(AurrekontuaSortu.this, R.anim.from_right, R.anim.from_right);
-        /** Bezeroen eta produktuen ArrayList-ak eramaten du **/
-        myIntent.putExtra("bezeroak", bezeroak);
-        myIntent.putExtra("produktuak", produktuak);
-        this.startActivity(myIntent, options.toBundle());
-    }
-
-    /**
-     * Aurrekontua gordetzeko
+     * Aurrekontuaren informazioa datu basean gordetzen du
      *
      * @param view
      */
     private void gorde(View view) {
-        /** Alert-a sortu eta hasieratu **/
         new AlertDialog.Builder(this)
                 .setTitle("Aurrekontua gordetzan")// Dialog-ari titulua jarri
                 .setMessage("Ziur zaude aurrekontua gehitu nahi duzula?") // Dialog-aren mezua jarri
@@ -246,7 +121,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
 
                             /** Hutsik badago **/
                             if (child == null) {
-                                Toast.makeText(AurrekontuaSortu.this, "Ez dago daturik taulan. Datuak sartu behar dituzu gorde ahal izateko", Toast.LENGTH_LONG).show();
+                                Toast.makeText(AurrekontuaAldatu.this, "Ez dago daturik taulan. Datuak sartu behar dituzu gorde ahal izateko", Toast.LENGTH_LONG).show();
                                 /** Datuak badaude **/
                             } else {
                                 /** Sortzen du aurrekontuaren izena **/
@@ -256,11 +131,11 @@ public class AurrekontuaSortu extends AppCompatActivity {
                                     ida = aurrekontuak.get(i).getId();
                                 }
                                 aurrekontuIzena = "SM000" + ida;
-                                Toast.makeText(AurrekontuaSortu.this, aurrekontuIzena, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AurrekontuaAldatu.this, aurrekontuIzena, Toast.LENGTH_SHORT).show();
 
                                 Date data = new Date(2002, 11, 28);
                                 /** Aurrekontu objetu bat sortzen du **/
-                                Aurrekontua aurrekontua = new Aurrekontua(1, aurrekontuIzena, bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getId(), bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getIzenaAbizena(), "draft", Float.parseFloat(prezioaGuztira.getText().toString()), data);
+                                //Aurrekontua aurrekontua = new Aurrekontua(1, aurrekontuIzena, bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getId(), bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getIzenaAbizena(), "draft", Float.parseFloat(prezioaGuztira.getText().toString()), data);
 
                                 /** Aurrekontuak gehitzeko haria **/
                                 Thread insertAurrekontuak = new Thread(new Runnable() {
@@ -273,7 +148,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
                                             e.printStackTrace();
                                         }
                                         // Aurrekontua gehitzen du
-                                        Menua.konexioa.insertAurrekontua(aurrekontua);
+                                        //Menua.konexioa.insertAurrekontua(aurrekontua);
                                         // Semaforoa libre lagatzen du
                                         semaforoaInsertAurrekontua.release();
                                     }
@@ -321,7 +196,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
                                 });
                                 insertAurrekontuaLerroa.start();
                             }
-                            taula = findViewById(R.id.taulaAurrekontuaSortu); // Esto no lo hace
+                            taula = findViewById(R.id.taulaAurrekontuaAldatu); // Esto no lo hace
                             prezioaGuztira.setText("");
                         }
                     }
@@ -334,36 +209,34 @@ public class AurrekontuaSortu extends AppCompatActivity {
     }
 
     /**
-     * Atzera joateko alert mezua
+     * Atzera joatea nahi duzun galdetzen du
      */
-    public void alertAtzera() {
+    private void alertAtzera() {
         /** Alert-a sortu eta hasieratu **/
         new AlertDialog.Builder(this)
                 .setTitle("Pantaila honetatik irtetzen")// Dialog-ari titulua jarri
                 .setMessage("Ziur zaude atzera joan nahi zarela gorde gabe?") // Dialog-aren mezua jarri
 
-                // Baiezko aukera klikatzen bada, aplikazioa itxiko da
+                // Baiezko aukera klikatzen bada, bezeroa gordeko da
                 .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
-                        if (getIntent().getBooleanExtra("EXIT", true)) {
-                            /** Aurreko pantailara joaten da**/
-                            Intent myIntent = new Intent(AurrekontuaSortu.this, AurrekontuaMenua.class);
-                            myIntent.putExtra("produktuak", produktuak);
-                            ActivityOptions options = ActivityOptions.makeCustomAnimation(getBaseContext(), R.anim.from_right, R.anim.from_right); // Animazioa definitzen
-                            AurrekontuaSortu.this.startActivity(myIntent, options.toBundle());
-                        }
+                        // Aurreko layout-era doa
+                        Intent myIntent = new Intent(AurrekontuaAldatu.this, AurrekontuaSortu.class);
+                        ActivityOptions options = ActivityOptions.makeCustomAnimation(AurrekontuaAldatu.this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
+                        AurrekontuaAldatu.this.startActivity(myIntent, options.toBundle());
                     }
                 })
 
-                // Listener huts bat, Ez klikatzen bada ez da aplikazioa itxiko
+                // Listener huts bat, Ez klikatzen bada ez da atzera egingo
                 .setNegativeButton("EZ", null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
 
     /**
-     * Aurreko layout-era joateko
+     * Aurreko pantailara doa
+     *
+     * @param view
      */
     private void irten(View view) {
         alertAtzera();

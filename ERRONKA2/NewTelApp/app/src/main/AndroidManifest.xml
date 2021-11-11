@@ -39,7 +39,7 @@
             android:name=".view.AurrekontuakIkusi"
             android:theme="@style/Theme.NewTelApp.NoActionBar" />
         <activity
-            android:name=".view.AurrekontuakAldatu"
+            android:name=".view.AurrekontuaAldatu"
             android:theme="@style/Theme.NewTelApp.NoActionBar" />
     </application>
 

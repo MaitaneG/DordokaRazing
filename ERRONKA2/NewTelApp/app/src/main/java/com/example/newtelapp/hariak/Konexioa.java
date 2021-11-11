@@ -132,8 +132,8 @@ public class Konexioa extends Thread {
                             "res_partner.email as korreoa,res_partner.street as kalea,res_partner.city as hiria," +
                             "res_partner.zip as kodigoPostala, res_country_state.name as probintzia,\n" +
                             "res_country.name as herrialdea from  res_partner\n" +
-                            "inner join  res_country_state on res_partner.state_id = res_country_state.id\n" +
-                            "inner join res_country on res_partner.country_id = res_country.id\n" +
+                            "full join  res_country_state on res_partner.state_id = res_country_state.id\n" +
+                            "full join res_country on res_partner.country_id = res_country.id\n" +
                             "where res_partner.customer_rank > 0" + // A ver si funciona
                             "order by res_partner.id asc\n");
 
@@ -380,7 +380,7 @@ public class Konexioa extends Thread {
                     /** AurrekontuLerroen insert-a **/
                     pstmt = conn.prepareStatement("INSERT INTO sale_order_line (order_id, name, sequence, invoice_status, price_unit, discount, " +
                             "product_uom_qty, customer_lead, display_type, product_id, product_uom, price_total, state, qty_delivered_method, " +
-                            "qty_delivered, qty-delivered_manual, qty_to_invoice, qty_invoiced, untaxed_amount_invoiced, untaxed_amount_to_invoice, " +
+                            "qty_delivered, qty_delivered_manual, qty_to_invoice, qty_invoiced, untaxed_amount_invoiced, untaxed_amount_to_invoice, " +
                             "salesman_id, currency_id, company_id, create_uid, write_uid)\n" +
                             "VALUES ((select max(id)from sale_order ), ?, 10, no, ?, 0, ?, 0, null, ?, 1, ?, 'draft', 'stock_move', 0, 0, 0, 0, 0, 0, 7, 1, 1, 7, 7);\n");
 

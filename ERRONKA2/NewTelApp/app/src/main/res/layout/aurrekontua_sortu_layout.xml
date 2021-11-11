@@ -11,18 +11,19 @@
 
     <ImageButton
         android:id="@+id/buttonGordeAurrekontua"
-        android:layout_width="150dp"
-        android:layout_height="48dp"
+        android:layout_width="85dp"
+        android:layout_height="35dp"
         android:adjustViewBounds="true"
         android:backgroundTint="@color/kolorea"
+        android:padding="0dp"
         android:scaleType="fitCenter"
         android:src="@drawable/gorde_botoia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintHorizontal_bias="0.165"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
+        app:layout_constraintVertical_bias="0.958"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
@@ -55,19 +56,20 @@
 
     <ImageButton
         android:id="@+id/buttonIrtenAurrekontuaSortu"
-        android:layout_width="150dp"
-        android:layout_height="48dp"
+        android:layout_width="85dp"
+        android:layout_height="35dp"
         android:adjustViewBounds="true"
         android:backgroundTint="@color/kolorea"
+        android:padding="0dp"
         android:scaleType="fitCenter"
         android:src="@drawable/irten_botoia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintHorizontal_bias="0.865"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintVertical_bias="0.958"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Spinner
         android:id="@+id/spinnerBezeroa"

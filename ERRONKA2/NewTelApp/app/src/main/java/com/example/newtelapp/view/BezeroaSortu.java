@@ -1,6 +1,5 @@
 package com.example.newtelapp.view;
 
-import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.newtelapp.R;
 import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
-import com.example.newtelapp.view.AurrekontuaSortu;
 
 import java.util.ArrayList;
 

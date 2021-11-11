@@ -2,13 +2,10 @@ package com.example.newtelapp.view;
 
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
-import android.app.AuthenticationRequiredException;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -31,8 +28,6 @@ public class AurrekontuakIkusi extends AppCompatActivity {
      */
     // ImageButton
     private ImageButton irten;
-    private ImageButton aldatu;
-    private ImageButton borratu;
     // ArrayList-ak
     private ArrayList<Aurrekontua> aurrekontuak;
     private ArrayList<AurrekontuaLerroa> aurrekontuaLerroa;
@@ -61,15 +56,11 @@ public class AurrekontuakIkusi extends AppCompatActivity {
     private void hasieratu() {
         /** Konponenteak hasieratu **/
         // Botoiak
-        irten = findViewById(R.id.buttonIrtenAurrekontuaSortu);
-        aldatu = findViewById(R.id.buttonAurrekontuaAldatu);
-        borratu = findViewById(R.id.buttonAurrekontuaBorratu);
+        irten = findViewById(R.id.buttonIrtenAurrekontuaIkusi);
         // TextView
         aurrekontuaListView = findViewById(R.id.listView_aurrekontuak);
         /** Botoiei listerrenak jarri **/
         irten.setOnClickListener(this::irten);
-        //aldatu.setOnClickListener(this::aldaturaJoan);
-        //borratu.setOnClickListener(this::borratu);
         /** Aurrekontuen ArrayList-a betetzen da **/
         aurrekontuak = (ArrayList<Aurrekontua>) getIntent().getSerializableExtra("aurrekontuak");
         aurrekontuaLerroa = (ArrayList<AurrekontuaLerroa>) getIntent().getSerializableExtra("aurrekontuaLerroa");
@@ -108,7 +99,15 @@ public class AurrekontuakIkusi extends AppCompatActivity {
         .setMessage("Aurrekontu hau ezabatu edo aldatu nahi duzu?")
         .setPositiveButton("Aldatu", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+                Intent myIntent = new Intent(AurrekontuakIkusi.this, AurrekontuaSortu.class);
+                // Aurrekontuen ArrayList-ak eramaten
+                myIntent.putExtra("aurrekontuak", aurrekontuak);
+                myIntent.putExtra("aurrekontuaLerroa", aurrekontuaLerroa);
+                // Beeroen eta produktuen aurrekontuak eramaten
+                myIntent.putExtra("bezeroak", bezeroak);
+                myIntent.putExtra("produktuak", produktuak);
+                ActivityOptions options = ActivityOptions.makeCustomAnimation(AurrekontuakIkusi.this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
+                AurrekontuakIkusi.this.startActivity(myIntent, options.toBundle());
             }
         })
         .setNegativeButton("Ezabatu", new DialogInterface.OnClickListener() {
@@ -134,13 +133,8 @@ public class AurrekontuakIkusi extends AppCompatActivity {
         .show();
     }
 
-    /**
-     * Aurreko pantailara doa
-     *
-     * @param view
-     */
-    private void irten(View view) {
-        Intent myIntent = new Intent(view.getContext(), AurrekontuaMenua.class);
+    public void irten(){
+        Intent myIntent = new Intent(AurrekontuakIkusi.this, AurrekontuaMenua.class);
         // Aurrekontuen ArrayList-ak eramaten
         myIntent.putExtra("aurrekontuak", aurrekontuak);
         myIntent.putExtra("aurrekontuaLerroa", aurrekontuaLerroa);
@@ -148,6 +142,16 @@ public class AurrekontuakIkusi extends AppCompatActivity {
         myIntent.putExtra("bezeroak", bezeroak);
         myIntent.putExtra("produktuak", produktuak);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
-        this.startActivity(myIntent, options.toBundle());
+        AurrekontuakIkusi.this.startActivity(myIntent, options.toBundle());
+    }
+
+    /**
+     * Aurreko pantailara doa
+     *
+     * @param view
+     */
+    private void irten(View view) {
+        irten();
+
     }
 }

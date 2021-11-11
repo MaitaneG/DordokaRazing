@@ -349,6 +349,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
                         if (getIntent().getBooleanExtra("EXIT", true)) {
                             /** Aurreko pantailara joaten da**/
                             Intent myIntent = new Intent(AurrekontuaSortu.this, AurrekontuaMenua.class);
+                            myIntent.putExtra("produktuak", produktuak);
                             ActivityOptions options = ActivityOptions.makeCustomAnimation(getBaseContext(), R.anim.from_right, R.anim.from_right); // Animazioa definitzen
                             AurrekontuaSortu.this.startActivity(myIntent, options.toBundle());
                         }

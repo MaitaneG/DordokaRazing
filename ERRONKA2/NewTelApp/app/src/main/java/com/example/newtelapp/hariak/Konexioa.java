@@ -134,7 +134,7 @@ public class Konexioa extends Thread {
                             "res_country.name as herrialdea from  res_partner\n" +
                             "inner join  res_country_state on res_partner.state_id = res_country_state.id\n" +
                             "inner join res_country on res_partner.country_id = res_country.id\n" +
-                            "where res_partner.customer_rank !=0" + // A ver si funciona
+                            "where res_partner.customer_rank > 0" + // A ver si funciona
                             "order by res_partner.id asc\n");
 
                     /** Sententzia exekutatzen da **/
@@ -284,7 +284,7 @@ public class Konexioa extends Thread {
                     /** AurrekontuaLerroen select-a **/
                     pstmt = conn.prepareStatement("SELECT sale_order_line.id as lerroa, sale_order_line.order_id as aurrekontua, " +
                             "sale_order_line.product_id as produktuId, sale_order_line.price_unit as prezioa, " +
-                            "product_template.name as ProduktuIzena, sale_order_line.product_uom_qty as kantitatea sale_order_line.price_total as totala\n" +
+                            "product_template.name as ProduktuIzena, sale_order_line.product_uom_qty as kantitatea, sale_order_line.price_total as totala\n" +
                             "FROM sale_order_line\n" +
                             "inner join product_template on sale_order_line.product_id = product_template.id\n" +
                             "where sale_order_line.state = 'draft';");
@@ -378,9 +378,11 @@ public class Konexioa extends Thread {
                     PreparedStatement pstmt = null;
 
                     /** AurrekontuLerroen insert-a **/
-                    pstmt = conn.prepareStatement("INSERT INTO sale_order_line(order_id, name, price_unit, " +
-                            "product_uom_qty, customer_lead, display_type, product_id, product_uom, price_total, state)\n" +
-                            "VALUES ((select max(id)from sale_order ), ?, ?, ?, 0, null, ?, 1, ?, 'draft');\n");
+                    pstmt = conn.prepareStatement("INSERT INTO sale_order_line (order_id, name, sequence, invoice_status, price_unit, discount, " +
+                            "product_uom_qty, customer_lead, display_type, product_id, product_uom, price_total, state, qty_delivered_method, " +
+                            "qty_delivered, qty-delivered_manual, qty_to_invoice, qty_invoiced, untaxed_amount_invoiced, untaxed_amount_to_invoice, " +
+                            "salesman_id, currency_id, company_id, create_uid, write_uid)\n" +
+                            "VALUES ((select max(id)from sale_order ), ?, 10, no, ?, 0, ?, 0, null, ?, 1, ?, 'draft', 'stock_move', 0, 0, 0, 0, 0, 0, 7, 1, 1, 7, 7);\n");
 
                     pstmt.setString(1, aurrekontualerroa.getIzenaProduktua());
                     pstmt.setFloat(2, aurrekontualerroa.getPrezioaProduktua());

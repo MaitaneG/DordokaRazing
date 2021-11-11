@@ -36,9 +36,8 @@ public class AurrekontuakIkusi extends AppCompatActivity {
     // ArrayList-ak
     private ArrayList<Aurrekontua> aurrekontuak;
     private ArrayList<AurrekontuaLerroa> aurrekontuaLerroa;
-    private ArrayList<Object> arrayListPolita;
-    //private ArrayList<Bezeroa> bezeroak;
-    //private ArrayList<Produktua> produktuak;
+    private ArrayList<Bezeroa> bezeroak;
+    private ArrayList<Produktua> produktuak;
 
     // ListView
     private ListView aurrekontuaListView;
@@ -74,8 +73,8 @@ public class AurrekontuakIkusi extends AppCompatActivity {
         /** Aurrekontuen ArrayList-a betetzen da **/
         aurrekontuak = (ArrayList<Aurrekontua>) getIntent().getSerializableExtra("aurrekontuak");
         aurrekontuaLerroa = (ArrayList<AurrekontuaLerroa>) getIntent().getSerializableExtra("aurrekontuaLerroa");
-        //bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
-        //produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
+        bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
+        produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
 
         /** ListView-ko datuak kargatu **/
 //        for(int i=0;i<aurrekontuaLerroa.size();i++){ //Movidas Maitane
@@ -142,6 +141,12 @@ public class AurrekontuakIkusi extends AppCompatActivity {
      */
     private void irten(View view) {
         Intent myIntent = new Intent(view.getContext(), AurrekontuaMenua.class);
+        // Aurrekontuen ArrayList-ak eramaten
+        myIntent.putExtra("aurrekontuak", aurrekontuak);
+        myIntent.putExtra("aurrekontuaLerroa", aurrekontuaLerroa);
+        // Beeroen eta produktuen aurrekontuak eramaten
+        myIntent.putExtra("bezeroak", bezeroak);
+        myIntent.putExtra("produktuak", produktuak);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
         this.startActivity(myIntent, options.toBundle());
     }

@@ -9,15 +9,16 @@ public class AurrekontuaLerroa implements Serializable {
     private String izenaProduktua;
     private float prezioaProduktua;
     private float kantitatea;
+    private float totala;
 
-    public AurrekontuaLerroa(int idLine, int idAurrekontua ,int idProduktua, String izenaProduktua, float prezioaProduktua, float kantitatea) {
+    public AurrekontuaLerroa(int idLine, int idAurrekontua, int idProduktua, String izenaProduktua, float prezioaProduktua, float kantitatea, float totala) {
         this.idLine = idLine;
         this.idAurrekontua = idAurrekontua;
-        this.idProduktua=idProduktua;
+        this.idProduktua = idProduktua;
         this.izenaProduktua = izenaProduktua;
         this.prezioaProduktua = prezioaProduktua;
         this.kantitatea = kantitatea;
-
+        this.totala = totala;
     }
 
     public int getIdLine() {
@@ -66,6 +67,14 @@ public class AurrekontuaLerroa implements Serializable {
 
     public float getKantitatea() {
         return kantitatea;
+    }
+
+    public float getTotala() {
+        return totala;
+    }
+
+    public void setTotala(float totala) {
+        this.totala = totala;
     }
 
     @Override

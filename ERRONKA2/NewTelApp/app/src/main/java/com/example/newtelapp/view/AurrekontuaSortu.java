@@ -260,23 +260,29 @@ public class AurrekontuaSortu extends AppCompatActivity {
 
                                 Date data = new Date(2002, 11, 28);
                                 /** Aurrekontu objetu bat sortzen du **/
+
                                 Aurrekontua aurrekontua = new Aurrekontua(1, aurrekontuIzena, bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getId(), bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getIzenaAbizena(), "draft", Float.parseFloat(prezioaGuztira.getText().toString()), data);
 
+                                /** Aurrekontuak gehitzeko haria **/
                                 Thread insertAurrekontuak = new Thread(new Runnable() {
                                     @Override
                                     public void run() {
                                         try {
+                                            // Semaforoa okupatzen du
                                             semaforoaInsertAurrekontua.acquire();
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
+                                        // Aurrekontua gehitzen du
                                         Menua.konexioa.insertAurrekontua(aurrekontua);
+                                        // Semaforoa libre lagatzen du
                                         semaforoaInsertAurrekontua.release();
                                     }
                                 });
                                 insertAurrekontuak.setPriority(Thread.MAX_PRIORITY);
                                 insertAurrekontuak.start();
 
+                                /** AurrekontuLerroa gehitzeko haria **/
                                 Thread insertAurrekontuaLerroa = new Thread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -293,19 +299,19 @@ public class AurrekontuaSortu extends AppCompatActivity {
                                                     /** Datuen lehenengo zutabea bada **/
                                                     if (j == 0) {
                                                         produktuIzena = texto.getText().toString();
-                                                        //Toast.makeText(AurrekontuaSortu.this, "Produktua: " + produktuIzena, Toast.LENGTH_LONG).show();
                                                         /** Datuen bigarren zutabea bada **/
                                                     } else if (j == 1) {
                                                         produktuKantitatea = Float.parseFloat(texto.getText().toString());
-                                                        //Toast.makeText(AurrekontuaSortu.this, "Kantitatea: " + produktuKantitatea, Toast.LENGTH_LONG).show();
                                                         /** Datuen hirugarren zutabea bada **/
                                                     } else {
                                                         produktuPrezioa = Float.parseFloat(texto.getText().toString());
-                                                        //Toast.makeText(AurrekontuaSortu.this, "prezioa: " + produktuPrezioa, Toast.LENGTH_LONG).show();
-                                                    }
-                                                    for(int h=0;h<produktuak.size();h++){
-                                                        if(produktuak.get(h).getIzena().equals(produktuIzena)){
-                                                            AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(1, ida + 1, produktuak.get(h).getId(),produktuIzena, produktuPrezioa, produktuKantitatea);
+
+                                                        for (int h = 0; h < produktuak.size(); h++) {
+
+                                                            if (produktuak.get(h).getIzena().equals(produktuIzena)) {
+                                                                AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(1, ida + 1, produktuak.get(h).getId(), produktuIzena, produktuPrezioa, produktuKantitatea, (produktuak.get(h).getPrezioa() * produktuKantitatea));
+                                                                Menua.konexioa.insertAurrekontuaLerroa(aurrekontuaLerroa);
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -315,8 +321,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
                                 });
                                 insertAurrekontuaLerroa.start();
                             }
-
-                            taulaHasieratu();
+                            taula = findViewById(R.id.taula);
                             prezioaGuztira.setText("");
                         }
                     }

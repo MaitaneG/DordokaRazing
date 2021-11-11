@@ -284,7 +284,7 @@ public class Konexioa extends Thread {
                     /** AurrekontuaLerroen select-a **/
                     pstmt = conn.prepareStatement("SELECT sale_order_line.id as lerroa, sale_order_line.order_id as aurrekontua, " +
                             "sale_order_line.product_id as produktuId, sale_order_line.price_unit as prezioa, " +
-                            "product_template.name as ProduktuIzena, sale_order_line.product_uom_qty as kantitatea\n" +
+                            "product_template.name as ProduktuIzena, sale_order_line.product_uom_qty as kantitatea sale_order_line.price_total as totala\n" +
                             "FROM sale_order_line\n" +
                             "inner join product_template on sale_order_line.product_id = product_template.id\n" +
                             "where sale_order_line.state = 'draft';");
@@ -295,7 +295,8 @@ public class Konexioa extends Thread {
                     /** Select-an jaso den informazioa Aurrekontua ArrayList batean gordetzen da **/
                     while (rs.next()) {
                         AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(rs.getInt("lerroa"), rs.getInt("aurrekontua"),
-                                rs.getInt("produktuId"), rs.getString("produktuIzena"), rs.getFloat("prezioa"), rs.getFloat("kantitatea"));
+                                rs.getInt("produktuId"), rs.getString("produktuIzena"), rs.getFloat("prezioa"),
+                                rs.getFloat("kantitatea"), rs.getFloat("totala"));
                         System.out.println();
                         aurrekontuaLerroaLista.add(aurrekontuaLerroa);
                     }
@@ -379,12 +380,13 @@ public class Konexioa extends Thread {
                     /** AurrekontuLerroen insert-a **/
                     pstmt = conn.prepareStatement("INSERT INTO sale_order_line(order_id, name, price_unit, " +
                             "product_uom_qty, customer_lead, display_type, product_id, product_uom, price_total, state)\n" +
-                            "VALUES ((select max(id)from sale_order ), ?, ?, 4,0, null, '3', '1', '5.3', 'draft');\n");
+                            "VALUES ((select max(id)from sale_order ), ?, ?, ?, 0, null, ?, 1, ?, 'draft');\n");
 
-//                    pstmt.setString(1, aurrekontualerroa.getIzenaProduktua());
-//                    pstmt.setInt(2, aurrekontualerroa.get);
-//                    pstmt.setInt(3, aurrekontualerroa.getBezeroaId());
-//                    pstmt.setInt(4, aurrekontualerroa.getBezeroaId());
+                    pstmt.setString(1, aurrekontualerroa.getIzenaProduktua());
+                    pstmt.setFloat(2, aurrekontualerroa.getPrezioaProduktua());
+                    pstmt.setFloat(3, aurrekontualerroa.getKantitatea());
+                    pstmt.setInt(4, aurrekontualerroa.getIdProduktua());
+                    pstmt.setFloat(5, aurrekontualerroa.getTotala());
 
                     /** Sententzia exekutatzen da **/
                     pstmt.executeUpdate();

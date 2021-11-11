@@ -2,6 +2,7 @@ package com.example.newtelapp.view;
 
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +11,9 @@ import com.example.newtelapp.R;
 public class AurrekontuakAldatu extends AppCompatActivity {
     private ImageButton irten;
     private ImageButton gorde;
+
+    private TextView textViewBezeroaAldatu;
+    private TextView textViewBezeroaAldatu;
 
     /**
      * Layout-a sortzen denean

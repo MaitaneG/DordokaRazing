@@ -1,7 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/aurrekontua_aldatu">
+
+    <ImageButton
+        android:id="@+id/buttonGordeAurrekontua2"
+        android:layout_width="85dp"
+        android:layout_height="35dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@color/kolorea"
+        android:padding="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gorde_botoia"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.165"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.958"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonIrtenAurrekontuaSortu2"
+        android:layout_width="85dp"
+        android:layout_height="35dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@color/kolorea"
+        android:padding="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/irten_botoia"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.958"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TableLayout
+        android:id="@+id/taula"
+        android:layout_width="255dp"
+        android:layout_height="164dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="416dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:id="@+id/tituloa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/produktuaIzena"
+                android:layout_width="115dp"
+                android:layout_height="25dp"
+                android:background="@drawable/taula_label"
+                android:padding="3dip"
+                android:text="Produktua"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/produktuaKantitatea"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:background="@drawable/taula_label"
+                android:padding="3dip"
+                android:text="Kantitatea"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/produktuaPrezioa"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:background="@drawable/taula_label"
+                android:padding="3dip"
+                android:text="Prezioa"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="279dp"
+        android:layout_height="179dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="412dp"
+        android:background="@drawable/edit_text_tall"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewPrezioaGuztira2"
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="604dp"
+        android:text="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="604dp"
+        android:text="GUZTIRA: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerProduktuaAurrekontuaAldatu"
+        android:layout_width="214dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="252dp"
+        android:background="@drawable/spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/editTextNumberKantitatea2"
+        android:layout_width="67dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="328dp"
+        android:background="@drawable/edit_text_small"
+        android:ems="10"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/grisaa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonProduktuaGehitu2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="288dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="@color/kolorea"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gehi_botoia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textViewBezeroaAldatu"
+        android:layout_width="210dp"
+        android:layout_height="62dp"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="159dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

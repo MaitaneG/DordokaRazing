@@ -3,10 +3,7 @@ package eus.uni.dam;
 import java.util.Properties;
 import javax.sql.DataSource;
 
-import com.NewTel.dao.ProductProductDao;
-import com.NewTel.dao.ResPartnerDao;
-import com.NewTel.dao.SaleOrderDao;
-import com.NewTel.dao.SaleOrderLineDao;
+import com.NewTel.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -82,6 +79,11 @@ public class DatuBasearenKonfigurazioa_SqlServer {
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
+    @Bean
+    public PurchaseOrderDao getPurchaseOrderDao() {return new PurchaseOrderDao(); }
+
+    @Bean
+    public PurchaseOrderLineDao getPurchaseOrderLineDao() {return new PurchaseOrderLineDao();}
 
     @Bean
     public ProductProductDao getProductDao() {

@@ -170,8 +170,31 @@ public class SaleOrder implements Serializable {
 	//bi-directional many-to-one association to SaleOrderLine
 	@OneToMany(mappedBy="saleOrder")
 	private List<SaleOrderLine> saleOrderLines;
+	//bi-directional many-to-one association to PurchaseOrderLine
+	@OneToMany(mappedBy="saleOrder")
+	private List<PurchaseOrderLine> purchaseOrderLines;
+
 
 	public SaleOrder() {
+	}
+	public List<PurchaseOrderLine> getPurchaseOrderLines(){return this.purchaseOrderLines;}
+
+	public void setPurchaseOrderLines(List<PurchaseOrderLine> purchaseOrderLines) {
+		this.purchaseOrderLines = purchaseOrderLines;
+	}
+
+	public PurchaseOrderLine addPurchaseOrderLine(PurchaseOrderLine purchaseOrderLine) {
+		getPurchaseOrderLines().add(purchaseOrderLine);
+		purchaseOrderLine.setSaleOrder(this);
+
+		return purchaseOrderLine;
+	}
+
+	public PurchaseOrderLine removePurchaseOrderLine(PurchaseOrderLine purchaseOrderLine) {
+		getPurchaseOrderLines().remove(purchaseOrderLine);
+		purchaseOrderLine.setSaleOrder(null);
+
+		return purchaseOrderLine;
 	}
 
 	public Integer getId() {

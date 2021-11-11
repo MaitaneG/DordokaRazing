@@ -22,7 +22,7 @@ public class ProduktuaDao {
      */
     public void create(Pelicula peli) {
         entityManager.persist(peli);
-        return;
+
     }
 
     /**
@@ -33,7 +33,7 @@ public class ProduktuaDao {
             entityManager.remove(peli);
         else
             entityManager.remove(entityManager.merge(peli));
-        return;
+
     }
 
     /**
@@ -56,7 +56,7 @@ public class ProduktuaDao {
      */
     public void update(Pelicula peli) {
         entityManager.merge(peli);
-        return;
+
     }
 
 }

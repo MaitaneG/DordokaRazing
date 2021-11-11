@@ -57,6 +57,10 @@ public class ProductProduct implements Serializable {
 
 	@OneToMany(mappedBy="productProduct")
 	private List<SaleOrderLine> saleOrderLines;
+	//bi-directional many-to-one association to PurchaseOrderLine
+
+	@OneToMany(mappedBy="productProduct")
+	private List<PurchaseOrderLine> purchaseOrderLines;
 
 
 	public ProductProduct() {
@@ -77,7 +81,27 @@ public class ProductProduct implements Serializable {
 //	public void setActive(Boolean active) {
 //		this.active = active;
 //	}
+public List<PurchaseOrderLine> getPurchaseOrderLines() {
+	return this.purchaseOrderLines;
+}
 
+	public void setPurchaseOrderLines(List<PurchaseOrderLine> purchaseOrderLines) {
+		this.purchaseOrderLines = purchaseOrderLines;
+	}
+
+	public PurchaseOrderLine addPurchaseOrderLine(PurchaseOrderLine purchaseOrderLine) {
+		getPurchaseOrderLines().add(purchaseOrderLine);
+		purchaseOrderLine.setProductProduct(this);
+
+		return purchaseOrderLine;
+	}
+
+	public PurchaseOrderLine removePurchaseOrderLine(PurchaseOrderLine purchaseOrderLine) {
+		getPurchaseOrderLines().remove(purchaseOrderLine);
+		purchaseOrderLine.setProductProduct(null);
+
+		return purchaseOrderLine;
+	}
 	public String getBarcode() {
 		return this.barcode;
 	}

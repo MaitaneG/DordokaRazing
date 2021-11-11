@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.newtelapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,24 +25,22 @@
         </activity>
         <activity
             android:name=".view.ProduktuakErakutsi"
-            android:theme="@style/Theme.NewTelApp.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.NewTelApp.NoActionBar" />
         <activity
             android:name=".view.AurrekontuaSortu"
-            android:theme="@style/Theme.NewTelApp.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.NewTelApp.NoActionBar" />
         <activity
             android:name=".view.BezeroaSortu"
-            android:theme="@style/Theme.NewTelApp.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.NewTelApp.NoActionBar" />
         <activity
             android:name=".view.AurrekontuaMenua"
-            android:theme="@style/Theme.NewTelApp.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.NewTelApp.NoActionBar" />
         <activity
             android:name=".view.AurrekontuakIkusi"
-            android:theme="@style/Theme.NewTelApp.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.NewTelApp.NoActionBar" />
+        <activity
+            android:name=".view.AurrekontuakAldatu"
+            android:theme="@style/Theme.NewTelApp.NoActionBar" />
     </application>
 
 </manifest>

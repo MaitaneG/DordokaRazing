@@ -114,7 +114,7 @@ public class Menua extends AppCompatActivity implements Serializable {
                 .setMessage("Aplikazioa itxi nahi duzu?") // Dialog-aren mezua jarri
 
                 // Baiezko aukera klikatzen bada, aplikazioa itxiko da
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
                         if (getIntent().getBooleanExtra("EXIT", true)) {
@@ -125,7 +125,7 @@ public class Menua extends AppCompatActivity implements Serializable {
                 })
 
                 // Listener huts bat, Ez klikatzen bada ez da aplikazioa itxiko
-                .setNegativeButton(android.R.string.no, null)
+                .setNegativeButton("EZ", null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }

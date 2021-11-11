@@ -116,7 +116,7 @@ public class BezeroaSortu extends AppCompatActivity {
                 .setMessage("Ziur zaude bezeroa gehitu nahi duzula?") // Dialog-aren mezua jarri
 
                 // Baiezko aukera klikatzen bada, bezeroa gordeko da
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         /** Bezeroa gordetzen du **/
                         // Gako guztiak beteta daudela konprobatzen du
@@ -145,7 +145,7 @@ public class BezeroaSortu extends AppCompatActivity {
                 })
 
                 // Listener huts bat, Ez klikatzen bada ez da gordeko
-                .setNegativeButton(android.R.string.no, null)
+                .setNegativeButton("EZ", null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
@@ -160,7 +160,7 @@ public class BezeroaSortu extends AppCompatActivity {
                 .setMessage("Ziur zaude atzera joan nahi zarela gorde gabe?") // Dialog-aren mezua jarri
 
                 // Baiezko aukera klikatzen bada, bezeroa gordeko da
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Gakoak husten du
                         garbitu();
@@ -176,7 +176,7 @@ public class BezeroaSortu extends AppCompatActivity {
                 })
 
                 // Listener huts bat, Ez klikatzen bada ez da atzera egingo
-                .setNegativeButton(android.R.string.no, null)
+                .setNegativeButton("EZ", null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }

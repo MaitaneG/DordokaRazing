@@ -39,31 +39,11 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/editTextProbintzia"
-        android:layout_width="109dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="428dp"
-        android:background="@drawable/edit_text_medium"
-        android:ems="10"
-        android:hint="Probintzia"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:textAlignment="center"
-        android:textColor="@color/grisa"
-        android:textColorHint="@color/grisa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
         android:id="@+id/editTextIzenaAbizena"
         android:layout_width="173dp"
         android:layout_height="48dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="188dp"
         android:background="@drawable/edit_text_large"
         android:ems="10"
         android:hint="@string/izen_abizenak"
@@ -84,7 +64,7 @@
         android:layout_width="200dp"
         android:layout_height="48dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="352dp"
+        android:layout_marginTop="420dp"
         android:background="@drawable/edit_text_large"
         android:ems="10"
         android:hint="@string/kalea"
@@ -101,11 +81,44 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/editTextMugikorra"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="264dp"
+        android:background="@drawable/edit_text_large"
+        android:ems="10"
+        android:hint="@string/mugikorreko_zenbakia"
+        android:inputType="phone"
+        android:minHeight="48dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/grisa"
+        android:textColorHint="@color/grisa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/switchEnpresa"
+        android:layout_width="113dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="236dp"
+        android:layout_marginTop="264dp"
+        android:text="@string/enpresa"
+        android:textColor="@color/grisa"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
         android:id="@+id/editTextKorreoa"
         android:layout_width="200dp"
         android:layout_height="48dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="288dp"
+        android:layout_marginTop="340dp"
         android:background="@drawable/edit_text_large"
         android:ems="10"
         android:hint="@string/korreo_elektronikoa"
@@ -122,32 +135,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextMugikorra"
-        android:layout_width="173dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="224dp"
-        android:background="@drawable/edit_text_large"
-        android:ems="10"
-        android:hint="@string/mugikorreko_zenbakia"
-        android:inputType="phone"
-        android:minHeight="48dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:textAlignment="center"
-        android:textColor="@color/grisa"
-        android:textColorHint="@color/grisa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
         android:id="@+id/editTextKodigoPostala"
         android:layout_width="67dp"
         android:layout_height="48dp"
-        android:layout_marginStart="292dp"
-        android:layout_marginTop="428dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="504dp"
         android:background="@drawable/edit_text_small"
         android:ems="10"
         android:hint="@string/c_p"
@@ -164,45 +156,12 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <Switch
-        android:id="@+id/switchEnpresa"
-        android:layout_width="113dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="244dp"
-        android:layout_marginTop="224dp"
-        android:text="@string/enpresa"
-        android:textColor="@color/grisa"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextHerrialdea"
-        android:layout_width="200dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="496dp"
-        android:background="@drawable/edit_text_large"
-        android:ems="10"
-        android:hint="@string/herrialdea"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:textAlignment="center"
-        android:textColor="@color/grisa"
-        android:textColorHint="@color/grisa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/editText_Hiria"
         android:layout_width="109dp"
         android:layout_height="48dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="428dp"
+        android:layout_marginTop="504dp"
         android:background="@drawable/edit_text_medium"
         android:ems="10"
         android:hint="@string/hiria"
@@ -222,7 +181,7 @@
         android:layout_width="78dp"
         android:layout_height="73dp"
         android:layout_marginStart="260dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="116dp"
         android:backgroundTint="@color/kolorea"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"

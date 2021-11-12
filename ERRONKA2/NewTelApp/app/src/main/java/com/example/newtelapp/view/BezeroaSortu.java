@@ -73,9 +73,9 @@ public class BezeroaSortu extends AppCompatActivity {
         korreoElektronikoa = findViewById(R.id.editTextKorreoa);
         kalea = findViewById(R.id.editTextKalea);
         hiria = findViewById(R.id.editText_Hiria);
-        probintzia = findViewById(R.id.editTextProbintzia);
+        //probintzia = findViewById(R.id.editTextProbintzia);
         kodigoPostala = findViewById(R.id.editTextKodigoPostala);
-        herrialdea = findViewById(R.id.editTextHerrialdea);
+        //herrialdea = findViewById(R.id.editTextHerrialdea);
         // Switch
         enpresaDa = findViewById(R.id.switchEnpresa);
 

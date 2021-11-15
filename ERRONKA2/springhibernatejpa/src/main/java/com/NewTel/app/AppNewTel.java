@@ -116,7 +116,7 @@ public class AppNewTel {
     }
 
     /***
-     * Menua lehen aldiz bistaratzen duzunean erabiltzen den menua
+     * Menua lehen aldiz bistaratzen duzunean erabiltzen den menua //deprecated
      */
     public static void menuOsoaBistaratu() {
         int election;
@@ -364,7 +364,7 @@ public class AppNewTel {
     }
 
     /**
-     * Aplikazioa lehenago exekutatu bada menu hau bistaratuko da
+     * Aplikazioa lehenago exekutatu bada menu hau bistaratuko da //deprecated
      */
     public static void menuaBistaratu() {
         irakurriXML();                          //Xml fitxategia irakurriko du
@@ -634,6 +634,11 @@ public class AppNewTel {
 
 
     }
+
+    /**
+     * Programa exekutatzerakoan erabiltzaileak sartutako inputa kudeatzen duen metodoa
+     * @param args user provided arguments
+     */
     private static void runMain(String[] args){
         List<String> argumentos = Arrays.asList(args);
         //runHelper = new RunHelper();
@@ -736,6 +741,8 @@ public class AppNewTel {
                     System.exit(-1);
                 }
 
+            }else{
+                System.out.println("Errorea, ez duzu konfigurazio fitxategirik");
             }
         }
         else{

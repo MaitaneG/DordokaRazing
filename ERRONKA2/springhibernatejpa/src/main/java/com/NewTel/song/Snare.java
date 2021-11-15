@@ -5,7 +5,7 @@ import java.io.File;
 
 public class Snare extends Thread {
     @Override
-    public void run() {
+    public synchronized void run() {
         super.run();
         try {
 

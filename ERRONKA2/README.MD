@@ -11,4 +11,4 @@ Bigarrena, android-eko aplikazioa bat da. Bertan, odooKonexioan hartutako fitxat
 ### springhibernatejpa [(Readme)](OdooKonexioa/README.md)
 Hemen dagoen aplikazioak, remotoan daukagun Odoo-ren datubasearekin (Postgres) konektatzen da. Ondoren Datubaseari dauden produktuen kontsulta egiten du, eta produktu bakoitzeko id-a, kantitatea, prezioa, mota eta izena hartzen dugu. Lortutako datu guztiak Excel fitxategi batera exportatzen da.
 
-Gainera, karpeta honetan aplikazio honen README-a dago
+Gainera, karpeta honetan aplikazio honen README-a dago 

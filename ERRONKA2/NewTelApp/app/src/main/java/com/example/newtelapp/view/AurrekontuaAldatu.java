@@ -50,6 +50,7 @@ public class AurrekontuaAldatu extends AppCompatActivity {
     // ArrayList-ak
     private ArrayList<AurrekontuaLerroa> aurrekontuaLerroa;
     private ArrayList<Produktua> produktuak;
+    private ArrayList<AurrekontuaLerroa> insertEgitekoAurrekontuLerroa;
     // Objektu bat
     private Aurrekontua aurrekontua;
     // TableLayout
@@ -103,6 +104,7 @@ public class AurrekontuaAldatu extends AppCompatActivity {
         aurrekontuaLerroa = (ArrayList<AurrekontuaLerroa>) getIntent().getSerializableExtra("aurrekontuaLerroak");
         aurrekontua = (Aurrekontua) getIntent().getSerializableExtra("aurrekontua");
         produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
+        insertEgitekoAurrekontuLerroa = new ArrayList<>();
 
         textViewBezeroaAldatu.setText(aurrekontua.getBezeroaIzena());
 
@@ -131,7 +133,7 @@ public class AurrekontuaAldatu extends AppCompatActivity {
     @SuppressLint("ResourceAsColor")
     private void taulaHasieratu() {
         /** Taula sortu **/
-        taula = findViewById(R.id.taulaAurrekontuaSortu);
+        taula = findViewById(R.id.taulaAurrekontuaAldatu);
 
         for (int i = 0; i < aurrekontuaLerroa.size(); i++) {
             /** Ilara bat sortzen du **/
@@ -161,8 +163,8 @@ public class AurrekontuaAldatu extends AppCompatActivity {
 
             /** Zutabeak betzen du **/
             column1.setText(aurrekontuaLerroa.get(i).getIzenaProduktua());
-            column2.setText(aurrekontuaLerroa.get(i).getKantitatea()+"");
-            column3.setText(aurrekontuaLerroa.get(i).getPrezioaProduktua()+"");
+            column2.setText((int)aurrekontuaLerroa.get(i).getKantitatea() + "");
+            column3.setText(aurrekontuaLerroa.get(i).getPrezioaProduktua() + "");
 
             /** Zutabeak ilaran sartu **/
             tableRow.addView(column1);
@@ -172,8 +174,7 @@ public class AurrekontuaAldatu extends AppCompatActivity {
             /** Ilara taulan sartzen du **/
             taula.addView(tableRow);
 
-            //prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString()) + (produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString())) + "");
-
+            prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString()) + (aurrekontuaLerroa.get(i).getPrezioaProduktua() * aurrekontuaLerroa.get(i).getKantitatea()) + "");
         }
     }
 
@@ -182,8 +183,56 @@ public class AurrekontuaAldatu extends AppCompatActivity {
      *
      * @param view
      */
+    @SuppressLint("ResourceAsColor")
     private void produktuaGehitu(View view) {
+        // Kantitatea hutsik badago
+        if (kantitatea.getText().toString().equals("")) {
+            Toast.makeText(this, "Produktuen kantitatea sartu behar duzu", Toast.LENGTH_SHORT).show();
+            // Knatitatea ez badago hutsik
+        } else {
+            /** Ilara bat sortzen du **/
+            TableRow tableRow = new TableRow(this);
 
+            /** Hiru zutabe sortzen du **/
+            // Zutabeen zabalera definitzeko (dp-tik pixeletara pasatu)
+            DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+            int px1 = Math.round(115 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+            int px23 = Math.round(70 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+
+            // Lehenengo zutabea
+            TextView column1 = new TextView(this);
+            column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            column1.setTextColor(R.color.black);
+            column1.setWidth(px1);
+            // Bigarren zutabea
+            TextView column2 = new TextView(this);
+            column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            column1.setTextColor(R.color.black);
+            column2.setWidth(px23);
+            // Hirugarren zutabea
+            TextView column3 = new TextView(this);
+            column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            column1.setTextColor(R.color.black);
+            column3.setWidth(px23);
+
+            /** Zutabeak betzen du **/
+            column1.setText(produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getIzena());
+            column2.setText(kantitatea.getText().toString());
+            column3.setText(produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getPrezioa() + "");
+
+            /** Zutabeak ilaran sartu **/
+            tableRow.addView(column1);
+            tableRow.addView(column2);
+            tableRow.addView(column3);
+
+            /** Ilara taulan sartzen du **/
+            taula.addView(tableRow);
+
+            prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString()) + (produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString())) + "");
+
+            /** Kantitatea gakoa hustu**/
+            kantitatea.setText("");
+        }
     }
 
     /**
@@ -201,7 +250,7 @@ public class AurrekontuaAldatu extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         if (getIntent().getBooleanExtra("EXIT", true)) {
-
+                            irtenAlertGabe();
                         }
                     }
                 })
@@ -225,7 +274,8 @@ public class AurrekontuaAldatu extends AppCompatActivity {
                 .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Aurreko layout-era doa
-                        Intent myIntent = new Intent(AurrekontuaAldatu.this, AurrekontuaSortu.class);
+                        Intent myIntent = new Intent(AurrekontuaAldatu.this, AurrekontuaMenua.class);
+                        myIntent.putExtra("produktuak", produktuak);
                         ActivityOptions options = ActivityOptions.makeCustomAnimation(AurrekontuaAldatu.this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
                         AurrekontuaAldatu.this.startActivity(myIntent, options.toBundle());
                     }
@@ -235,6 +285,16 @@ public class AurrekontuaAldatu extends AppCompatActivity {
                 .setNegativeButton("EZ", null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    /**
+     * Aurreko pantailara joaten da alerta atera gabe
+     */
+    private void irtenAlertGabe() {
+        Intent myIntent = new Intent(AurrekontuaAldatu.this, AurrekontuaMenua.class);
+        myIntent.putExtra("produktuak", produktuak);
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(getBaseContext(), R.anim.from_right, R.anim.from_right); // Animazioa definitzen
+        AurrekontuaAldatu.this.startActivity(myIntent, options.toBundle());
     }
 
     /**

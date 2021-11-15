@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -182,13 +183,18 @@ public class AurrekontuaSortu extends AppCompatActivity {
             // Bigarren zutabea
             TextView column2 = new TextView(this);
             column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
+            column2.setTextColor(R.color.black);
             column2.setWidth(px23);
             // Hirugarren zutabea
             TextView column3 = new TextView(this);
             column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
+            column3.setTextColor(R.color.black);
             column3.setWidth(px23);
+            // Hirugarren zutabea
+            Button borratu = new Button(this);
+            borratu.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            borratu.setTextColor(R.color.black);
+            borratu.setWidth(px23);
 
             /** Zutabeak betzen du **/
             column1.setText(produktuak.get(produktuSpinner.getSelectedItemPosition()).getIzena());

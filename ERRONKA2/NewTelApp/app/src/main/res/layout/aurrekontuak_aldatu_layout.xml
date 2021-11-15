@@ -42,14 +42,14 @@
 
     <TableLayout
         android:id="@+id/taulaAurrekontuaAldatu"
-        android:layout_width="255dp"
-        android:layout_height="164dp"
+        android:layout_width="288dp"
+        android:layout_height="170dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.698">
+        app:layout_constraintVertical_bias="0.721">
 
         <TableRow
             android:id="@+id/tituloaAurrekontuaAldatu"
@@ -97,7 +97,7 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="279dp"
+        android:layout_width="319dp"
         android:layout_height="179dp"
         android:background="@drawable/edit_text_tall"
         app:layout_constraintBottom_toBottomOf="parent"

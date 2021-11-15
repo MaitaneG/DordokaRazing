@@ -69,7 +69,7 @@ public class AurrekontuakIkusi extends AppCompatActivity {
         aurrekontuaLerroa = (ArrayList<AurrekontuaLerroa>) getIntent().getSerializableExtra("aurrekontuaLerroa");
         bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
         produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
-        aurrekontuaLerroaAldatu=new ArrayList<>();
+        aurrekontuaLerroaAldatu = new ArrayList<>();
 
         /** Adapterra sortu, datuak jarri eta listenerra izendatu **/
         adapter = new ArrayAdapter<>(AurrekontuakIkusi.this, android.R.layout.simple_list_item_1, aurrekontuak);
@@ -96,10 +96,10 @@ public class AurrekontuakIkusi extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent myIntent = new Intent(AurrekontuakIkusi.this, AurrekontuaAldatu.class);
 
-                        for(int i =0;i<aurrekontuak.size();i++){
-                            if(aurrekontuak.get(i).getId()==aurrekontuak.get((int) l).getId()){
-                                for(int j=0;j<aurrekontuaLerroa.size();j++){
-                                    if (aurrekontuak.get(i).getId()==aurrekontuaLerroa.get(j).getIdAurrekontua()){
+                        for (int i = 0; i < aurrekontuak.size(); i++) {
+                            if (aurrekontuak.get(i).getId() == aurrekontuak.get((int) l).getId()) {
+                                for (int j = 0; j < aurrekontuaLerroa.size(); j++) {
+                                    if (aurrekontuak.get(i).getId() == aurrekontuaLerroa.get(j).getIdAurrekontua()) {
                                         aurrekontuaLerroaAldatu.add(aurrekontuaLerroa.get(j));
                                     }
 

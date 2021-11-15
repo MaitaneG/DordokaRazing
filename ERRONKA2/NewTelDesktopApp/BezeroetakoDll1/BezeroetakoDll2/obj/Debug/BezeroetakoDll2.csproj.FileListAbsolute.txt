@@ -1,0 +1,13 @@
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\bin\Debug\BezeroetakoDll2.dll.config
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\bin\Debug\BezeroetakoDll2.dll
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\bin\Debug\BezeroetakoDll2.pdb
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\obj\Debug\BezeroetakoDll2.csproj.AssemblyReference.cache
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\obj\Debug\BezeroetakoDll2.KontrolaBezero2.resources
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\obj\Debug\BezeroetakoDll2.csproj.GenerateResource.cache
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\obj\Debug\BezeroetakoDll2.csproj.CoreCompileInputs.cache
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\obj\Debug\BezeroetakoDll2.dll
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\obj\Debug\BezeroetakoDll2.pdb
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\bin\Debug\EntityFramework.dll
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\bin\Debug\EntityFramework.xml
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroetakoDll2\bin\Debug\EntityFramework.SqlServer.xml

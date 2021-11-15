@@ -1,0 +1,9 @@
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileKantitateaDll\bin\Debug\HornitzaileKantitateaDll.dll.config
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileKantitateaDll\bin\Debug\HornitzaileKantitateaDll.dll
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileKantitateaDll\bin\Debug\HornitzaileKantitateaDll.pdb
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileKantitateaDll\obj\Debug\HornitzaileKantitateaDll.csproj.AssemblyReference.cache
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileKantitateaDll\obj\Debug\HornitzaileKantitateaDll.KontrolaHornitzaileGuztira.resources
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileKantitateaDll\obj\Debug\HornitzaileKantitateaDll.csproj.GenerateResource.cache
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileKantitateaDll\obj\Debug\HornitzaileKantitateaDll.csproj.CoreCompileInputs.cache
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileKantitateaDll\obj\Debug\HornitzaileKantitateaDll.dll
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileKantitateaDll\obj\Debug\HornitzaileKantitateaDll.pdb

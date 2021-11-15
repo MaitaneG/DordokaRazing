@@ -1,0 +1,9 @@
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\FinantzetakoDll1\obj\Debug\FinantzetakoDll1.csproj.AssemblyReference.cache
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\FinantzetakoDll1\obj\Debug\FinantzetakoDll1.KontrolaFinantzak1.resources
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\FinantzetakoDll1\obj\Debug\FinantzetakoDll1.csproj.GenerateResource.cache
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\FinantzetakoDll1\obj\Debug\FinantzetakoDll1.csproj.CoreCompileInputs.cache
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\FinantzetakoDll1\bin\Debug\FinantzetakoDll1.dll.config
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\FinantzetakoDll1\bin\Debug\FinantzetakoDll1.dll
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\FinantzetakoDll1\bin\Debug\FinantzetakoDll1.pdb
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\FinantzetakoDll1\obj\Debug\FinantzetakoDll1.dll
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\FinantzetakoDll1\obj\Debug\FinantzetakoDll1.pdb

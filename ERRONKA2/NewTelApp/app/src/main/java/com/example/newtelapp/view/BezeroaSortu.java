@@ -37,9 +37,7 @@ public class BezeroaSortu extends AppCompatActivity {
     private EditText korreoElektronikoa;
     private EditText kalea;
     private EditText hiria;
-    private EditText probintzia;
     private EditText kodigoPostala;
-    private EditText herrialdea;
     //Switch
     private Switch enpresaDa;
     // ArrayList-a
@@ -73,9 +71,7 @@ public class BezeroaSortu extends AppCompatActivity {
         korreoElektronikoa = findViewById(R.id.editTextKorreoa);
         kalea = findViewById(R.id.editTextKalea);
         hiria = findViewById(R.id.editText_Hiria);
-        //probintzia = findViewById(R.id.editTextProbintzia);
         kodigoPostala = findViewById(R.id.editTextKodigoPostala);
-        //herrialdea = findViewById(R.id.editTextHerrialdea);
         // Switch
         enpresaDa = findViewById(R.id.switchEnpresa);
 
@@ -95,9 +91,7 @@ public class BezeroaSortu extends AppCompatActivity {
         korreoElektronikoa.setText("");
         kalea.setText("");
         hiria.setText("");
-        probintzia.setText("");
         kodigoPostala.setText("");
-        herrialdea.setText("");
     }
 
     private void borratu(View view) {
@@ -122,23 +116,25 @@ public class BezeroaSortu extends AppCompatActivity {
                         // Gako guztiak beteta daudela konprobatzen du
                         if (izenAbizena.getText().toString().trim().equals("") || mugikorZenbakia.getText().toString().trim().equals("") ||
                                 korreoElektronikoa.getText().toString().trim().equals("") || kalea.getText().toString().trim().equals("") ||
-                                hiria.getText().toString().trim().equals("") || probintzia.getText().toString().trim().equals("") ||
-                                kodigoPostala.getText().toString().trim().equals("") || herrialdea.getText().toString().trim().equals("")) {
-                            Toast.makeText(view.getContext(), "Gako guztiak bete behar dira", Toast.LENGTH_SHORT).show();
+                                hiria.getText().toString().trim().equals("") ||
+                                kodigoPostala.getText().toString().trim().equals("")) {
 
-                        } else if (!korreoElektronikoa.getText().toString().trim().contains("@") && !korreoElektronikoa.getText().toString().trim().contains(".")) {
+                            Toast.makeText(view.getContext(), "Gako guztiak bete behar dira", Toast.LENGTH_SHORT).show();
+                        // Korreo elektronikoa ez badago ondo
+                        } else if (!korreoElektronikoa.getText().toString().trim().contains("@") || !korreoElektronikoa.getText().toString().trim().contains(".")) {
                             Toast.makeText(view.getContext(), "Korreoaren formatua gaizki dago", Toast.LENGTH_SHORT).show();
                             // Informazio guztia beteta badago eta ondo
                         } else {
                             Bezeroa bezeroa = new Bezeroa(/*El id no lo uso*/1, izenAbizena.getText().toString(), enpresaDa.isChecked(), mugikorZenbakia.getText().toString().trim(),
-                                    korreoElektronikoa.getText().toString().trim(), kalea.getText().toString(), hiria.getText().toString().trim(),
-                                    probintzia.getText().toString().trim(), Integer.parseInt(kodigoPostala.getText().toString().trim()),
-                                    herrialdea.getText().toString().trim());
+                                    korreoElektronikoa.getText().toString().trim(), kalea.getText().toString(), hiria.getText().toString().trim(), Integer.parseInt(kodigoPostala.getText().toString().trim()));
                             // Bezeroa datu basean sartzen du
                             Menua.konexioa.insertBezeroak(bezeroa);
                             Toast.makeText(view.getContext(), "Bezeroa behar bezala sortu da", Toast.LENGTH_SHORT).show();
                             // Pantaila honetatik irtetzen da
-                            irten(view);
+
+                            garbitu();
+                            irtenAlertGabe();
+
                         }
 
                     }
@@ -186,6 +182,19 @@ public class BezeroaSortu extends AppCompatActivity {
      */
     private void irten(View view) {
         alertAtzera();
+    }
+
+    private void irtenAlertGabe(){
+        // Gakoak husten du
+        garbitu();
+
+        // Aurreko layout-era doa
+        Intent myIntent = new Intent(BezeroaSortu.this, AurrekontuaMenua.class);
+        // Bezeroen eta produktuen ArrayList-a eramaten du
+        myIntent.putExtra("bezeroak", bezeroak);
+        myIntent.putExtra("produktuak", produktuak);
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(BezeroaSortu.this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
+        BezeroaSortu.this.startActivity(myIntent, options.toBundle());
     }
 
     /**

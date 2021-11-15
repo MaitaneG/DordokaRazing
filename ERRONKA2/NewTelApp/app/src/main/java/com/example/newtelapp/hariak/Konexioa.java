@@ -1,9 +1,12 @@
 package com.example.newtelapp.hariak;
 
+import android.widget.Toast;
+
 import com.example.newtelapp.model.Aurrekontua;
 import com.example.newtelapp.model.AurrekontuaLerroa;
 import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
+import com.example.newtelapp.view.AurrekontuakIkusi;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -129,9 +132,9 @@ public class Konexioa extends Thread {
                     /** Bezeroen select-a **/
                     pstmt = conn.prepareStatement("select res_partner.id as id, res_partner.name  as izenaAbizena, " +
                             "res_partner.is_company as enpresa, res_partner.mobile as mugikorra,\n" +
-                            "res_partner.email as korreoa,res_partner.street as kalea,res_partner.city as hiria," +
-                            "res_partner.zip as kodigoPostala, res_country_state.name as probintzia,\n" +
-                            "res_country.name as herrialdea from  res_partner\n" +
+                            "res_partner.email as korreoa,res_partner.street as kalea,res_partner.city as hiria, " +
+                            "res_partner.zip as kodigoPostala\n" +
+                            "from  res_partner\n" +
                             "full join  res_country_state on res_partner.state_id = res_country_state.id\n" +
                             "full join res_country on res_partner.country_id = res_country.id\n" +
                             "where res_partner.customer_rank > 0" + // A ver si funciona
@@ -143,8 +146,7 @@ public class Konexioa extends Thread {
                     /** Select-an jaso den informazioa Bezeroa ArrayList batean gordetzen da **/
                     while (rs.next()) {
                         Bezeroa bezeroa = new Bezeroa(rs.getInt("id"), rs.getString("izenaAbizena"), rs.getBoolean("enpresa"), rs.getString("mugikorra"), rs.getString("korreoa"),
-                                rs.getString("kalea"), rs.getString("hiria"), rs.getString("probintzia"), rs.getInt("kodigoPostala"),
-                                rs.getString("herrialdea"));
+                                rs.getString("kalea"), rs.getString("hiria"), rs.getInt("kodigoPostala"));
                         System.out.println();
                         bezeroakLista.add(bezeroa);
                     }
@@ -183,10 +185,10 @@ public class Konexioa extends Thread {
 
                     /** Bezeroaren insert-a **/
                     pstmt = conn.prepareStatement("INSERT INTO res_partner\n" +
-                            "(\"name\", create_date, display_name, lang, tz, active, \"type\", street,zip, city, email, mobile, is_company, customer_rank)\n" +
+                            "(\"name\", create_date, display_name, lang, tz, active, \"type\", street,zip, city, email, mobile, is_company, customer_rank, country_id)\n" +
                             "VALUES(?, CURRENT_DATE, ? , 'es_ES', 'Europe/Madrid',\n" +
                             "true,  'contact', ? , ? , ? ,\n" +
-                            " ? , ? , ?, 1);\n");
+                            " ? , ? , ?, 1, 68);\n");
                     pstmt.setString(1, bezeroa.getIzenaAbizena());
                     pstmt.setString(2, bezeroa.getIzenaAbizena());
                     pstmt.setString(3, bezeroa.getKalea());
@@ -382,7 +384,7 @@ public class Konexioa extends Thread {
                             "product_uom_qty, customer_lead, display_type, product_id, product_uom, price_total, state, qty_delivered_method, " +
                             "qty_delivered, qty_delivered_manual, qty_to_invoice, qty_invoiced, untaxed_amount_invoiced, untaxed_amount_to_invoice, " +
                             "salesman_id, currency_id, company_id, create_uid, write_uid)\n" +
-                            "VALUES ((select max(id)from sale_order ), ?, 10, no, ?, 0, ?, 0, null, ?, 1, ?, 'draft', 'stock_move', 0, 0, 0, 0, 0, 0, 7, 1, 1, 7, 7);\n");
+                            "VALUES ((select max(id)from sale_order ), ?, 10, 'no', ?, 0, ?, 0, null, ?, 1, ?, 'draft', 'stock_move', 0, 0, 0, 0, 0, 0, 7, 1, 1, 7, 7);\n");
 
                     pstmt.setString(1, aurrekontualerroa.getIzenaProduktua());
                     pstmt.setFloat(2, aurrekontualerroa.getPrezioaProduktua());
@@ -436,5 +438,42 @@ public class Konexioa extends Thread {
         });
         /** Haria exekutatzen da **/
         deleteAurrekontuak.start();
+    }
+
+    /**
+     * AurrekontuLerroak ezabatzeko metodoa
+     */
+    public void deleteAurrekontuaLerroa(AurrekontuaLerroa aurrekontualerroa) {
+        /**
+         *
+         * Hari bat sortzen da aurrekontuLerroen delete bat egiteko
+         */
+        Thread deleteAurrekontuaLerroa = new Thread(new Runnable() {
+            /**
+             *
+             * Hariaren exekutagarria da
+             */
+            @Override
+            public void run() {
+                try {
+                    /** Konexioa lortzeko connect metodoari deitzen dio **/
+                    Connection conn = connect();
+                    Class.forName("org.postgresql.Driver");
+                    PreparedStatement pstmt = null;
+
+                    /** Aurrekontuen insert-a **/
+                    pstmt = conn.prepareStatement("delete from sale_order_line  where id = ?\n");
+
+                    pstmt.setInt(1, aurrekontualerroa.getIdLine());
+
+                    /** Sententzia exekutatzen da **/
+                    pstmt.executeUpdate();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        /** Haria exekutatzen da **/
+        deleteAurrekontuaLerroa.start();
     }
 }

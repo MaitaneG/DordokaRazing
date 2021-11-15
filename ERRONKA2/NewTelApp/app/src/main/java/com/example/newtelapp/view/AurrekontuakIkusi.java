@@ -34,6 +34,7 @@ public class AurrekontuakIkusi extends AppCompatActivity {
     // ArrayList-ak
     private ArrayList<Aurrekontua> aurrekontuak;
     private ArrayList<AurrekontuaLerroa> aurrekontuaLerroa;
+    private ArrayList<AurrekontuaLerroa> aurrekontuaLerroaAldatu;
     private ArrayList<Bezeroa> bezeroak;
     private ArrayList<Produktua> produktuak;
     // ListView
@@ -94,12 +95,21 @@ public class AurrekontuakIkusi extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent myIntent = new Intent(AurrekontuakIkusi.this, AurrekontuaAldatu.class);
 
+                        for(int i =0;i<aurrekontuak.size();i++){
+                            if(aurrekontuak.get(i).getId()==aurrekontuak.get((int) l).getId()){
+                                for(int j=0;j<aurrekontuaLerroa.size();j++){
+                                    if (aurrekontuak.get(i).getId()==aurrekontuaLerroa.get(j).getIdAurrekontua()){
+                                        aurrekontuaLerroaAldatu.add(aurrekontuaLerroa.get(j));
+                                    }
+
+                                }
+                                myIntent.putExtra("aurrekontua", aurrekontuak.get(i));
+                                myIntent.putExtra("aurrekontua", aurrekontuaLerroaAldatu);
+                            }
+                        }
                         // Aurrekontuen ArrayList-ak eramaten
-                        myIntent.putExtra("aurrekontuak", aurrekontuak);
-                        myIntent.putExtra("aurrekontuaLerroa", aurrekontuaLerroa);
-                        // Beeroen eta produktuen aurrekontuak eramaten
-                        myIntent.putExtra("bezeroak", bezeroak);
-                        myIntent.putExtra("produktuak", produktuak);
+
+                        myIntent.putExtra("aurrekontuLerroa", aurrekontuak);
 
                         ActivityOptions options = ActivityOptions.makeCustomAnimation(AurrekontuakIkusi.this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
                         AurrekontuakIkusi.this.startActivity(myIntent, options.toBundle());

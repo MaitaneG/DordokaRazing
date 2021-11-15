@@ -321,8 +321,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
                                 });
                                 insertAurrekontuaLerroa.start();
                             }
-                            taula = findViewById(R.id.taulaAurrekontuaSortu); // Esto no lo hace
-                            prezioaGuztira.setText("");
+                            irtenAlertGabe();
                         }
                     }
                 })
@@ -360,6 +359,13 @@ public class AurrekontuaSortu extends AppCompatActivity {
                 .setNegativeButton("EZ", null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    private void irtenAlertGabe(){
+        Intent myIntent = new Intent(AurrekontuaSortu.this, AurrekontuaMenua.class);
+        myIntent.putExtra("produktuak", produktuak);
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(getBaseContext(), R.anim.from_right, R.anim.from_right); // Animazioa definitzen
+        AurrekontuaSortu.this.startActivity(myIntent, options.toBundle());
     }
 
     /**

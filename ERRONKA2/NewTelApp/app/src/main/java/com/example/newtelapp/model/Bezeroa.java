@@ -16,9 +16,7 @@ public class Bezeroa implements Serializable {
     private String korreoa;
     private String kalea;
     private String hiria;
-    private String probintzia;
     private int kodigoPostala;
-    private String herrialdea;
 
     /**
      * Bezeroa klasearen konstruktorea
@@ -28,11 +26,9 @@ public class Bezeroa implements Serializable {
      * @param korreoa
      * @param kalea
      * @param hiria
-     * @param probintzia
      * @param kodigoPostala
-     * @param herrialdea
      */
-    public Bezeroa(int id, String izenaAbizena, boolean enpresa, String mugikorra, String korreoa, String kalea, String hiria, String probintzia, int kodigoPostala, String herrialdea) {
+    public Bezeroa(int id, String izenaAbizena, boolean enpresa, String mugikorra, String korreoa, String kalea, String hiria, int kodigoPostala) {
         this.id = id;
         this.izenaAbizena = izenaAbizena;
         this.enpresa = enpresa;
@@ -40,9 +36,7 @@ public class Bezeroa implements Serializable {
         this.korreoa = korreoa;
         this.kalea = kalea;
         this.hiria = hiria;
-        this.probintzia = probintzia;
         this.kodigoPostala = kodigoPostala;
-        this.herrialdea = herrialdea;
     }
 
     /**
@@ -158,22 +152,6 @@ public class Bezeroa implements Serializable {
     }
 
     /**
-     * @return Bezeroaren probintzia
-     */
-    public String getProbintzia() {
-        return probintzia;
-    }
-
-    /**
-     * Aldatzen du Bezeroaren probintzia
-     *
-     * @param probintzia
-     */
-    public void setProbintzia(String probintzia) {
-        this.probintzia = probintzia;
-    }
-
-    /**
      * @return Bezeroaren kodigo postala
      */
     public int getKodigoPostala() {
@@ -187,22 +165,6 @@ public class Bezeroa implements Serializable {
      */
     public void setKodigoPostala(int kodigoPostala) {
         this.kodigoPostala = kodigoPostala;
-    }
-
-    /**
-     * @return Bezeroaren herrialdea
-     */
-    public String getHerrialdea() {
-        return herrialdea;
-    }
-
-    /**
-     * Aldatzen du Bezeroaren herrialdea
-     *
-     * @param herrialdea
-     */
-    public void setHerrialdea(String herrialdea) {
-        this.herrialdea = herrialdea;
     }
 
     /**

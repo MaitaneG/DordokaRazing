@@ -45,6 +45,7 @@ public class AurrekontuaAldatu extends AppCompatActivity {
     private ArrayList<Bezeroa> bezeroak;
     private ArrayList<Produktua> produktuak;
     private ArrayList<Aurrekontua> aurrekontuak;
+    private ArrayList<AurrekontuaLerroa> aurrekontuaLerroa;
     // TableLayout
     private TableLayout taula;
     // SemaforoaInsertAurrekontua
@@ -89,6 +90,14 @@ public class AurrekontuaAldatu extends AppCompatActivity {
         irten.setOnClickListener(this::irten);
         gorde.setOnClickListener(this::gorde);
         produktuaGehitu.setOnClickListener(this::produktuaGehitu);
+
+        /** Datuak hasieratu **/
+        aurrekontuak = (ArrayList<Aurrekontua>) getIntent().getSerializableExtra("aurrekontuak");
+        aurrekontuaLerroa = (ArrayList<AurrekontuaLerroa>) getIntent().getSerializableExtra("aurrekontuaLerroa");
+        bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
+        produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
+
+        textViewBezeroaAldatu.setText("");
     }
 
     /**

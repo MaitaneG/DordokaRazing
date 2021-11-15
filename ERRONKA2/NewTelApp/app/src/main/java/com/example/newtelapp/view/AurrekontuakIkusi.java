@@ -69,6 +69,7 @@ public class AurrekontuakIkusi extends AppCompatActivity {
         aurrekontuaLerroa = (ArrayList<AurrekontuaLerroa>) getIntent().getSerializableExtra("aurrekontuaLerroa");
         bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
         produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
+        aurrekontuaLerroaAldatu=new ArrayList<>();
 
         /** Adapterra sortu, datuak jarri eta listenerra izendatu **/
         adapter = new ArrayAdapter<>(AurrekontuakIkusi.this, android.R.layout.simple_list_item_1, aurrekontuak);
@@ -102,15 +103,13 @@ public class AurrekontuakIkusi extends AppCompatActivity {
                                         aurrekontuaLerroaAldatu.add(aurrekontuaLerroa.get(j));
                                     }
 
-                                }
+                                }// Aurrekontuen ArrayList-ak eramate
+
                                 myIntent.putExtra("aurrekontua", aurrekontuak.get(i));
-                                myIntent.putExtra("aurrekontua", aurrekontuaLerroaAldatu);
+                                myIntent.putExtra("aurrekontuaLerroak", aurrekontuaLerroaAldatu);
                             }
                         }
-                        // Aurrekontuen ArrayList-ak eramaten
-
-                        myIntent.putExtra("aurrekontuLerroa", aurrekontuak);
-
+                        myIntent.putExtra("produktuak", produktuak);
                         ActivityOptions options = ActivityOptions.makeCustomAnimation(AurrekontuakIkusi.this, R.anim.from_right, R.anim.from_right); // Animazioa definitzen
                         AurrekontuakIkusi.this.startActivity(myIntent, options.toBundle());
                     }

@@ -111,10 +111,10 @@ public class AurrekontuaSortu extends AppCompatActivity {
         /** Semaforoa hasieratu **/
         semaforoaInsertAurrekontua = new Semaphore(1, true);
 
-        /**Spinnerak kargatu**/
+        /** Spinnerak kargatu **/
         spinnerrakKargatu();
 
-        /** Taula sortu eta hasieratu**/
+        /** Taula sortu eta hasieratu **/
         taulaHasieratu();
     }
 
@@ -141,7 +141,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
 
         /** Adapter bat sortzen da Produktuen spinner batean jartzeko **/
         ArrayAdapter adapterP = new ArrayAdapter(this, android.R.layout.simple_spinner_item, produktuIzena);
-        adapterB.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterP.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         produktuSpinner.setAdapter(adapterP);
     }
 

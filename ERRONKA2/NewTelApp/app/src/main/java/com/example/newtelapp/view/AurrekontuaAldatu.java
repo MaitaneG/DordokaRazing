@@ -1,11 +1,15 @@
 package com.example.newtelapp.view;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -39,26 +43,28 @@ public class AurrekontuaAldatu extends AppCompatActivity {
     // TextView
     private TextView textViewBezeroaAldatu;
     private TextView prezioaGuztira;
+    //EditText
+    private EditText kantitatea;
     // Spinner
-    private Spinner spinnerProdukttuAldatu;
+    private Spinner spinnerProduktuAldatu;
     // ArrayList-ak
-    private ArrayList<Bezeroa> bezeroak;
-    private ArrayList<Produktua> produktuak;
-    private ArrayList<Aurrekontua> aurrekontuak;
     private ArrayList<AurrekontuaLerroa> aurrekontuaLerroa;
+    private ArrayList<Produktua> produktuak;
+    // Objektu bat
+    private Aurrekontua aurrekontua;
     // TableLayout
     private TableLayout taula;
-    // SemaforoaInsertAurrekontua
-    private Semaphore semaforoaInsertAurrekontua;
-    // TableRow bakoitzeko izena
-    private String produktuIzena = "";
-    // TableRow bakoitzeko kantitatea
-    private float produktuKantitatea = (float) 0.1;
-    // TableRow bakoitzeko prezioa
-    private float produktuPrezioa = (float) 0.1;
-    // Aurrkontuari izena emateko
-    private String aurrekontuIzena;
-    private int ida;
+
+
+//    // TableRow bakoitzeko izena
+//    private String produktuIzena = "";
+//    // TableRow bakoitzeko kantitatea
+//    private float produktuKantitatea = (float) 0.1;
+//    // TableRow bakoitzeko prezioa
+//    private float produktuPrezioa = (float) 0.1;
+//    // Aurrekontuari izena emateko
+//    private String aurrekontuIzena;
+//    private int ida;
 
     /**
      * Layout-a sortzen denean
@@ -84,7 +90,9 @@ public class AurrekontuaAldatu extends AppCompatActivity {
         textViewBezeroaAldatu = findViewById(R.id.textViewBezeroaAldatu);
         prezioaGuztira = findViewById(R.id.textViewPrezioaGuztiraAurrekontuaAldatu);
         // Spinner
-        spinnerProdukttuAldatu = findViewById(R.id.spinnerProduktuaAurrekontuaAldatu);
+        spinnerProduktuAldatu = findViewById(R.id.spinnerProduktuaAurrekontuaAldatu);
+        // EditText
+        kantitatea = findViewById(R.id.editTextNumberKantitateaAldatu);
 
         /** Botoiei listerrenak jarri **/
         irten.setOnClickListener(this::irten);
@@ -92,12 +100,81 @@ public class AurrekontuaAldatu extends AppCompatActivity {
         produktuaGehitu.setOnClickListener(this::produktuaGehitu);
 
         /** Datuak hasieratu **/
-        aurrekontuak = (ArrayList<Aurrekontua>) getIntent().getSerializableExtra("aurrekontuak");
-        aurrekontuaLerroa = (ArrayList<AurrekontuaLerroa>) getIntent().getSerializableExtra("aurrekontuaLerroa");
-        bezeroak = (ArrayList<Bezeroa>) getIntent().getSerializableExtra("bezeroak");
+        aurrekontuaLerroa = (ArrayList<AurrekontuaLerroa>) getIntent().getSerializableExtra("aurrekontuaLerroak");
+        aurrekontua = (Aurrekontua) getIntent().getSerializableExtra("aurrekontua");
         produktuak = (ArrayList<Produktua>) getIntent().getSerializableExtra("produktuak");
 
-        textViewBezeroaAldatu.setText("");
+        textViewBezeroaAldatu.setText(aurrekontua.getBezeroaIzena());
+
+        /**Spinnerak kargatu**/
+        spinnerraKargatu();
+        /** Taula sortu eta hasieratu **/
+        taulaHasieratu();
+    }
+
+    private void spinnerraKargatu() {
+        /** Produktuen ArrayList-etik bezeroaren izena hartzen du **/
+        String[] produktuIzena = new String[produktuak.size()];
+        for (int i = 0; i < produktuak.size(); i++) {
+            produktuIzena[i] = produktuak.get(i).getIzena();
+        }
+
+        /** Adapter bat sortzen da Produktuen spinner batean jartzeko **/
+        ArrayAdapter adapterP = new ArrayAdapter(this, android.R.layout.simple_spinner_item, produktuIzena);
+        adapterP.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProduktuAldatu.setAdapter(adapterP);
+    }
+
+    /**
+     * Taula sortzen du eta zutabeen tituloak hasieratu
+     */
+    @SuppressLint("ResourceAsColor")
+    private void taulaHasieratu() {
+        /** Taula sortu **/
+        taula = findViewById(R.id.taulaAurrekontuaSortu);
+
+        for (int i = 0; i < aurrekontuaLerroa.size(); i++) {
+            /** Ilara bat sortzen du **/
+            TableRow tableRow = new TableRow(this);
+
+            /** Hiru zutabe sortzen du **/
+            // Zutabeen zabalera definitzeko (dp-tik pixeletara pasatu)
+            DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+            int px1 = Math.round(115 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+            int px23 = Math.round(70 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+
+            // Lehenengo zutabea
+            TextView column1 = new TextView(this);
+            column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            column1.setTextColor(R.color.black);
+            column1.setWidth(px1);
+            // Bigarren zutabea
+            TextView column2 = new TextView(this);
+            column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            column1.setTextColor(R.color.black);
+            column2.setWidth(px23);
+            // Hirugarren zutabea
+            TextView column3 = new TextView(this);
+            column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            column1.setTextColor(R.color.black);
+            column3.setWidth(px23);
+
+            /** Zutabeak betzen du **/
+            column1.setText(aurrekontuaLerroa.get(i).getIzenaProduktua());
+            column2.setText(aurrekontuaLerroa.get(i).getKantitatea()+"");
+            column3.setText(aurrekontuaLerroa.get(i).getPrezioaProduktua()+"");
+
+            /** Zutabeak ilaran sartu **/
+            tableRow.addView(column1);
+            tableRow.addView(column2);
+            tableRow.addView(column3);
+
+            /** Ilara taulan sartzen du **/
+            taula.addView(tableRow);
+
+            //prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString()) + (produktuak.get(produktuSpinner.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString())) + "");
+
+        }
     }
 
     /**
@@ -125,88 +202,6 @@ public class AurrekontuaAldatu extends AppCompatActivity {
 
                         if (getIntent().getBooleanExtra("EXIT", true)) {
 
-                            /** Datuen lehengo ilara hartzen du **/
-                            View child = taula.getChildAt(1);
-
-                            /** Hutsik badago **/
-                            if (child == null) {
-                                Toast.makeText(AurrekontuaAldatu.this, "Ez dago daturik taulan. Datuak sartu behar dituzu gorde ahal izateko", Toast.LENGTH_LONG).show();
-                                /** Datuak badaude **/
-                            } else {
-                                /** Sortzen du aurrekontuaren izena **/
-                                aurrekontuIzena = "";
-                                ida = 0;
-                                for (int i = 0; i < aurrekontuak.size(); i++) {
-                                    ida = aurrekontuak.get(i).getId();
-                                }
-                                aurrekontuIzena = "SM000" + ida;
-                                Toast.makeText(AurrekontuaAldatu.this, aurrekontuIzena, Toast.LENGTH_SHORT).show();
-
-                                Date data = new Date(2002, 11, 28);
-                                /** Aurrekontu objetu bat sortzen du **/
-                                //Aurrekontua aurrekontua = new Aurrekontua(1, aurrekontuIzena, bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getId(), bezeroak.get(bezeroSpinner.getSelectedItemPosition()).getIzenaAbizena(), "draft", Float.parseFloat(prezioaGuztira.getText().toString()), data);
-
-                                /** Aurrekontuak gehitzeko haria **/
-                                Thread insertAurrekontuak = new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            // Semaforoa okupatzen du
-                                            semaforoaInsertAurrekontua.acquire();
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        // Aurrekontua gehitzen du
-                                        //Menua.konexioa.insertAurrekontua(aurrekontua);
-                                        // Semaforoa libre lagatzen du
-                                        semaforoaInsertAurrekontua.release();
-                                    }
-                                });
-                                insertAurrekontuak.setPriority(Thread.MAX_PRIORITY);
-                                insertAurrekontuak.start();
-
-                                /** AurrekontuLerroa gehitzeko haria **/
-                                Thread insertAurrekontuaLerroa = new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        /** Ilara bakoitzeko **/
-                                        for (int i = 1; i < taula.getChildCount(); i++) {
-                                            /** Sortzen du ilara bat **/
-                                            View row = taula.getChildAt(i);
-                                            if (row instanceof TableRow) {
-                                                TableRow rowC = (TableRow) row;
-                                                /** Zutabe bakoitzeko **/
-                                                for (int j = 0; j < rowC.getChildCount(); j++) {
-                                                    /** Sortzen du zutabe bat **/
-                                                    TextView texto = (TextView) rowC.getChildAt(j);
-                                                    /** Datuen lehenengo zutabea bada **/
-                                                    if (j == 0) {
-                                                        produktuIzena = texto.getText().toString();
-                                                        /** Datuen bigarren zutabea bada **/
-                                                    } else if (j == 1) {
-                                                        produktuKantitatea = Float.parseFloat(texto.getText().toString());
-                                                        /** Datuen hirugarren zutabea bada **/
-                                                    } else {
-                                                        produktuPrezioa = Float.parseFloat(texto.getText().toString());
-
-                                                        for (int h = 0; h < produktuak.size(); h++) {
-
-                                                            if (produktuak.get(h).getIzena().equals(produktuIzena)) {
-                                                                AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(1, ida + 1, produktuak.get(h).getId(), produktuIzena, produktuPrezioa, produktuKantitatea, (produktuak.get(h).getPrezioa() * produktuKantitatea));
-                                                                // Aurrekontu lerroa sortzen du
-                                                                Menua.konexioa.insertAurrekontuaLerroa(aurrekontuaLerroa);
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                });
-                                insertAurrekontuaLerroa.start();
-                            }
-                            taula = findViewById(R.id.taulaAurrekontuaAldatu); // Esto no lo hace
-                            prezioaGuztira.setText("");
                         }
                     }
                 })

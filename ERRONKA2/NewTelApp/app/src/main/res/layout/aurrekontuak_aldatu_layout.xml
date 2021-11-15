@@ -44,10 +44,12 @@
         android:id="@+id/taulaAurrekontuaAldatu"
         android:layout_width="255dp"
         android:layout_height="164dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="416dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.698">
 
         <TableRow
             android:id="@+id/tituloaAurrekontuaAldatu"
@@ -97,49 +99,54 @@
         android:id="@+id/textView6"
         android:layout_width="279dp"
         android:layout_height="179dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="412dp"
         android:background="@drawable/edit_text_tall"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewPrezioaGuztiraAurrekontuaAldatu"
-        android:layout_width="140dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="604dp"
-        android:text="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.717" />
 
     <TextView
         android:id="@+id/textViewPrezioaTituloa"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="604dp"
         android:text="GUZTIRA: "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.857" />
+
+    <TextView
+        android:id="@+id/textViewPrezioaGuztiraAurrekontuaAldatu"
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.756"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.857" />
 
     <Spinner
         android:id="@+id/spinnerProduktuaAurrekontuaAldatu"
         android:layout_width="214dp"
         android:layout_height="52dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="252dp"
         android:background="@drawable/spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.346"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/editTextNumberKantitatea2"
+        android:id="@+id/editTextNumberKantitateaAldatu"
         android:layout_width="67dp"
         android:layout_height="57dp"
-        android:layout_marginStart="240dp"
-        android:layout_marginTop="328dp"
         android:background="@drawable/edit_text_small"
         android:ems="10"
         android:inputType="number"
@@ -149,31 +156,42 @@
         android:paddingBottom="10dp"
         android:textAlignment="center"
         android:textColor="@color/grisaa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.703"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.458"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/buttonProduktuaGehituAurrekontuaAldatu"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="320dp"
-        android:layout_marginTop="288dp"
         android:adjustViewBounds="true"
         android:backgroundTint="@color/kolorea"
         android:scaleType="fitCenter"
         android:src="@drawable/gehi_botoia"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.874"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.338"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewBezeroaAldatu"
-        android:layout_width="210dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="164dp"
+        android:layout_width="213dp"
+        android:layout_height="64dp"
+        android:fontFamily="sans-serif-black"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.223" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

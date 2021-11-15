@@ -1,0 +1,9 @@
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\SalmentakGuztiraDll\bin\Debug\SalmentakGuztiraDll.dll.config
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\SalmentakGuztiraDll\bin\Debug\SalmentakGuztiraDll.dll
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\SalmentakGuztiraDll\bin\Debug\SalmentakGuztiraDll.pdb
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\SalmentakGuztiraDll\obj\Debug\SalmentakGuztiraDll.csproj.AssemblyReference.cache
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\SalmentakGuztiraDll\obj\Debug\SalmentakGuztiraDll.KontrolaSalmentaGuztira.resources
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\SalmentakGuztiraDll\obj\Debug\SalmentakGuztiraDll.csproj.GenerateResource.cache
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\SalmentakGuztiraDll\obj\Debug\SalmentakGuztiraDll.csproj.CoreCompileInputs.cache
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\SalmentakGuztiraDll\obj\Debug\SalmentakGuztiraDll.dll
+C:\Users\suinaga.jon\source\repos\FinantzetakoDllak\SalmentakGuztiraDll\obj\Debug\SalmentakGuztiraDll.pdb

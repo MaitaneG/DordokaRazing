@@ -1,0 +1,9 @@
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroakGuztiraDll\bin\Debug\BezeroakGuztiraDll.dll.config
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroakGuztiraDll\bin\Debug\BezeroakGuztiraDll.dll
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroakGuztiraDll\bin\Debug\BezeroakGuztiraDll.pdb
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroakGuztiraDll\obj\Debug\BezeroakGuztiraDll.csproj.AssemblyReference.cache
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroakGuztiraDll\obj\Debug\BezeroakGuztiraDll.KontrrolaBezGuztira.resources
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroakGuztiraDll\obj\Debug\BezeroakGuztiraDll.csproj.GenerateResource.cache
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroakGuztiraDll\obj\Debug\BezeroakGuztiraDll.csproj.CoreCompileInputs.cache
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroakGuztiraDll\obj\Debug\BezeroakGuztiraDll.dll
+C:\Users\suinaga.jon\source\repos\BezeroetakoDll1\BezeroakGuztiraDll\obj\Debug\BezeroakGuztiraDll.pdb

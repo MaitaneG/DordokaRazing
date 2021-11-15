@@ -1,0 +1,9 @@
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileenDll2\bin\Debug\HornitzaileenDll2.dll
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileenDll2\bin\Debug\HornitzaileenDll2.pdb
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileenDll2\obj\Debug\HornitzaileenDll2.csproj.AssemblyReference.cache
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileenDll2\obj\Debug\HornitzaileenDll2.KontrolaHornitzaile2.resources
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileenDll2\obj\Debug\HornitzaileenDll2.csproj.GenerateResource.cache
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileenDll2\obj\Debug\HornitzaileenDll2.csproj.CoreCompileInputs.cache
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileenDll2\obj\Debug\HornitzaileenDll2.dll
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileenDll2\obj\Debug\HornitzaileenDll2.pdb
+C:\Users\suinaga.jon\source\repos\HornitzaileenDllak\HornitzaileenDll2\bin\Debug\HornitzaileenDll2.dll.config

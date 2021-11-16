@@ -66,7 +66,7 @@ public class AppNewTel {
     public static boolean puExported = false;
     public static boolean sExported = false;
     //xml-en  rutak
-    public static String path = "config.xml";
+    public static String path = "configuration/config.xml";
     public static String logPath = "logs/log.xml";
 
     public static Festi song = new Festi();         //Abestiaren klasea

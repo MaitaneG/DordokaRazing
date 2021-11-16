@@ -613,11 +613,11 @@ public class AppNewTel {
 
             if (nodo.getNodeType() == Node.ELEMENT_NODE) {
 
-                Element salmenta = (Element) nodo;
+                Element erosketa = (Element) nodo;
 
                 // get staff's attribute
-                if (salmenta.getFirstChild() != null)
-                    puExported = Boolean.parseBoolean(salmenta.getFirstChild().getTextContent());
+                if (erosketa.getFirstChild() != null)
+                    puExported = Boolean.parseBoolean(erosketa.getFirstChild().getTextContent());
 
             }
 
@@ -777,6 +777,7 @@ public class AppNewTel {
 //            System.out.println("Syntax error, type -h or -help for help");
 //            runHelper.getHelper();
 //        }
+                List<String> aukerak = new ArrayList<>();
                 if (args.length == 1){
                 switch(args[0].toLowerCase()){
                     case "-h" :
@@ -787,21 +788,23 @@ public class AppNewTel {
                         break;
                     case "-b":
                         clients = resPartnerDao.getAll();
+                        aukerak.add("bezeroak");
 
                         break;
                     case "-p":
                         products = productDao.getAll();
-
+                        aukerak.add("produktuak");
                         break;
                     case "-s":
                         sales = salesDao.getAll();
                         salesLines = saoLineDao.getAll();
+                        aukerak.add("salmentak");
 
                         break;
                     case "-e":
                         purchases = purchaseOrderDao.getAll();
                         purchasesLines = purchaseOrderLineDao.getAll();
-
+                        aukerak.add("erosketak");
                         break;
                     case "-a":
                         clients = resPartnerDao.getAll();
@@ -810,6 +813,10 @@ public class AppNewTel {
                         salesLines = saoLineDao.getAll();
                         purchases = purchaseOrderDao.getAll();
                         purchasesLines = purchaseOrderLineDao.getAll();
+                        aukerak.add("bezeroak");
+                        aukerak.add("produktuak");
+                        aukerak.add("salmentak");
+                        aukerak.add("erosketak");
 
                         break;
                     case "-sapo":
@@ -822,9 +829,8 @@ public class AppNewTel {
                         System.out.println(runHelper.getHelper());
                         System.exit(-1);
                         break;
-
-
             }
+            xmlSortu(aukerak);
             updateDB();
             logMaker();
             openSound(1);
@@ -858,6 +864,12 @@ public class AppNewTel {
                             sales = salesDao.getAll();
                             salesLines = new ArrayList<SaleOrderLine>();
                             salesLines = saoLineDao.getAll();
+                        }
+                        if (puExported){
+                            purchases = new ArrayList<PurchaseOrder>();
+                            purchases = purchaseOrderDao.getAll();
+                            purchasesLines = new ArrayList<PurchaseOrderLine>();
+                            purchasesLines = purchaseOrderLineDao.getAll();
                         }
                         updateDB();                             //Aurreko menuan bezala
                         logMaker();
@@ -899,11 +911,18 @@ public class AppNewTel {
                         salesLines = saoLineDao.getAll();
 
                         break;
+                    case "-e":
+                        purchases = purchaseOrderDao.getAll();
+                        purchasesLines = purchaseOrderLineDao.getAll();
+                        break;
+
                     case "-a":
                         clients = resPartnerDao.getAll();
                         products = productDao.getAll();
                         sales = salesDao.getAll();
                         salesLines = saoLineDao.getAll();
+                        purchases = purchaseOrderDao.getAll();
+                        purchasesLines = purchaseOrderLineDao.getAll();
 
                         break;
                     case "-sapo":

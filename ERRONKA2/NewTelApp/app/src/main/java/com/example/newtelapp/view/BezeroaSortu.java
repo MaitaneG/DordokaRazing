@@ -62,7 +62,7 @@ public class BezeroaSortu extends AppCompatActivity {
     private void hasieratu() {
         /** Botoiak aurkitzen eta aldagaietan gorde **/
         // Botoiak
-        irtenBotoia = findViewById(R.id.buttonIrtenAurrekontuaSortu);
+        irtenBotoia = findViewById(R.id.buttonIrtenBezeroaSortu);
         gordeBotoia = findViewById(R.id.buttonGordeBezeroa);
         borratu = findViewById(R.id.imageButtonBorratu);
         // EditText

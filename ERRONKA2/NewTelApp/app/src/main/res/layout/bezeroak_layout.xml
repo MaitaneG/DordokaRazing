@@ -6,8 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bezeroa_sortu_hondoa">
 
+    <!-- AurrekontuaSortutik irtetzeko botoia -->
     <ImageButton
-        android:id="@+id/buttonIrtenAurrekontuaSortu"
+        android:id="@+id/buttonIrtenBezeroaSortu"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:adjustViewBounds="true"
@@ -22,6 +23,7 @@
         app:layout_constraintVertical_bias="0.976"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Bezeroa gordetzeko botoia -->
     <ImageButton
         android:id="@+id/buttonGordeBezeroa"
         android:layout_width="150dp"
@@ -38,6 +40,7 @@
         app:layout_constraintVertical_bias="0.976"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Izen-abizenak jartzeko TextView -->
     <EditText
         android:id="@+id/editTextIzenaAbizena"
         android:layout_width="173dp"
@@ -59,6 +62,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Kalea jartzeko TextView -->
     <EditText
         android:id="@+id/editTextKalea"
         android:layout_width="200dp"
@@ -80,6 +84,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Mugikorra jartzeko TextView -->
     <EditText
         android:id="@+id/editTextMugikorra"
         android:layout_width="173dp"
@@ -101,6 +106,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Enpresa bat edo pertsona bat den Switch -->
     <Switch
         android:id="@+id/switchEnpresa"
         android:layout_width="113dp"
@@ -113,6 +119,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Korreoa jartzeko TextView -->
     <EditText
         android:id="@+id/editTextKorreoa"
         android:layout_width="200dp"
@@ -134,6 +141,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Kodigo postala jartzeko TextView -->
     <EditText
         android:id="@+id/editTextKodigoPostala"
         android:layout_width="67dp"
@@ -156,6 +164,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Hiria jartzeko TextView -->
     <EditText
         android:id="@+id/editText_Hiria"
         android:layout_width="109dp"
@@ -176,6 +185,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Jarritako informazioa husteko botoia -->
     <ImageButton
         android:id="@+id/imageButtonBorratu"
         android:layout_width="78dp"

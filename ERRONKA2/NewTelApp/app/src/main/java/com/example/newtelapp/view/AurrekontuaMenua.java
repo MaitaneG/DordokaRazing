@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,7 +14,6 @@ import com.example.newtelapp.model.AurrekontuaLerroa;
 import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -53,8 +51,8 @@ public class AurrekontuaMenua extends AppCompatActivity {
     private void hasieratu() {
         /** Botoiak hasieratu **/
         aurrekontuaSortu = findViewById(R.id.buttonAurrekontuaSortu);
-        aurrrekontuakIkusi = findViewById(R.id.buttonErakutsiProduktuak);
-        irten = findViewById(R.id.buttonIrten);
+        aurrrekontuakIkusi = findViewById(R.id.buttonAurrekontuakIkusi);
+        irten = findViewById(R.id.buttonIrtenMenuaAurrekontuMenua);
 
         /** Botoiei listerrenak jarri **/
         aurrekontuaSortu.setOnClickListener(this::aurrekontuaSorturaJoan);

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.Semaphore;
 import javax.sound.sampled.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -65,10 +66,12 @@ public class AppNewTel {
     public static boolean puExported = false;
     public static boolean sExported = false;
     //xml-en  rutak
-    public static String path = "config.xml";
+    public static String path = "configuration/config.xml";
     public static String logPath = "logs/log.xml";
 
     public static Festi song = new Festi();         //Abestiaren klasea
+
+    public static Semaphore s = new Semaphore(1); //Semaforoa sarrera baterekin
 
 
 
@@ -195,27 +198,89 @@ public class AppNewTel {
          * Aukeratuta badago objetu horren arraylist a dagokion dao-a erabiliz betetzen da.
          */
         System.out.println("\n\n\n\n\tXML FITXATEGIA SORTZEN");
-        if (aukerak.contains("bezeroak")) {
-            clients = new ArrayList<ResPartner>();
-            clients = resPartnerDao.getAll(); //Hibernate jpa
+        Thread bezSelect = new Thread(new Runnable() {
 
-                    }
-        if (aukerak.contains("produktuak")) {
-            products = new ArrayList<ProductProduct>();
-            products = productDao.getAll();
+            @Override
+            public void run() {
+                try {
+                    s.acquire();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (aukerak.contains("bezeroak")) {
+                    clients = new ArrayList<ResPartner>();
+                    clients = resPartnerDao.getAll(); //Hibernate jpa
+
+                }
+                s.release();
+            }
+        });
+        Thread prodSelect = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    s.acquire();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (aukerak.contains("produktuak")) {
+                    products = new ArrayList<ProductProduct>();
+                    products = productDao.getAll();
+                }
+                s.release();
+            }
+        });
+        Thread saleSelect = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    s.acquire();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (aukerak.contains("salmentak")) {
+                    sales = new ArrayList<SaleOrder>();
+                    sales = salesDao.getAll();
+                    salesLines = new ArrayList<SaleOrderLine>();
+                    salesLines = saoLineDao.getAll();
+                }
+                s.release();
+            }
+        });
+        Thread purchaseSelect = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    s.acquire();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (aukerak.contains("erosketak")){
+                    purchases = new ArrayList<PurchaseOrder>();
+                    purchases = purchaseOrderDao.getAll();
+                    purchasesLines = new ArrayList<PurchaseOrderLine>();
+                    purchasesLines = purchaseOrderLineDao.getAll();
+                }
+                s.release();
+            }
+        });
+        try {
+            bezSelect.start();
+            bezSelect.join();
+
+            prodSelect.start();
+            prodSelect.join();
+
+            saleSelect.start();
+            saleSelect.join();
+
+            purchaseSelect.start();
+            purchaseSelect.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        if (aukerak.contains("salmentak")) {
-            sales = new ArrayList<SaleOrder>();
-            sales = salesDao.getAll();
-            salesLines = new ArrayList<SaleOrderLine>();
-            salesLines = saoLineDao.getAll();
-        }
-        if (aukerak.contains("erosketak")){
-            purchases = new ArrayList<PurchaseOrder>();
-            purchases = purchaseOrderDao.getAll();
-            purchasesLines = new ArrayList<PurchaseOrderLine>();
-            purchasesLines = purchaseOrderLineDao.getAll();
-        }
+
+
         // xml sortzeko kodigoa:
 
         try {
@@ -331,28 +396,94 @@ public class AppNewTel {
         purchaseOrderDao = appContext2.getBean(PurchaseOrderDao.class);
 
         purchaseOrderLineDao = appContext2.getBean(PurchaseOrderLineDao.class);
-
+                                                            //update bakoitzean semaforoaren bidez updateak ordenatuta joango dira
         try {
-            if (clients != null)                //Exportatzeko zer dagoen begiratzen du
-                for (ResPartner rp : clients)
-                   // if( rp.getCustomerRank()!=null) if( rp.getCustomerRank()!=0)
-                    resPartnerDao.update(rp);
+            Thread partnerUpdate = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        s.acquire();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (clients != null) {                //Exportatzeko zer dagoen begiratzen du
+                        for (ResPartner rp : clients)
+                            // if( rp.getCustomerRank()!=null) if( rp.getCustomerRank()!=0)
+                            resPartnerDao.update(rp);
+                    }
+                    s.release();
+                }
+            });
 
-            if (products != null)
-                for (ProductProduct p : products)
-                    productDao.update(p);
-            if (sales != null) {
-                for (SaleOrder s : sales)
-                    salesDao.update(s);
-                for (SaleOrderLine s : salesLines)
-                    saoLineDao.update(s);
-            }
-            if(purchases != null){
-                for (PurchaseOrder p : purchases)
-                    purchaseOrderDao.update(p);
-                for (PurchaseOrderLine p : purchasesLines)
-                    purchaseOrderLineDao.update(p);
-            }
+
+            Thread prodUpdate = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        s.acquire();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (products != null) {
+                        for (ProductProduct p : products)
+                            productDao.update(p);
+                    }
+                    s.release();
+                }
+            });
+
+
+            Thread salesUpdate= new Thread(new Runnable(){
+                @Override
+                public void run() {
+                    try {
+                        s.acquire();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (sales != null) {
+                        for (SaleOrder s : sales)
+                            salesDao.update(s);
+                        for (SaleOrderLine s : salesLines)
+                            saoLineDao.update(s);
+                    }
+                    s.release();
+                }
+            });
+
+
+
+            Thread purchaseUpdate = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        s.acquire();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if(purchases != null){
+                        for (PurchaseOrder p : purchases)
+                            purchaseOrderDao.update(p);
+                        for (PurchaseOrderLine p : purchasesLines)
+                            purchaseOrderLineDao.update(p);
+                    }
+                    s.release();
+                }
+            });
+
+
+            partnerUpdate.start();
+            partnerUpdate.join();                                   //Haria hasi eta itxaron amaitu harte
+
+            prodUpdate.start();
+            prodUpdate.join();
+
+            salesUpdate.start();
+            salesUpdate.join();
+
+            purchaseUpdate.start();
+            purchaseUpdate.join();
+
         } catch (Exception ex) {
             ex.printStackTrace();
             success = false;
@@ -482,11 +613,11 @@ public class AppNewTel {
 
             if (nodo.getNodeType() == Node.ELEMENT_NODE) {
 
-                Element salmenta = (Element) nodo;
+                Element erosketa = (Element) nodo;
 
                 // get staff's attribute
-                if (salmenta.getFirstChild() != null)
-                    puExported = Boolean.parseBoolean(salmenta.getFirstChild().getTextContent());
+                if (erosketa.getFirstChild() != null)
+                    puExported = Boolean.parseBoolean(erosketa.getFirstChild().getTextContent());
 
             }
 
@@ -646,6 +777,7 @@ public class AppNewTel {
 //            System.out.println("Syntax error, type -h or -help for help");
 //            runHelper.getHelper();
 //        }
+                List<String> aukerak = new ArrayList<>();
                 if (args.length == 1){
                 switch(args[0].toLowerCase()){
                     case "-h" :
@@ -656,21 +788,23 @@ public class AppNewTel {
                         break;
                     case "-b":
                         clients = resPartnerDao.getAll();
+                        aukerak.add("bezeroak");
 
                         break;
                     case "-p":
                         products = productDao.getAll();
-
+                        aukerak.add("produktuak");
                         break;
                     case "-s":
                         sales = salesDao.getAll();
                         salesLines = saoLineDao.getAll();
+                        aukerak.add("salmentak");
 
                         break;
                     case "-e":
                         purchases = purchaseOrderDao.getAll();
                         purchasesLines = purchaseOrderLineDao.getAll();
-
+                        aukerak.add("erosketak");
                         break;
                     case "-a":
                         clients = resPartnerDao.getAll();
@@ -679,6 +813,10 @@ public class AppNewTel {
                         salesLines = saoLineDao.getAll();
                         purchases = purchaseOrderDao.getAll();
                         purchasesLines = purchaseOrderLineDao.getAll();
+                        aukerak.add("bezeroak");
+                        aukerak.add("produktuak");
+                        aukerak.add("salmentak");
+                        aukerak.add("erosketak");
 
                         break;
                     case "-sapo":
@@ -691,9 +829,8 @@ public class AppNewTel {
                         System.out.println(runHelper.getHelper());
                         System.exit(-1);
                         break;
-
-
             }
+            xmlSortu(aukerak);
             updateDB();
             logMaker();
             openSound(1);
@@ -727,6 +864,12 @@ public class AppNewTel {
                             sales = salesDao.getAll();
                             salesLines = new ArrayList<SaleOrderLine>();
                             salesLines = saoLineDao.getAll();
+                        }
+                        if (puExported){
+                            purchases = new ArrayList<PurchaseOrder>();
+                            purchases = purchaseOrderDao.getAll();
+                            purchasesLines = new ArrayList<PurchaseOrderLine>();
+                            purchasesLines = purchaseOrderLineDao.getAll();
                         }
                         updateDB();                             //Aurreko menuan bezala
                         logMaker();
@@ -768,11 +911,18 @@ public class AppNewTel {
                         salesLines = saoLineDao.getAll();
 
                         break;
+                    case "-e":
+                        purchases = purchaseOrderDao.getAll();
+                        purchasesLines = purchaseOrderLineDao.getAll();
+                        break;
+
                     case "-a":
                         clients = resPartnerDao.getAll();
                         products = productDao.getAll();
                         sales = salesDao.getAll();
                         salesLines = saoLineDao.getAll();
+                        purchases = purchaseOrderDao.getAll();
+                        purchasesLines = purchaseOrderLineDao.getAll();
 
                         break;
                     case "-sapo":

@@ -134,6 +134,7 @@ public class Menua extends AppCompatActivity implements Serializable {
      * @param view
      */
     private void itxi(View view) {
+        this.
         alert();
     }
 

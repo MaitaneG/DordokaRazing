@@ -361,6 +361,46 @@ public class Konexioa extends Thread {
     /**
      * Aurrekontuak sortzeko metodoa
      */
+    public void updateAurrekontua(Aurrekontua aurrekontua, float prezioa) {
+        /**
+         *
+         * Hari bat sortzen da aurrekontuen insert bat egiteko
+         */
+        Thread updateAurrekontua = new Thread(new Runnable() {
+            /**
+             *
+             * Hariaren exekutagarria da
+             */
+            @Override
+            public void run() {
+                try {
+                    /** Konexioa lortzeko connect metodoari deitzen dio **/
+                    Connection conn = connect();
+                    Class.forName("org.postgresql.Driver");
+                    PreparedStatement pstmt = null;
+
+                    /** Aurrekontuen insert-a **/
+                    pstmt = conn.prepareStatement("update sale_order " +
+                            "set amount_total = ?" +
+                            "where id = ?; ");
+
+                    pstmt.setFloat(1, prezioa);
+                    pstmt.setInt(2, aurrekontua.getId());
+
+                    /** Sententzia exekutatzen da **/
+                    pstmt.executeUpdate();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        /** Haria exekutatzen da **/
+        updateAurrekontua.start();
+    }
+
+    /**
+     * Aurrekontuak sortzeko metodoa
+     */
     public void insertAurrekontuaLerroa(AurrekontuaLerroa aurrekontualerroa) {
         /**
          *
@@ -384,13 +424,14 @@ public class Konexioa extends Thread {
                             "product_uom_qty, customer_lead, display_type, product_id, product_uom, price_total, state, qty_delivered_method, " +
                             "qty_delivered, qty_delivered_manual, qty_to_invoice, qty_invoiced, untaxed_amount_invoiced, untaxed_amount_to_invoice, " +
                             "salesman_id, currency_id, company_id, create_uid, write_uid)\n" +
-                            "VALUES ((select max(id)from sale_order ), ?, 10, 'no', ?, 0, ?, 0, null, ?, 1, ?, 'draft', 'stock_move', 0, 0, 0, 0, 0, 0, 7, 1, 1, 7, 7);\n");
+                            "VALUES (?, ?, 10, 'no', ?, 0, ?, 0, null, ?, 1, ?, 'draft', 'stock_move', 0, 0, 0, 0, 0, 0, 7, 1, 1, 7, 7);\n");
 
-                    pstmt.setString(1, aurrekontualerroa.getIzenaProduktua());
-                    pstmt.setFloat(2, aurrekontualerroa.getPrezioaProduktua());
-                    pstmt.setFloat(3, aurrekontualerroa.getKantitatea());
-                    pstmt.setInt(4, aurrekontualerroa.getIdProduktua());
-                    pstmt.setFloat(5, aurrekontualerroa.getTotala());
+                    pstmt.setInt(1, aurrekontualerroa.getIdAurrekontua());
+                    pstmt.setString(2, aurrekontualerroa.getIzenaProduktua());
+                    pstmt.setFloat(3, aurrekontualerroa.getPrezioaProduktua());
+                    pstmt.setFloat(4, aurrekontualerroa.getKantitatea());
+                    pstmt.setInt(5, aurrekontualerroa.getIdProduktua());
+                    pstmt.setFloat(6, aurrekontualerroa.getTotala());
 
                     /** Sententzia exekutatzen da **/
                     pstmt.executeUpdate();
@@ -401,6 +442,11 @@ public class Konexioa extends Thread {
         });
         /** Haria exekutatzen da **/
         insertAurrekontuaLerroa.start();
+        try {
+            insertAurrekontuaLerroa.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -104,8 +104,8 @@ public class AurrekontuakIkusi extends AppCompatActivity {
                                     }
 
                                 }// Aurrekontuen ArrayList-ak eramate
-
-                                myIntent.putExtra("aurrekontua", aurrekontuak.get(i));
+                                Aurrekontua aurrekontua =aurrekontuak.get((int) l);
+                                myIntent.putExtra("aurrekontua", aurrekontua);
                                 myIntent.putExtra("aurrekontuaLerroak", aurrekontuaLerroaAldatu);
                             }
                         }

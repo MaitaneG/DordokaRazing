@@ -5,12 +5,17 @@ import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -57,15 +62,14 @@ public class AurrekontuaAldatu extends AppCompatActivity {
     private TableLayout taula;
 
 
-//    // TableRow bakoitzeko izena
-//    private String produktuIzena = "";
-//    // TableRow bakoitzeko kantitatea
-//    private float produktuKantitatea = (float) 0.1;
-//    // TableRow bakoitzeko prezioa
-//    private float produktuPrezioa = (float) 0.1;
-//    // Aurrekontuari izena emateko
-//    private String aurrekontuIzena;
-//    private int ida;
+    // TableRow bakoitzeko izena
+    private String produktuIzena = "";
+    // TableRow bakoitzeko kantitatea
+    private float produktuKantitatea = (float) 0.1;
+    // TableRow bakoitzeko prezioa
+    private float produktuPrezioa = (float) 0.1;
+
+    private int ida;
 
     /**
      * Layout-a sortzen denean
@@ -110,7 +114,8 @@ public class AurrekontuaAldatu extends AppCompatActivity {
 
         /**Spinnerak kargatu**/
         spinnerraKargatu();
-        /** Taula sortu eta hasieratu **/
+        /** Taula sortu eta hasieratu **//** Taula sortu **/
+        taula = findViewById(R.id.taulaAurrekontuaAldatu);
         taulaHasieratu();
     }
 
@@ -132,9 +137,6 @@ public class AurrekontuaAldatu extends AppCompatActivity {
      */
     @SuppressLint("ResourceAsColor")
     private void taulaHasieratu() {
-        /** Taula sortu **/
-        taula = findViewById(R.id.taulaAurrekontuaAldatu);
-
         for (int i = 0; i < aurrekontuaLerroa.size(); i++) {
             /** Ilara bat sortzen du **/
             TableRow tableRow = new TableRow(this);
@@ -153,29 +155,72 @@ public class AurrekontuaAldatu extends AppCompatActivity {
             // Bigarren zutabea
             TextView column2 = new TextView(this);
             column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
+            column2.setTextColor(R.color.black);
             column2.setWidth(px23);
             // Hirugarren zutabea
             TextView column3 = new TextView(this);
             column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
+            column3.setTextColor(R.color.black);
             column3.setWidth(px23);
+
+            // Botoia
+            ImageButton button = new ImageButton(this);
+            button.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            button.setBackgroundResource(R.drawable.borratu_botoia_txikia);
+
+            button.setOnClickListener(AurrekontuaAldatu.this::borratu);
+
 
             /** Zutabeak betzen du **/
             column1.setText(aurrekontuaLerroa.get(i).getIzenaProduktua());
-            column2.setText((int)aurrekontuaLerroa.get(i).getKantitatea() + "");
+            column2.setText((int) aurrekontuaLerroa.get(i).getKantitatea() + "");
             column3.setText(aurrekontuaLerroa.get(i).getPrezioaProduktua() + "");
 
             /** Zutabeak ilaran sartu **/
             tableRow.addView(column1);
             tableRow.addView(column2);
             tableRow.addView(column3);
+            tableRow.addView(button);
 
             /** Ilara taulan sartzen du **/
             taula.addView(tableRow);
 
             prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString()) + (aurrekontuaLerroa.get(i).getPrezioaProduktua() * aurrekontuaLerroa.get(i).getKantitatea()) + "");
         }
+    }
+
+    private void borratu(View view) {
+        new AlertDialog.Builder(this).setTitle("Produktuak ezabatzen")// Dialog-ari titulua jarri
+                .setMessage("Ziur zaude produktu hau ezabatu nahi duzula?") // Dialog-aren mezua jarri
+
+                // Baiezko aukera klikatzen bada, aplikazioa itxiko da
+                .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (getIntent().getBooleanExtra("EXIT", true)) {
+                            /** Ilara bat sortzen du **/
+                            TableRow tableRow = new TableRow(AurrekontuaAldatu.this);
+
+                            // Lehenengo zutabea
+                            TextView column1 = new TextView(AurrekontuaAldatu.this);
+
+                            // Bigarren zutabea
+                            TextView column2 = new TextView(AurrekontuaAldatu.this);
+
+                            // Hirugarren zutabea
+                            TextView column3 = new TextView(AurrekontuaAldatu.this);
+
+                            // Botoia
+                            ImageButton button = new ImageButton(AurrekontuaAldatu.this);
+
+                            for (int i = 1; i < taula.getChildCount(); i++) {
+
+                            }
+                        }
+                    }
+                }).setNegativeButton("EZ", null)
+                .show();
+        ;
     }
 
     /**
@@ -185,54 +230,96 @@ public class AurrekontuaAldatu extends AppCompatActivity {
      */
     @SuppressLint("ResourceAsColor")
     private void produktuaGehitu(View view) {
-        // Kantitatea hutsik badago
-        if (kantitatea.getText().toString().equals("")) {
-            Toast.makeText(this, "Produktuen kantitatea sartu behar duzu", Toast.LENGTH_SHORT).show();
-            // Knatitatea ez badago hutsik
-        } else {
-            /** Ilara bat sortzen du **/
-            TableRow tableRow = new TableRow(this);
+        new AlertDialog.Builder(this).setTitle("Produktuak gehitzen")// Dialog-ari titulua jarri
+                .setMessage("Ziur zaude produktu hau gehitu nahi duzula?") // Dialog-aren mezua jarri
 
-            /** Hiru zutabe sortzen du **/
-            // Zutabeen zabalera definitzeko (dp-tik pixeletara pasatu)
-            DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
-            int px1 = Math.round(115 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-            int px23 = Math.round(70 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+                // Baiezko aukera klikatzen bada, aplikazioa itxiko da
+                .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
 
-            // Lehenengo zutabea
-            TextView column1 = new TextView(this);
-            column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
-            column1.setWidth(px1);
-            // Bigarren zutabea
-            TextView column2 = new TextView(this);
-            column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
-            column2.setWidth(px23);
-            // Hirugarren zutabea
-            TextView column3 = new TextView(this);
-            column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
-            column3.setWidth(px23);
+                        if (getIntent().getBooleanExtra("EXIT", true)) {
+                            // Kantitatea hutsik badago
+                            if (kantitatea.getText().toString().equals("")) {
+                                Toast.makeText(AurrekontuaAldatu.this, "Produktuen kantitatea sartu behar duzu", Toast.LENGTH_SHORT).show();
+                                // Kantitatea ez badago hutsik
+                            } else {
+                                /** Ilara bat sortzen du **/
+                                TableRow tableRow = new TableRow(AurrekontuaAldatu.this);
 
-            /** Zutabeak betzen du **/
-            column1.setText(produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getIzena());
-            column2.setText(kantitatea.getText().toString());
-            column3.setText(produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getPrezioa() + "");
+                                /** Hiru zutabe sortzen du **/
+                                // Zutabeen zabalera definitzeko (dp-tik pixeletara pasatu)
+                                DisplayMetrics displayMetrics = AurrekontuaAldatu.this.getResources().getDisplayMetrics();
+                                int px1 = Math.round(115 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+                                int px23 = Math.round(70 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
 
-            /** Zutabeak ilaran sartu **/
-            tableRow.addView(column1);
-            tableRow.addView(column2);
-            tableRow.addView(column3);
+                                // Lehenengo zutabea
+                                TextView column1 = new TextView(AurrekontuaAldatu.this);
+                                column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                column1.setTextColor(R.color.black);
+                                column1.setWidth(px1);
+                                // Bigarren zutabea
+                                TextView column2 = new TextView(AurrekontuaAldatu.this);
+                                column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                column1.setTextColor(R.color.black);
+                                column2.setWidth(px23);
+                                // Hirugarren zutabea
+                                TextView column3 = new TextView(AurrekontuaAldatu.this);
+                                column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                column1.setTextColor(R.color.black);
+                                column3.setWidth(px23);
+                                // Botoia
+                                ImageButton button = new ImageButton(AurrekontuaAldatu.this);
+                                button.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
-            /** Ilara taulan sartzen du **/
-            taula.addView(tableRow);
+                                button.setBackgroundResource(R.drawable.borratu_botoia_txikia);
+                                button.setOnClickListener(AurrekontuaAldatu.this::borratu);
 
-            prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString()) + (produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString())) + "");
+                                /** Zutabeak betzen du **/
+                                column1.setText(produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getIzena());
+                                column2.setText(kantitatea.getText().toString());
+                                column3.setText(produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getPrezioa() + "");
 
-            /** Kantitatea gakoa hustu**/
-            kantitatea.setText("");
-        }
+                                /** Zutabeak ilaran sartu **/
+                                tableRow.addView(column1);
+                                tableRow.addView(column2);
+                                tableRow.addView(column3);
+                                tableRow.addView(button);
+
+                                /** Ilara taulan sartzen du **/
+                                taula.addView(tableRow);
+
+                                prezioaGuztira.setText(Float.parseFloat(prezioaGuztira.getText().toString()) + (produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString())) + "");
+
+                                /** Datuen lehengo ilara hartzen du **/
+                                View child = taula.getChildAt(1);
+
+                                /** Hutsik badago **/
+                                if (child == null) {
+                                    Toast.makeText(AurrekontuaAldatu.this, "Ez dago daturik taulan. Datuak sartu behar dituzu gorde ahal izateko", Toast.LENGTH_LONG).show();
+                                    /** Datuak badaude **/
+                                } else {
+
+                                    ida = aurrekontua.getId();
+
+                                    /** AurrekontuLerroa gehitzeko haria **/
+                                    Thread insertAurrekontuaLerroa = new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(1, ida, produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getId(), produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getIzena(), produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getPrezioa(), Float.parseFloat(kantitatea.getText().toString()), (produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString())));
+
+                                            Menua.konexioa.insertAurrekontuaLerroa(aurrekontuaLerroa);
+                                            Menua.konexioa.updateAurrekontua(aurrekontua, Float.parseFloat(prezioaGuztira.getText().toString()));
+                                            /** Kantitatea gakoa hustu**/
+                                            kantitatea.setText("");
+                                        }
+                                    });
+                                    insertAurrekontuaLerroa.start();
+                                }
+                            }
+                        }
+                    }
+                }).setNegativeButton("EZ", null)
+                .show();
     }
 
     /**

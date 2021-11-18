@@ -1,4 +1,4 @@
-# DordokaRazing
+# DordokaRazing (Erronka1)
 
 Hau gure projektuaren errepositorioa da. Hemen aurkitu dezakezu hiru karpeta desberdin. 
 

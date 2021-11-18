@@ -153,7 +153,7 @@
 
     <!-- Irten botoia -->
     <ImageButton
-        android:id="@+id/buttonIrten"
+        android:id="@+id/buttonIrtenMenua"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:adjustViewBounds="true"

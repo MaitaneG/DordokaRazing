@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/aurrekontua_aldatu">
 
+    <!-- Aurrekontua gordetzeko botoia -->
     <ImageButton
         android:id="@+id/buttonGordeAurrekontuaAldatu"
         android:layout_width="85dp"
@@ -23,8 +24,9 @@
         app:layout_constraintVertical_bias="0.958"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+    <!-- AurrekontuaAldatutik irtetzeko botoia -->
     <ImageButton
-        android:id="@+id/buttonIrtenAurrekontuaSortuAurrekontuaAldatu"
+        android:id="@+id/buttonIrtenAurrekontuaAldatu"
         android:layout_width="85dp"
         android:layout_height="35dp"
         android:adjustViewBounds="true"
@@ -40,6 +42,7 @@
         app:layout_constraintVertical_bias="0.958"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+    <!-- Sale_order-en TableLayout -->
     <TableLayout
         android:id="@+id/taulaAurrekontuaAldatu"
         android:layout_width="312dp"
@@ -51,11 +54,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.714">
 
+        <!-- TableLayout-aren TableRow-a -->
         <TableRow
             android:id="@+id/tituloaAurrekontuaAldatu"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- Lehengo zutabea -->
             <TextView
                 android:id="@+id/produktuaIzenaAurrekontuaAldatu"
                 android:layout_width="115dp"
@@ -68,6 +73,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
+            <!-- Bigarren zutabea -->
             <TextView
                 android:id="@+id/produktuaKantitateaAurrekontuaAldatu"
                 android:layout_width="70dp"
@@ -80,6 +86,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
+            <!-- Hirugarren zutabea -->
             <TextView
                 android:id="@+id/produktuaPrezioaAurrekontuaAldatu"
                 android:layout_width="70dp"
@@ -92,11 +99,11 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </TableRow>
-
     </TableLayout>
 
+    <!-- Taula atzeko TextView -->
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textViewTaulaAtzekoaAurrekontuaAldatu"
         android:layout_width="331dp"
         android:layout_height="185dp"
         android:background="@drawable/edit_text_tall"
@@ -106,8 +113,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.717" />
 
+    <!-- Guztira label-a -->
     <TextView
-        android:id="@+id/textViewPrezioaTituloa"
+        android:id="@+id/textViewPrezioaGuztiraLabelAurrekontuaAldatu"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:text="GUZTIRA: "
@@ -118,8 +126,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.857" />
 
+    <!-- Aurrekontu baten prezioaren guztira TextView -->
     <TextView
-        android:id="@+id/textViewPrezioaGuztiraAurrekontuaAldatu"
+        android:id="@+id/textViewPrezioaGuztiraInformazioaAurrekontuaAldatu"
         android:layout_width="140dp"
         android:layout_height="30dp"
         android:text="0"
@@ -130,6 +139,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.857" />
 
+    <!-- Produktuen spinnerra -->
     <Spinner
         android:id="@+id/spinnerProduktuaAurrekontuaAldatu"
         android:layout_width="214dp"
@@ -143,6 +153,7 @@
         app:layout_constraintVertical_bias="0.346"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Kantitatea sartzeko EditText-a -->
     <EditText
         android:id="@+id/editTextNumberKantitateaAldatu"
         android:layout_width="67dp"
@@ -164,6 +175,7 @@
         app:layout_constraintVertical_bias="0.458"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Produktua gehitzeko botoia -->
     <ImageButton
         android:id="@+id/buttonProduktuaGehituAurrekontuaAldatu"
         android:layout_width="60dp"
@@ -180,6 +192,7 @@
         app:layout_constraintVertical_bias="0.338"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Aurrekontuaren bezeroaren Label-a -->
     <TextView
         android:id="@+id/textViewBezeroaAldatu"
         android:layout_width="213dp"

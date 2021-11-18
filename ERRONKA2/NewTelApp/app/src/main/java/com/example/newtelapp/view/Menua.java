@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -15,12 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtelapp.hariak.Konexioa;
 import com.example.newtelapp.R;
-import com.example.newtelapp.model.Aurrekontua;
-import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
 
 import java.io.Serializable;
-import java.sql.Connection;
 import java.util.ArrayList;
 
 /**
@@ -58,8 +53,8 @@ public class Menua extends AppCompatActivity implements Serializable {
     private void hasieratu() {
         /** Botoiak aurkitzen eta aldagaietan gorde **/
         erakutsi_produktuak_botoia = findViewById(R.id.buttonErakutsiProduktuak);
-        aurrekontua_botoia = findViewById(R.id.buttonAurrekontuaSortu);
-        irten_botoia = findViewById(R.id.buttonIrten);
+        aurrekontua_botoia = findViewById(R.id.buttonAurrekontuaMenua);
+        irten_botoia = findViewById(R.id.buttonIrtenMenua);
         produktuak = new ArrayList<>();
 
         /** Botoiei listenerra jarri **/

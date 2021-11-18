@@ -9,6 +9,7 @@
     android:paddingTop="5dp"
     android:paddingRight="5dp">
 
+    <!-- Aurrekontuak gordetzeko botoia -->
     <ImageButton
         android:id="@+id/buttonGordeAurrekontua"
         android:layout_width="85dp"
@@ -24,8 +25,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.958"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+    <!-- Bezeroa sortzeko botoia -->
     <ImageButton
         android:id="@+id/buttonBezeroaSortu"
         android:layout_width="60dp"
@@ -40,6 +42,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Produktua gehitzeko botoia -->
     <ImageButton
         android:id="@+id/buttonProduktuaGehitu"
         android:layout_width="60dp"
@@ -54,6 +57,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- AurrekontuSortutik irtetzeko botoia -->
     <ImageButton
         android:id="@+id/buttonIrtenAurrekontuaSortu"
         android:layout_width="85dp"
@@ -71,6 +75,7 @@
         app:layout_constraintVertical_bias="0.958"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+    <!-- Bezeroen spinnerra -->
     <Spinner
         android:id="@+id/spinnerBezeroa"
         android:layout_width="214dp"
@@ -84,6 +89,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Produktuen spinnerra -->
     <Spinner
         android:id="@+id/spinnerProduktua"
         android:layout_width="214dp"
@@ -95,6 +101,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Kantitatea sartzeko EditText-a -->
     <EditText
         android:id="@+id/editTextNumberKantitatea"
         android:layout_width="67dp"
@@ -114,6 +121,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <!-- Sale_order-en TableLayout -->
     <TableLayout
         android:id="@+id/taulaAurrekontuaSortu"
         android:layout_width="255dp"
@@ -123,11 +131,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- TableLayout-aren TableRow-a -->
         <TableRow
             android:id="@+id/tituloaAurrekontuaSortu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
+            <!-- Lehengo zutabea -->
             <TextView
                 android:id="@+id/produktuaIzena"
                 android:layout_width="115dp"
@@ -140,6 +150,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
+            <!-- Bigarren zutabea -->
             <TextView
                 android:id="@+id/produktuaKantitatea"
                 android:layout_width="70dp"
@@ -152,6 +163,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
+            <!-- Hirugarren zutabea -->
             <TextView
                 android:id="@+id/produktuaPrezioa"
                 android:layout_width="70dp"
@@ -164,11 +176,11 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </TableRow>
-
     </TableLayout>
 
+    <!-- Taula atzeko TextView -->
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewTaulaAtzekoaAurrekontuaSortu"
         android:layout_width="279dp"
         android:layout_height="179dp"
         android:layout_marginStart="68dp"
@@ -177,8 +189,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Aurrekontu baten prezioaren guztira TextView -->
     <TextView
-        android:id="@+id/textViewPrezioaGuztira"
+        android:id="@+id/textViewPrezioaGuztiraInformazioaAurrekontuaSortu"
         android:layout_width="140dp"
         android:layout_height="30dp"
         android:layout_marginStart="196dp"
@@ -187,8 +200,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Guztira label-a -->
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewPrezioaGuztiraLabelAurrekontuaSortu"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginStart="76dp"
@@ -196,11 +210,4 @@
         android:text="GUZTIRA: "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--<DatePicker
-        android:layout_width="284dp"
-        android:layout_height="368dp"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="234dp" />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

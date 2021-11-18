@@ -9,6 +9,7 @@
     android:paddingTop="5dp"
     android:paddingRight="5dp">
 
+    <!-- AurrekontuaIkusitik irtetzeko botoia -->
     <ImageButton
         android:id="@+id/buttonIrtenAurrekontuaIkusi"
         android:layout_width="85dp"
@@ -26,6 +27,7 @@
         app:layout_constraintVertical_bias="0.964"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+    <!-- Aurrekontu guztien ListView-a -->
     <ListView
         android:id="@+id/listView_aurrekontuak"
         android:layout_width="284dp"
@@ -36,11 +38,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.58" />
-
-    <!--<DatePicker
-        android:layout_width="284dp"
-        android:layout_height="368dp"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="234dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,17 +7,12 @@ import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -30,12 +25,9 @@ import com.example.newtelapp.R;
 import com.example.newtelapp.hariak.Konexioa;
 import com.example.newtelapp.model.Aurrekontua;
 import com.example.newtelapp.model.AurrekontuaLerroa;
-import com.example.newtelapp.model.Bezeroa;
 import com.example.newtelapp.model.Produktua;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.concurrent.Semaphore;
 
 /**
  * AurrekontuakAldatu-ren Layout-aren klasea
@@ -91,12 +83,12 @@ public class AurrekontuaAldatu extends AppCompatActivity {
     private void hasieratu() {
         /** Konponenteak hasieratu **/
         // Botoiak
-        irten = findViewById(R.id.buttonIrtenAurrekontuaSortuAurrekontuaAldatu);
+        irten = findViewById(R.id.buttonIrtenAurrekontuaAldatu);
         gorde = findViewById(R.id.buttonGordeAurrekontuaAldatu);
         produktuaGehitu = findViewById(R.id.buttonProduktuaGehituAurrekontuaAldatu);
         // TextView
         textViewBezeroaAldatu = findViewById(R.id.textViewBezeroaAldatu);
-        prezioaGuztira = findViewById(R.id.textViewPrezioaGuztiraAurrekontuaAldatu);
+        prezioaGuztira = findViewById(R.id.textViewPrezioaGuztiraInformazioaAurrekontuaAldatu);
         // Spinner
         spinnerProduktuAldatu = findViewById(R.id.spinnerProduktuaAurrekontuaAldatu);
         // EditText

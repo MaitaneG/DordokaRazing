@@ -7,9 +7,9 @@
     android:background="@drawable/menua_hondoa"
     tools:context=".view.Menua">
 
-    <!-- Produktuetara joateko botoia -->
+    <!-- Aurrekontuak ikusi botoia -->
     <ImageButton
-        android:id="@+id/buttonErakutsiProduktuak"
+        android:id="@+id/buttonAurrekontuakIkusi"
         android:layout_width="254dp"
         android:layout_height="99dp"
         android:background="@drawable/aurrekontu_erakutsi_botoia"
@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.403"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <!-- Irten botoia -->
+    <!-- Aurrekontua sortu botoia -->
     <ImageButton
         android:id="@+id/buttonAurrekontuaSortu"
         android:layout_width="254dp"
@@ -35,9 +35,9 @@
         app:layout_constraintVertical_bias="0.645"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <!--  -->
+    <!-- Irtetzeko botoia -->
     <ImageButton
-        android:id="@+id/buttonIrten"
+        android:id="@+id/buttonIrtenMenuaAurrekontuMenua"
         android:layout_width="162dp"
         android:layout_height="50dp"
         android:adjustViewBounds="true"
@@ -46,9 +46,9 @@
         android:src="@drawable/irten_botoia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.991"
+        app:layout_constraintHorizontal_bias="0.935"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.955"
+        app:layout_constraintVertical_bias="0.961"
         tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

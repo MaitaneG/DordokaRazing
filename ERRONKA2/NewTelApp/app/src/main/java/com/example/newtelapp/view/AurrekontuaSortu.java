@@ -96,7 +96,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
         // EditText
         kantitatea = findViewById(R.id.editTextNumberKantitatea);
         // TextView
-        prezioaGuztira = findViewById(R.id.textViewPrezioaGuztira);
+        prezioaGuztira = findViewById(R.id.textViewPrezioaGuztiraInformazioaAurrekontuaSortu);
 
         /** Botoiei listenerra jarri **/
         irtenBotoia.setOnClickListener(this::irten);
@@ -326,8 +326,8 @@ public class AurrekontuaSortu extends AppCompatActivity {
                                     }
                                 });
                                 insertAurrekontuaLerroa.start();
+                                irtenAlertGabe();
                             }
-                            irtenAlertGabe();
                         }
                     }
                 })
@@ -367,7 +367,10 @@ public class AurrekontuaSortu extends AppCompatActivity {
                 .show();
     }
 
-    private void irtenAlertGabe(){
+    /**
+     * Aurreko layout-era joateko alerta gabe
+     */
+    private void irtenAlertGabe() {
         Intent myIntent = new Intent(AurrekontuaSortu.this, AurrekontuaMenua.class);
         myIntent.putExtra("produktuak", produktuak);
         ActivityOptions options = ActivityOptions.makeCustomAnimation(getBaseContext(), R.anim.from_right, R.anim.from_right); // Animazioa definitzen

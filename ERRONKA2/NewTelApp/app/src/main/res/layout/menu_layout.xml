@@ -21,9 +21,9 @@
         app:layout_constraintVertical_bias="0.403"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <!-- Irten botoia -->
+    <!-- AurrekontuMenua botoia -->
     <ImageButton
-        android:id="@+id/buttonAurrekontuaSortu"
+        android:id="@+id/buttonAurrekontuaMenua"
         android:layout_width="254dp"
         android:layout_height="99dp"
         android:background="@drawable/aurrekontu_botoia"
@@ -35,9 +35,9 @@
         app:layout_constraintVertical_bias="0.645"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <!--  -->
+    <!-- Menutik irtetzeko botoia -->
     <ImageButton
-        android:id="@+id/buttonIrten"
+        android:id="@+id/buttonIrtenMenua"
         android:layout_width="162dp"
         android:layout_height="50dp"
         android:adjustViewBounds="true"

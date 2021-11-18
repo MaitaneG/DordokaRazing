@@ -107,7 +107,7 @@ public class ProduktuakErakutsi extends AppCompatActivity implements SearchView.
         // Button
         botoiaAurrera = findViewById(R.id.button_produktuak_aurrera);
         botoiaAtzera = findViewById(R.id.buttonProduktuakAtzera);
-        botoiaIrten = findViewById(R.id.buttonIrten);
+        botoiaIrten = findViewById(R.id.buttonIrtenMenua);
 
         /** Botoiei listenerra jarri **/
         botoiaAurrera.setOnClickListener(this::produktuakAurrera);

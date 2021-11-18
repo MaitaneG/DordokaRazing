@@ -26,6 +26,7 @@ public class Konexioa extends Thread {
     private final String url = "jdbc:postgresql://192.168.65.6:5432/NewTel1"; // Zerbitzariaren Postgres-eko url-a
     private final String username = "openpg"; // Datu baseko erabiltzailea
     private final String password = "openpgpwd"; // Datu baseko pasahitza
+    float totala=0;
 
     /**
      * Konexioa lortzeko metodoa
@@ -397,6 +398,53 @@ public class Konexioa extends Thread {
         /** Haria exekutatzen da **/
         updateAurrekontua.start();
     }
+
+    public float selectTotalBerria(Aurrekontua aurrekontua){
+
+
+        Thread selectTotalBerria = new Thread(new Runnable() {
+            /**
+             *
+             * Hariaren exekutagarria da
+             */
+            @Override
+            public void run() {
+                try {
+                    /** Konexioa lortzeko connect metodoari deitzen dio **/
+                    Connection conn = connect();
+                    Class.forName("org.postgresql.Driver");
+                    PreparedStatement pstmt = null;
+
+                    /** Aurrekontuen insert-a **/
+                    pstmt = conn.prepareStatement("select sum(price_total) as totala from sale_order_line where order_id= ?");
+
+                    pstmt.setInt(1, aurrekontua.getId());
+
+                    /** Sententzia exekutatzen da **/
+                    ResultSet rs = pstmt.executeQuery();
+
+                    /** Select-an jaso den informazioa Aurrekontua ArrayList batean gordetzen da **/
+                    while (rs.next()) {
+                       totala = rs.getFloat("totala");
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        /** Haria exekutatzen da **/
+        selectTotalBerria.start();
+        try {
+            selectTotalBerria.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return totala;
+
+
+    }
+
 
     /**
      * Aurrekontuak sortzeko metodoa

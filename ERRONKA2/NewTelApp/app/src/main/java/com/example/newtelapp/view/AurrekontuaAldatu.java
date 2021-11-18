@@ -1,5 +1,7 @@
 package com.example.newtelapp.view;
 
+import static com.example.newtelapp.view.Menua.konexioa;
+
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtelapp.R;
+import com.example.newtelapp.hariak.Konexioa;
 import com.example.newtelapp.model.Aurrekontua;
 import com.example.newtelapp.model.AurrekontuaLerroa;
 import com.example.newtelapp.model.Bezeroa;
@@ -138,6 +141,7 @@ public class AurrekontuaAldatu extends AppCompatActivity {
     @SuppressLint("ResourceAsColor")
     private void taulaHasieratu() {
         for (int i = 0; i < aurrekontuaLerroa.size(); i++) {
+            int x = i;
             /** Ilara bat sortzen du **/
             TableRow tableRow = new TableRow(this);
 
@@ -162,13 +166,33 @@ public class AurrekontuaAldatu extends AppCompatActivity {
             column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             column3.setTextColor(R.color.black);
             column3.setWidth(px23);
-
             // Botoia
             ImageButton button = new ImageButton(this);
             button.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             button.setBackgroundResource(R.drawable.borratu_botoia_txikia);
 
-            button.setOnClickListener(AurrekontuaAldatu.this::borratu);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(AurrekontuaAldatu.this).setTitle("Produktuak ezabatzen")// Dialog-ari titulua jarri
+                            .setMessage("Ziur zaude produktu hau ezabatu nahi duzula?") // Dialog-aren mezua jarri
+
+                            // Baiezko aukera klikatzen bada, aplikazioa itxiko da
+                            .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    AurrekontuaLerroa ak = aurrekontuaLerroa.get(x);
+                                    konexioa.deleteAurrekontuaLerroa(ak);
+                                    String totalBerria= konexioa.selectTotalBerria(aurrekontua)+"";
+                                    prezioaGuztira.setText(totalBerria);
+                                    konexioa.updateAurrekontua(aurrekontua, Float.parseFloat(totalBerria));
+                                    taula.removeViewAt(1);
+                                }
+
+                            }).setNegativeButton("EZ", null)
+                            .show();
+
+                }
+            });
 
 
             /** Zutabeak betzen du **/
@@ -197,27 +221,8 @@ public class AurrekontuaAldatu extends AppCompatActivity {
                 .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        if (getIntent().getBooleanExtra("EXIT", true)) {
-                            /** Ilara bat sortzen du **/
-                            TableRow tableRow = new TableRow(AurrekontuaAldatu.this);
-
-                            // Lehenengo zutabea
-                            TextView column1 = new TextView(AurrekontuaAldatu.this);
-
-                            // Bigarren zutabea
-                            TextView column2 = new TextView(AurrekontuaAldatu.this);
-
-                            // Hirugarren zutabea
-                            TextView column3 = new TextView(AurrekontuaAldatu.this);
-
-                            // Botoia
-                            ImageButton button = new ImageButton(AurrekontuaAldatu.this);
-
-                            for (int i = 1; i < taula.getChildCount(); i++) {
-
-                            }
                         }
-                    }
+
                 }).setNegativeButton("EZ", null)
                 .show();
         ;
@@ -272,7 +277,24 @@ public class AurrekontuaAldatu extends AppCompatActivity {
                                 button.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                                 button.setBackgroundResource(R.drawable.borratu_botoia_txikia);
-                                button.setOnClickListener(AurrekontuaAldatu.this::borratu);
+                                button.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        new AlertDialog.Builder(AurrekontuaAldatu.this).setTitle("Produktuak ezabatzen")// Dialog-ari titulua jarri
+                                                .setMessage("Ziur zaude produktu hau ezabatu nahi duzula?") // Dialog-aren mezua jarri
+
+                                                // Baiezko aukera klikatzen bada, aplikazioa itxiko da
+                                                .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int which) {
+//                                                        AurrekontuaLerroa ak = aurrekontuaLerroa.get(x);
+//                                                        Menua.konexioa.deleteAurrekontuaLerroa(ak);
+                                                    }
+
+                                                }).setNegativeButton("EZ", null)
+                                                .show();
+
+                                    }
+                                });
 
                                 /** Zutabeak betzen du **/
                                 column1.setText(produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getIzena());
@@ -307,8 +329,8 @@ public class AurrekontuaAldatu extends AppCompatActivity {
                                         public void run() {
                                             AurrekontuaLerroa aurrekontuaLerroa = new AurrekontuaLerroa(1, ida, produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getId(), produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getIzena(), produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getPrezioa(), Float.parseFloat(kantitatea.getText().toString()), (produktuak.get(spinnerProduktuAldatu.getSelectedItemPosition()).getPrezioa() * Float.parseFloat(kantitatea.getText().toString())));
 
-                                            Menua.konexioa.insertAurrekontuaLerroa(aurrekontuaLerroa);
-                                            Menua.konexioa.updateAurrekontua(aurrekontua, Float.parseFloat(prezioaGuztira.getText().toString()));
+                                            konexioa.insertAurrekontuaLerroa(aurrekontuaLerroa);
+                                            konexioa.updateAurrekontua(aurrekontua, Float.parseFloat(prezioaGuztira.getText().toString()));
                                             /** Kantitatea gakoa hustu**/
                                             kantitatea.setText("");
                                         }

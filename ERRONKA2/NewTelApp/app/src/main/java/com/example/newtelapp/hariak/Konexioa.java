@@ -490,11 +490,6 @@ public class Konexioa extends Thread {
         });
         /** Haria exekutatzen da **/
         insertAurrekontuaLerroa.start();
-        try {
-            insertAurrekontuaLerroa.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

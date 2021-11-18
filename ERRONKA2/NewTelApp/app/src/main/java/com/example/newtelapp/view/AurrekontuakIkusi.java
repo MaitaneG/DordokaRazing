@@ -121,13 +121,7 @@ public class AurrekontuakIkusi extends AppCompatActivity {
                         Menua.konexioa.deleteAurrekontua(aurrekontuak.get((int) l));
                         Toast.makeText(AurrekontuakIkusi.this, aurrekontuak.get((int) l).getIzena() + " aurrekontua behar bezala ezabatu da", Toast.LENGTH_SHORT).show();
 
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        Toast.makeText(AurrekontuakIkusi.this, "Sartu berriro pantaila honetara aldaketak ikusteko", Toast.LENGTH_SHORT).show();
+                        irten();
 
                     }
                 })

@@ -166,26 +166,9 @@ public class AurrekontuaAldatu extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new AlertDialog.Builder(AurrekontuaAldatu.this).setTitle("Produktuak ezabatzen")// Dialog-ari titulua jarri
-                            .setMessage("Ziur zaude produktu hau ezabatu nahi duzula?") // Dialog-aren mezua jarri
-
-                            // Baiezko aukera klikatzen bada, aplikazioa itxiko da
-                            .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    AurrekontuaLerroa ak = aurrekontuaLerroa.get(x);
-                                    konexioa.deleteAurrekontuaLerroa(ak);
-                                    String totalBerria= konexioa.selectTotalBerria(aurrekontua)+"";
-                                    prezioaGuztira.setText(totalBerria);
-                                    konexioa.updateAurrekontua(aurrekontua, Float.parseFloat(totalBerria));
-                                    taula.removeViewAt(1);
-                                }
-
-                            }).setNegativeButton("EZ", null)
-                            .show();
-
+                    Toast.makeText(AurrekontuaAldatu.this, "Hurrengo bertsioetan, aurrekontu lerroa borratu ahal iazgo duzu", Toast.LENGTH_SHORT).show();
                 }
             });
-
 
             /** Zutabeak betzen du **/
             column1.setText(aurrekontuaLerroa.get(i).getIzenaProduktua());
@@ -213,7 +196,7 @@ public class AurrekontuaAldatu extends AppCompatActivity {
                 .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        }
+                    }
 
                 }).setNegativeButton("EZ", null)
                 .show();
@@ -272,19 +255,7 @@ public class AurrekontuaAldatu extends AppCompatActivity {
                                 button.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        new AlertDialog.Builder(AurrekontuaAldatu.this).setTitle("Produktuak ezabatzen")// Dialog-ari titulua jarri
-                                                .setMessage("Ziur zaude produktu hau ezabatu nahi duzula?") // Dialog-aren mezua jarri
-
-                                                // Baiezko aukera klikatzen bada, aplikazioa itxiko da
-                                                .setPositiveButton("BAI", new DialogInterface.OnClickListener() {
-                                                    public void onClick(DialogInterface dialog, int which) {
-//                                                        AurrekontuaLerroa ak = aurrekontuaLerroa.get(x);
-//                                                        Menua.konexioa.deleteAurrekontuaLerroa(ak);
-                                                    }
-
-                                                }).setNegativeButton("EZ", null)
-                                                .show();
-
+                                        Toast.makeText(AurrekontuaAldatu.this, "Hurrengo bertsioetan, aurrekontu lerroa borratu ahal iazgo duzu", Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
@@ -351,6 +322,7 @@ public class AurrekontuaAldatu extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         if (getIntent().getBooleanExtra("EXIT", true)) {
+                            Toast.makeText(AurrekontuaAldatu.this, aurrekontua.getIzena() + " aurrekontua ondo gorde da", Toast.LENGTH_SHORT).show();
                             irtenAlertGabe();
                         }
                     }

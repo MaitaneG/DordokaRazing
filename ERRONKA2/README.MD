@@ -6,9 +6,9 @@ Hau gure bigarren erronkako karpeta da. Hemen aurkitu dezakezu hiru karpeta desb
 Lehengoa, mugikorreko aplikazioa da. Aplikazio hau postgresql datu basera konektatzen da. Hau da egiten duena: produktuak bistaratu, aurrekontuak bistaratu, aurrekontuak ezabatu, aldatu eta sortu. 
 
 ### NewTelDesktopApp
-Bigarrena, android-eko aplikazioa bat da. Bertan, odooKonexioan hartutako fitxategia irakurtzen da, eta informazio hori bistaratzen da.
+Bigarrena, mahaigaineko aplikazio bat da. Apliazioa hau aginte koadro bat da eta bertan, enpresaren informazioa modu ulergarri batean agertzen da.
 
-### springhibernatejpa [(Readme)](OdooKonexioa/README.md)
-Hemen dagoen aplikazioak, remotoan daukagun Odoo-ren datubasearekin (Postgres) konektatzen da. Ondoren Datubaseari dauden produktuen kontsulta egiten du, eta produktu bakoitzeko id-a, kantitatea, prezioa, mota eta izena hartzen dugu. Lortutako datu guztiak Excel fitxategi batera exportatzen da.
+### SpringhHibernateJpaNewTel [(Readme)](SpringhHibernateJpaNewTel/README.md)
+Hemengo aplikazioa, postgresql datu basetik aukeratutako datuak esportatzen du, eta Microsoft SQL serverrean gordetzen ditu.
 
 Gainera, karpeta honetan aplikazio honen README-a dago 

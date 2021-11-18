@@ -1,6 +1,6 @@
 # DordokaRazing (Erronka1)
 
-Hau gure projektuaren errepositorioa da. Hemen aurkitu dezakezu hiru karpeta desberdin. 
+Hau gure lehenengo erronkako karpeta da. Hemen aurkitu dezakezu hiru karpeta desberdin.
 
 ### Lanzador_Odoo
 Lehengoa Lanzador_Odoo da, bertako java aplikazioak, Odoo webgunea irekitzen du Chrome-ko orri batean eta OdooKonexioa aplikazioa exekutatzen du

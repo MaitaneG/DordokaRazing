@@ -262,7 +262,6 @@ public class AurrekontuaSortu extends AppCompatActivity {
                                     ida = aurrekontuak.get(i).getId();
                                 }
                                 aurrekontuIzena = "SM000" + ida;
-                                Toast.makeText(AurrekontuaSortu.this, aurrekontuIzena, Toast.LENGTH_SHORT).show();
 
                                 Date data = new Date(2002, 11, 28);
                                 /** Aurrekontu objetu bat sortzen du **/
@@ -327,6 +326,8 @@ public class AurrekontuaSortu extends AppCompatActivity {
                                 });
                                 insertAurrekontuaLerroa.start();
                                 irtenAlertGabe();
+
+                                Toast.makeText(AurrekontuaSortu.this, aurrekontuIzena +" aurrekontua ondo gorde da", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

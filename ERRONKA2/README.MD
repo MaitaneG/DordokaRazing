@@ -10,6 +10,8 @@ Bigarrena, mahaigaineko aplikazio bat da. Apliazioa hau aginte koadro bat da eta
 
 [(Hemen dago Microsoft SQL server datu baseko script-a)](VisualStudioNewtel/NewTelDB.sql)
 
+[(Hemen dago exekutagarria)](VisualStudioNewtel/NewTelDesktopApp/Setup1/Release/)
+
 ### SpringHibernateJpaNewTel [(Readme)](SpringhHibernateJpaNewTel/README.md)
 Hemengo aplikazioa, postgresql datu basetik aukeratutako datuak esportatzen du, eta Microsoft SQL serverrean gordetzen ditu.
 

@@ -130,7 +130,6 @@ public class AurrekontuaAldatu extends AppCompatActivity {
     /**
      * Taula sortzen du eta zutabeen tituloak hasieratu
      */
-    @SuppressLint("ResourceAsColor")
     private void taulaHasieratu() {
         for (int i = 0; i < aurrekontuaLerroa.size(); i++) {
             int x = i;
@@ -146,17 +145,20 @@ public class AurrekontuaAldatu extends AppCompatActivity {
             // Lehenengo zutabea
             TextView column1 = new TextView(this);
             column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
+            column1.setTextColor(getResources().getColor(R.color.black));
+            column1.setTextSize(13);
             column1.setWidth(px1);
             // Bigarren zutabea
             TextView column2 = new TextView(this);
             column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column2.setTextColor(R.color.black);
+            column2.setTextColor(getResources().getColor(R.color.black));
+            column2.setTextSize(13);
             column2.setWidth(px23);
             // Hirugarren zutabea
             TextView column3 = new TextView(this);
             column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column3.setTextColor(R.color.black);
+            column3.setTextColor(getResources().getColor(R.color.black));
+            column3.setTextSize(13);
             column3.setWidth(px23);
             // Botoia
             ImageButton button = new ImageButton(this);
@@ -208,7 +210,6 @@ public class AurrekontuaAldatu extends AppCompatActivity {
      *
      * @param view
      */
-    @SuppressLint("ResourceAsColor")
     private void produktuaGehitu(View view) {
         new AlertDialog.Builder(this).setTitle("Produktuak gehitzen")// Dialog-ari titulua jarri
                 .setMessage("Ziur zaude produktu hau gehitu nahi duzula?") // Dialog-aren mezua jarri
@@ -235,17 +236,17 @@ public class AurrekontuaAldatu extends AppCompatActivity {
                                 // Lehenengo zutabea
                                 TextView column1 = new TextView(AurrekontuaAldatu.this);
                                 column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                                column1.setTextColor(R.color.black);
+                                column1.setTextColor(getResources().getColor(R.color.black));
                                 column1.setWidth(px1);
                                 // Bigarren zutabea
                                 TextView column2 = new TextView(AurrekontuaAldatu.this);
                                 column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                                column1.setTextColor(R.color.black);
+                                column1.setTextColor(getResources().getColor(R.color.black));
                                 column2.setWidth(px23);
                                 // Hirugarren zutabea
                                 TextView column3 = new TextView(AurrekontuaAldatu.this);
                                 column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                                column1.setTextColor(R.color.black);
+                                column1.setTextColor(getResources().getColor(R.color.black));
                                 column3.setWidth(px23);
                                 // Botoia
                                 ImageButton button = new ImageButton(AurrekontuaAldatu.this);

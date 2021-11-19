@@ -159,7 +159,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
      *
      * @param view
      */
-    @SuppressLint("ResourceAsColor")
+
     private void produktuBatGehitu(View view) {
         // Kantitatea hutsik badago
         if (kantitatea.getText().toString().equals("")) {
@@ -178,22 +178,24 @@ public class AurrekontuaSortu extends AppCompatActivity {
             // Lehenengo zutabea
             TextView column1 = new TextView(this);
             column1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column1.setTextColor(R.color.black);
+            column1.setTextColor(getResources().getColor(R.color.black));
+            column1.setTextSize(13);
             column1.setWidth(px1);
             // Bigarren zutabea
             TextView column2 = new TextView(this);
             column2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column2.setTextColor(R.color.black);
+            column2.setTextColor(getResources().getColor(R.color.black));
+            column2.setTextSize(13);
             column2.setWidth(px23);
             // Hirugarren zutabea
             TextView column3 = new TextView(this);
             column3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            column3.setTextColor(R.color.black);
+            column3.setTextColor(getResources().getColor(R.color.black));
+            column3.setTextSize(13);
             column3.setWidth(px23);
             // Hirugarren zutabea
             Button borratu = new Button(this);
             borratu.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            borratu.setTextColor(R.color.black);
             borratu.setWidth(px23);
 
             /** Zutabeak betzen du **/

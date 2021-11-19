@@ -122,67 +122,76 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <!-- Sale_order-en TableLayout -->
-    <TableLayout
-        android:id="@+id/taulaAurrekontuaSortu"
-        android:layout_width="255dp"
-        android:layout_height="164dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="364dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!-- TableLayout-aren TableRow-a -->
-        <TableRow
-            android:id="@+id/tituloaAurrekontuaSortu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!-- Lehengo zutabea -->
-            <TextView
-                android:id="@+id/produktuaIzena"
-                android:layout_width="115dp"
-                android:layout_height="25dp"
-                android:background="@drawable/taula_label"
-                android:padding="3dip"
-                android:text="Produktua"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <!-- Bigarren zutabea -->
-            <TextView
-                android:id="@+id/produktuaKantitatea"
-                android:layout_width="70dp"
-                android:layout_height="25dp"
-                android:background="@drawable/taula_label"
-                android:padding="3dip"
-                android:text="Kantitatea"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <!-- Hirugarren zutabea -->
-            <TextView
-                android:id="@+id/produktuaPrezioa"
-                android:layout_width="70dp"
-                android:layout_height="25dp"
-                android:background="@drawable/taula_label"
-                android:padding="3dip"
-                android:text="Prezioa"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </TableRow>
-    </TableLayout>
 
     <!-- Taula atzeko TextView -->
+
+    <ScrollView
+        android:layout_width="253dp"
+        android:layout_height="153dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="364dp"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <TableLayout
+            android:id="@+id/taulaAurrekontuaSortu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- TableLayout-aren TableRow-a -->
+            <TableRow
+                android:id="@+id/tituloaAurrekontuaSortu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Lehengo zutabea -->
+                <TextView
+                    android:id="@+id/produktuaIzena"
+                    android:layout_width="115dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/edit_text_tall"
+                    android:padding="3dip"
+                    android:text="Produktua"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <!-- Bigarren zutabea -->
+                <TextView
+                    android:id="@+id/produktuaKantitatea"
+                    android:layout_width="70dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/edit_text_tall"
+                    android:padding="3dip"
+                    android:text="Kantitatea"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <!-- Hirugarren zutabea -->
+                <TextView
+                    android:id="@+id/produktuaPrezioa"
+                    android:layout_width="70dp"
+                    android:layout_height="25dp"
+                    android:padding="3dip"
+                    android:text="Prezioa"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
     <TextView
         android:id="@+id/textViewTaulaAtzekoaAurrekontuaSortu"
-        android:layout_width="279dp"
-        android:layout_height="179dp"
+        android:layout_width="263dp"
+        android:layout_height="167dp"
         android:layout_marginStart="68dp"
         android:layout_marginTop="360dp"
         android:background="@drawable/edit_text_tall"

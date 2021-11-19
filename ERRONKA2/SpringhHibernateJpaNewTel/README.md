@@ -45,6 +45,14 @@
   
  ![Klase diagrama svg formatuan](https://github.com/agerKalboetxeaga/datu-atzipena2021/blob/main/NewTelXml.svg)
  
+ ### Gehigarriak (Extras)
+ Abestitxo bat dago eginda non abestia osatzen duten elementu guztiak hariak dira eta hari bakoitzak beraz, soinu desberdin bat zabaltzen du, Horretarako "Clip" libreria erabili dugu. Azkenik festi klaseak soinuak sekuentziatu eta kudeatzen ditu:
+ 
+ ![Hat baten klasea](https://github.com/agerKalboetxeaga/datu-atzipena2021/blob/main/hats.png)
+ 
+ Abestia klaseko zati bat:
+ 
+ ![Abestia class](https://github.com/agerKalboetxeaga/datu-atzipena2021/blob/main/abestia2.png)
  
  ### Iturriak:
   - [StackOverflow](https://stackoverflow.com/) 

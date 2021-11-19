@@ -2,7 +2,6 @@ package com.example.newtelapp.view;
 
 import static com.example.newtelapp.view.Menua.konexioa;
 
-import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -22,7 +21,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtelapp.R;
-import com.example.newtelapp.hariak.Konexioa;
 import com.example.newtelapp.model.Aurrekontua;
 import com.example.newtelapp.model.AurrekontuaLerroa;
 import com.example.newtelapp.model.Produktua;

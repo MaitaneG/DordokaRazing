@@ -159,8 +159,8 @@ public class AurrekontuaSortu extends AppCompatActivity {
      *
      * @param view
      */
-
     private void produktuBatGehitu(View view) {
+
         // Kantitatea hutsik badago
         if (kantitatea.getText().toString().equals("")) {
             Toast.makeText(this, "Produktuen kantitatea sartu behar duzu", Toast.LENGTH_SHORT).show();
@@ -329,7 +329,7 @@ public class AurrekontuaSortu extends AppCompatActivity {
                                 insertAurrekontuaLerroa.start();
                                 irtenAlertGabe();
 
-                                Toast.makeText(AurrekontuaSortu.this, aurrekontuIzena +" aurrekontua ondo gorde da", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AurrekontuaSortu.this, aurrekontuIzena + " aurrekontua ondo gorde da", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

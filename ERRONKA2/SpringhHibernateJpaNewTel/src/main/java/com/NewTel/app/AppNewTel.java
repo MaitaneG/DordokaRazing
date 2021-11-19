@@ -3,6 +3,7 @@ package com.NewTel.app;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -73,14 +74,6 @@ public class AppNewTel {
 
     public static Semaphore s = new Semaphore(1); //Semaforoa sarrera baterekin
 
-
-
-
-
-
-
-
-
     public static void main(String[] args) {
 
         song.setPriority(Thread.MAX_PRIORITY);      //Abestiaren hariari prioritate handiena emango diogu, horrela
@@ -98,23 +91,6 @@ public class AppNewTel {
 
         resPartnerDao = appContext.getBean(ResPartnerDao.class);
         runMain(args);
-
-
-
-
-
-
-
-
-
-
-//        File file = new File(path);  // Konfigurazio xml a
-//
-//        if (!file.exists()) {        //ea XML konfigurazio Fitxategia existitzen den konprobatzen du
-//            runMain(args);
-//        } else {
-//            menuaBistaratu();
-//        }
 
     }
 
@@ -152,9 +128,7 @@ public class AppNewTel {
                     aukerak.add("erosketak");
                 case 5:
                     Thread th = new Thread("datuak gordetzen...");
-//                    if (!song.isAlive()) {                                  //Aukeraketa amaitzean abestia martxan ez badago
-//                        song.run();                                         //martxan jartzen du
-//                    }
+//
                     try {
                         th.sleep(2000);
 
@@ -177,11 +151,9 @@ public class AppNewTel {
 
         }
 
-        // Hemen un AsyncTask?
+
 
     }
-
-
 
     /**
      * Metodo honek xml konfigurazio fitxategia sortzen du
@@ -309,6 +281,7 @@ public class AppNewTel {
             bezeroa.appendChild(battr);
 
             // produktua
+
             Element produktua = document.createElement("produktuak");
             root.appendChild(produktua);
             Element pattr = document.createElement("exported");
@@ -408,7 +381,7 @@ public class AppNewTel {
                     }
                     if (clients != null) {                //Exportatzeko zer dagoen begiratzen du
                         for (ResPartner rp : clients)
-                            // if( rp.getCustomerRank()!=null) if( rp.getCustomerRank()!=0)
+
                             resPartnerDao.update(rp);
                     }
                     s.release();
@@ -697,7 +670,9 @@ public class AppNewTel {
                 document.appendChild(root);
                 Element logtxt = document.createElement("Exportazioa");
                 LocalDateTime date = LocalDateTime.now();
-                String txt = date.toString() + ", ";
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String formattedDate = date.format(formatter);
+                String txt = formattedDate + ", ";
                 if (clients != null) {
                     txt = txt + clients.size() + " clients were exported ";
                 }
@@ -732,8 +707,10 @@ public class AppNewTel {
                 Element rootElement = document.getDocumentElement();
 
                 Element logtxt = document.createElement("Exportazioa");
-                LocalDate date = LocalDate.now();
-                String txt = date.toString() + ", ";
+                LocalDateTime date = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String formattedDate = date.format(formatter);
+                String txt = formattedDate + ", ";
                 if (clients != null) {
                     txt = txt + clients.size() + " clients were exported ";
                 }
@@ -772,11 +749,6 @@ public class AppNewTel {
      */
     private static void runMain(String[] args){
         List<String> argumentos = Arrays.asList(args);
-        //runHelper = new RunHelper();
-//        if (args.length < 1) {
-//            System.out.println("Syntax error, type -h or -help for help");
-//            runHelper.getHelper();
-//        }
                 List<String> aukerak = new ArrayList<>();
                 if (args.length == 1){
                 switch(args[0].toLowerCase()){
@@ -834,11 +806,6 @@ public class AppNewTel {
             updateDB();
             logMaker();
             openSound(1);
-
-//            }else if(args.length % 2 != 0){
-//            System.out.println("Syntax error");
-//            System.out.println(runHelper.getHelper());
-
         }else if(!argumentos.contains("sapo") && args.length > 3 ){
             System.out.println("Syntax error");
             System.out.println(runHelper.getHelper());

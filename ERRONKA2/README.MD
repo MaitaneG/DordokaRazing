@@ -7,9 +7,12 @@ Lehengoa, mugikorreko aplikazioa da. Aplikazio hau postgresql datu basera konekt
 
 ### NewTelDesktopApp
 Bigarrena, mahaigaineko aplikazio bat da. Apliazioa hau aginte koadro bat da eta bertan, enpresaren informazioa modu ulergarri batean agertzen da.
+
 [(Hemen dago Microsoft SQL server datu baseko script-a)](VisualStudioNewtel/NewTelDB.sql)
 
-### SpringhHibernateJpaNewTel [(Readme)](SpringhHibernateJpaNewTel/README.md)
+[(Hemen dago exekutagarria)](VisualStudioNewtel/NewTelDesktopApp/Setup1/Release/)
+
+### SpringHibernateJpaNewTel [(Readme)](SpringhHibernateJpaNewTel/README.md)
 Hemengo aplikazioa, postgresql datu basetik aukeratutako datuak esportatzen du, eta Microsoft SQL serverrean gordetzen ditu.
 
 Gainera, karpeta honetan aplikazio honen README-a dago 

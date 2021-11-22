@@ -287,6 +287,11 @@ public class AurrekontuaSortu extends AppCompatActivity {
                                 });
                                 insertAurrekontuak.setPriority(Thread.MAX_PRIORITY);
                                 insertAurrekontuak.start();
+                                try {
+                                    insertAurrekontuak.join();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
 
                                 /** AurrekontuLerroa gehitzeko haria **/
                                 Thread insertAurrekontuaLerroa = new Thread(new Runnable() {
